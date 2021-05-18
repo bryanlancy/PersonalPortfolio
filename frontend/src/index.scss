@@ -8,10 +8,11 @@ $color-background: #1f1f1f;
 	box-sizing: border-box;
 
 	font-family: 'Comfortaa', cursive;
-	font-size: 1em;
 	color: #cfcfcf;
 }
-
+p {
+	font-size: 1em;
+}
 html {
 	background-color: $color-background;
 }
