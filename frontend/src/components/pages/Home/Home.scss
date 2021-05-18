@@ -1,11 +1,37 @@
+$color-neon: #7d7dfe;
+$border: 0 0 15px 2px $color-neon;
+
 .home {
-	div {
-		background-color: #fff;
+	> div {
+		margin: 32px;
+		padding: 16px;
+
+		border: 1px solid $color-neon;
+		border-radius: 4px;
+
+		&:hover {
+			box-shadow: $border, $border inset;
+		}
+
+		transition: all 0.25s ease-in-out;
 	}
 }
 .about {
+	> div {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	&__photo {
+		border: none;
+		width: 200px;
+		border-radius: 50%;
+	}
 }
 .projects {
+	&__container {
+		padding: 4px;
+	}
 }
 .contact {
 }

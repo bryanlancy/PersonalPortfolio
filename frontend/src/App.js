@@ -8,7 +8,7 @@ function App() {
 	const [isLoaded, setIsLoaded] = useState(false)
 	useEffect(() => {
 		setIsLoaded(true)
-	})
+	}, [])
 
 	return (
 		<>

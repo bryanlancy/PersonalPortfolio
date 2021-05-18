@@ -16,17 +16,10 @@ const store = configureStore()
 
 if (process.env.NODE_ENV !== 'production') {
 	restoreCSRF()
-
 	window.csrfFetch = fetch
 	window.store = store
 	window.sessionActions = sessionActions
 }
-
-// const Carrot = () => (
-//   <div style={{ color: "orange", fontSize: "100px" }}>
-//     <i className="fas fa-carrot"></i>
-//   </div>
-// );
 
 function Root() {
 	return (
@@ -34,7 +27,6 @@ function Root() {
 			<Provider store={store}>
 				<BrowserRouter>
 					<App />
-					{/* <Carrot /> */}
 				</BrowserRouter>
 			</Provider>
 		</ModalProvider>
