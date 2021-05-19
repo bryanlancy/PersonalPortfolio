@@ -1,3 +1,9 @@
+@mixin text-grdient($color) {
+	background: linear-gradient(90deg, $color, #fff);
+}
+
+$color-text: #cfcfcf;
+
 $color-neon: #7d7dfe;
 $border: 0 0 15px 2px $color-neon;
 
@@ -18,15 +24,33 @@ $color-icon-raspberry: #bf1d47;
 	&__LED {
 		color: $color-icon-python;
 		font-weight: 700;
-		&:hover {
-			text-shadow: 0 0 4px $color-icon-python;
-		}
 	}
 	&__garden {
 		color: $color-icon-node;
 	}
 	&__raspberry {
 		color: $color-icon-raspberry;
+	}
+	&__arduino {
+		color: $color-icon-arduino;
+	}
+}
+.icon {
+	&__LED {
+		float: left;
+		font-size: 48px;
+		margin: 0 8px;
+	}
+	&__Morph {
+		float: right;
+
+		width: 56px;
+		margin: 0 8px;
+
+		text-align: right;
+		font-size: 48px;
+
+		transition: all 0.25s ease-in-out;
 	}
 }
 
@@ -40,6 +64,8 @@ $color-icon-raspberry: #bf1d47;
 		// border-radius: 4px;
 
 		transition: all 0.25s ease-in-out;
+
+		color: $color-text;
 	}
 }
 .about {
@@ -59,6 +85,9 @@ $color-icon-raspberry: #bf1d47;
 			justify-content: space-between;
 			margin-right: 64px;
 		}
+		> p {
+			padding: 0 8px;
+		}
 	}
 	&__photo {
 		border: none;
@@ -71,6 +100,7 @@ $color-icon-raspberry: #bf1d47;
 		align-items: center;
 
 		width: 100%;
+		transition: all 2s ease-in-out !important;
 		&--grid {
 			display: grid;
 			grid-template-columns: repeat(3, 1fr);
@@ -78,10 +108,15 @@ $color-icon-raspberry: #bf1d47;
 			justify-items: center;
 
 			width: 100%;
-			margin-top: 4px;
+			margin-top: 16px;
 			> div {
+				color: transparent;
+				background-clip: text;
+				background-size: 500%;
+				background-position: 200% 0;
+				transition: all 0.75s ease-in;
 				&:hover {
-					cursor: pointer;
+					cursor: default;
 				}
 
 				& :not(:first-child) {
@@ -90,7 +125,41 @@ $color-icon-raspberry: #bf1d47;
 				:last-child {
 					margin-left: 8px;
 				}
+				&:hover {
+					background-position: 0;
+				}
 			}
+		}
+
+		&--react {
+			@include text-grdient($color-icon-react);
+		}
+		&--sass {
+			@include text-grdient($color-icon-sass);
+		}
+		&--css3 {
+			@include text-grdient($color-icon-css3);
+		}
+		&--html5 {
+			@include text-grdient($color-icon-html5);
+		}
+		&--js {
+			@include text-grdient($color-icon-javascript);
+		}
+		&--github {
+			@include text-grdient($color-icon-git);
+		}
+		&--bootstrap {
+			@include text-grdient($color-icon-bootstrap);
+		}
+		&--node {
+			@include text-grdient($color-icon-node);
+		}
+		&--python {
+			@include text-grdient($color-icon-python);
+		}
+		&--raspberry {
+			@include text-grdient($color-icon-raspberry);
 		}
 	}
 }
