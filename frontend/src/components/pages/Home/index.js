@@ -8,9 +8,10 @@ export default function Home() {
 	const [limitStamp, setLimitStamp] = useState(0)
 	const [ledBrightness, setLedBrightness] = useState(0)
 	const [iconMorph, setIconMorph] = useState('fa-laptop-house')
+	const [iconOptions, setIconOptions] = useState({})
 	const [borderColor, setBorderColor] = useState('#cfcfcf')
+	const LED = createRef()
 
-	let LED = createRef()
 	function getDistance(e) {
 		const limitThreshold = 75
 		if (e.timeStamp > limitStamp + limitThreshold) {
@@ -36,34 +37,56 @@ export default function Home() {
 			garden: {
 				color: '#26ac56',
 				icon: 'fa-hand-holding-seedling',
+				options: {
+					'--fa-primary-color': '#26ac56',
+					// '--fa-secondary-color': '#26ac56',
+				},
 			},
 			arduino: {
 				color: '#009298',
 				icon: 'fa-microchip',
+				options: {
+					'--fa-primary-color': '#009298',
+					// '--fa-secondary-color': '#26ac56',
+				},
 			},
 			raspberry: {
 				color: '#bf1d47',
+				options: {
+					'--fa-primary-color': '#bf1d47',
+					// '--fa-secondary-color': '#26ac56',
+				},
 			},
 			default: {
 				color: '#cfcfcf',
 				icon: 'fa-laptop-house',
+				options: {
+					'--fa-primary-color': '#016cb4',
+					// '--fa-secondary-color': '#26ac56',
+				},
 			},
 		}
-		let { icon, color } = icons[x]
+		let { icon, color, options } = icons[x]
 		if (x === 'raspberry') {
 			const y = Math.random()
-			if (y <= 0.33) icon = 'fa-raspberry-pi'
+			if (y <= 0.33) icon = 'fa-pie'
 			else if (y <= 0.66) icon = 'fa-pizza-slice'
-			else icon = 'fa-pie'
+			else {
+				icon = 'fa-raspberry-pi'
+				options = { color: '#bf1d47' }
+			}
+
 			console.log(y, icon)
 		}
+		const morphOptions = {}
 		setBorderColor(color)
 		setIconMorph(icon)
+		setIconOptions(options)
 	}
 
 	return (
 		<div className="home">
-			<div className="about" data-aos="fade" onMouseMove={getDistance}>
+			<div className="about" data-aos="fade" onMouseMove={getDistance} onMouseLeave={() => setMorph('default')}>
 				<div className="about__bio">
 					<div>
 						<h1>
@@ -90,7 +113,7 @@ export default function Home() {
 						to grow as a software developer.
 					</p>
 					<p style={{ borderLeft: `1px solid ${borderColor}`, transition: 'border .5s ease-in-out' }}>
-						<i className={`${iconMorph === 'fa-raspberry-pi' ? 'fab' : 'fad'} ${iconMorph} icon__Morph`} style={{ '--fa-secondary-opacity': Math.max(ledBrightness, 0.5) }}></i>
+						<i className={`${iconMorph === 'fa-raspberry-pi' ? 'fab' : 'fad'} ${iconMorph} icon__Morph`} style={iconOptions}></i>
 						When I'm not programming professionally, I am usually working on automating tasks in my home. Most recently I've been developing an{' '}
 						<span className="span__garden" onMouseEnter={() => setMorph('garden')}>
 							automated garden
