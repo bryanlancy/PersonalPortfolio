@@ -1,0 +1,26 @@
+.intro {
+	display: flex;
+	align-items: center;
+	div {
+	}
+	&__title {
+		// animation-direction: forwards;
+		// animation-duration: 2.5s;
+		// animation-timing-function: ease-in-out;
+
+		// animation: colorTest 1s linear 0s;
+		span {
+			transition-property: all;
+			transition-timing-function: ease-out;
+		}
+		&--software-engineer {
+			color: rgb(0, 119, 255);
+		}
+		&--tinkerer {
+			color: rgb(77, 167, 77);
+		}
+		&--learner {
+			color: rgb(211, 104, 96);
+		}
+	}
+}

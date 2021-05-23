@@ -1,6 +1,14 @@
 @mixin text-grdient($color) {
 	background: linear-gradient(90deg, $color, #fff);
 }
+@keyframes colorTest {
+	0% {
+		color: green !important;
+	}
+	100% {
+		color: #fff;
+	}
+}
 
 $color-text: #cfcfcf;
 
@@ -55,29 +63,40 @@ $color-icon-raspberry: #bf1d47;
 }
 
 .home {
+	display: flex;
+	flex-direction: column;
+
+	align-items: center;
+
 	> div {
+		display: flex;
+		flex-direction: column;
+
+		align-items: center;
+		justify-content: center;
+
+		height: 100vh;
+		max-width: 800px;
+
 		margin: 0 32px;
 		padding: 16px;
-
-		// border: 1px solid $color-neon;
-		// box-shadow: $border, $border inset;
-		// border-radius: 4px;
-
-		transition: all 0.25s ease-in-out;
 
 		color: $color-text;
 	}
 }
+
 .about {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
 	> :not(:first-child) {
-		margin-top: 16px;
+		margin-top: 48px;
+	}
+	&__photo {
+		border: none;
+		width: 175px;
+		border-radius: 50%;
 	}
 	&__bio {
 		& > :not(:first-child) {
-			margin-top: 8px;
+			margin-top: 48px;
 		}
 		> div {
 			display: flex;
@@ -86,13 +105,8 @@ $color-icon-raspberry: #bf1d47;
 			margin-right: 64px;
 		}
 		> p {
-			padding: 0 8px;
+			padding: 0 16px;
 		}
-	}
-	&__photo {
-		border: none;
-		width: 175px;
-		border-radius: 50%;
 	}
 	&__techs {
 		display: flex;
@@ -100,10 +114,25 @@ $color-icon-raspberry: #bf1d47;
 		align-items: center;
 
 		width: 100%;
-		transition: all 2s ease-in-out !important;
+
+		&--title {
+			display: flex;
+			align-items: center;
+			width: 80%;
+			b {
+				min-width: 245px;
+				margin: 0 16px;
+			}
+			hr {
+				width: 30%;
+			}
+		}
+
 		&--grid {
 			display: grid;
+
 			grid-template-columns: repeat(3, 1fr);
+
 			row-gap: 8px;
 			justify-items: center;
 
@@ -164,9 +193,31 @@ $color-icon-raspberry: #bf1d47;
 	}
 }
 .projects {
-	&__container {
-		padding: 4px;
+	display: flex;
+	flex-direction: column;
+
+	width: 90%;
+
+	& > :not(:first-child) {
+		// margin-top: 32px;
+	}
+	> div {
+		// height: 35vh;
 	}
 }
 .contact {
+}
+
+@media screen and (max-width: 750px) {
+	* {
+	}
+
+	.about {
+		&__techs {
+			&--grid {
+				grid-template-columns: repeat(2, 1fr);
+				margin-bottom: 32px;
+			}
+		}
+	}
 }
