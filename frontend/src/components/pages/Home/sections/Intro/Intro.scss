@@ -1,26 +1,136 @@
+@keyframes strokeShift {
+	0%,
+	100% {
+		stroke-dashoffset: 100%;
+	}
+
+	50% {
+		stroke-dashoffset: 0%;
+	}
+}
+
 .intro {
 	display: flex;
 	align-items: center;
-	div {
-	}
-	&__title {
-		// animation-direction: forwards;
-		// animation-duration: 2.5s;
-		// animation-timing-function: ease-in-out;
 
-		// animation: colorTest 1s linear 0s;
+	width: 100%;
+
+	&__title {
 		span {
 			transition-property: all;
 			transition-timing-function: ease-out;
 		}
 		&--software-engineer {
-			color: rgb(0, 119, 255);
+			color: #0077ff;
 		}
 		&--tinkerer {
-			color: rgb(77, 167, 77);
+			color: #4da74d;
 		}
 		&--learner {
-			color: rgb(211, 104, 96);
+			color: #d36860;
 		}
+	}
+}
+
+.outline {
+	$animFontSize: 1.5em;
+
+	width: 100%;
+
+	font-size: 100%;
+	font-weight: 700;
+
+	&__container {
+		display: flex;
+
+		font-size: $animFontSize;
+
+		svg {
+			margin-left: 8px;
+			width: 60%;
+		}
+	}
+	&__line {
+		fill: none;
+		stroke-dasharray: 100%;
+		stroke-dashoffset: 100%;
+	}
+	&__animation {
+		animation-name: strokeShift;
+		animation-timing-function: ease-in-out;
+		animation-fill-mode: forwards;
+	}
+}
+
+.icon {
+	> svg {
+		width: 150px;
+		height: 150px;
+
+		stroke-dasharray: var(--dashOffset);
+		stroke-width: 1px;
+
+		animation: 5s iconAnimate 0s ease 2 forwards;
+
+		path {
+			fill: none;
+		}
+	}
+	&__git,
+	&__binary,
+	&__code {
+		stroke: #0077ff;
+	}
+
+	&__tools,
+	&__flux,
+	&__engine {
+		stroke: #4da74d;
+	}
+
+	&__brain,
+	&__book,
+	&__telescope {
+		stroke: #d36860;
+	}
+
+	&__git {
+		--dashOffset: 2025px;
+	}
+	&__binary {
+		--dashOffset: 775px;
+	}
+	&__code {
+		--dashOffset: 1150px;
+	}
+
+	&__tools {
+		--dashOffset: 1550px;
+	}
+	&__flux {
+		--dashOffset: 1675px;
+	}
+	&__engine {
+		--dashOffset: 2325px;
+	}
+
+	&__telescope {
+		--dashOffset: 1850px;
+	}
+	&__brain {
+		--dashOffset: 1750px;
+	}
+	&__book {
+		--dashOffset: 2775px;
+	}
+}
+
+@keyframes iconAnimate {
+	0%,
+	100% {
+		stroke-dashoffset: var(--dashOffset);
+	}
+	50% {
+		stroke-dashoffset: 0;
 	}
 }

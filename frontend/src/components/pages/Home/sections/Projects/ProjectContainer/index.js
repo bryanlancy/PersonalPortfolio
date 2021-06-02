@@ -11,7 +11,7 @@ export default function ProjectContainer({ image, icon, title, sub, desc, left }
 	}
 
 	return (
-		<div className="project" onMouseEnter={hoverStyle} onMouseLeave={hoverStyle} data-aos={`fade-${left ? 'left' : 'right'}`} data-aos-offset="250">
+		<div className="project" onMouseEnter={hoverStyle} onMouseLeave={hoverStyle} data-aos="fade" data-aos-offset="250">
 			<img className="project__image" src={`images/${image}`} alt={`${title}-project`} style={{ [left ? 'left' : 'right']: '-24px' }} />
 			<div className="project__text" style={textStyle}>
 				<div className="project__text--title">

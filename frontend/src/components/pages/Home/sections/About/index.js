@@ -73,8 +73,8 @@ export default function About() {
 		let { icon, color, options } = icons[x]
 		if (x === 'raspberry') {
 			const y = Math.random()
-			if (y <= 0.15) icon = 'fa-pie'
-			else if (y <= 0.3) icon = 'fa-pizza-slice'
+			if (y <= 0.1) icon = 'fa-pie'
+			else if (y <= 0.2) icon = 'fa-pizza-slice'
 			else {
 				icon = 'fa-raspberry-pi'
 				options = { color: '#bf1d47' }

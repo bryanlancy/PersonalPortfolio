@@ -1,13 +1,15 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-import './Navigation.css'
+import './Navigation.scss'
 
 function Navigation() {
 	return (
-		<NavLink exact to="/">
-			Home
-		</NavLink>
+		<div className="navbar">
+			<NavLink exact to="/">
+				Home
+			</NavLink>
+		</div>
 	)
 }
 
