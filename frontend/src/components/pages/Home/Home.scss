@@ -1,6 +1,3 @@
-@mixin text-grdient($color) {
-	background: linear-gradient(90deg, $color, #fff);
-}
 @keyframes colorTest {
 	0% {
 		color: green !important;
@@ -11,10 +8,6 @@
 }
 
 $color-text: #cfcfcf;
-
-$color-neon: #7d7dfe;
-$border: 0 0 15px 2px $color-neon;
-
 $color-icon-react: #4d4dff;
 $color-icon-sass: #c76494;
 $color-icon-css3: #016cb4;
@@ -67,6 +60,11 @@ $color-icon-raspberry: #bf1d47;
 	flex-direction: column;
 	align-items: center;
 
+	& > :not(:last-child) {
+		height: 100vh;
+		margin: 32px 0;
+	}
+
 	> div {
 		display: flex;
 		flex-direction: column;
@@ -74,124 +72,14 @@ $color-icon-raspberry: #bf1d47;
 		align-items: center;
 		justify-content: center;
 
-		height: 100vh;
-
 		max-width: 800px;
 
-		margin: 32px 0;
 		padding: 16px;
 
 		color: $color-text;
 	}
 }
 
-.about {
-	> :not(:first-child) {
-		margin-top: 48px;
-	}
-	&__photo {
-		border: none;
-		width: 175px;
-		border-radius: 50%;
-	}
-	&__bio {
-		& > :not(:first-child) {
-			margin-top: 48px;
-		}
-		> div {
-			display: flex;
-			align-items: flex-end;
-			justify-content: space-between;
-			margin-right: 64px;
-		}
-		> p {
-			padding: 0 16px;
-		}
-	}
-	&__techs {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-
-		width: 100%;
-
-		&--title {
-			display: flex;
-			align-items: center;
-			width: 80%;
-			b {
-				min-width: 245px;
-				margin: 0 16px;
-			}
-			hr {
-				width: 30%;
-			}
-		}
-
-		&--grid {
-			display: grid;
-
-			grid-template-columns: repeat(3, 1fr);
-
-			row-gap: 8px;
-			justify-items: center;
-
-			width: 100%;
-			margin-top: 16px;
-			> div {
-				color: transparent;
-				background-clip: text;
-				background-size: 500%;
-				background-position: 200% 0;
-				transition: all 0.75s ease-in;
-				&:hover {
-					cursor: default;
-				}
-
-				& :not(:first-child) {
-					margin-left: 4px;
-				}
-				:last-child {
-					margin-left: 8px;
-				}
-				&:hover {
-					background-position: 0;
-				}
-			}
-		}
-
-		&--react {
-			@include text-grdient($color-icon-react);
-		}
-		&--sass {
-			@include text-grdient($color-icon-sass);
-		}
-		&--css3 {
-			@include text-grdient($color-icon-css3);
-		}
-		&--html5 {
-			@include text-grdient($color-icon-html5);
-		}
-		&--js {
-			@include text-grdient($color-icon-javascript);
-		}
-		&--github {
-			@include text-grdient($color-icon-git);
-		}
-		&--bootstrap {
-			@include text-grdient($color-icon-bootstrap);
-		}
-		&--node {
-			@include text-grdient($color-icon-node);
-		}
-		&--python {
-			@include text-grdient($color-icon-python);
-		}
-		&--raspberry {
-			@include text-grdient($color-icon-raspberry);
-		}
-	}
-}
 .projects {
 	display: flex;
 	flex-direction: column;

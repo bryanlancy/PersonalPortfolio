@@ -89,7 +89,9 @@ export default function About() {
 		<div className="about" onMouseMove={getDistance} onMouseLeave={() => setMorph('default')}>
 			<div className="about__bio">
 				<div data-aos="fade" data-aos-offset="250">
-					<p>REPLACE WITH BIO</p>
+					<p className="about__quote">
+						"Give a man a program, frustrate him for a day. Teach a man to program, frustrate him for a lifetime."<span> - Muhammad Waseem</span>
+					</p>
 					<img className="about__photo" src={gravatar} alt="gravatar-profile" />
 				</div>
 				<p data-aos="fade" data-aos-offset="300" style={{ textAlign: 'right', borderRight: `1px solid rgba(247, 199, 56, ${Math.max(ledBrightness, 0.8)})` }}>

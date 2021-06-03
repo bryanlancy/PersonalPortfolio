@@ -10,28 +10,101 @@
 }
 
 .intro {
+	position: relative;
 	display: flex;
 	align-items: center;
 
 	width: 100%;
 
 	&__title {
-		span {
-			transition-property: all;
-			transition-timing-function: ease-out;
+		// transform: scale(2);
+	}
+
+	> svg {
+		position: absolute;
+		--iconSize: 150px;
+		width: var(--iconSize);
+		height: var(--iconSize);
+
+		stroke-dasharray: var(--dashOffset);
+		stroke-width: 2px;
+
+		animation: 5s iconAnimate 0s ease infinite forwards;
+
+		path {
+			fill: none;
 		}
-		&--software-engineer {
-			color: #0077ff;
+	}
+
+	.icon {
+		&__git,
+		&__binary,
+		&__code {
+			stroke: #0077ff;
 		}
-		&--tinkerer {
-			color: #4da74d;
+
+		&__tools,
+		&__flux,
+		&__engine {
+			stroke: #4da74d;
 		}
-		&--learner {
-			color: #d36860;
+
+		&__brain,
+		&__book,
+		&__telescope {
+			stroke: #d36860;
+		}
+
+		&__git {
+			top: 30px;
+			left: 20px;
+			// --iconSize: 500px;
+			--dashOffset: 2025px;
+		}
+		&__binary {
+			top: 50%;
+			right: 35px;
+			--dashOffset: 775px;
+		}
+		&__code {
+			bottom: 15%;
+			left: 75px;
+			--dashOffset: 1150px;
+		}
+
+		&__tools {
+			top: 25px;
+			right: 50px;
+			--dashOffset: 1550px;
+		}
+		&__flux {
+			bottom: 45px;
+			right: 15%;
+			--dashOffset: 1675px;
+		}
+		&__engine {
+			top: 65px;
+			left: 40px;
+			--dashOffset: 2325px;
+		}
+
+		&__telescope {
+			bottom: 35px;
+			left: 25%;
+			--dashOffset: 1850px;
+		}
+		&__brain {
+			top: 10px;
+			left: 40%;
+			--dashOffset: 1750px;
+		}
+		&__book {
+			top: 45%;
+			right: 10%;
+			--dashOffset: 2775px;
 		}
 	}
 }
-
 .outline {
 	$animFontSize: 1.5em;
 
@@ -61,70 +134,6 @@
 		animation-fill-mode: forwards;
 	}
 }
-
-.icon {
-	> svg {
-		width: 150px;
-		height: 150px;
-
-		stroke-dasharray: var(--dashOffset);
-		stroke-width: 1px;
-
-		animation: 5s iconAnimate 0s ease 2 forwards;
-
-		path {
-			fill: none;
-		}
-	}
-	&__git,
-	&__binary,
-	&__code {
-		stroke: #0077ff;
-	}
-
-	&__tools,
-	&__flux,
-	&__engine {
-		stroke: #4da74d;
-	}
-
-	&__brain,
-	&__book,
-	&__telescope {
-		stroke: #d36860;
-	}
-
-	&__git {
-		--dashOffset: 2025px;
-	}
-	&__binary {
-		--dashOffset: 775px;
-	}
-	&__code {
-		--dashOffset: 1150px;
-	}
-
-	&__tools {
-		--dashOffset: 1550px;
-	}
-	&__flux {
-		--dashOffset: 1675px;
-	}
-	&__engine {
-		--dashOffset: 2325px;
-	}
-
-	&__telescope {
-		--dashOffset: 1850px;
-	}
-	&__brain {
-		--dashOffset: 1750px;
-	}
-	&__book {
-		--dashOffset: 2775px;
-	}
-}
-
 @keyframes iconAnimate {
 	0%,
 	100% {

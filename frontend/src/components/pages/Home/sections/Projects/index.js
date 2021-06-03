@@ -30,7 +30,7 @@ export default function Projects() {
 	]
 	return (
 		<div className="projects" data-aos="fade">
-			<h2>Projects</h2>
+			<h1>Projects</h1>
 			<div className="projects">
 				{projects.map((p, i) => (
 					<ProjectContainer key={`${p.title}-container`} image={p.image} icon={p.icon} title={p.title} sub={p.sub} desc={p.desc} left={i % 2} />

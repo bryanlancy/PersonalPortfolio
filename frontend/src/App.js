@@ -12,7 +12,7 @@ function App() {
 
 	return (
 		<>
-			<Navigation />
+			{/* <Navigation /> */}
 			{isLoaded && (
 				<Switch>
 					<Route path="/">
