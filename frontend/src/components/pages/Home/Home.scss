@@ -1,0 +1,99 @@
+@keyframes colorTest {
+	0% {
+		color: green !important;
+	}
+	100% {
+		color: #fff;
+	}
+}
+
+$color-text: #cfcfcf;
+$color-icon-react: #4d4dff;
+$color-icon-sass: #c76494;
+$color-icon-css3: #016cb4;
+$color-icon-html5: #de4c25;
+$color-icon-javascript: #f3cf01;
+$color-icon-git: #e84d31;
+$color-icon-bootstrap: #8512f3;
+$color-icon-node: #26ac56;
+$color-icon-python: #f7c738;
+$color-icon-python-secondary: #326994;
+$color-icon-arduino: #009298;
+$color-icon-raspberry: #bf1d47;
+
+.span {
+	&__LED {
+		color: $color-icon-python;
+		font-weight: 700;
+	}
+	&__garden {
+		color: $color-icon-node;
+	}
+	&__raspberry {
+		color: $color-icon-raspberry;
+	}
+	&__arduino {
+		color: $color-icon-arduino;
+	}
+}
+.icon {
+	&__LED {
+		float: left;
+		font-size: 48px;
+		margin: 0 8px;
+	}
+	&__Morph {
+		float: right;
+
+		width: 56px;
+		margin: 0 8px;
+
+		text-align: right;
+		font-size: 48px;
+
+		transition: all 0.25s ease-in-out;
+	}
+}
+
+.home {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	& > :not(:last-child) {
+		height: 100vh;
+		margin: 32px 0;
+	}
+
+	> div {
+		display: flex;
+		flex-direction: column;
+
+		align-items: center;
+		justify-content: center;
+
+		max-width: 800px;
+
+		padding: 16px;
+
+		color: $color-text;
+	}
+}
+
+.projects {
+	display: flex;
+	flex-direction: column;
+
+	width: 90%;
+}
+
+@media screen and (max-width: 750px) {
+	.about {
+		&__techs {
+			&--grid {
+				grid-template-columns: repeat(2, 1fr);
+				margin-bottom: 32px;
+			}
+		}
+	}
+}
