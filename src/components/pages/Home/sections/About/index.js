@@ -88,13 +88,13 @@ export default function About() {
 	return (
 		<div className="about" onMouseMove={getDistance} onMouseLeave={() => setMorph('default')}>
 			<div className="about__bio">
-				<div data-aos="fade" data-aos-offset="250">
+				<div>
 					<p className="about__quote">
 						"Give a man a program, frustrate him for a day. Teach a man to program, frustrate him for a lifetime."<span> - Muhammad Waseem</span>
 					</p>
 					<img className="about__photo" src={gravatar} alt="gravatar-profile" />
 				</div>
-				<p data-aos="fade" data-aos-offset="300" style={{ textAlign: 'right', borderRight: `1px solid rgba(247, 199, 56, ${Math.max(ledBrightness, 0.8)})` }}>
+				<p style={{ textAlign: 'right', borderRight: `1px solid rgba(247, 199, 56, ${Math.max(ledBrightness, 0.8)})` }}>
 					<i
 						className="fad fa-lightbulb icon__LED"
 						style={{ '--fa-secondary-opacity': Math.max(ledBrightness, 0.5), '--fa-secondary-color': `rgb(247, 199, 56)`, filter: `drop-shadow(0 -6px 12px rgba(247, 199, 56, ${Math.min(ledBrightness, 0.5)}))` }}
@@ -113,8 +113,6 @@ export default function About() {
 					grow as a software developer.
 				</p>
 				<p
-					data-aos="fade"
-					data-aos-offset="300"
 					style={{
 						borderLeft: `1px solid ${borderColor}`,
 						transition: 'all .5s ease-in-out',
@@ -137,7 +135,7 @@ export default function About() {
 				</p>
 			</div>
 
-			<div className="about__techs" data-aos="fade" data-aos-offset="250">
+			<div className="about__techs">
 				<div className="about__techs--title">
 					<hr />
 					<b>Technologies I'm familiar with</b>

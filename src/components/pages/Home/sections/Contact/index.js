@@ -4,7 +4,7 @@ import './Contact.scss'
 
 export default function Contact() {
 	return (
-		<div className="contact" data-aos="fade">
+		<div className="contact">
 			<h2>Get in touch</h2>
 			<p className="contact__message">I'm currently looking for a new software engineering role. If you enjoyed my portfolio please feel free to connect with me using the links below.</p>
 			<div className="contact__links">

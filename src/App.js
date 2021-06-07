@@ -8,7 +8,7 @@ function App() {
 		setIsLoaded(true)
 	}, [])
 
-	return <>{isLoaded && <HomePage />}</>
+	return isLoaded && <HomePage />
 }
 
 export default App

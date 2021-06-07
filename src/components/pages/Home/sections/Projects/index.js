@@ -7,21 +7,21 @@ import ProjectContainer from './ProjectContainer'
 export default function Projects() {
 	const projects = [
 		{
-			image: 'clonify-screenshot.PNG',
+			image: 'clonify-screenshot.jpg',
 			icon: <i className="fab fa-spotify"></i>,
 			title: 'Clonify',
 			sub: 'a Spotify clone',
 			desc: `With Spotify API you can listen to songs you search for. Sign up and like songs, artists, and playlists to begin receiving customized suggestions.`,
 		},
 		{
-			image: 'que-it-screenshot.PNG',
+			image: 'que-it-screenshot.jpg',
 			icon: <i className="fab fa-quora"></i>,
 			title: 'Que-It',
 			sub: 'a Quora clone',
 			desc: `Do you want to gain or share your musical knowledge? In this Quora clone, you can join the conversation and ask or answers any questions you're interested in.`,
 		},
 		{
-			image: 'fetch-screenshot.PNG',
+			image: 'fetch-screenshot.jpg',
 			icon: <i className="fab fa-instagram"></i>,
 			title: 'Fetch',
 			sub: 'an Instagram clone',
@@ -29,7 +29,7 @@ export default function Projects() {
 		},
 	]
 	return (
-		<div className="projects" data-aos="fade">
+		<div className="projects">
 			<h1>Projects</h1>
 			<div className="projects">
 				{projects.map((p, i) => (
