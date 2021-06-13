@@ -2,7 +2,7 @@ import React from 'react'
 
 import './ProjectContainer.scss'
 
-export default function ProjectContainer({ image, icon, title, sub, desc, left, link }) {
+export default function ProjectContainer({ image, icon, title, sub, desc, left, link, techs }) {
 	const projectDetails = (
 		<div className="project__details" style={{ '--offsetDirection': left ? '1%' : '-1%' }}>
 			<div className="project__header">
@@ -11,6 +11,7 @@ export default function ProjectContainer({ image, icon, title, sub, desc, left, 
 				<p className="project__title--sub">{sub}</p>
 			</div>
 			<p className="project__details--desc">{desc}</p>
+			{/* <div className="project__techs">{techs.map()}</div> */}
 		</div>
 	)
 

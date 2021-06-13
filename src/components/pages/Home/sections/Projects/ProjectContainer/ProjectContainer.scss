@@ -10,7 +10,6 @@
 			margin-left: 4px;
 		}
 	}
-
 	&__title {
 		display: flex;
 		&--sub {
@@ -50,6 +49,9 @@
 		&--desc {
 			margin-top: 8px;
 		}
+	}
+	&__techs {
+		display: flex;
 	}
 }
 
