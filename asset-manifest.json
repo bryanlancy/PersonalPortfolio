@@ -1,20 +1,24 @@
 {
   "files": {
-    "main.css": "/PersonalPortfolio/static/css/main.e0687c01.chunk.css",
-    "main.js": "/PersonalPortfolio/static/js/main.b020ffc9.chunk.js",
-    "main.js.map": "/PersonalPortfolio/static/js/main.b020ffc9.chunk.js.map",
-    "runtime-main.js": "/PersonalPortfolio/static/js/runtime-main.babf5301.js",
-    "runtime-main.js.map": "/PersonalPortfolio/static/js/runtime-main.babf5301.js.map",
-    "static/js/2.56c55e7f.chunk.js": "/PersonalPortfolio/static/js/2.56c55e7f.chunk.js",
-    "static/js/2.56c55e7f.chunk.js.map": "/PersonalPortfolio/static/js/2.56c55e7f.chunk.js.map",
+    "main.css": "/PersonalPortfolio/static/css/main.3a736e54.chunk.css",
+    "main.js": "/PersonalPortfolio/static/js/main.569ef888.chunk.js",
+    "main.js.map": "/PersonalPortfolio/static/js/main.569ef888.chunk.js.map",
+    "runtime-main.js": "/PersonalPortfolio/static/js/runtime-main.56c5dff7.js",
+    "runtime-main.js.map": "/PersonalPortfolio/static/js/runtime-main.56c5dff7.js.map",
+    "static/js/2.398e3e0c.chunk.js": "/PersonalPortfolio/static/js/2.398e3e0c.chunk.js",
+    "static/js/2.398e3e0c.chunk.js.map": "/PersonalPortfolio/static/js/2.398e3e0c.chunk.js.map",
     "index.html": "/PersonalPortfolio/index.html",
-    "static/css/main.e0687c01.chunk.css.map": "/PersonalPortfolio/static/css/main.e0687c01.chunk.css.map",
-    "static/js/2.56c55e7f.chunk.js.LICENSE.txt": "/PersonalPortfolio/static/js/2.56c55e7f.chunk.js.LICENSE.txt"
+    "static/css/main.3a736e54.chunk.css.map": "/PersonalPortfolio/static/css/main.3a736e54.chunk.css.map",
+    "static/js/2.398e3e0c.chunk.js.LICENSE.txt": "/PersonalPortfolio/static/js/2.398e3e0c.chunk.js.LICENSE.txt",
+    "static/media/Bryan_Burns_Resume.db789f17.pdf": "/PersonalPortfolio/static/media/Bryan_Burns_Resume.db789f17.pdf",
+    "static/media/clonify-screenshot.jpg": "/PersonalPortfolio/static/media/clonify-screenshot.ca5eefb6.jpg",
+    "static/media/fetch-screenshot.jpg": "/PersonalPortfolio/static/media/fetch-screenshot.c23be290.jpg",
+    "static/media/que-it-screenshot.jpg": "/PersonalPortfolio/static/media/que-it-screenshot.4bb9fee7.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.babf5301.js",
-    "static/js/2.56c55e7f.chunk.js",
-    "static/css/main.e0687c01.chunk.css",
-    "static/js/main.b020ffc9.chunk.js"
+    "static/js/runtime-main.56c5dff7.js",
+    "static/js/2.398e3e0c.chunk.js",
+    "static/css/main.3a736e54.chunk.css",
+    "static/js/main.569ef888.chunk.js"
   ]
 }
