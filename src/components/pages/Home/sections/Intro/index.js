@@ -111,7 +111,7 @@ export default function Intro() {
 	}
 
 	return (
-		<div className="intro">
+		<div className="intro fullHeight">
 			{Object.values(intros[0].icons).map((icon, i) => (
 				<React.Fragment key={`icon${i}`}>{icon}</React.Fragment>
 			))}

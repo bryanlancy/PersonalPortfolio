@@ -1,7 +1,4 @@
-$color-icon-git: #e84d31;
-$color-icon-angellist: #098901;
-$color-icon-linkedin: #0077b5;
-$color-icon-email: #bab53a;
+@import '../../../../../index.scss';
 
 @mixin linkHover($hoverColor) {
 	&:hover {
@@ -25,7 +22,7 @@ $color-icon-email: #bab53a;
 		color: #aaa;
 	}
 	& > :not(:first-child) {
-		margin-top: 32px;
+		margin-top: 16px;
 	}
 	&__message {
 		max-width: 450px;
@@ -79,5 +76,11 @@ $color-icon-email: #bab53a;
 		transition: all 0.3s ease;
 
 		@include linkHover(#8f49f0);
+	}
+}
+
+@include mobile {
+	.contact {
+		margin-top: 48px;
 	}
 }

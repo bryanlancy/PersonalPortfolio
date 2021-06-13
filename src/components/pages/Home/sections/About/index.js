@@ -86,7 +86,7 @@ export default function About() {
 	}
 
 	return (
-		<div className="about" onMouseMove={getDistance} onMouseLeave={() => setMorph('default')}>
+		<div className="about fullHeight" onMouseMove={getDistance} onMouseLeave={() => setMorph('default')}>
 			<div className="about__bio">
 				<div>
 					<p className="about__quote">
