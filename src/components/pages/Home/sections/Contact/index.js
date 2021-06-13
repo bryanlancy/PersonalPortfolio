@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Resume from './Bryan_Burns_Resume.pdf'
+
 import './Contact.scss'
 
 export default function Contact() {
@@ -33,7 +35,7 @@ export default function Contact() {
 					</div>
 				</a>
 			</div>
-			<a href="./BryanBurnsResume.pdf">
+			<a href={Resume}>
 				<div className="contact__resume">
 					<p>Download Resume</p>
 				</div>

@@ -6,7 +6,7 @@
 
 .about {
 	> :not(:first-child) {
-		margin-top: 48px;
+		margin-top: 40px;
 	}
 	&__quote {
 		font-style: italic;
@@ -155,5 +155,11 @@
 @include mobile {
 	.about {
 		padding: 0 16px;
+		&__techs {
+			&--grid {
+				grid-template-columns: repeat(2, 1fr);
+				margin-bottom: 32px;
+			}
+		}
 	}
 }

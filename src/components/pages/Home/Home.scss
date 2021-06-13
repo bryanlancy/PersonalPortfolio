@@ -28,30 +28,9 @@
 }
 @include desktop {
 	.home {
-		& .fullHeight {
-			height: 100vh;
-		}
-
-		& > :not(:last-child) {
-			margin: 32px 0;
-		}
-
 		> div {
 			max-width: 800px;
 			padding: 16px;
-		}
-	}
-}
-@include tablet {
-}
-
-@media screen and (max-width: 750px) {
-	.about {
-		&__techs {
-			&--grid {
-				grid-template-columns: repeat(2, 1fr);
-				margin-bottom: 32px;
-			}
 		}
 	}
 }
