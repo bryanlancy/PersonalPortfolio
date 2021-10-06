@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+import Text from './Text'
+import Icons from './Icons'
 import './Intro.scss'
 
 export default function Intro() {
@@ -99,42 +101,21 @@ export default function Intro() {
 			const newOrder = [...intros.slice(1), intros[0]]
 
 			const outline = document.querySelector('.outline__line')
+			console.log(outline)
 			outline.classList.add('outline__animation')
 
 			setIntros(newOrder)
 		}, titleTimer)
 	}, [intros])
 
-	function textChange() {
-		const outline = document.querySelector('.outline__line')
-		outline.classList.remove('outline__animation')
-	}
-
 	return (
 		<div className="intro fullHeight">
-			{Object.values(intros[0].icons).map((icon, i) => (
-				<React.Fragment key={`icon${i}`}>{icon}</React.Fragment>
-			))}
-
+			<Icons icons={intros[0].icons} />
 			<div className="intro__title">
 				<h1>Hello, I'm Bryan.</h1>
 				<p className="outline__container">
 					And I'm a
-					<svg className="outline" viewBox="0 0 250 50">
-						<symbol id="outline__text">
-							<text textAnchor="start" dominantBaseline="hanging" x="0" y="5">
-								{intros[0].title}.
-							</text>
-						</symbol>
-						<g>
-							<use
-								xlinkHref="#outline__text"
-								style={{ stroke: intros[0].color, animationDuration: `${(titleTimer - 1000) / 1000}s` }}
-								className="outline__line outline__line--1 outline__animation"
-								onAnimationEnd={() => textChange()}
-							></use>
-						</g>
-					</svg>
+					<Text value={intros[0].title} color={intros[0].color} timer={titleTimer} />
 				</p>
 			</div>
 		</div>
