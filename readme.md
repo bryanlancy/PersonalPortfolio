@@ -30,7 +30,7 @@
 
 
 ## Setup
-If for whatever reason you'd like to run the application locally, setup is simple.
+If for some reason you'd like to run the application locally, setup is simple.
 
 1. Clone the repo from github <br>
  `git clone https://github.com/bryanlancy/PersonalPortfolio.git`
