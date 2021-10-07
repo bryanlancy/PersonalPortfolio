@@ -12,7 +12,7 @@
     It's a basic single page application that primarily provides easy access to the live demos and my contact information.
 </p>
 
-##    Technology Used
+##    Technologies Used
 
  <img alt="NodeJS" src="https://img.shields.io/badge/Node.js%20-%2343853D.svg?logo=node-dot-js&logoColor=white">
  <img alt="JavaScript" src="https://img.shields.io/badge/JavaScript%20-%23F7DF1E.svg?logo=javascript&logoColor=black">
