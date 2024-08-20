@@ -1,0 +1,36 @@
+@import '../../../index.scss';
+
+.home {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	& > div {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		color: $color-text;
+	}
+}
+
+@include mobile {
+	.home {
+		& > :not(:last-child) {
+			margin: 0px 0;
+		}
+		> div {
+			width: 100%;
+		}
+		& .fullHeight {
+			height: 90vh;
+		}
+	}
+}
+@include desktop {
+	.home {
+		> div {
+			max-width: 800px;
+			padding: 16px;
+		}
+	}
+}

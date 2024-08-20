@@ -1,0 +1,145 @@
+@keyframes strokeShift {
+	0%,
+	100% {
+		stroke-dashoffset: 100%;
+	}
+
+	50% {
+		stroke-dashoffset: 0%;
+	}
+}
+
+.intro {
+	position: relative;
+	display: flex;
+	align-items: center;
+
+	height: 100vh;
+	width: 100%;
+
+	&__title {
+		// transform: scale(2);
+	}
+
+	> svg {
+		position: absolute;
+		--iconSize: 150px;
+		width: var(--iconSize);
+		height: var(--iconSize);
+
+		stroke-dasharray: var(--dashOffset);
+		stroke-width: 2px;
+
+		animation: 5s iconAnimate 0s ease infinite forwards;
+
+		path {
+			fill: none;
+		}
+	}
+}
+.icon {
+	&__git,
+	&__binary,
+	&__code {
+		stroke: #0077ff;
+	}
+
+	&__tools,
+	&__flux,
+	&__engine {
+		stroke: #4da74d;
+	}
+
+	&__brain,
+	&__book,
+	&__telescope {
+		stroke: #d36860;
+	}
+
+	&__git {
+		top: 30px;
+		left: 20px;
+		// --iconSize: 500px;
+		--dashOffset: 2025px;
+	}
+	&__binary {
+		top: 50%;
+		right: 35px;
+		--dashOffset: 775px;
+	}
+	&__code {
+		bottom: 15%;
+		left: 75px;
+		--dashOffset: 1150px;
+	}
+
+	&__tools {
+		top: 25px;
+		right: 50px;
+		--dashOffset: 1550px;
+	}
+	&__flux {
+		bottom: 45px;
+		right: 15%;
+		--dashOffset: 1675px;
+	}
+	&__engine {
+		top: 65px;
+		left: 40px;
+		--dashOffset: 2325px;
+	}
+
+	&__telescope {
+		bottom: 35px;
+		left: 25%;
+		--dashOffset: 1850px;
+	}
+	&__brain {
+		top: 10px;
+		left: 40%;
+		--dashOffset: 1750px;
+	}
+	&__book {
+		top: 45%;
+		right: 10%;
+		--dashOffset: 2775px;
+	}
+}
+.outline {
+	$animFontSize: 1.5em;
+
+	width: 100%;
+
+	font-size: 100%;
+	font-weight: 700;
+
+	&__container {
+		display: flex;
+
+		font-size: $animFontSize;
+
+		svg {
+			margin-left: 8px;
+			width: 60%;
+		}
+	}
+	&__line {
+		fill: none;
+		stroke-dasharray: 100%;
+		stroke-dashoffset: 100%;
+	}
+	&__animation {
+		animation-name: strokeShift;
+		animation-timing-function: ease-in-out;
+		animation-fill-mode: forwards;
+	}
+}
+@keyframes iconAnimate {
+	0%,
+	100% {
+		stroke-dashoffset: var(--dashOffset);
+	}
+	50% {
+		stroke-dashoffset: 0;
+	}
+}
