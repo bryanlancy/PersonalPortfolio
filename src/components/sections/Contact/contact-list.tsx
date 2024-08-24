@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { ReactElement } from 'react'
 
 interface Contact {
 	/** Name of contact method */
@@ -6,7 +7,7 @@ interface Contact {
 	/** Link for redirecting to contact method */
 	link: string
 	/** Icon to be used */
-	icon: typeof Image
+	icon: ReactElement
 	/** Hexcode to be used to style elements related to the contact method */
 	color: string
 }
@@ -15,7 +16,7 @@ interface Contact {
 const wellfound: Contact = {
 	name: 'wellfound:',
 	link: 'https://wellfound.com/u/bryan-burns-4',
-	icon: <Image src='' />,
+	icon: <Image src={''} alt='' />,
 }
 const github: Contact = {
 	name: 'Github',
