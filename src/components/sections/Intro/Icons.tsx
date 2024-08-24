@@ -74,3 +74,5 @@ const TelescopeIcon = (props: SVGProps<SVGSVGElement>) => (
 		/>
 	</svg>
 )
+
+export { CodeIcon, GitIcon, BinaryIcon, ToolsIcon, FluxIcon, EngineIcon, BrainIcon, BookIcon, TelescopeIcon }

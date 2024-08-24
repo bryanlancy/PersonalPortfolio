@@ -32,30 +32,51 @@ const walkOns: Project = {
 	article: false,
 	link: 'https://walk-ons.com/',
 	priority: 10,
+	// TODO Add info
+	description:
+		"While working at Bowen Media one of the largest project I took on was being the primary developer for Walk-On's website redesign. Working with an awesome design team and support from the dev team almost guaranteed an awesome result. I'm proud to have worked on such a cool project!",
+	images: [],
+	technologies: [],
 }
 const mercury: Project = {
 	name: 'Mercury',
 	article: false,
 	link: undefined,
 	priority: 9,
+	// TODO Add info
+	description: '',
+	images: [],
+	technologies: [],
 }
 const otto: Project = {
 	name: 'Otto',
 	article: false,
 	link: undefined,
 	priority: 8,
+	// TODO Add info
+	description: '',
+	images: [],
+	technologies: [],
 }
 const homeNetwork: Project = {
 	name: 'Home Network',
 	article: false,
 	link: undefined,
 	priority: 0,
+	// TODO Add info
+	description: '',
+	images: [],
+	technologies: [],
 }
 const carputer: Project = {
 	name: 'Car Computer',
 	article: false,
 	link: undefined,
 	priority: 0,
+	// TODO Add info
+	description: '',
+	images: [],
+	technologies: [],
 }
 
 // ========================
