@@ -1,7 +1,10 @@
+import { faGithub, faLinkedinIn } from '@awesome.me/kit-ddd907bdb7/icons/classic/brands'
+import { faFileUser, faMailboxFlagUp } from '@awesome.me/kit-ddd907bdb7/icons/sharp-duotone/solid'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 import { ReactElement } from 'react'
 
-interface Contact {
+export interface Contact {
 	/** Name of contact method */
 	name: string
 	/** Link for redirecting to contact method */
@@ -18,35 +21,31 @@ const wellfound: Contact = {
 	link: 'https://wellfound.com/u/bryan-burns-4',
 	color: '#00ff00',
 	// TODO Add Icon
-	icon: <Image src={''} alt='' />,
+	icon: <Image src='' alt='' />,
 }
 const github: Contact = {
 	name: 'Github',
 	link: 'https://github.com/bryanlancy',
 	color: '#cc8800',
-	// TODO Add Icon
-	icon: <Image src={''} alt='' />,
+	icon: <FontAwesomeIcon icon={faGithub} />,
 }
 const linkedin: Contact = {
 	name: 'LinkedIn',
 	link: 'https://www.linkedin.com/in/bryan-burns-b45006116/',
 	color: '#0457c4',
-	// TODO Add Icon
-	icon: <Image src={''} alt='' />,
+	icon: <FontAwesomeIcon icon={faLinkedinIn} />,
 }
 const email: Contact = {
 	name: 'Email',
 	link: 'mailto:bryanburns93@gmail.com',
 	color: '#c9c604',
-	// TODO Add Icon
-	icon: <Image src={''} alt='' />,
+	icon: <FontAwesomeIcon icon={faMailboxFlagUp} />,
 }
 const resume: Contact = {
 	name: 'Resume',
 	link: '/Resume_Bryan_Burns.pdf',
 	color: '#6304c9',
-	// TODO Add Icon
-	icon: <Image src={''} alt='' />,
+	icon: <FontAwesomeIcon icon={faFileUser} />,
 }
 // ========================
 
