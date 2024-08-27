@@ -1,8 +1,23 @@
+@import '@/styles/mixins.scss';
+
 .main {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	padding: 6rem;
 	min-height: 100vh;
+}
+
+.page {
+	margin: 0 32px;
+	max-width: 1164px;
+
+	@include desktop {
+		margin: 0 auto;
+	}
+
+	section {
+		width: 100%;
+		border: 1px solid blue;
+	}
 }

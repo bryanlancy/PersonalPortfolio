@@ -8,7 +8,7 @@ type ContactCardProps = {
 }
 
 const ContactCard: FC<ContactCardProps> = ({ contactMethod }) => {
-	return <div>{contactMethod.name}</div>
+	return <div className={styles.card}>{contactMethod.name}</div>
 }
 
 export default ContactCard

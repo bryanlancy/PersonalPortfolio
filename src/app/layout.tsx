@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Bebas_Neue } from 'next/font/google'
 import './globals.scss'
 
-const inter = Inter({ subsets: ['latin'] })
+// Display/title fonts
+const bebasNeue = Bebas_Neue({ subsets: ['latin'], weight: '400' })
 
 export const metadata: Metadata = {
 	title: 'Bryan Burns | Software Engineer',
@@ -16,7 +17,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body className={inter.className}>{children}</body>
+			<body className={bebasNeue.className}>{children}</body>
 		</html>
 	)
 }

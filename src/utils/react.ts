@@ -1,0 +1,29 @@
+type classInput = string | [boolean, string] | [boolean, string, string]
+
+/**
+ *
+ * @param classes Any classes needed to be added to a component. Useful when using css modules.
+ * Input can be any combination of a string or array.
+ *
+ * If an array is provided index 0 is a boolean used to determine which class to apply.
+ * True = index 1, False = index 2 (if provided))
+ * @returns `string`
+ */
+const cn: (...input: classInput[]) => string = (...classes) => {
+	let classString: string = ''
+	// Loop through classes and add to classes
+	for (let i = 0; i < classes.length; i++) {
+		const classValue = classes[i]
+		// if type is array, check boolean value
+		if (typeof classValue !== 'string') {
+			// If true, add class at index 1
+			if (classValue[0]) classString += ' ' + classValue[1]
+			// If false, add class at index 2 (if provided)
+			else if (classValue[2]) classString += ' ' + classValue[2]
+		} else classString += ' ' + classValue
+	}
+
+	return classString.trimStart()
+}
+
+export { cn }

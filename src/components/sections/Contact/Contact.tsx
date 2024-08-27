@@ -2,22 +2,23 @@ import React from 'react'
 import contactList, { Contact as ContactMethod } from './contact-list'
 import ContactCard from './ContactCard'
 
+import styles from './Contact.module.scss'
+
 const Contact = () => {
 	const contactArray: ContactMethod[] = Object.values(contactList)
 
 	return (
-		<section>
-			<h1>Get in Touch</h1>
-			<p>I'm always interested in talking about new opportunities. Please feel free to reach out to me if you want to talk more!</p>
-			<ul>
+		<section className={styles.section}>
+			<h1 className={styles.title}>Get in Touch</h1>
+			<div className={styles.text}>
+				<p>I'm always interested in talking about new opportunities!</p>
+				<p>Don't hesitate to reach out to me if you want to talk more!</p>
+			</div>
+			<div className={styles.contactList}>
 				{contactArray.map((contactMethod, i) => {
-					return (
-						<li key={i}>
-							<ContactCard contactMethod={contactMethod} />
-						</li>
-					)
+					return <ContactCard contactMethod={contactMethod} key={i} />
 				})}
-			</ul>
+			</div>
 		</section>
 	)
 }

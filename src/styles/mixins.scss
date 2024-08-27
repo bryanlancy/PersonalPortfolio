@@ -1,0 +1,27 @@
+// Min width to check for is 375px
+
+//! These mixins follow a "mobile-first" order
+// The intended practice is that the default properties will apply to the
+// smallest screen size ("mobile") and will apply to all larger screen sizes.
+// Additional rules will be applied as needed for larger sizes
+
+@mixin tablet {
+	@media (min-width: 600px) {
+		@content;
+	}
+}
+@mixin laptop {
+	@media (min-width: 950px) {
+		@content;
+	}
+}
+@mixin desktop {
+	@media (min-width: 1240px) {
+		@content;
+	}
+}
+@mixin hd {
+	@media (min-width: 1728px) {
+		@content;
+	}
+}
