@@ -148,9 +148,22 @@
 	height: 90vh;
 }
 
-.title {
-	border: 1px solid red;
-}
 .text {
+	display: flex;
+	flex-direction: column;
+}
+.title {
+	font-size: 40px;
+}
+.subtext {
+	display: flex;
+	text-wrap: nowrap;
+
+	font-size: 40px;
+	height: 75px;
+	t > * {
+		border: 1px solid red;
+	}
+
 	border: 1px solid red;
 }
