@@ -1,7 +1,22 @@
+'use client'
+
 import React from 'react'
 
+import styles from './About.module.scss'
+import Quote from './Quote'
+
+const quote =
+	'Give a man a program, frustrate him for a day. Teach a man to program, frustrate him for a lifetime.'
+const author = 'Muhammad Waseem'
+
 const About = () => {
-	return <section>About</section>
+	return (
+		<section>
+			<h1>A little about me</h1>
+
+			<Quote quote={quote} author={author} />
+		</section>
+	)
 }
 
 export default About
