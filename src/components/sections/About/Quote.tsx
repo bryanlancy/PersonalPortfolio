@@ -50,7 +50,7 @@ const Quote: FC<QuoteProps> = ({ quote, author }) => {
 				transition={innerTrans}
 				viewport={{ once: true }}>
 				<q>{quote}</q>
-				<figcaption>- {author}</figcaption>
+				<figcaption className={styles.author}>- {author}</figcaption>
 			</motion.figure>
 			<motion.div
 				initial={init}

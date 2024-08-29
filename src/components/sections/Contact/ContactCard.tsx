@@ -41,6 +41,7 @@ const copyLink: (
 	text: string
 ) => void = (e, text) => {
 	e.preventDefault()
+	// TODO Add animation for successful/failed copy
 	if (location.protocol !== 'https:') {
 		console.error('Cannot copy to clipboard over insecure connection!')
 		return
