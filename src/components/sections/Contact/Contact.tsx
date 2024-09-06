@@ -1,8 +1,11 @@
 import React from 'react'
-import contactList, { Contact as ContactMethod } from './contact-list'
+import { contactList } from '../../../app/data'
+import { Contact as ContactMethod } from '@/app/data/contact-list'
 import ContactCard from './ContactCard'
 
 import styles from './Contact.module.scss'
+
+// TODO Change animation, change container of cards to show cards when viewed NOT each card, stagger
 
 const Contact = () => {
 	const contactArray: ContactMethod[] = Object.values(contactList)

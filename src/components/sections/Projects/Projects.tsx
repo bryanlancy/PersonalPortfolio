@@ -1,54 +1,44 @@
 import React, { FC } from 'react'
-import projectList from './project-list'
-import ProjectPreview from './ProjectPreview'
 
 import styles from './Projects.module.scss'
 
-interface ProjectsProps {
-	/** Maximum number of projects to show in list */
-	max?: number
-}
+import {
+	CarputerBanner,
+	HomeNetworkBanner,
+	MercuryBanner,
+	OttoBanner,
+	WalkOnsBanner,
+} from './Banner'
 
-const Projects: FC<ProjectsProps> = ({ max = Infinity }) => {
-	const proProjects = ['walkOns', 'mercury', 'otto']
-	const personalProjects = ['homeNetwork', 'carputer']
-	// const proTechs = ['']
-	// const personalTechs = []
+interface ProjectsProps {}
 
+const Projects: FC<ProjectsProps> = () => {
 	return (
-		<section>
-			<div>
-				<h1>Professional Highlights</h1>
-				<p>While I'm always learning new things and up for any challenge. These are some technologies that I have used on a professional level.</p>
-				<ul></ul>
-				<ul>
-					{proProjects.map((project, i) => {
-						// If i is greater than or equal to max return null
-						return i < max ? (
-							<li key={i}>
-								<ProjectPreview project={projectList[project]} />
-							</li>
-						) : null
-					})}
-				</ul>
-			</div>
-			<div>
-				<h1>Personal Projects</h1>
-				<p>When I'm not working I like to explore all different facets of technology. Here's a couple technologies and projects I've recently played around with in my free time.</p>
-				<ul></ul>
-				<ul>
-					{' '}
-					{personalProjects.map((project, i) => {
-						// If i is greater than or equal to max return null
-						return i < max ? (
-							<li key={i}>
-								<ProjectPreview project={projectList[project]} />
-							</li>
-						) : null
-					})}
-				</ul>
-			</div>
-		</section>
+		<>
+			<section className={styles.projects}>
+				<h1 className={styles.title}>Professional Highlights</h1>
+				<p className={styles.description}>
+					Here's a couple of technologies I've used on a professional
+					level and some of my favorite projects.
+				</p>
+				<div className={styles.tech}>Pro Techs</div>
+				<WalkOnsBanner />
+				<MercuryBanner />
+				<OttoBanner />
+			</section>
+			<section className={styles.projects}>
+				<h1 className={styles.title}>Personal Projects</h1>
+				<p className={styles.description}>
+					I still love learning new things in my free time. Here's a
+					couple technologies and projects I'm currently working on at
+					home.
+				</p>
+				<div className={styles.tech}>Home Techs</div>
+
+				<HomeNetworkBanner />
+				<CarputerBanner />
+			</section>
+		</>
 	)
 }
 

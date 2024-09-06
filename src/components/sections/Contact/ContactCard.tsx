@@ -1,7 +1,7 @@
 'use client'
 
 import React, { FC } from 'react'
-import { Contact } from './contact-list'
+import { Contact } from '../../../app/data/contact-list'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@awesome.me/kit-ddd907bdb7/icons/classic/regular'

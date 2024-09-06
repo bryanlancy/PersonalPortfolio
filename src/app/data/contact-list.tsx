@@ -1,9 +1,15 @@
-import { faGithub, faLinkedinIn } from '@awesome.me/kit-ddd907bdb7/icons/classic/brands'
-import { faFileUser, faMailboxFlagUp } from '@awesome.me/kit-ddd907bdb7/icons/sharp-duotone/solid'
+import {
+	faGithub,
+	faLinkedinIn,
+} from '@awesome.me/kit-ddd907bdb7/icons/classic/brands'
+import {
+	faFileUser,
+	faMailboxFlagUp,
+} from '@awesome.me/kit-ddd907bdb7/icons/sharp-duotone/solid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 import { ReactElement } from 'react'
-import styles from './ContactCard.module.scss'
+import styles from '../../components/sections/Contact/ContactCard.module.scss'
 
 export interface Contact {
 	/** Name of contact method */

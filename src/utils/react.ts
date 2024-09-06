@@ -1,4 +1,8 @@
-type classInput = string | [boolean, string] | [boolean, string, string]
+type classInput =
+	| string
+	| [boolean, string]
+	| [boolean, string, string]
+	| undefined
 
 /**
  *
@@ -14,6 +18,10 @@ const cn: (...input: classInput[]) => string = (...classes) => {
 	// Loop through classes and add to classes
 	for (let i = 0; i < classes.length; i++) {
 		const classValue = classes[i]
+
+		// Skip if given an undefined value
+		if (!classValue) continue
+
 		// if type is array, check boolean value
 		if (typeof classValue !== 'string') {
 			// If true, add class at index 1
