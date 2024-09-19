@@ -9,7 +9,7 @@ import {
 } from 'react'
 
 export const BannerContext = createContext<BannerContextProps>({
-	animState: null,
+	animState: [{}, () => null],
 })
 
 export const useBannerContext = (): BannerContextProps => {
@@ -18,12 +18,16 @@ export const useBannerContext = (): BannerContextProps => {
 
 export const BannerContextProvider: FC<PropsWithChildren> = ({ children }) => {
 	return (
-		<BannerContext.Provider value={{ animState: useState(0) }}>
+		<BannerContext.Provider value={{ animState: useState({}) }}>
 			{children}
 		</BannerContext.Provider>
 	)
 }
 
+interface BannerProgress {
+	[project: string]: number
+}
+
 export interface BannerContextProps {
-	animState: [number, Dispatch<SetStateAction<number>>] | null
+	animState: [BannerProgress, Dispatch<SetStateAction<BannerProgress>>]
 }

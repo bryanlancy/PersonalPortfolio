@@ -1,6 +1,12 @@
-import React, { CSSProperties, FC, ReactElement } from 'react'
+import React, {
+	CSSProperties,
+	FC,
+	ReactElement,
+	useEffect,
+	useState,
+} from 'react'
 import Image from 'next/image'
-import { cn } from '@/utils/react'
+import { AnimatePresence, AnimationProps, motion } from 'framer-motion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
 	faBaseballBatBall,
@@ -11,34 +17,106 @@ import {
 	faTrophyStar,
 } from '@awesome.me/kit-ddd907bdb7/icons/classic/regular'
 
+import { cn } from '@/utils/react'
+import { mapRange, randomInteger } from '@/utils/general'
+
 import styles from './WalkOns.module.scss'
 
-interface TileProps {}
+interface TileProps {
+	animProgress: number
+}
+interface ColumnAnimOptions {
+	initial: AnimationProps['initial']
+	animate: AnimationProps['animate']
+	exit: AnimationProps['exit']
+}
 
-const Tiles: FC<TileProps> = () => {
+const Tiles: FC<TileProps> = ({ animProgress }) => {
+	const enter = 0.01
+	const exit = 0.95
+
+	const scrollMove = 30
+
+	const [offset, setOffset] = useState(new Array(tiles.length))
+	useEffect(() => {
+		const tempTiles = tiles.map(() => {
+			return randomInteger(0, 10)
+		})
+		setOffset(tempTiles)
+	}, [])
+
+	const oddColumnAnim: (index: number) => ColumnAnimOptions = index => {
+		return {
+			initial: {
+				opacity: 0,
+				transform: 'translateY(-100%)',
+			},
+			animate: {
+				opacity: 1,
+				transform: `translateY(${
+					mapRange(animProgress, 0, 1, 0, scrollMove) + offset[index]
+				}%)`,
+			},
+			exit: {
+				opacity: 0,
+				transform: 'translateY(100%)',
+			},
+		}
+	}
+	const evenColumnAnim: (index: number) => ColumnAnimOptions = index => {
+		return {
+			initial: {
+				opacity: 0,
+				transform: 'translateY(100%)',
+			},
+			animate: {
+				opacity: 1,
+				transform: `translateY(-${
+					mapRange(animProgress, 0, 1, 0, scrollMove) + offset[index]
+				}%)`,
+			},
+			exit: {
+				opacity: 0,
+				transform: 'translateY(-100%)',
+			},
+		}
+	}
 	return (
-		<div className={styles.tiles}>
-			{tiles.map((column, ci) => {
-				return (
-					<div
-						key={ci}
-						className={cn(styles.column, styles[`column${ci}`])}>
-						{column.map((tile, ti) => {
-							const { backgroundColor, image, icon } = tile
-							return (
-								<div
-									key={ti}
-									className={styles.tile}
-									style={{ backgroundColor }}>
-									{image}
-									{icon}
-								</div>
-							)
-						})}
-					</div>
-				)
-			})}
-		</div>
+		<motion.div key='tiles' className={styles.tiles}>
+			<AnimatePresence>
+				{tiles.map((column, ci) => {
+					return (
+						animProgress >= enter &&
+						animProgress <= exit && (
+							<motion.div
+								{...(ci % 2 === 0
+									? evenColumnAnim(ci)
+									: oddColumnAnim(ci))} // Adds even animation props to even columns, etc..
+								// transition={{ type: 'spring' }}
+								key={ci}
+								className={cn(
+									styles.column,
+									styles[`column${ci}`]
+								)}>
+								{column.map((tile, ti) => {
+									const { backgroundColor, image, icon } =
+										tile
+									return (
+										<div
+											key={ti}
+											className={styles.tile}
+											style={{ backgroundColor }}>
+											{image}
+											{icon}
+										</div>
+									)
+								})}
+							</motion.div>
+						)
+					)
+				})}
+			</AnimatePresence>
+		</motion.div>
 	)
 }
 

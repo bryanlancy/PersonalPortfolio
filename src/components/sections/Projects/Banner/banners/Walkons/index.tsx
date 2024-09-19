@@ -1,15 +1,18 @@
 'use client'
 
-import React, { FC, useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
+import React, { FC } from 'react'
+import { useBannerScrollProgress } from '@/hooks'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import Container from '@/utils/components/Container'
+import Background from './Background'
 import ProjectBanner from '../../ProjectBanner'
-import WalkOnsLogo from './Logo'
 import Tiles from './Tiles'
 import QuarterBack from './Quarterback'
 import DescriptionCard from './DescriptionCard'
-import { BarSVG, BarStoolsSVG } from './Quarterback/SVGs'
+import Button from './Button'
+import Border from './Border'
+
 import { projectList } from '@/app/data'
 
 import styles from './WalkOns.module.scss'
@@ -19,58 +22,42 @@ interface WalkOnsBannerProps {}
 const WalkOnsBanner: FC<WalkOnsBannerProps> = ({}) => {
 	const { walkOns: data } = projectList
 
-	const animRef = useRef(null)
-	const [progressState, setProgressState] = useState(0)
-
-	useEffect(() => {
-		console.log('Walkons: ', progressState)
-	}, [progressState])
+	const projectName = "Walk On's"
+	const progress = useBannerScrollProgress(projectName)
 
 	return (
-		<ProjectBanner
-			className={styles.background}
-			projectName="Walk On's"
-			animRef={animRef}
-			setProgressState={setProgressState}>
-			<div className={styles.imageBackground}>
-				<div className={styles.overlay}></div>
-				<Image
-					src='/assets/walkons/walkons.jpg'
-					alt='walkons restaurant'
-					priority
-					width={800}
-					height={500}
-					className={styles.image}
-				/>
-			</div>
-			<div className={styles.colorBackground}></div>
+		<ProjectBanner className={styles.background} projectName={projectName}>
+			<Background animProgress={progress} />
 
 			<Container>
-				<DescriptionCard paragraphs={data.description} />
+				<DescriptionCard
+					paragraphs={data.description}
+					animProgress={progress}
+				/>
 
 				{/* Project Link */}
-				<a className={styles.link}>Check out the site!</a>
+				<Button animProgress={progress} />
 
 				{/* Project Title */}
-				<h1 className={styles.title}>{data.name}</h1>
+				<AnimatePresence>
+					{progress > 0.1 && (
+						<motion.h1
+							key='title'
+							initial={{ transform: 'translateY(150%)' }}
+							animate={{ transform: 'translateY(0%)' }}
+							exit={{ transform: 'translateY(150%)' }}
+							className={styles.title}>
+							{data.name}
+						</motion.h1>
+					)}
+				</AnimatePresence>
 
-				<Tiles />
-				<QuarterBack />
+				<Tiles animProgress={progress} />
 
-				<WalkOnsLogo />
+				<QuarterBack animProgress={progress} />
 			</Container>
 
-			{/* Bar Border */}
-			<div className={styles.barBackground}></div>
-			<div className={styles.bar}>
-				<BarSVG className={styles.svgBar} />
-			</div>
-			<div className={styles.barStools}>
-				<BarStoolsSVG className={styles.svgStools} />
-				{/* {stools.map((num, i) => {
-					return <BarStoolSVG key={i} className={styles.svgStool} />
-				})} */}
-			</div>
+			<Border animProgress={progress} />
 		</ProjectBanner>
 	)
 }

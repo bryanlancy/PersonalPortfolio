@@ -40,7 +40,7 @@ const walkOns: Project = {
 	// TODO Add info
 	description: [
 		"While working at Bowen Media one of the largest projects I took on was being the primary developer for the Walk-On's website redesign.",
-		"Working with an awesome design team and support from the dev team guaranteed an awesome result. I'm proud to have worked on such a cool project!",
+		"Working with an awesome design team and support from the dev team guaranteed an amazing result. I'm proud to have worked on such a cool project!",
 	],
 	images: [],
 	technologies: [],

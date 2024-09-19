@@ -1,31 +1,44 @@
 'use client'
 
-import React, { FC, useContext, useEffect } from 'react'
+import React, { FC } from 'react'
 
 import styles from './WalkOns.module.scss'
-import { BannerContext } from '@/context/bannerContext'
+import { AnimatePresence, motion } from 'framer-motion'
 
 interface DescriptionCardProps {
 	paragraphs: string[]
+	animProgress: number
 }
 
-const DescriptionCard: FC<DescriptionCardProps> = ({ paragraphs }) => {
-	const { animState } = useContext(BannerContext)
-
-	// console.log('DescriptionCard: ', animState[0])
-	useEffect(() => {
-		// const progress = animState[0]
-	}, [animState])
+const DescriptionCard: FC<DescriptionCardProps> = ({
+	paragraphs,
+	animProgress,
+}) => {
+	const enter = 0.01
+	const exit = 0.95
 
 	return (
-		<div className={styles.card}>
-			<div className={styles.color}></div>
-			<div className={styles.text}>
-				{paragraphs.map((paragraph, i) => {
-					return <p key={i}>{paragraph}</p>
-				})}
-			</div>
-		</div>
+		<AnimatePresence>
+			{animProgress >= enter && animProgress <= exit && (
+				<motion.div
+					key='descriptionCard'
+					initial={{ transform: 'translateX(-150%)' }}
+					animate={{ transform: 'translateX(0%)' }}
+					exit={{ transform: 'translateX(-150%)' }}
+					transition={{
+						type: 'spring',
+						stiffness: 120,
+					}}
+					className={styles.card}>
+					<div className={styles.color}></div>
+					<div className={styles.text}>
+						{paragraphs.map((paragraph, i) => {
+							return <p key={i}>{paragraph}</p>
+						})}
+					</div>
+				</motion.div>
+			)}
+		</AnimatePresence>
 	)
 }
 

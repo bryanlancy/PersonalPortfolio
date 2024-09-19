@@ -1,3 +1,5 @@
+'use client'
+
 import React, { FC } from 'react'
 
 import styles from './Projects.module.scss'
@@ -9,12 +11,13 @@ import {
 	OttoBanner,
 	WalkOnsBanner,
 } from './Banner'
+import { BannerContextProvider } from '@/context/bannerContext'
 
 interface ProjectsProps {}
 
 const Projects: FC<ProjectsProps> = () => {
 	return (
-		<>
+		<BannerContextProvider>
 			<section className={styles.projects}>
 				<h1 className={styles.title}>Professional Highlights</h1>
 				<p className={styles.description}>
@@ -38,7 +41,7 @@ const Projects: FC<ProjectsProps> = () => {
 				<HomeNetworkBanner />
 				<CarputerBanner />
 			</section>
-		</>
+		</BannerContextProvider>
 	)
 }
 
