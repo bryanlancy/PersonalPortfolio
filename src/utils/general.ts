@@ -1,22 +1,21 @@
 /**
  *
  * @param num value to be mapped to new ranger
- * @param inMin input minimum, anything lower is mapped to `outMin`
- * @param inMax input maximum, anything higher is mapped to `outMax`
- * @param outMin output minimum
- * @param outMax output maximum
+ * @param inRange input [min, max]
+ * @param outRange output [min, max]
  * @param clamp clamp output to `outMax` and `outMin`, defaults to true
  * @returns
  */
 export function mapRange(
 	num: number,
-	inMin: number,
-	inMax: number,
-	outMin: number,
-	outMax: number,
+	inRange: [number, number],
+	outRange: [number, number],
 	clamp = true
 ) {
 	if (typeof num !== 'number') return 0
+
+	const [inMin, inMax] = inRange
+	const [outMin, outMax] = outRange
 
 	// Map input to output range
 	let mappedValue =

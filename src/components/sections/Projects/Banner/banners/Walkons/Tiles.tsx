@@ -54,7 +54,8 @@ const Tiles: FC<TileProps> = ({ animProgress }) => {
 			animate: {
 				opacity: 1,
 				transform: `translateY(${
-					mapRange(animProgress, 0, 1, 0, scrollMove) + offset[index]
+					mapRange(animProgress, [0, 1], [0, scrollMove]) +
+					offset[index]
 				}%)`,
 			},
 			exit: {
@@ -72,7 +73,8 @@ const Tiles: FC<TileProps> = ({ animProgress }) => {
 			animate: {
 				opacity: 1,
 				transform: `translateY(-${
-					mapRange(animProgress, 0, 1, 0, scrollMove) + offset[index]
+					mapRange(animProgress, [0, 1], [0, scrollMove]) +
+					offset[index]
 				}%)`,
 			},
 			exit: {

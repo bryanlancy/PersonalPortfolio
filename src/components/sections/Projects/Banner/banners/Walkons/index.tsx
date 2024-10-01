@@ -43,9 +43,15 @@ const WalkOnsBanner: FC<WalkOnsBannerProps> = ({}) => {
 					{progress > 0.1 && (
 						<motion.h1
 							key='title'
-							initial={{ transform: 'translateY(150%)' }}
-							animate={{ transform: 'translateY(0%)' }}
-							exit={{ transform: 'translateY(150%)' }}
+							initial={{
+								transform: 'translateY(150%)',
+								opacity: 0,
+							}}
+							animate={{
+								transform: 'translateY(0%)',
+								opacity: 1,
+							}}
+							exit={{ transform: 'translateY(150%)', opacity: 0 }}
 							className={styles.title}>
 							{data.name}
 						</motion.h1>

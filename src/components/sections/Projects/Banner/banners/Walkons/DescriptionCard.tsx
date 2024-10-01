@@ -22,9 +22,9 @@ const DescriptionCard: FC<DescriptionCardProps> = ({
 			{animProgress >= enter && animProgress <= exit && (
 				<motion.div
 					key='descriptionCard'
-					initial={{ transform: 'translateX(-150%)' }}
-					animate={{ transform: 'translateX(0%)' }}
-					exit={{ transform: 'translateX(-150%)' }}
+					initial={{ transform: 'translateX(-150%)', opacity: 0 }}
+					animate={{ transform: 'translateX(0%)', opacity: 1 }}
+					exit={{ transform: 'translateX(-150%)', opacity: 0 }}
 					transition={{
 						type: 'spring',
 						stiffness: 120,

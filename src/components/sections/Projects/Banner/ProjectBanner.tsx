@@ -4,7 +4,12 @@ import React, { FC, PropsWithChildren, useContext, useRef } from 'react'
 import { cn } from '@/utils/react'
 
 import styles from './ProjectBanner.module.scss'
-import { useMotionValueEvent, useScroll, motion } from 'framer-motion'
+import {
+	useMotionValueEvent,
+	useScroll,
+	motion,
+	AnimatePresence,
+} from 'framer-motion'
 import { BannerContext } from '@/context/bannerContext'
 import { mapRange } from '@/utils/general'
 
@@ -55,22 +60,26 @@ const ProjectBanner: FC<ProjectBannerProps> = ({
 		animState[1](tempState)
 	})
 
+	// TODO Use framer useTransform instead of mapRange
+
 	return (
 		<motion.section className={cn(styles.project, className)} ref={animRef}>
-			{animState[0][projectName] >= overlayStart && (
-				<motion.div
-					initial={{ opacity: 0 }}
-					animate={{
-						opacity: mapRange(
-							animState[0][projectName],
-							overlayStart,
-							1,
-							0,
-							0.8
-						),
-					}}
-					className={styles.overlay}></motion.div>
-			)}
+			<AnimatePresence>
+				{animState[0][projectName] >= overlayStart && (
+					<motion.div
+						key={`overlay${projectName}`}
+						initial={{ opacity: 0 }}
+						animate={{
+							opacity: mapRange(
+								animState[0][projectName],
+								[overlayStart, 1],
+								[0, 0.8]
+							),
+						}}
+						exit={{ opacity: 0 }}
+						className={styles.overlay}></motion.div>
+				)}
+			</AnimatePresence>
 			{children}
 		</motion.section>
 	)

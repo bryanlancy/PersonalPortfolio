@@ -1,9 +1,12 @@
 @import '@/styles/mixins.scss';
 
+$bannerHeightSmallScreen: 500px;
+$bannerHeightLargeScreen: 450px;
+
 .project {
 	position: relative;
 
-	height: 500px;
+	height: $bannerHeightSmallScreen;
 	width: 100%;
 	max-width: 100% !important;
 
@@ -21,7 +24,7 @@
 		}
 	}
 	@include laptop {
-		height: 450px;
+		height: $bannerHeightLargeScreen;
 		h1 {
 			font-size: 88px;
 		}

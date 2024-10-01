@@ -7,9 +7,10 @@ import styles from './HomeNetwork.module.scss'
 interface HomeNetworkCardProps {}
 
 const HomeNetworkCard: FC<HomeNetworkCardProps> = ({}) => {
-	const { network: data } = projectList
+	const { lab: data } = projectList
+
 	return (
-		<ProjectCard className={styles.background} projectName='Home Network'>
+		<ProjectCard className={styles.background} projectName='Home Lab'>
 			<h1 className={styles.title}>{data.name}</h1>
 		</ProjectCard>
 	)

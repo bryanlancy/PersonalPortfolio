@@ -15,6 +15,8 @@ import { BannerContextProvider } from '@/context/bannerContext'
 
 interface ProjectsProps {}
 
+// TODO Add Technology component and sidebar
+
 const Projects: FC<ProjectsProps> = () => {
 	return (
 		<BannerContextProvider>

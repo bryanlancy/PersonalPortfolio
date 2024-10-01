@@ -20,17 +20,15 @@ const Background: FC<BackgroundProps> = ({ animProgress }) => {
 		<>
 			<motion.div
 				initial={{ opacity: 0 }}
-				animate={{ opacity: mapRange(animProgress, 0, 0.1, 0, 1) }}
+				animate={{ opacity: mapRange(animProgress, [0, 0.1], [0, 1]) }}
 				className={styles.imageBackground}>
 				<motion.div
 					initial={{ opacity: overLayInitA }}
 					animate={{
 						opacity: mapRange(
 							animProgress,
-							0,
-							1,
-							overLayInitA,
-							overLayEndA
+							[0, 1],
+							[overLayInitA, overLayEndA]
 						),
 					}}
 					className={styles.overlay}></motion.div>
@@ -49,7 +47,7 @@ const Background: FC<BackgroundProps> = ({ animProgress }) => {
 					opacity: 0,
 				}}
 				animate={{
-					opacity: mapRange(animProgress, 0, 0.4, 0, 1),
+					opacity: mapRange(animProgress, [0, 0.4], [0, 1]),
 				}}>
 				<WalkOnsLogo />
 			</motion.div>
