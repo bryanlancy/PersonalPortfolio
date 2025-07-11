@@ -9,7 +9,7 @@ import {
 	useScroll,
 	motion,
 	AnimatePresence,
-} from 'framer-motion'
+} from 'motion/react'
 import { BannerContext } from '@/context/bannerContext'
 import { mapRange } from '@/utils/general'
 

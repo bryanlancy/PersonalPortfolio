@@ -6,7 +6,7 @@ import React, {
 	useState,
 } from 'react'
 import Image from 'next/image'
-import { AnimatePresence, AnimationProps, motion } from 'framer-motion'
+import { AnimatePresence, AnimationProps, motion } from 'motion/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
 	faBaseballBatBall,

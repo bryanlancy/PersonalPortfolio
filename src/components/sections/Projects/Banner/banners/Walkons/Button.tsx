@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@awesome.me/kit-ddd907bdb7/icons/classic/regular'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'motion/react'
 
 import styles from './WalkOns.module.scss'
 

@@ -54,6 +54,7 @@ const email: Contact = {
 	color: ['#FBBE0C', '#EB493B', '#3AAB58', '#4889F4'],
 	icon: <FontAwesomeIcon icon={faMailboxFlagUp} className={styles.icon} />,
 }
+// TODO Confirm link to file is accurate
 const resume: Contact = {
 	name: 'Resume',
 	link: '/Resume_Bryan_Burns.pdf',

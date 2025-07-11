@@ -11,7 +11,7 @@ const Contact = () => {
 	const contactArray: ContactMethod[] = Object.values(contactList)
 
 	return (
-		<section>
+		<section className={styles.section}>
 			<h1 className={styles.title}>Get in Touch</h1>
 			<div className={styles.text}>
 				<p>

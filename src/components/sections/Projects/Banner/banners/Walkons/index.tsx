@@ -2,7 +2,7 @@
 
 import React, { FC } from 'react'
 import { useBannerScrollProgress } from '@/hooks'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'motion/react'
 
 import Container from '@/utils/components/Container'
 import Background from './Background'

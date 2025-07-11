@@ -1,7 +1,7 @@
 'use client'
 
 import React, { FC } from 'react'
-import { AnimationProps, motion } from 'framer-motion'
+import { motion, Transition } from 'motion/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
 	faQuoteLeft,
@@ -16,18 +16,18 @@ interface QuoteProps {
 }
 
 // Animation Properties
-const init: AnimationProps['initial'] = {
+const init = {
 	opacity: 0,
 }
-const final: AnimationProps['initial'] = {
+const final = {
 	opacity: 1,
 }
-const outerTrans: AnimationProps['transition'] = {
+const outerTrans: Transition = {
 	delay: 4,
 	duration: 1.5,
 	ease: 'easeIn',
 }
-const innerTrans: AnimationProps['transition'] = {
+const innerTrans: Transition = {
 	delay: 1,
 	duration: 1.5,
 }

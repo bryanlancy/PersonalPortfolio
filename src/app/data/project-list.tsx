@@ -7,7 +7,7 @@ interface ProjectImage extends NextImage {
 	ignoreThumbmail?: boolean
 }
 
-type company = 'bowen' | 'monster' | 'personal'
+type company = 'bowen' | 'monster' | 'rd' | 'personal'
 
 export interface Project {
 	/** Name of the project. */
@@ -79,6 +79,18 @@ const otto: Project = {
 	images: [],
 	technologies: [],
 }
+const twoBeeks: Project = {
+	name: '2Beeks',
+	article: false,
+	link: undefined,
+	priority: 7,
+	company: 'rd',
+	description: [
+		'2Beeks is a family-owned and operated bee farm local to southern NJ.',
+	],
+	images: [],
+	technologies: [],
+}
 const lab: Project = {
 	name: 'Home Lab',
 	article: false,
@@ -124,6 +136,7 @@ const carputer: Project = {
 const projectList: { [projectName: string]: Project } = {
 	walkOns,
 	mercury,
+	twoBeeks,
 	otto,
 	lab,
 	carputer,

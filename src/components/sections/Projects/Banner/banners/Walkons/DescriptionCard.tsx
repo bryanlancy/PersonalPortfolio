@@ -3,7 +3,7 @@
 import React, { FC } from 'react'
 
 import styles from './WalkOns.module.scss'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'motion/react'
 
 interface DescriptionCardProps {
 	paragraphs: string[]

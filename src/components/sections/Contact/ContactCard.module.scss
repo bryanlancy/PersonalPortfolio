@@ -4,17 +4,30 @@
 	position: relative;
 	width: 100%;
 
-	border-radius: var(--border-radius);
+	border-radius: 0px;
+
 	overflow: hidden;
 
 	@include tablet {
 		width: 48%;
+		border-radius: var(--border-radius);
 	}
 	@include laptop {
 		width: 30%;
 	}
 
 	height: 160px;
+
+	@include mobile {
+		cursor: pointer;
+		.name {
+			bottom: 55%;
+		}
+		.linkText {
+			top: 100%;
+			opacity: 1;
+		}
+	}
 
 	&:hover {
 		cursor: pointer;

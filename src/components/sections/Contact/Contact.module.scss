@@ -1,94 +1,10 @@
-// @import '../../../../../index.scss';
-
-// @mixin linkHover($hoverColor) {
-// 	&:hover {
-// 		color: $hoverColor;
-// 		border: 1px solid $hoverColor;
-
-// 		box-shadow: 0 0 5px $hoverColor, 0 0 5px $hoverColor inset;
-
-// 		p,
-// 		i {
-// 			text-shadow: 0 0 5px $hoverColor;
-// 		}
-// 	}
-// }
-
-// .contact {
-// 	margin-top: 128px;
-// 	margin-bottom: 48px;
-// 	a {
-// 		text-decoration: none;
-// 		color: #aaa;
-// 	}
-// 	& > :not(:first-child) {
-// 		margin-top: 16px;
-// 	}
-// 	&__message {
-// 		max-width: 450px;
-// 		text-align: center;
-// 	}
-// 	&__links {
-// 		display: grid;
-// 		grid-template: auto / repeat(2, 1fr);
-// 		gap: 16px;
-// 		a div {
-// 			display: flex;
-// 			flex-direction: column;
-// 			align-items: center;
-// 			justify-content: center;
-
-// 			--linkSize: 128px;
-// 			width: var(--linkSize);
-// 			height: var(--linkSize);
-
-// 			border-radius: 8px;
-// 			border: 1px solid #fff;
-
-// 			transition: all 0.3s ease;
-
-// 			i {
-// 				font-size: 48px;
-// 			}
-// 			p {
-// 				margin-top: 16px;
-// 			}
-// 		}
-// 		&--angellist {
-// 			@include linkHover($color-icon-angellist);
-// 		}
-// 		&--github {
-// 			@include linkHover($color-icon-git);
-// 		}
-// 		&--linkedin {
-// 			@include linkHover($color-icon-linkedin);
-// 		}
-// 		&--email {
-// 			@include linkHover($color-icon-email);
-// 		}
-// 	}
-// 	&__resume {
-// 		padding: 16px;
-
-// 		border-radius: 8px;
-// 		border: 1px solid #fff;
-
-// 		transition: all 0.3s ease;
-
-// 		@include linkHover(#8f49f0);
-// 	}
-// }
-
-// @include mobile {
-// 	.contact {
-// 		margin-top: 48px;
-// 	}
-// }
-
 @import '@/styles/mixins.scss';
 
 .section {
-	padding: 32px 0;
+	padding: 0 !important;
+	@include tablet {
+		padding: 32px 0 !important;
+	}
 }
 
 .title {
@@ -101,8 +17,8 @@
 	gap: 16px;
 
 	margin: 32px 0;
-
 	text-align: center;
+
 	p {
 		width: 144px;
 	}
@@ -123,7 +39,12 @@
 .contactList {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 16px;
+	gap: 4px;
+
+	@include tablet {
+		gap: 16px;
+	}
+
 	justify-content: center;
 
 	width: 100%;

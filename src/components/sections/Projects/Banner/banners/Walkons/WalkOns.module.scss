@@ -289,8 +289,46 @@ $gap: 16px;
 	}
 
 	background-color: $red;
-	box-shadow: $box-shadow;
+
+	filter: drop-shadow(2px 2px 16px #0008);
+	// filter: drop-shadow($box-shadow);
+	// box-shadow: $box-shadow;
 }
+.capContainer {
+	position: relative;
+	top: 0;
+	left: 50%;
+
+	width: 1200px;
+	height: 100%;
+	transform: translateX(-50%);
+
+	// border: 1px solid blue;
+}
+.barCap {
+	// display: none;
+	position: absolute;
+	width: 24px;
+	height: 40px;
+
+	@include hd {
+		display: block;
+	}
+
+	background-color: $blue;
+
+	bottom: 0;
+
+	&.left {
+		right: 100%;
+		border-top-left-radius: 16px;
+	}
+	&.right {
+		left: 100%;
+		border-top-right-radius: 16px;
+	}
+}
+
 .bar {
 	position: absolute;
 	bottom: 0;
@@ -325,7 +363,7 @@ $gap: 16px;
 	min-width: 1000px;
 	max-width: 1200px;
 
-	filter: drop-shadow(2px 2px 16px #0008);
+	// filter: drop-shadow(2px 2px 16px #0008);
 
 	fill: $blue;
 }

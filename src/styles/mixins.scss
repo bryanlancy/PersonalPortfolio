@@ -26,6 +26,13 @@
 	}
 }
 
+// Styles only applied to mobile
+@mixin mobile {
+	@media (max-width: 599px) {
+		@content;
+	}
+}
+
 // This is intended to be used on elements that contain the width of content on the page with a standard "margin"
 
 @mixin container {

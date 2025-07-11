@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import styles from '../WalkOns.module.scss'
 import { FootballSVG, PostThrowSVG, PreThrowSVG } from './SVGs'
 import { cn } from '@/utils/react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'motion/react'
 
 type QuarterbackProps = {
 	animProgress: number

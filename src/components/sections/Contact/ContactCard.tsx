@@ -6,7 +6,7 @@ import { Contact } from '../../../app/data/contact-list'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@awesome.me/kit-ddd907bdb7/icons/classic/regular'
 import { faClipboard } from '@awesome.me/kit-ddd907bdb7/icons/sharp-duotone/solid'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 
 import styles from './ContactCard.module.scss'
 
