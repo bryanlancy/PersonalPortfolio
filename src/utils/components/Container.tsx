@@ -1,8 +1,12 @@
 import React, { FC, PropsWithChildren } from 'react'
 
 import styles from './Container.module.scss'
+import { cn } from '../react'
 
-interface ContainerProps {}
+interface ContainerProps {
+	/** The Container Component comes wih default styling. Use this prop to override or add additional styling. */
+	className?: string
+}
 
 /**
  * Automatically applies margins to the horizontal edge of the children.
@@ -11,14 +15,15 @@ interface ContainerProps {}
  * @component
  * @example
  * <Conainer>
- *     <div>
  *         <h1>Example Children</h1>
  *         <p>Example text</p>
- *     </div>
  * </Conainer>
  */
-const Container: FC<PropsWithChildren<ContainerProps>> = ({ children }) => {
-	return <div className={styles.content}>{children}</div>
+const Container: FC<PropsWithChildren<ContainerProps>> = ({
+	children,
+	className,
+}) => {
+	return <div className={cn(styles.content, className)}>{children}</div>
 }
 
 export default Container
