@@ -53,7 +53,7 @@ const ProjectBanner: FC<ProjectBannerProps> = ({
 		target: animRef,
 		axis: 'y',
 		offset: ['-100%', '0px'],
-		smooth: 100,
+		// smooth: 100,
 	})
 	useMotionValueEvent(scrollYProgress, 'change', latest => {
 		const tempState = { ...animState[0], [projectName]: latest }
@@ -61,6 +61,7 @@ const ProjectBanner: FC<ProjectBannerProps> = ({
 	})
 
 	// TODO Use framer useTransform instead of mapRange
+	// TODO Add project spec section - techs, company link,
 
 	return (
 		<motion.section className={cn(styles.project, className)} ref={animRef}>
