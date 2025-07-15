@@ -1,0 +1,44 @@
+.bucket {
+	position: relative;
+	// z-index: -1;
+	border-radius: 4px;
+
+	padding: 8px;
+
+	width: fit-content;
+	height: fit-content;
+
+	overflow: hidden;
+
+	&:hover {
+		.background {
+			background-color: rgba(var(--green), 0.9);
+		}
+	}
+}
+
+.background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+
+	width: 101%;
+	height: 101%;
+
+	background-color: var(--green);
+	filter: brightness(1.2);
+}
+
+.line {
+	max-width: 480px;
+
+	&:nth-child(odd) {
+		text-align: left;
+	}
+	&:nth-child(even) {
+		text-align: right;
+	}
+
+	color: var(--lightgreen);
+}

@@ -1,17 +1,15 @@
 .project {
+	--green: green;
 	--lightgreen: #d1ffd1;
 
 	position: relative;
 	background-color: var(--lightgreen);
 	overflow: visible !important;
 	z-index: 99;
+
+	height: 720px;
 }
 
-// .title {
-// 	position: absolute;
-// 	z-index: 2;
-// 	filter: none;
-
-// 	right: 50px;
-// 	bottom: 150px;
-// }
+.container {
+	// z-index: 1;
+}

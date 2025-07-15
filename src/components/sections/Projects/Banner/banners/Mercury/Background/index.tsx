@@ -37,7 +37,9 @@ const Background = () => {
 					}}
 				/>
 
-				<h1 className={styles.title}>{data.name}</h1>
+				<div>
+					<h1 className={styles.title}>{data.name}</h1>
+				</div>
 
 				{/* TODO Hide or fade bottom wave when  scrolled out of view*/}
 				<Wave
