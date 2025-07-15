@@ -19,7 +19,7 @@ export interface Project {
 	 * Add `ignoreThumbnail={true}` to omit an image from the thumbnail preview. */
 	images: ProjectImage[]
 	/** Short description to use in previews */
-	description: string[]
+	description: (string | string[])[]
 	/** Company project was made for */
 	company: company
 	/** Link to the project, if applicable. */
@@ -53,10 +53,15 @@ const mercury: Project = {
 	company: 'monster',
 	// TODO Add info
 	description: [
-		'Monster was a company built on great communication. With that came a lot of, well, communicating.',
-		'There were very large numbers of phone calls, texts, and emails and Mercury was the solution to connecting it all.',
+		[
+			'Monster was a company built on great communication. With that came a lot of, well, communicating.',
+			'There were very large numbers of phone calls, texts, and emails and Mercury was the solution to connecting all of that disparate info.',
+		],
 		'It could parse spreadsheets and connect that info to templated emails and messages making it very versatile.',
-		'Using GCP and webhooks to handle every type of message update it had the ability to provide realtime updates on things like email status and replies.',
+		[
+			'Mercury handled many types of message updates like delivered and read status.',
+			'This provided valueable information to the marketing team who could then make informed decisions, such as the best time to send an email to maximize the open rate.',
+		],
 		'Mercury would also build a contact profile using message metadata that could combine different types of messages into a single thread, providing a centralized location for communications with a customer.',
 	],
 	images: [],
