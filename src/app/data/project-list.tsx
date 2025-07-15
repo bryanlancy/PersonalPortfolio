@@ -53,7 +53,7 @@ const mercury: Project = {
 	company: 'monster',
 	// TODO Add info
 	description: [
-		'Monster was a company built on great communication. With that came a lot of communicating.',
+		'Monster was a company built on great communication. With that came a lot of, well, communicating.',
 		'There were very large numbers of phone calls, texts, and emails and Mercury was the solution to connecting it all.',
 		'It could parse spreadsheets and connect that info to templated emails and messages making it very versatile.',
 		'Using GCP and webhooks to handle every type of message update it had the ability to provide realtime updates on things like email status and replies.',

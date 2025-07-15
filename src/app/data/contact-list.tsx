@@ -7,7 +7,7 @@ import {
 	faMailboxFlagUp,
 } from '@awesome.me/kit-ddd907bdb7/icons/sharp-duotone/solid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Image from 'next/image'
+
 import { ReactElement } from 'react'
 import styles from '../../components/sections/Contact/ContactCard.module.scss'
 
@@ -19,7 +19,7 @@ export interface Contact {
 	/** Text used to display link */
 	linkText: string
 	/** Icon to be used */
-	icon: ReactElement
+	icon: ReactElement | null
 	/** Hexcode to be used to style elements related to the contact method */
 	color: string | string[]
 }
@@ -31,7 +31,7 @@ const wellfound: Contact = {
 	linkText: 'Visit my profile',
 	color: '#EC2E39',
 	// TODO Add Icon
-	icon: <Image src='' alt='' />,
+	icon: null,
 }
 const github: Contact = {
 	name: 'Github',

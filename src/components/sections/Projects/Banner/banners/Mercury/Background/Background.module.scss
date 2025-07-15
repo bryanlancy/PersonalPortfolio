@@ -1,0 +1,58 @@
+@import '@/styles/mixins.scss';
+
+.background {
+	--green: green;
+	position: absolute;
+
+	top: 0;
+	width: 100%;
+	height: 100%;
+
+	filter: url(#smoosh);
+	-webkit-filter: url(#smoosh);
+}
+
+.wave {
+	position: absolute;
+	z-index: 3;
+	left: 0;
+
+	path {
+		fill: var(--green);
+	}
+
+	&.top {
+		top: 0;
+		height: 40px;
+
+		transform: rotate(180deg);
+	}
+	&.bottom {
+		bottom: 0px;
+		height: 160px;
+
+		@include tablet {
+		}
+	}
+	&.bottombottom {
+		height: 20px;
+		transform: rotate(180deg);
+		bottom: -20px;
+	}
+}
+
+.title {
+	position: absolute;
+	z-index: 2;
+	filter: none;
+
+	right: 50px;
+
+	bottom: 120px;
+	@include tablet {
+		bottom: 112px;
+	}
+	@include laptop {
+		bottom: 104px;
+	}
+}

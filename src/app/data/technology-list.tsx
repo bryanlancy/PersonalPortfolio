@@ -16,7 +16,7 @@ export interface Technology {
 	/** Name of technology. */
 	name: string
 	/** Icon to use when showing the technology has been used. */
-	icon: ReactElement | ReactElement[]
+	icon: ReactElement | ReactElement[] | null
 	/** Hex code used to style elements related to the technology. */
 	color: string | string[]
 	/**  Category used to group techs used for similar things*/
@@ -75,7 +75,21 @@ const tailwinds: Technology = {
 	name: 'Tailwinds',
 	color: '#0492c9',
 	// TODO Add Icon
-	icon: <Image src='' alt='' />,
+	icon: null,
+	category: 'styles',
+}
+const gsap: Technology = {
+	name: 'GSAP',
+	color: '#47ec61',
+	// TODO Add Icon
+	icon: null,
+	category: 'styles',
+}
+const motion: Technology = {
+	name: 'Motion',
+	color: '#f6eb2a',
+	// TODO Add Icon
+	icon: null,
 	category: 'styles',
 }
 
@@ -124,6 +138,8 @@ const technologyList: { [technologyName: string]: Technology } = {
 	jsdocs,
 	git,
 	tailwinds,
+	gsap,
+	motion,
 	node,
 	arduinoPi,
 	cpp,
