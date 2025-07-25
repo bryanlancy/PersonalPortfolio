@@ -12,6 +12,7 @@ import {
 } from '@awesome.me/kit-ddd907bdb7/icons/classic/brands'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+const categories = ['frontend', 'backend', 'styles', 'general'] as const
 export interface Technology {
 	/** Name of technology. */
 	name: string
@@ -20,7 +21,7 @@ export interface Technology {
 	/** Hex code used to style elements related to the technology. */
 	color: string | string[]
 	/**  Category used to group techs used for similar things*/
-	category: 'frontend' | 'backend' | 'styles' | 'general'
+	category: (typeof categories)[number] | (typeof categories)[number][]
 }
 
 // Technologies ===========
@@ -28,7 +29,7 @@ const nextjs: Technology = {
 	name: 'Next.js',
 	color: '#4304c9',
 	// TODO Add Icon
-	icon: <Image src='' alt='' />,
+	icon: null,
 	category: 'frontend',
 }
 const html: Technology = {
@@ -47,14 +48,14 @@ const typescript: Technology = {
 	name: 'Typescript',
 	color: '#049fc9',
 	// TODO Add Icon
-	icon: <Image src='' alt='' />,
+	icon: null,
 	category: 'general',
 }
 const jsdocs: Technology = {
 	name: 'JS Docs',
 	color: '#049fc9',
 	// TODO Add Icon
-	icon: <Image src='' alt='' />,
+	icon: null,
 	category: 'general',
 }
 
@@ -115,7 +116,7 @@ const cpp: Technology = {
 	name: 'C++',
 	color: '#01548f',
 	// TODO Add Icon
-	icon: <Image src='' alt='' />,
+	icon: null,
 	category: 'backend',
 }
 const docker: Technology = {

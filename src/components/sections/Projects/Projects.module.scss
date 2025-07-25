@@ -14,3 +14,15 @@
 :is(.title, .description, .tech) {
 	margin-bottom: 48px;
 }
+
+:is(.proText, .homeText) {
+	position: relative;
+	width: 100%;
+}
+
+.proText {
+	height: 600px;
+}
+.homeText {
+	height: 500px;
+}

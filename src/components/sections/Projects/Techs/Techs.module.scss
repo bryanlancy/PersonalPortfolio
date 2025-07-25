@@ -1,0 +1,18 @@
+.container {
+	border: 1px solid red;
+
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 16px;
+}
+
+.tech {
+	--primaryColor: #fff;
+
+	border: 1px solid var(--primaryColor);
+
+	width: 240px;
+	height: 100px;
+}
