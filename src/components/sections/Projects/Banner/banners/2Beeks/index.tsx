@@ -4,15 +4,15 @@ import { projectList } from '@/app/data'
 
 import styles from './TwoBeeks.module.scss'
 
-interface OttoCardProps {}
+interface TwoBeeksBannerProps {}
 
-const OttoCard: FC<OttoCardProps> = ({}) => {
-	const { tBeeks: data } = projectList
+const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
+	const { twoBeeks: data } = projectList
 	return (
-		<ProjectCard className={styles.background} projectName='Otto'>
+		<ProjectCard className={styles.background} projectName='2Beeks'>
 			<h1 className={styles.title}>{data.name}</h1>
 		</ProjectCard>
 	)
 }
 
-export default OttoCard
+export default TwoBeeksBanner

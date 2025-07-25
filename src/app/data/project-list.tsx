@@ -51,18 +51,14 @@ const mercury: Project = {
 	link: undefined,
 	priority: 9,
 	company: 'monster',
-	// TODO Add info
+
 	description: [
-		[
-			'Monster was a company built on great communication. With that came a lot of, well, communicating.',
-			'There were very large numbers of phone calls, texts, and emails and Mercury was the solution to connecting all of that disparate info.',
-		],
-		'It could parse spreadsheets and connect that info to templated emails and messages making it very versatile.',
-		[
-			'Mercury handled many types of message updates like delivered and read status.',
-			'This provided valueable information to the marketing team who could then make informed decisions, such as the best time to send an email to maximize the open rate.',
-		],
-		'Mercury would also build a contact profile using message metadata that could combine different types of messages into a single thread, providing a centralized location for communications with a customer.',
+		'Monster is a company built on great communication. Naturally, that meant a lot of... communicating.',
+		'Over time, that translated into a massive number of phone calls, texts, and emails — resulting in a mess of scattered information.',
+		'Mercury was the solution.',
+		'It built rich contact profiles by using message metadata to combine conversations across channels into a single, centralized thread. Giving us a complete, organized view of every customer interaction.',
+		'Mercury allowed users to upload spreadsheets and connect the data to templated emails and messages, making it easy to send both mass marketing emails and transactional messages.',
+		'It also tracked message events like delivery and read status, giving the marketing team valuable insights. Helping them make smarter decisions — like figuring out the best time to send an email to boost open rates.',
 	],
 	images: [],
 	technologies: [],

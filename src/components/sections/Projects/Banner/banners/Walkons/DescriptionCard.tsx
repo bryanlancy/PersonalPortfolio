@@ -4,9 +4,10 @@ import React, { FC } from 'react'
 
 import styles from './WalkOns.module.scss'
 import { AnimatePresence, motion } from 'motion/react'
+import { Project } from '@/app/data/project-list'
 
 interface DescriptionCardProps {
-	paragraphs: string[]
+	paragraphs: Project['description']
 	animProgress: number
 }
 

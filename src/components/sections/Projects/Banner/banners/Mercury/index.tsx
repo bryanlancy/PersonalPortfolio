@@ -8,14 +8,30 @@ import Bucket from './Bucket'
 import Container from '@/utils/components/Container'
 
 const MercuryCard = () => {
+	//TODO Add skip animation on click
 	const { mercury: data } = projectList
+
+	const timings: { delay: number; duration: number }[] = [
+		{ delay: 0, duration: 2 }, // Bucket 1
+		{ delay: 3, duration: 2 }, // Bucket 2
+		{ delay: 6, duration: 2 }, // Bucket 3
+		{ delay: 9, duration: 2 }, // Bucket 4
+		{ delay: 13, duration: 2 }, // Bucket 5
+		{ delay: 17, duration: 2 }, // Bucket 5
+	]
 
 	return (
 		<ProjectCard className={styles.project} projectName='Mercury'>
 			<Background />
-			<Container className={styles.container}>
+			<Container variants={{}} initial='hidden' animate='show'>
 				{data.description.map((text, i) => (
-					<Bucket className={styles[`bucket${i}`]} text={text} />
+					<Bucket
+						key={i}
+						className={`bucket${i}`}
+						text={text}
+						delay={timings[i] && timings[i].delay}
+						duration={timings[i] && timings[i].duration}
+					/>
 				))}
 			</Container>
 		</ProjectCard>

@@ -1,5 +1,7 @@
+@import '@/styles/mixins.scss';
+
 .project {
-	--green: green;
+	--green: #008000;
 	--lightgreen: #d1ffd1;
 
 	position: relative;
@@ -8,8 +10,32 @@
 	z-index: 99;
 
 	height: 720px;
+	@include tablet {
+		height: 640px;
+	}
+	@include laptop {
+		height: 560px;
+	}
+
+	::selection {
+		background: #f6ff00;
+		color: black;
+	}
 }
 
 .container {
-	// z-index: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	align-items: flex-end;
+	padding-top: 40px;
+
+	> :nth-child(odd) {
+		align-self: flex-start;
+	}
+
+	@include laptop {
+		display: unset;
+		flex-direction: unset;
+	}
 }

@@ -1,43 +1,154 @@
-.bucket {
-	position: relative;
-	// z-index: -1;
-	border-radius: 4px;
+@import '@/styles/mixins.scss';
 
-	padding: 8px;
+$border-radius: 8px;
 
-	width: fit-content;
-	height: fit-content;
+.background {
+	position: absolute;
+	z-index: -1;
+	height: 100%;
+
+	width: 100%;
+	top: 0;
+	left: 0;
+
+	border-radius: $border-radius;
 
 	overflow: hidden;
+	filter: drop-shadow(8px 8px 4px #0003);
+}
+.fill {
+	position: absolute;
+	bottom: 0;
+	left: 0;
 
-	&:hover {
-		.background {
-			background-color: rgba(var(--green), 0.9);
+	width: 101%;
+	height: 100%;
+
+	background-color: var(--green);
+	filter: brightness(1.2);
+
+	.top {
+		position: absolute;
+		bottom: 100%;
+		left: 0;
+		height: 24px;
+		width: 100%;
+
+		path {
+			fill: var(--green);
 		}
 	}
 }
 
-.background {
+.nib {
 	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: -1;
+	bottom: 0;
+	left: 100%;
 
-	width: 101%;
-	height: 101%;
+	width: 8px;
+	height: 8px;
 
+	clip-path: polygon(0 0, 100% 100%, 0 100%);
 	background-color: var(--green);
 	filter: brightness(1.2);
+}
+.bucket {
+	position: relative;
+
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	width: fit-content;
+	height: fit-content;
+
+	padding: 8px;
+	border-radius: $border-radius;
+
+	@include laptop {
+		position: absolute;
+		max-width: 49%;
+	}
+	&:nth-child(even) {
+		right: 0;
+		border-bottom-right-radius: 0 !important;
+		.background {
+			border-bottom-right-radius: 0 !important;
+		}
+	}
+	&:nth-child(odd) {
+		left: 0;
+		border-bottom-left-radius: 0 !important;
+		.background {
+			border-bottom-left-radius: 0 !important;
+		}
+		.nib {
+			left: unset;
+			right: 100%;
+			clip-path: polygon(100% 0, 0 100%, 100% 100%);
+		}
+	}
+}
+
+.bucket0 {
+	@include laptop {
+		top: 40px;
+	}
+
+	.line {
+		&:nth-child(1) {
+			max-width: 540px;
+		}
+	}
+}
+
+.bucket1 {
+	@include laptop {
+		top: 72px;
+	}
+}
+
+.bucket2 {
+	@include laptop {
+		top: 128px;
+	}
+	$green: #0d420d;
+	.nib {
+		background-color: $green;
+	}
+	.fill {
+		background-color: $green;
+
+		.top {
+			path {
+				fill: $green;
+			}
+		}
+	}
+}
+.bucket3 {
+	@include laptop {
+		top: 152px;
+	}
+}
+.bucket4 {
+	@include laptop {
+		top: 216px;
+	}
+}
+.bucket5 {
+	@include laptop {
+		top: 256px;
+	}
 }
 
 .line {
 	max-width: 480px;
-
 	&:nth-child(odd) {
 		text-align: left;
 	}
 	&:nth-child(even) {
 		text-align: right;
+		align-self: end;
 	}
 
 	color: var(--lightgreen);

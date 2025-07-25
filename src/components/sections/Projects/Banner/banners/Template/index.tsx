@@ -7,9 +7,9 @@ import styles from './Template.module.scss'
 interface TemplateBannerProps {}
 
 const TemplateBanner: FC<TemplateBannerProps> = ({}) => {
-	const { otto: data } = projectList
+	const { template: data } = projectList
 	return (
-		<ProjectCard className={styles.background} projectName='Otto'>
+		<ProjectCard className={styles.background} projectName='Template'>
 			<h1 className={styles.title}>{data.name}</h1>
 		</ProjectCard>
 	)

@@ -8,10 +8,12 @@ import {
 	CarputerBanner,
 	HomeNetworkBanner,
 	MercuryBanner,
-	OttoBanner,
+	// OttoBanner,
+	TwoBeeksBanner,
 	WalkOnsBanner,
 } from './Banner'
 import { BannerContextProvider } from '@/context/bannerContext'
+import Techs from './Techs'
 
 interface ProjectsProps {}
 
@@ -26,10 +28,11 @@ const Projects: FC<ProjectsProps> = () => {
 					Here's a couple of technologies I've used on a professional
 					level and some of my favorite projects.
 				</p>
-				<div className={styles.tech}>Pro Techs</div>
+				<Techs type='pro' />
 				<WalkOnsBanner />
 				<MercuryBanner />
-				<OttoBanner />
+				{/* <OttoBanner /> */}
+				<TwoBeeksBanner />
 			</section>
 			<section className={styles.projects}>
 				<h1 className={styles.title}>Personal Projects</h1>
@@ -38,7 +41,7 @@ const Projects: FC<ProjectsProps> = () => {
 					couple technologies and projects I'm currently working on at
 					home.
 				</p>
-				<div className={styles.tech}>Home Techs</div>
+				<Techs type='home' />
 
 				<HomeNetworkBanner />
 				<CarputerBanner />

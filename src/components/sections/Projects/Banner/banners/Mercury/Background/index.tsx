@@ -1,9 +1,11 @@
-import Wave from 'react-wavify'
-
 import { projectList } from '@/app/data'
+
+import Wave from 'react-wavify'
+import { motion } from 'motion/react'
 
 import { cn } from '@/utils/react'
 import Drops from './Drops'
+import Container from '@/utils/components/Container'
 
 import styles from './Background.module.scss'
 
@@ -14,7 +16,7 @@ const Background = () => {
 
 	return (
 		<>
-			<div className={styles.background}>
+			<motion.div className={styles.background}>
 				<Wave
 					className={cn(styles.wave, styles.top)}
 					paused={false}
@@ -36,10 +38,9 @@ const Background = () => {
 						points: 4,
 					}}
 				/>
-
-				<div>
+				<Container>
 					<h1 className={styles.title}>{data.name}</h1>
-				</div>
+				</Container>
 
 				{/* TODO Hide or fade bottom wave when  scrolled out of view*/}
 				<Wave
@@ -52,7 +53,7 @@ const Background = () => {
 						points: 4,
 					}}
 				/>
-			</div>
+			</motion.div>
 			<svg>
 				<defs>
 					<filter id='smoosh'>

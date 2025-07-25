@@ -15,6 +15,12 @@ $box-shadow: 2px 2px 16px #0008;
 	z-index: 100;
 
 	--borderHeight: 64px;
+
+	::selection {
+		background: $red;
+		color: black;
+	}
+
 	@include tablet {
 		--borderHeight: 80px;
 	}
@@ -98,7 +104,10 @@ $box-shadow: 2px 2px 16px #0008;
 	background-color: $red;
 	border-radius: var(--border-radius);
 	box-shadow: $box-shadow;
-
+	::selection {
+		background: $red;
+		color: #fff;
+	}
 	p {
 		position: relative;
 		margin: 0 16px;
@@ -156,6 +165,10 @@ $box-shadow: 2px 2px 16px #0008;
 
 	@include tablet {
 		bottom: calc(var(--borderHeight) - 56px);
+	}
+	&::selection {
+		background: $red;
+		color: #fff;
 	}
 }
 

@@ -1,3 +1,9 @@
+$primary-color: #fce300;
+$secondary-color: #3f3f43;
+$accent-color-1: #efefef;
+$accent-color-2: #f7e653;
+$accent-color-3: #ffb800;
+
 .background {
-	background-color: yellow;
+	background-color: $primary-color;
 }
