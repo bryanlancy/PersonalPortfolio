@@ -1,6 +1,4 @@
 .container {
-	border: 1px solid red;
-
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -9,10 +7,27 @@
 }
 
 .tech {
+	position: relative;
 	--primaryColor: #fff;
 
 	border: 1px solid var(--primaryColor);
+	border-radius: 16px;
 
 	width: 240px;
 	height: 100px;
+}
+.title {
+	position: absolute;
+	bottom: 8px;
+	left: 8px;
+	// mix-blend-mode: difference;
+}
+
+.title2 {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+}
+.motion {
+	color: #000;
 }

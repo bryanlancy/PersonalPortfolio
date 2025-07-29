@@ -10,7 +10,7 @@ import { motion } from 'motion/react'
 
 import styles from './ContactCard.module.scss'
 
-const createBackground: (color: Contact['color']) => string = color => {
+export const createBackground: (color: Contact['color']) => string = color => {
 	let background: string = ''
 	switch (typeof color) {
 		case 'string':

@@ -1,7 +1,8 @@
 import { FC } from 'react'
 
-import styles from './Techs.module.scss'
 import Tech from './Tech'
+
+import styles from './Techs.module.scss'
 
 interface TechsProps {
 	type: 'pro' | 'home'
