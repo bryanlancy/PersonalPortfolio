@@ -13,11 +13,19 @@ import {
 import { BannerContext } from '@/context/bannerContext'
 import { mapRange } from '@/utils/general'
 
+interface ProjectTechs {
+	frontend: string[]
+	backend: string[]
+	devops: string[]
+}
+
 // TODO larger height of mercury banner messes with overlay fade?
+// TODO Add techs used component
 
 interface ProjectBannerProps extends PropsWithChildren {
 	projectName: string
 	className?: string
+	techs: ProjectTechs
 	// animRef: RefObject<HTMLElement>
 }
 
@@ -59,7 +67,7 @@ const ProjectBanner: FC<ProjectBannerProps> = ({
 	})
 	useMotionValueEvent(scrollYProgress, 'change', latest => {
 		const tempState = { ...animState[0], [projectName]: latest }
-		console.log(tempState)
+
 		animState[1](tempState)
 	})
 

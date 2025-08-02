@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Technology } from './technology-list'
+import techListObj from './technology-list'
 
 type NextImage = typeof Image
 interface ProjectImage extends NextImage {
@@ -13,7 +13,7 @@ export interface Project {
 	/** Name of the project. */
 	name: string
 	/** The technologies used in making the project. */
-	technologies: Technology[]
+	technologies: (keyof typeof techListObj)[]
 	/** Array of `next/image`.
 	 *
 	 * Add `ignoreThumbnail={true}` to omit an image from the thumbnail preview. */
@@ -53,7 +53,7 @@ const mercury: Project = {
 	company: 'monster',
 
 	description: [
-		'Monster is a company built on great communication. Naturally, that meant a lot of... communicating.',
+		'Monster is a company built on great communication. Naturally, that meant a lot of, well, communicating.',
 		'Over time, that translated into a massive number of phone calls, texts, and emails — resulting in a mess of scattered information.',
 		'Mercury was the solution.',
 		'It built rich contact profiles by using message metadata to combine conversations across channels into a single, centralized thread. Giving us a complete, organized view of every customer interaction.',

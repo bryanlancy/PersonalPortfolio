@@ -1,8 +1,11 @@
 'use client'
 
-import React, { FC } from 'react'
-
-import styles from './Projects.module.scss'
+import React, { FC, PropsWithChildren } from 'react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCloud } from '@awesome.me/kit-ddd907bdb7/icons/classic/solid'
 
 import {
 	CarputerBanner,
@@ -14,48 +17,122 @@ import {
 } from './Banner'
 import { BannerContextProvider } from '@/context/bannerContext'
 import Techs from './Techs'
+import { cn } from '@/utils/react'
+
+import styles from './Projects.module.scss'
+import {
+	faBriefcase,
+	faLightCeiling,
+} from '@awesome.me/kit-ddd907bdb7/icons/sharp-duotone/solid'
 import Container from '@/utils/components/Container'
 
 interface ProjectsProps {}
 
 // TODO Add Technology component and sidebar
 
+interface SideBannerProps extends PropsWithChildren {
+	name: string
+}
+const SideBanner: FC<SideBannerProps> = ({ name, children }) => {
+	return (
+		<div className={cn(styles.sideBanner, styles[name])}>
+			<Container>
+				<h2>{children}</h2>
+			</Container>
+		</div>
+	)
+}
+
 const Projects: FC<ProjectsProps> = () => {
+	gsap.registerPlugin(useGSAP)
+	gsap.registerPlugin(ScrollTrigger)
+
+	const scrollTrigger = {
+		trigger: `.proTitle`,
+		start: 'top center',
+	}
+
+	useGSAP(() => {
+		gsap.fromTo(
+			`.${styles.high}`,
+			{
+				transform: 'scaleY(1)',
+			},
+			{
+				scrollTrigger,
+				transform: 'scaleY(.75) translateY(-10px)',
+			}
+		)
+		gsap.fromTo(
+			`.${styles.lights}`,
+			{
+				color: '#ffffff',
+			},
+			{ scrollTrigger, color: '#e9fa79' }
+		)
+		gsap.fromTo(
+			`:is(.${styles.cloud}, .${styles.light}, .${styles.briefcase})`,
+			{
+				opacity: 0,
+			},
+			{
+				scrollTrigger,
+				opacity: 1,
+			}
+		)
+	}, [])
+
 	return (
 		<BannerContextProvider>
 			<section className={styles.projects}>
 				<div className={styles.proText}>
-					<Container>
-						<h1 className={styles.title}>
-							Professional Highlights
-						</h1>
-						<p className={styles.description}>
-							Here's a couple of technologies I've used on a
-							professional level and some of my favorite projects.
-						</p>
-						<Techs type='pro' />
-					</Container>
+					<h1 className={cn(styles.title, 'proTitle')}>
+						<span className={styles.professional}>
+							Professional
+						</span>
+						<span className={styles.high}>
+							<FontAwesomeIcon
+								className={styles.cloud}
+								icon={faCloud}
+							/>
+							High
+						</span>
+						<span className={styles.lights}>
+							<FontAwesomeIcon
+								className={styles.light}
+								icon={faLightCeiling}
+							/>
+							lights
+						</span>
+					</h1>
+					<SideBanner name='proTechs'>Technologies</SideBanner>
+					<Techs type='pro' />
 				</div>
-				<WalkOnsBanner />
-				<MercuryBanner />
-				{/* <OttoBanner /> */}
-				<TwoBeeksBanner />
+				<ul>
+					<SideBanner name='proProjects'>Projects</SideBanner>
+					<WalkOnsBanner />
+					<MercuryBanner />
+					{/* <OttoBanner /> */}
+					<TwoBeeksBanner />
+				</ul>
 			</section>
 			<section className={styles.projects}>
 				<div className={styles.homeText}>
-					<Container>
-						<h1 className={styles.title}>Personal Projects</h1>
-						<p className={styles.description}>
-							I still love learning new things in my free time.
-							Here's a couple technologies and projects I'm
-							currently working on at home.
-						</p>
-						<Techs type='home' />
-					</Container>
+					<h1 className={styles.title}>Personal Projects</h1>
+					<p className={styles.description}>
+						I still love learning new things in my free time. Here's
+						a couple technologies and projects I'm currently working
+						on at home.
+					</p>
+					<SideBanner name='homeTechs'>Technologies</SideBanner>
+					<Techs type='home' />
 				</div>
 
-				<HomeNetworkBanner />
-				<CarputerBanner />
+				<ul>
+					<SideBanner name='homeProjects'>Projects</SideBanner>
+					<HomeNetworkBanner />
+					<CarputerBanner />
+				</ul>
 			</section>
 		</BannerContextProvider>
 	)

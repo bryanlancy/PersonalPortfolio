@@ -1,6 +1,11 @@
 type classInput =
+	/** Class name to add. */
 	| string
+	/** Add the class name provided in index 1 only when index 0 is equal to true */
 	| [boolean, string]
+	/** Add the class name provided in index 1 only when index 0 is equal to true, \
+	 * use the class at index 2 if false.
+	 */
 	| [boolean, string, string]
 	| undefined
 
@@ -9,7 +14,7 @@ type classInput =
  * @param classes Any classes needed to be added to a component. Useful when using css modules.
  * Input can be any combination of a string or array.
  *
- * If an array is provided index 0 is a boolean used to determine which class to apply.
+ * If an array is provided index 0 should be a boolean used to determine which class to apply.
  * True = index 1, False = index 2 (if provided))
  * @returns `string`
  */

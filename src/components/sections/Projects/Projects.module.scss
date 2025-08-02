@@ -1,6 +1,14 @@
+@import '@/styles/mixins.scss';
+
 .projects {
 	max-width: 100% !important;
-	padding: 0;
+
+	ul {
+		position: relative;
+		width: 100%;
+
+		padding-top: 64px;
+	}
 }
 
 .projectList {
@@ -19,10 +27,82 @@
 	position: relative;
 	width: 100%;
 }
+.title {
+	display: flex;
+	justify-content: center;
 
-.proText {
-	height: 600px;
+	span {
+		position: relative;
+	}
+	.professional {
+		margin-right: 8px;
+	}
+	.cloud {
+		// border: 1px solid red;
+
+		position: absolute;
+		bottom: 0px;
+		left: -4px;
+
+		height: 32px;
+
+		color: #929292;
+		stroke: #000;
+	}
+	.high {
+		display: block;
+		transform-origin: top;
+	}
+	.lights {
+		display: block;
+
+		.light {
+			--fa-primary-color: #fff;
+			--fa-secondary-color: inherit;
+			--fa-secondary-opacity: 1;
+
+			position: absolute;
+			top: 36px;
+			left: 6.5px;
+			z-index: -1;
+
+			font-size: 24px;
+			filter: drop-shadow(0px 0px 4px #e9fa79);
+		}
+	}
 }
-.homeText {
-	height: 500px;
+
+.sideBanner {
+	position: absolute;
+	top: 0px;
+	width: 100%;
+
+	display: flex;
+
+	border: 1px solid red;
+	> * {
+		border: 1px solid blue;
+	}
+	h2 {
+		position: absolute;
+		left: 0;
+	}
+}
+.proTechs {
+	top: 80px;
+}
+.proProjects {
+	h2 {
+		left: unset;
+		right: 0;
+	}
+}
+.homeTechs {
+	top: 180px;
+}
+.homeProjects {
+	h2 {
+		left: unset;
+		right: 0;
+	}
 }

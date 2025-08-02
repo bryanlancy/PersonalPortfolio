@@ -11,28 +11,33 @@ interface TechsProps {
 const lists = {
 	pro: [
 		'nextjs',
-		'sass',
-		'css',
-		'html',
-		'typescript',
-		'jsdocs',
+		'typescriptJs',
 		'git',
+		'figma',
+		'sass',
 		'tailwinds',
-		'gsap',
-		'motion',
+		'fontAwesome',
+		'gsapMotion',
 		'node',
 		'docker',
+		'graphql',
+		'craft',
 	],
-	home: ['arduinoPi', 'cpp'],
+	home: ['arduinoPi', 'cpp', 'cloudflare'],
 }
 
 const Techs: FC<TechsProps> = ({ type }) => {
 	return (
-		<div className={styles.container}>
-			{lists[type].map(tech => (
-				<Tech name={tech} />
+		<ul className={styles.container}>
+			{lists[type].map((tech, i) => (
+				<Tech
+					key={`techlist-${tech}`}
+					name={tech}
+					type={type}
+					index={i}
+				/>
 			))}
-		</div>
+		</ul>
 	)
 }
 

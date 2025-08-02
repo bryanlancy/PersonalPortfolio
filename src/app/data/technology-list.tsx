@@ -1,13 +1,18 @@
 import { ReactElement } from 'react'
 
 import {
+	faCloudflare,
 	faCss3,
 	faDocker,
+	faFigma,
+	faFontAwesome,
 	faGit,
 	faGithub,
 	faHtml5,
+	faJs,
 	faNodeJs,
 	faRaspberryPi,
+	faReact,
 	faSass,
 } from '@awesome.me/kit-ddd907bdb7/icons/classic/brands'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -17,152 +22,211 @@ export interface Technology {
 	/** Name of technology. */
 	title: string
 	/** Icon to use when showing the technology has been used. */
-	icon: ReactElement | ReactElement[] | null
+	icon: ReactElement | (ReactElement | null)[] | null
 	/** Hex code used to style elements related to the technology. */
 	color: string | string[]
 	/** Category used to group techs used for similar things*/
 	category: (typeof categories)[number] | (typeof categories)[number][]
 	/** My story of my familiarity with the particular language */
-	desctiption: string
+	description: (string | string[])[]
+	/** Array of image urls for any examples */
+	images?: string[]
 }
 
 // Technologies ===========
-const nextjs: Technology = {
-	title: 'Next.js',
-	color: '#4304c9',
-	// TODO Add Icon
-	icon: null,
-	category: 'frontend',
-	desctiption: `My first experience with NextJS was working as a devloper at \
-	Bowen Media. Many of the sites we worked on involved sites that had their own blogs \
-	or stores where I server side rendering really shined.`,
-}
-const html: Technology = {
-	title: 'HTML5',
-	color: '#c96704',
-	icon: <FontAwesomeIcon icon={faHtml5} />,
-	category: 'frontend',
-	desctiption: '',
-}
-const node: Technology = {
-	title: 'Node',
-	color: '#038717',
-	icon: <FontAwesomeIcon icon={faNodeJs} />,
-	category: 'general',
-	desctiption: '',
-}
-const typescript: Technology = {
-	title: 'Typescript',
-	color: '#049fc9',
-	// TODO Add Icon
-	icon: null,
-	category: 'general',
-	desctiption: '',
-}
-const jsdocs: Technology = {
-	title: 'JS Docs',
-	color: '#049fc9',
-	// TODO Add Icon
-	icon: null,
-	category: 'general',
-	desctiption: '',
-}
-
-// Styling
-const css: Technology = {
-	title: 'CSS3',
-	color: '#0450c9',
-	icon: <FontAwesomeIcon icon={faCss3} />,
-	category: 'styles',
-	desctiption: '',
-}
-const sass: Technology = {
-	title: 'Scss',
-	color: '#c904c0',
-	icon: <FontAwesomeIcon icon={faSass} />,
-	category: 'styles',
-	desctiption: '',
-}
-const tailwinds: Technology = {
-	title: 'Tailwinds',
-	color: '#0492c9',
-	// TODO Add Icon
-	icon: null,
-	category: 'styles',
-	desctiption: '',
-}
-const gsap: Technology = {
-	title: 'GSAP',
-	color: '#47ec61',
-	// TODO Add Icon
-	icon: null,
-	category: 'styles',
-	desctiption: '',
-}
-const motion: Technology = {
-	title: 'Motion',
-	color: '#f6eb2a',
-	// TODO Add Icon
-	icon: null,
-	category: 'styles',
-	desctiption: '',
-}
-
-// Version Control
-const git: Technology = {
-	title: 'Git/GitHub',
-	color: ['#c95604', '#5a027a'],
-	icon: [
-		<FontAwesomeIcon icon={faGit} />,
-		<FontAwesomeIcon icon={faGithub} />,
-	],
-	category: 'general',
-	desctiption: '',
-}
-
-// Hobby Skills
-const arduinoPi: Technology = {
-	title: 'Arduino/Raspberry Pi',
-	color: ['#02687a', '#bf064a'],
-	icon: <FontAwesomeIcon icon={faRaspberryPi} />,
-	category: 'general',
-	desctiption: '',
-}
-const cpp: Technology = {
-	title: 'C++',
-	color: '#01548f',
-	// TODO Add Icon
-	icon: null,
-	category: 'backend',
-	desctiption: '',
-}
-const docker: Technology = {
-	title: 'Docker',
-	color: '#0458d6',
-	icon: <FontAwesomeIcon icon={faDocker} />,
-	category: 'general',
-	desctiption: '',
-}
-// ========================
-
 /**
+ *
  * Object containing all technologies I'm familiar with.
  */
 const technologyList: { [technologyName: string]: Technology } = {
-	nextjs,
-	sass,
-	css,
-	html,
-	typescript,
-	jsdocs,
-	git,
-	tailwinds,
-	gsap,
-	motion,
-	node,
-	arduinoPi,
-	cpp,
-	docker,
-}
+	nextjs: {
+		title: 'Next.js/React',
+		color: ['#4304c9', '#58c4dc'],
+		// TODO Add Icon
+		icon: [null, <FontAwesomeIcon icon={faReact} />],
+		category: 'frontend',
+		description: [
+			`My first experience with NextJS was working as a devloper at \
+	Bowen Media. Many of the sites we worked on involved sites that had their own blogs \
+	or stores where I learned how server side rendering really shined.`,
+		],
+	},
 
+	html: {
+		title: 'HTML',
+		color: '#c96704',
+		icon: <FontAwesomeIcon icon={faHtml5} />,
+		category: 'frontend',
+		description: [
+			"HTML was the first language I learned in the realm of web development. \
+	I had been tinkering with Raspberry Pi's and Arduinos for a while at that point in my life, \
+	but with smart home devices starting to become more popular I knew I had to get my hobby projects online. \
+	I found a Udemy course from Rob Percival and haven't stopped since.",
+		],
+	},
+	node: {
+		title: 'Node',
+		color: '#038717',
+		icon: <FontAwesomeIcon icon={faNodeJs} />,
+		category: 'general',
+		description: [''],
+	},
+
+	typescriptJs: {
+		title: 'Typescript/JS Docs',
+		color: ['#3178c6', '#049fc9'],
+		// TODO Add Icon
+		icon: null,
+		category: 'general',
+		description: [''],
+	},
+	typescript: {
+		title: 'Typescript',
+		color: ['#3178c6'],
+		// TODO Add Icon
+		icon: null,
+		category: 'general',
+		description: [
+			"I didn't start using Typescript until after I started my first full-time software position \
+		at Monster Reservations Group.",
+		],
+	},
+	javascript: {
+		title: 'Javascript',
+		color: '#f7df1e',
+		// TODO Add Icon
+		icon: <FontAwesomeIcon icon={faJs} />,
+		category: 'general',
+		description: [''],
+	},
+	jsdocs: {
+		title: 'JS Docs',
+		color: '#049fc9',
+		// TODO Add Icon
+		icon: null,
+		category: 'general',
+		description: [''],
+	},
+	graphql: {
+		title: 'GraphQL',
+		color: '#f6009b',
+		icon: null,
+		category: 'backend',
+		description: [''],
+	},
+	craft: {
+		title: 'CraftCMS',
+		color: '#e5422b',
+		icon: null,
+		category: 'backend',
+		description: [''],
+	},
+
+	// Design
+	figma: {
+		title: 'Figma',
+		color: ['#ff3737', '#ff7237', '#874fff', '#00b6ff', '#24cb71'],
+		icon: <FontAwesomeIcon icon={faFigma} />,
+		category: 'styles',
+		description: [''],
+	},
+	css: {
+		title: 'CSS',
+		color: '#0450c9',
+		icon: <FontAwesomeIcon icon={faCss3} />,
+		category: 'styles',
+		description: [''],
+	},
+	sass: {
+		title: 'SCSS',
+		color: ['#c904c0'],
+		icon: <FontAwesomeIcon icon={faSass} />,
+		category: 'styles',
+		description: [''],
+	},
+	fontAwesome: {
+		title: 'Font Awesome',
+		color: '#146ebe',
+		icon: <FontAwesomeIcon icon={faFontAwesome} />,
+		category: 'styles',
+		description: [''],
+	},
+	tailwinds: {
+		title: 'Tailwinds',
+		color: '#00bcff',
+		// TODO Add Icon
+		icon: null,
+		category: 'styles',
+		description: [''],
+	},
+	gsapMotion: {
+		title: 'GSAP/Motion',
+		color: ['#0ad644', '#f6eb2a'],
+		// TODO Add Icon
+		icon: null,
+		category: 'styles',
+		description: [''],
+	},
+	gsap: {
+		title: 'GSAP',
+		color: '#0ad644',
+		// TODO Add Icon
+		icon: null,
+		category: 'styles',
+		description: [''],
+	},
+	motion: {
+		title: 'Motion',
+		color: '#f6eb2a',
+		// TODO Add Icon
+		icon: null,
+		category: 'styles',
+		description: [''],
+	},
+
+	// Version Control
+	git: {
+		title: 'Git/GitHub',
+		color: ['#c95604', '#5a027a'],
+		icon: [
+			<FontAwesomeIcon icon={faGit} />,
+			<FontAwesomeIcon icon={faGithub} />,
+		],
+		category: 'general',
+		description: [''],
+	},
+
+	// Hobby Skills
+	arduinoPi: {
+		title: 'Arduino/Raspberry Pi',
+		color: ['#02687a', '#bf064a'],
+		icon: <FontAwesomeIcon icon={faRaspberryPi} />,
+		category: 'general',
+		description: [''],
+	},
+	cpp: {
+		title: 'C++',
+		color: '#01548f',
+		// TODO Add Icon
+		icon: null,
+		category: 'backend',
+		description: [''],
+	},
+	docker: {
+		title: 'Docker',
+		color: '#0458d6',
+		icon: <FontAwesomeIcon icon={faDocker} />,
+		category: 'general',
+		description: [''],
+	},
+	cloudflare: {
+		title: 'Cloudflare',
+		color: '#f3811a',
+		icon: <FontAwesomeIcon icon={faCloudflare} />,
+		category: 'general',
+		description: [''],
+	},
+} as const
+
+// ========================
 export default technologyList

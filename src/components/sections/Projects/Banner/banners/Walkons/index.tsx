@@ -26,7 +26,14 @@ const WalkOnsBanner: FC<WalkOnsBannerProps> = ({}) => {
 	const progress = useBannerScrollProgress(projectName)
 
 	return (
-		<ProjectBanner className={styles.background} projectName={projectName}>
+		<ProjectBanner
+			className={styles.background}
+			projectName={projectName}
+			techs={{
+				frontend: ['nextjs', 'typescript', 'scss', 'tailwinds'],
+				backend: ['graphql'],
+				devops: ['cloudflare'],
+			}}>
 			<Background animProgress={progress} />
 
 			<Container>
