@@ -1,6 +1,10 @@
 @import '@/styles/mixins.scss';
 
 .container {
+	position: relative;
+}
+
+.list {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -8,7 +12,7 @@
 	margin: 0 auto;
 
 	max-width: 1164px;
-	padding: 16px;
+	padding: 0 48px;
 
 	gap: 4px;
 	@include laptop {
@@ -16,12 +20,14 @@
 	}
 
 	padding-bottom: 40px;
-	perspective: 30em;
+	perspective: 75em;
 }
 
 // Individual Tech cards
 
 .tech {
+	visibility: hidden;
+
 	position: relative;
 	--primaryColor: #fff; //! Changed in frontend
 	border: 1px solid var(--primaryColor);
@@ -32,8 +38,8 @@
 
 	transform-style: preserve-3d;
 
+	border-radius: 8px;
 	@include laptop {
-		border-radius: 8px;
 		width: 240px;
 	}
 
@@ -72,43 +78,29 @@
 	top: 8px;
 	right: 8px;
 }
-.title {
-}
-
-.title2 {
-}
 
 .icon {
 	> * {
-		width: 40px;
-		height: 40px;
+		width: 56px;
+		height: 56px;
 
-		opacity: 0.5;
+		opacity: 0.2;
+
+		@include tablet {
+			width: 80px;
+			height: 80px;
+		}
 	}
 }
 .background1 {
 	position: absolute;
 	bottom: 4px;
 	left: 16px;
-
-	> * {
-		width: 80px !important;
-		height: 80px !important;
-
-		opacity: 0.2;
-	}
 }
 .background2 {
 	position: absolute;
 	top: 4px;
 	right: 16px;
-
-	> * {
-		width: 80px !important;
-		height: 80px !important;
-
-		opacity: 0.2;
-	}
 }
 
 .link {

@@ -1,25 +1,39 @@
-import React, { FC } from 'react'
-import { motion } from 'motion/react'
+import { FC } from 'react'
 
 import styles from './Story.module.scss'
-import Chapter from './Chapter'
+import {
+	Chapter1,
+	Chapter2,
+	Chapter3,
+	Chapter4,
+	Chapter5,
+	Chapter6,
+} from './Chapters'
 
 interface StoryProps {}
 
+/*
+	Animation timeline
+
+	Animation:
+	Child icon surrounded by tech stuff
+	Adult pops up, show question asked
+	Curiosity?
+
+	Transition:
+	Zoom into computer screen, reveals next panel
+*/
+
 const Story: FC<StoryProps> = ({}) => {
 	return (
-		<motion.div className={styles.story}>
-			<Chapter text={paragraph1} shortText='' step={1} />
-			<Chapter text={paragraph2} shortText='' step={2} />
-			<Chapter text={paragraph3} shortText='' step={3} />
-			<Chapter text={paragraph4} shortText='' step={4} />
-			<Chapter text={paragraph5} shortText='' step={5} />
-
-			{/* <p>
-				I've got a couple of my favorite and more recent projects listed
-				below!
-			</p> */}
-		</motion.div>
+		<div className={styles.story}>
+			<Chapter1 />
+			<Chapter2 />
+			<Chapter3 />
+			<Chapter4 />
+			<Chapter5 />
+			<Chapter6 />
+		</div>
 	)
 }
 
@@ -52,10 +66,8 @@ export default Story
 //     I've gotten to work on some cool projects in that time and still frequently work on my own projects at home (I've got some down below!).
 // `
 
-const paragraph1 = `I've always been drawn to technology, but I didn't realize how little I understood it until my grandfather once asked me how computers work. That question sparked a curiosity that's shaped my career ever since.`
-const paragraph2 = `It started with building PCs and doing basic repairs. In 2011, I got into spreadsheets at my first job and was fascinated by how much you could do with formulas. I automated nightly math tasks and later built a barcode-scanning spreadsheet used to manage millions in inventory. But I eventually hit the limits of what spreadsheets could do.`
-const paragraph3 = `In 2015, while trying to solve my own problem—waking up early—I bought an Arduino kit to build a sunrise alarm clock with LEDs. The first time I saw an LED respond to code I had written, I was hooked. I knew this was something I wanted to do for the rest of my life.`
-const paragraph4 = `Wanting to connect my Arduino projects and control them remotely, I turned to web development. Its accessibility was a big draw—no special tools, just a computer and an internet connection.`
-const paragraph5 = `After a couple of years learning and building personal projects, I landed my first full-time dev job in 2021. I've been building software professionally ever since, while continuing to work on passion projects at home (some of which you can check out below).
-
-`
+// const paragraph1 = `I've always been drawn to technology, but I didn't realize how little I understood it until my grandfather once asked me how computers work. That question sparked a curiosity that's shaped my career ever since.`
+// const paragraph2 = `It started with building PCs and doing basic repairs. In 2011, I got into spreadsheets at my first job and was fascinated by how much you could do with formulas. I automated nightly math tasks and later built a barcode-scanning spreadsheet used to manage millions in inventory. But I eventually hit the limits of what spreadsheets could do.`
+// const paragraph3 = `In 2015, while trying to solve my own problem—waking up early—I bought an Arduino kit to build a sunrise alarm clock with LEDs. The first time I saw an LED respond to code I had written, I was hooked. I knew this was something I wanted to do for the rest of my life.`
+// const paragraph4 = `Wanting to connect my Arduino projects and control them remotely, I turned to web development. Its accessibility was a big draw—no special tools, just a computer and an internet connection.`
+// const paragraph5 = `After a couple of years learning and building personal projects, I landed my first full-time dev job in 2021. I've been building software professionally ever since, while continuing to work on passion projects at home (some of which you can check out below).`

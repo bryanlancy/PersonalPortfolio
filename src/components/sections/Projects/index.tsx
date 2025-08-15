@@ -1,11 +1,12 @@
 'use client'
 
-import React, { FC, PropsWithChildren } from 'react'
+import { FC, PropsWithChildren } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCloud } from '@awesome.me/kit-ddd907bdb7/icons/classic/solid'
+import { faLightCeiling } from '@awesome.me/kit-ddd907bdb7/icons/sharp-duotone/solid'
 
 import {
 	CarputerBanner,
@@ -16,15 +17,11 @@ import {
 	WalkOnsBanner,
 } from './Banner'
 import { BannerContextProvider } from '@/context/bannerContext'
+import Container from '@/utils/components/Container'
 import Techs from './Techs'
 import { cn } from '@/utils/react'
 
 import styles from './Projects.module.scss'
-import {
-	faBriefcase,
-	faLightCeiling,
-} from '@awesome.me/kit-ddd907bdb7/icons/sharp-duotone/solid'
-import Container from '@/utils/components/Container'
 
 interface ProjectsProps {}
 
@@ -61,21 +58,25 @@ const Projects: FC<ProjectsProps> = () => {
 			{
 				scrollTrigger,
 				transform: 'scaleY(.75) translateY(-10px)',
+				duration: 1,
 			}
 		)
+
 		gsap.fromTo(
 			`.${styles.lights}`,
 			{
 				color: '#ffffff',
 			},
-			{ scrollTrigger, color: '#e9fa79' }
+			{ scrollTrigger, color: '#e9fa79', duration: 0.75 }
 		)
 		gsap.fromTo(
-			`:is(.${styles.cloud}, .${styles.light}, .${styles.briefcase})`,
+			`:is(.${styles.cloud}, .${styles.light})`,
 			{
+				autoAlpha: 0,
 				opacity: 0,
 			},
 			{
+				autoAlpha: 1,
 				scrollTrigger,
 				opacity: 1,
 			}
@@ -116,7 +117,7 @@ const Projects: FC<ProjectsProps> = () => {
 					<TwoBeeksBanner />
 				</ul>
 			</section>
-			<section className={styles.projects}>
+			{/* <section className={styles.projects}>
 				<div className={styles.homeText}>
 					<h1 className={styles.title}>Personal Projects</h1>
 					<p className={styles.description}>
@@ -133,7 +134,7 @@ const Projects: FC<ProjectsProps> = () => {
 					<HomeNetworkBanner />
 					<CarputerBanner />
 				</ul>
-			</section>
+			</section> */}
 		</BannerContextProvider>
 	)
 }

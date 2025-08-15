@@ -2,11 +2,11 @@ type classInput =
 	/** Class name to add. */
 	| string
 	/** Add the class name provided in index 1 only when index 0 is equal to true */
-	| [boolean, string]
+	| [boolean | undefined, string]
 	/** Add the class name provided in index 1 only when index 0 is equal to true, \
 	 * use the class at index 2 if false.
 	 */
-	| [boolean, string, string]
+	| [boolean | undefined, string, string]
 	| undefined
 
 /**
@@ -18,7 +18,7 @@ type classInput =
  * True = index 1, False = index 2 (if provided))
  * @returns `string`
  */
-const cn: (...input: classInput[]) => string = (...classes) => {
+export const cn: (...input: classInput[]) => string = (...classes) => {
 	let classString: string = ''
 	// Loop through classes and add to classes
 	for (let i = 0; i < classes.length; i++) {
@@ -38,5 +38,3 @@ const cn: (...input: classInput[]) => string = (...classes) => {
 
 	return classString.trimStart()
 }
-
-export { cn }

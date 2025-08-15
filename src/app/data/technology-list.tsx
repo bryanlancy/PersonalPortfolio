@@ -19,7 +19,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const categories = ['frontend', 'backend', 'styles', 'general'] as const
 export interface Technology {
-	/** Name of technology. */
+	/** Name used to lookup tech info */
+	name: string
+	/** Display name of technology. */
 	title: string
 	/** Icon to use when showing the technology has been used. */
 	icon: ReactElement | (ReactElement | null)[] | null
@@ -41,6 +43,7 @@ export interface Technology {
 const technologyList: { [technologyName: string]: Technology } = {
 	nextjs: {
 		title: 'Next.js/React',
+		name: 'nextjs',
 		color: ['#4304c9', '#58c4dc'],
 		// TODO Add Icon
 		icon: [null, <FontAwesomeIcon icon={faReact} />],
@@ -54,6 +57,7 @@ const technologyList: { [technologyName: string]: Technology } = {
 
 	html: {
 		title: 'HTML',
+		name: 'html',
 		color: '#c96704',
 		icon: <FontAwesomeIcon icon={faHtml5} />,
 		category: 'frontend',
@@ -66,6 +70,7 @@ const technologyList: { [technologyName: string]: Technology } = {
 	},
 	node: {
 		title: 'Node',
+		name: 'node',
 		color: '#038717',
 		icon: <FontAwesomeIcon icon={faNodeJs} />,
 		category: 'general',
@@ -74,14 +79,16 @@ const technologyList: { [technologyName: string]: Technology } = {
 
 	typescriptJs: {
 		title: 'Typescript/JS Docs',
+		name: 'typescriptJs',
 		color: ['#3178c6', '#049fc9'],
 		// TODO Add Icon
-		icon: null,
+		icon: [null, null],
 		category: 'general',
 		description: [''],
 	},
 	typescript: {
 		title: 'Typescript',
+		name: 'typescript',
 		color: ['#3178c6'],
 		// TODO Add Icon
 		icon: null,
@@ -93,6 +100,7 @@ const technologyList: { [technologyName: string]: Technology } = {
 	},
 	javascript: {
 		title: 'Javascript',
+		name: 'javascript',
 		color: '#f7df1e',
 		// TODO Add Icon
 		icon: <FontAwesomeIcon icon={faJs} />,
@@ -101,6 +109,7 @@ const technologyList: { [technologyName: string]: Technology } = {
 	},
 	jsdocs: {
 		title: 'JS Docs',
+		name: 'jsdocs',
 		color: '#049fc9',
 		// TODO Add Icon
 		icon: null,
@@ -109,6 +118,7 @@ const technologyList: { [technologyName: string]: Technology } = {
 	},
 	graphql: {
 		title: 'GraphQL',
+		name: 'graphql',
 		color: '#f6009b',
 		icon: null,
 		category: 'backend',
@@ -116,6 +126,7 @@ const technologyList: { [technologyName: string]: Technology } = {
 	},
 	craft: {
 		title: 'CraftCMS',
+		name: 'craft',
 		color: '#e5422b',
 		icon: null,
 		category: 'backend',
@@ -125,6 +136,7 @@ const technologyList: { [technologyName: string]: Technology } = {
 	// Design
 	figma: {
 		title: 'Figma',
+		name: 'figma',
 		color: ['#ff3737', '#ff7237', '#874fff', '#00b6ff', '#24cb71'],
 		icon: <FontAwesomeIcon icon={faFigma} />,
 		category: 'styles',
@@ -132,6 +144,7 @@ const technologyList: { [technologyName: string]: Technology } = {
 	},
 	css: {
 		title: 'CSS',
+		name: 'css',
 		color: '#0450c9',
 		icon: <FontAwesomeIcon icon={faCss3} />,
 		category: 'styles',
@@ -139,6 +152,7 @@ const technologyList: { [technologyName: string]: Technology } = {
 	},
 	sass: {
 		title: 'SCSS',
+		name: 'ssss',
 		color: ['#c904c0'],
 		icon: <FontAwesomeIcon icon={faSass} />,
 		category: 'styles',
@@ -146,6 +160,7 @@ const technologyList: { [technologyName: string]: Technology } = {
 	},
 	fontAwesome: {
 		title: 'Font Awesome',
+		name: 'fontAwesome',
 		color: '#146ebe',
 		icon: <FontAwesomeIcon icon={faFontAwesome} />,
 		category: 'styles',
@@ -153,6 +168,7 @@ const technologyList: { [technologyName: string]: Technology } = {
 	},
 	tailwinds: {
 		title: 'Tailwinds',
+		name: 'tailwinds',
 		color: '#00bcff',
 		// TODO Add Icon
 		icon: null,
@@ -161,14 +177,16 @@ const technologyList: { [technologyName: string]: Technology } = {
 	},
 	gsapMotion: {
 		title: 'GSAP/Motion',
+		name: 'gsapMotion',
 		color: ['#0ad644', '#f6eb2a'],
 		// TODO Add Icon
-		icon: null,
+		icon: [null, null],
 		category: 'styles',
 		description: [''],
 	},
 	gsap: {
 		title: 'GSAP',
+		name: 'gsap',
 		color: '#0ad644',
 		// TODO Add Icon
 		icon: null,
@@ -177,6 +195,7 @@ const technologyList: { [technologyName: string]: Technology } = {
 	},
 	motion: {
 		title: 'Motion',
+		name: 'motion',
 		color: '#f6eb2a',
 		// TODO Add Icon
 		icon: null,
@@ -187,6 +206,7 @@ const technologyList: { [technologyName: string]: Technology } = {
 	// Version Control
 	git: {
 		title: 'Git/GitHub',
+		name: 'git',
 		color: ['#c95604', '#5a027a'],
 		icon: [
 			<FontAwesomeIcon icon={faGit} />,
@@ -199,13 +219,15 @@ const technologyList: { [technologyName: string]: Technology } = {
 	// Hobby Skills
 	arduinoPi: {
 		title: 'Arduino/Raspberry Pi',
+		name: 'arduinoPi',
 		color: ['#02687a', '#bf064a'],
-		icon: <FontAwesomeIcon icon={faRaspberryPi} />,
+		icon: [null, <FontAwesomeIcon icon={faRaspberryPi} />],
 		category: 'general',
 		description: [''],
 	},
 	cpp: {
 		title: 'C++',
+		name: 'cpp',
 		color: '#01548f',
 		// TODO Add Icon
 		icon: null,
@@ -214,6 +236,7 @@ const technologyList: { [technologyName: string]: Technology } = {
 	},
 	docker: {
 		title: 'Docker',
+		name: 'docker',
 		color: '#0458d6',
 		icon: <FontAwesomeIcon icon={faDocker} />,
 		category: 'general',
@@ -221,6 +244,7 @@ const technologyList: { [technologyName: string]: Technology } = {
 	},
 	cloudflare: {
 		title: 'Cloudflare',
+		name: 'cloudflare',
 		color: '#f3811a',
 		icon: <FontAwesomeIcon icon={faCloudflare} />,
 		category: 'general',

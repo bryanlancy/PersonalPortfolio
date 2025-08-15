@@ -1,10 +1,9 @@
 'use client'
 
-import React from 'react'
-
-import styles from './About.module.scss'
 import Quote from './Quote'
 import Story from './Story'
+
+import styles from './About.module.scss'
 
 const quote =
 	'Give a man a program, frustrate him for a day. Teach a man to program, frustrate him for a lifetime.'
