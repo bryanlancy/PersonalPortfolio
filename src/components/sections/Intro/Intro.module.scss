@@ -1,3 +1,58 @@
+.section {
+	position: relative;
+	height: 90vh;
+}
+
+.text {
+	display: flex;
+	flex-direction: column;
+}
+.title {
+	font-size: 40px;
+}
+.subtext {
+	display: flex;
+	text-wrap: nowrap;
+
+	font-size: 40px;
+	height: 75px;
+}
+
+.timelineButtons {
+	position: absolute;
+
+	display: flex;
+	gap: 24px;
+
+	bottom: 20%;
+	> * {
+		cursor: pointer;
+		padding: 8px 24px;
+
+		border-radius: 8px;
+	}
+	.skip {
+		background-color: red;
+	}
+	.auto {
+		background-color: rgb(43, 160, 43);
+		border: none;
+	}
+	.keepScrolling {
+		position: absolute;
+		top: 100%;
+	}
+}
+
+//
+//
+//! Old Intro code, only keep for quick reference until done with update
+//
+//
+//
+//
+//
+//
 // @keyframes strokeShift {
 // 	0%,
 // 	100% {
@@ -8,7 +63,7 @@
 // 		stroke-dashoffset: 0%;
 // 	}
 // }
-// @keyframes iconAnimate {
+// @keyframes iconAnimate {f
 // 	0%,
 // 	100% {
 // 		stroke-dashoffset: var(--dashOffset);
@@ -143,22 +198,3 @@
 // 		animation-fill-mode: forwards;
 // 	}
 // }
-
-.section {
-	height: 90vh;
-}
-
-.text {
-	display: flex;
-	flex-direction: column;
-}
-.title {
-	font-size: 40px;
-}
-.subtext {
-	display: flex;
-	text-wrap: nowrap;
-
-	font-size: 40px;
-	height: 75px;
-}

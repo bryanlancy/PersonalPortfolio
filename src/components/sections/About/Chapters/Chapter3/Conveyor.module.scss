@@ -1,0 +1,42 @@
+.conveyor {
+	position: absolute;
+	bottom: 0;
+
+	display: flex;
+	align-items: center;
+	gap: 120px;
+
+	height: 400px;
+	width: 100%;
+
+	transform: translateX(1200px);
+}
+
+.boxContainer {
+	position: relative;
+
+	display: flex;
+
+	width: fit-content;
+	.box {
+		font-size: 120px;
+		color: #705731;
+	}
+	.barcode {
+		position: absolute;
+		bottom: 16px;
+		left: 8px;
+
+		font-size: 24px;
+		color: #000;
+	}
+	.partNumber {
+		position: absolute;
+		bottom: 16px;
+		right: 8px;
+
+		color: #fff;
+
+		font-size: 12px;
+	}
+}

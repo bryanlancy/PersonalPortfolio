@@ -1,6 +1,5 @@
 import { FC } from 'react'
 
-import styles from './Story.module.scss'
 import {
 	Chapter1,
 	Chapter2,
@@ -9,6 +8,11 @@ import {
 	Chapter5,
 	Chapter6,
 } from './Chapters'
+import Spreadsheet from './Chapters/Spreadsheet'
+import Graphs from './Chapters/Graphs'
+import { SpreadsheetContextProvider } from '@/context/spreadsheetContext'
+
+import styles from './Story.module.scss'
 
 interface StoryProps {}
 
@@ -28,8 +32,12 @@ const Story: FC<StoryProps> = ({}) => {
 	return (
 		<div className={styles.story}>
 			<Chapter1 />
-			<Chapter2 />
-			<Chapter3 />
+			<SpreadsheetContextProvider>
+				<Chapter2 />
+				<Spreadsheet />
+				<Graphs />
+				<Chapter3 />
+			</SpreadsheetContextProvider>
 			<Chapter4 />
 			<Chapter5 />
 			<Chapter6 />

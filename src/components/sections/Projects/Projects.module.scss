@@ -1,6 +1,7 @@
 @import '@/styles/mixins.scss';
 
 .projects {
+	position: relative;
 	max-width: 100% !important;
 
 	ul {

@@ -19,6 +19,13 @@ type classInput =
  * @returns `string`
  */
 export const cn: (...input: classInput[]) => string = (...classes) => {
+	// If only one argument is passed, log a warning as this function is not needed (dev environment only)
+	if (classes.length === 1 && process.env.NODE_ENV === 'development') {
+		console.warn(
+			`'cn' function used with only one class: ${classes[0]}.\n%cThis is an unneeded function call!\n`,
+			'color:#ff0'
+		)
+	}
 	let classString: string = ''
 	// Loop through classes and add to classes
 	for (let i = 0; i < classes.length; i++) {

@@ -46,3 +46,8 @@
 		inset: 0 32px;
 	}
 }
+
+@mixin autoAlpha {
+	opacity: 0;
+	visibility: hidden;
+}

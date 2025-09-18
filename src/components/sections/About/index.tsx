@@ -11,7 +11,7 @@ const author = 'Muhammad Waseem'
 
 const About = () => {
 	return (
-		<section>
+		<section className={styles.section}>
 			<h1>A little about me</h1>
 
 			<Quote quote={quote} author={author} />

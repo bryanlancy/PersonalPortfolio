@@ -1,0 +1,161 @@
+@import '@/styles/mixins.scss';
+
+.chapter4 {
+	position: relative;
+	// height: 4000px;
+
+	border: 1px solid red;
+
+	overflow: hidden;
+}
+
+.container {
+	position: relative;
+
+	height: 100vh;
+	width: 100vw;
+}
+
+.title {
+	position: absolute;
+	top: 24px;
+	left: 24px;
+
+	word-wrap: normal;
+
+	text-align: left;
+	width: 120px;
+}
+
+.house {
+	position: absolute;
+	top: 65%;
+	left: 50%;
+
+	height: 600px;
+	width: 600px;
+
+	transform: translate(-50%, -50%);
+}
+
+.houseContainer {
+	> * {
+		height: 100%;
+
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+.houseOut {
+	position: absolute;
+}
+
+.houseIn {
+	position: absolute;
+	@include autoAlpha;
+}
+
+.me {
+	position: absolute;
+	left: 50%;
+	bottom: 8%;
+	height: 64px;
+
+	transform: translateX(-1000px);
+}
+.happy {
+	height: 100%;
+}
+.sleeping {
+	height: 100%;
+}
+.smart {
+	height: 100%;
+}
+
+.bed {
+	position: absolute;
+	bottom: 5%;
+	right: 15%;
+
+	height: 80px;
+
+	transform: rotateY(180deg);
+	@include autoAlpha;
+}
+
+.lightContainer {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+
+	transform: translate(-50%, -50%);
+
+	@include autoAlpha;
+
+	> * {
+		top: 50%;
+		left: 50%;
+
+		height: 40px;
+
+		transform: translate(-50%, -50%) rotate(-180deg);
+	}
+	.lightOff {
+		position: absolute;
+	}
+	.lightOn {
+		position: absolute;
+		color: rgb(220, 220, 43);
+
+		@include autoAlpha;
+	}
+}
+
+.computer {
+	position: absolute;
+	bottom: 10%;
+	left: 20%;
+
+	transform: translate(-50%, -50%);
+
+	height: 48px;
+
+	@include autoAlpha;
+}
+
+.line {
+	position: absolute;
+
+	@include autoAlpha;
+}
+.line1 {
+	top: 50%;
+	left: 24px;
+}
+.line2 {
+	top: 52%;
+	left: 24px;
+}
+.line3 {
+	top: 54%;
+	left: 48px;
+}
+.line4 {
+	bottom: 25%;
+	left: 35%;
+
+	width: 200px;
+	text-align: left;
+}
+.line5 {
+	top: 53%;
+	left: 45%;
+
+	width: 144px;
+	text-align: left;
+}
+.line6 {
+	top: 57%;
+	left: 45%;
+}

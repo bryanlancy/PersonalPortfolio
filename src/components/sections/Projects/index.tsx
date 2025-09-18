@@ -85,7 +85,7 @@ const Projects: FC<ProjectsProps> = () => {
 
 	return (
 		<BannerContextProvider>
-			<section className={styles.projects}>
+			<section id='projects' className={styles.projects}>
 				<div className={styles.proText}>
 					<h1 className={cn(styles.title, 'proTitle')}>
 						<span className={styles.professional}>

@@ -4,7 +4,9 @@ import { useGSAP } from '@gsap/react'
 import { SplitText } from 'gsap/SplitText'
 
 import styles from './FancyText.module.scss'
-import { cn } from '../react'
+
+gsap.registerPlugin(useGSAP)
+gsap.registerPlugin(SplitText)
 
 interface FancyTextProps extends PropsWithChildren {
 	/** Controls start of animation */
@@ -20,9 +22,6 @@ const FancyText: FC<FancyTextProps> = ({
 	className,
 	children,
 }) => {
-	gsap.registerPlugin(useGSAP)
-	gsap.registerPlugin(SplitText)
-
 	const containerRef = useRef<HTMLDivElement>(null)
 	const tl = useRef(gsap.timeline({ paused: true }))
 
@@ -33,7 +32,7 @@ const FancyText: FC<FancyTextProps> = ({
 
 	const animateText = contextSafe(() => {
 		let split = SplitText.create(`.${styles.text}`, {
-			type: 'chars',
+			type: 'chars, words',
 			deepSlice: true,
 			autoSplit: true,
 		})
@@ -52,14 +51,21 @@ const FancyText: FC<FancyTextProps> = ({
 		if (shouldAnimate) {
 			tl.current.resume()
 		}
-		if (tl.current && reverse) {
+		if (reverse) {
 			tl.current.reversed(!shouldAnimate)
 		}
 	}, [shouldAnimate, reverse])
 
+	const content =
+		typeof children === 'string' ? (
+			<p className={styles.text}>{children}</p>
+		) : (
+			children
+		)
+
 	return (
 		<div ref={containerRef} className={className}>
-			<p className={cn(styles.text, '.text')}>{children}</p>
+			{content}
 		</div>
 	)
 }
