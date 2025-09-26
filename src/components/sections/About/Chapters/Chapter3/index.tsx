@@ -10,8 +10,7 @@ import TypeText from '@/utils/components/TypeText'
 import useStateRef from 'react-usestateref'
 import Conveyor from './Conveyor'
 
-gsap.registerPlugin(useGSAP)
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 /*
 	Animation timeline
@@ -61,29 +60,30 @@ const Chapter3 = () => {
 			scrollTrigger: {
 				trigger: '.chapter3',
 				start: 'top center',
-				end: '+=1px',
+				end: '+=400px',
 				onUpdate: self => {
-					titleInTl.reversed(self.direction > 0 ? false : true)
+					titleInTl.reversed(!self.isActive)
 				},
 			},
 		})
 		titleInTl.to(`.${styles.title}`, {
+			duration: 0.25,
 			autoAlpha: 1,
 		})
-		const titleOutTl = gsap.timeline({
-			scrollTrigger: {
-				trigger: '.chapter3',
-				start: 'top top',
-				end: '+=1px',
-				onUpdate: self => {
-					titleOutTl.reversed(self.direction > 0 ? false : true)
-				},
-			},
-		})
-		titleOutTl.to(`.${styles.title}`, {
-			duration: 0.25,
-			autoAlpha: 0,
-		})
+		// const titleOutTl = gsap.timeline({
+		// 	scrollTrigger: {
+		// 		trigger: '.chapter',
+		// 		start: 'top top',
+		// 		end: '+=1px',
+		// 		onUpdate: self => {
+		// 			titleOutTl.reversed(self.direction > 0 ? false : true)
+		// 		},
+		// 	},
+		// })
+		// titleOutTl.to(`.${styles.title}`, {
+		// 	duration: 0.25,
+		// 	autoAlpha: 0,
+		// })
 
 		// Background Animation
 		const backgroundTl = gsap.timeline({
@@ -174,7 +174,7 @@ const Chapter3 = () => {
 
 	return (
 		<div className={cn('chapter3', styles.chapter3)}>
-			<h1 ref={titleRef} className={cn('c3-title', styles.title)}>
+			<h1 ref={titleRef} className={styles.title}>
 				{title}
 			</h1>
 			<div ref={containerRef} className={styles.container}>

@@ -3,11 +3,23 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+	faLaptop,
+	faScrewdriverWrench,
+	faWifiFair,
+} from '@awesome.me/kit-ddd907bdb7/icons/sharp-duotone/solid'
+import {
+	faBan,
+	faCheck,
+} from '@awesome.me/kit-ddd907bdb7/icons/classic/regular'
 
+import { arrRotator } from '@/utils/general'
 import { cn } from '@/utils/react'
 
 import styles from './Chapter5.module.scss'
-import { arrRotator } from '@/utils/general'
+
+gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText)
 
 function duplicateWords(
 	text: string,
@@ -24,10 +36,6 @@ function duplicateWords(
 	}
 	return arr
 }
-
-gsap.registerPlugin(useGSAP)
-gsap.registerPlugin(ScrollTrigger)
-gsap.registerPlugin(SplitText)
 
 /*
 	Animation timeline
@@ -48,7 +56,7 @@ const Chapter5 = () => {
 	const line1 =
 		'Wanting to connect my Arduino projects and control them remotely'
 	const line2 = 'I turned to web development'
-	const line3 = 'Its accessibility was a big draw — '
+	const line3 = 'Its accessibility was a big draw'
 	const lineTools = 'no special tools'
 	const lineComputer = 'just a computer'
 	const lineInternet = 'and an internet connection.'
@@ -73,6 +81,15 @@ const Chapter5 = () => {
 		SplitText.create(`.${styles.title}`, {
 			type: 'lines',
 			onSplit: ({ lines }) => {
+				gsap.to(`.${styles.title}`, {
+					rotate: 30,
+					scrollTrigger: {
+						trigger: '.chapter5',
+						start: 'top center-=960px',
+						end: '+=6000px',
+						scrub: true,
+					},
+				})
 				for (let i = 0; i < lines.length; i++) {
 					const line = lines[i]
 					gsap.to(line, {
@@ -114,44 +131,62 @@ const Chapter5 = () => {
 			autoAlpha: 1,
 		})
 
-		// Line 3 Animation
+		// Line 3,Tools,Computer,Internet Animation
 		const line3Tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter5',
 				start: 'top top-=200px',
 				end: '+=1px',
 				onUpdate: self => {
-					line1Tl.reversed(self.direction > 0 ? false : true)
+					line3Tl.reversed(self.direction > 0 ? false : true)
 				},
 			},
 		})
 		line3Tl.to(`.${styles.line3}`, {
 			autoAlpha: 1,
 		})
-
-		// Line Tools,Computer,Internet Animation
-		const line4Tl = gsap.timeline({
-			scrollTrigger: {
-				trigger: '.chapter5',
-				start: 'top top-=600px',
-				end: '+=1px',
-				onUpdate: self => {
-					line4Tl.reversed(self.direction > 0 ? false : true)
-				},
-			},
-		})
-		line4Tl.to(`.${styles.lineTools}`, { autoAlpha: 1 }, '<')
-		line4Tl.to(`.${styles.lineComputer}`, {
-			autoAlpha: 1,
-		})
-		line4Tl.to(`.${styles.lineInternet}`, {
-			autoAlpha: 1,
-		})
+		line3Tl.to(
+			[
+				`.${styles.toolsContainer} p`,
+				`.${styles.toolsContainer}>.${styles.iconContainer}`,
+				`.${styles.toolsContainer} .${styles.check}`,
+			],
+			{
+				delay: 0.5,
+				stagger: 0.3,
+				autoAlpha: 1,
+			}
+		)
+		line3Tl.to(
+			[
+				`.${styles.computerContainer} p`,
+				`.${styles.computerContainer}>.${styles.iconContainer}`,
+				`.${styles.computerContainer} .${styles.check}`,
+			],
+			{
+				delay: 0.5,
+				stagger: 0.3,
+				autoAlpha: 1,
+			}
+		)
+		line3Tl.to(
+			[
+				`.${styles.internetContainer} p`,
+				`.${styles.internetContainer}>.${styles.iconContainer}`,
+				`.${styles.internetContainer} .${styles.check}`,
+			],
+			{
+				delay: 0.5,
+				stagger: 0.3,
+				autoAlpha: 1,
+			}
+		)
 	}, [])
 
 	return (
 		<div className={cn('chapter5', styles.chapter5)}>
 			<div className={styles.container} ref={containerRef}>
+				<div className={styles.networkContainer}>Network Animation</div>
 				<h1 className={cn('c5-title', styles.title)}>
 					{duplicateWords(title, 8).map((word, i) => {
 						return (
@@ -166,13 +201,61 @@ const Chapter5 = () => {
 				<p className={cn(styles.line, styles.line2)}>{line2}</p>
 				<p className={cn(styles.line, styles.line3)}>{line3}</p>
 
-				<p className={cn(styles.line, styles.lineTools)}>{lineTools}</p>
-				<p className={cn(styles.line, styles.lineComputer)}>
-					{lineComputer}
-				</p>
-				<p className={cn(styles.line, styles.lineInternet)}>
-					{lineInternet}
-				</p>
+				<div className={cn(styles.proContainer, styles.toolsContainer)}>
+					<div className={styles.iconContainer}>
+						<FontAwesomeIcon icon={faBan} className={styles.ban} />
+						<FontAwesomeIcon
+							icon={faScrewdriverWrench}
+							className={styles.icon}
+						/>
+					</div>
+					<div className={styles.text}>
+						<FontAwesomeIcon
+							icon={faCheck}
+							className={styles.check}
+						/>
+						<p className={styles.lineTools}>{lineTools}</p>
+					</div>
+				</div>
+				<div
+					className={cn(
+						styles.proContainer,
+						styles.computerContainer
+					)}>
+					<div className={styles.iconContainer}>
+						<FontAwesomeIcon
+							icon={faLaptop}
+							className={styles.icon}
+						/>
+					</div>
+					<div className={styles.text}>
+						<FontAwesomeIcon
+							icon={faCheck}
+							className={styles.check}
+						/>
+						<p className={styles.lineComputer}>{lineComputer}</p>
+					</div>
+				</div>
+
+				<div
+					className={cn(
+						styles.proContainer,
+						styles.internetContainer
+					)}>
+					<div className={styles.iconContainer}>
+						<FontAwesomeIcon
+							icon={faWifiFair}
+							className={styles.icon}
+						/>
+					</div>
+					<div className={styles.text}>
+						<FontAwesomeIcon
+							icon={faCheck}
+							className={styles.check}
+						/>
+						<p className={styles.lineInternet}>{lineInternet}</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	)

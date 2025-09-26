@@ -1,0 +1,99 @@
+$primary-color: #fce300;
+$secondary-color: #3f3f43;
+$accent-color-1: #efefef;
+$accent-color-2: #f7e653;
+$accent-color-3: #ffb800;
+
+.button {
+	--transition: 250ms 0s all ease;
+
+	--height: 40px;
+	--corners: 12px;
+
+	position: relative;
+	height: var(--height);
+	width: fit-content;
+
+	display: flex;
+	align-items: center;
+	padding: 0 8px;
+
+	text-decoration: none;
+	background: $primary-color;
+	border: none;
+
+	// @include t.action('button');
+
+	filter: drop-shadow(1px 2px 2px #00000050);
+
+	transition: var(--transition);
+
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		height: 0;
+		width: 0;
+		top: 0;
+		/* half height */
+		border-top: calc(var(--height) / 2) solid transparent;
+		border-bottom: calc(var(--height) / 2) solid transparent;
+
+		transition: var(--transition);
+	}
+	&::before {
+		left: calc(var(--corners) * -1);
+		border-right: var(--corners) solid $primary-color;
+	}
+	&::after {
+		right: calc(var(--corners) * -1);
+		border-left: var(--corners) solid $primary-color;
+	}
+
+	color: #000;
+	p {
+		margin-top: 4px;
+		color: #000;
+	}
+
+	&:hover {
+		cursor: pointer;
+		background: $accent-color-3 !important;
+
+		&::after {
+			border-left: var(--corners) solid $accent-color-3;
+		}
+		&::before {
+			border-right: var(--corners) solid $accent-color-3;
+		}
+	}
+
+	// Dark Variant
+	&.dark {
+		background: $secondary-color;
+		color: $accent-color-1;
+		p {
+			color: $accent-color-1;
+		}
+		&::before {
+			border-right: var(--corners) solid $secondary-color;
+		}
+		&::after {
+			border-left: var(--corners) solid $secondary-color;
+		}
+		&:hover {
+			background: $accent-color-3 !important;
+			color: #000;
+			p {
+				color: #000;
+			}
+
+			&::after {
+				border-left: var(--corners) solid $accent-color-3;
+			}
+			&::before {
+				border-right: var(--corners) solid $accent-color-3;
+			}
+		}
+	}
+}

@@ -5,9 +5,6 @@
 	// height: 4000px;
 
 	border: 1px solid red;
-
-	// overflow: hidden;
-	// overflow-x: hidden;
 }
 
 .container {
@@ -30,9 +27,7 @@
 
 		perspective: 50em;
 		transform-origin: bottom right;
-		transform:
-		// translateY(500px)
-			rotateY(180deg);
+		transform: rotateY(180deg);
 
 		background: #0f0f0f88;
 	}
@@ -46,36 +41,93 @@
 .line1 {
 	top: 50%;
 	left: 16px;
-
-	border: 1px solid red;
 }
 .line2 {
 	top: 52%;
 	left: 16px;
-
-	border: 1px solid orange;
 }
 .line3 {
 	top: 66%;
 	left: 16px;
-
-	border: 1px solid yellow;
 }
-.lineTools {
-	top: 68%;
-	left: 33%;
 
-	border: 1px solid green;
+.networkContainer {
+	position: absolute;
+	top: 16px;
+	left: 16px;
+	width: 75%;
+	height: 40%;
+	background-color: #36a4ff;
 }
-.lineComputer {
-	top: 68%;
-	left: 50%;
 
-	border: 1px solid blue;
+.proContainer {
+	position: absolute;
+	top: 68%;
+
+	width: 160px;
+	height: 240px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+
+	p {
+		@include autoAlpha;
+	}
 }
-.lineInternet {
-	top: 68%;
-	left: 66%;
+.iconContainer {
+	position: relative;
 
-	border: 1px solid purple;
+	display: grid;
+	place-items: center;
+
+	height: 160px;
+	width: 100%;
+
+	background-color: #36a4ff;
+	border-radius: 16px;
+
+	@include autoAlpha;
+}
+.icon {
+	font-size: 64px;
+}
+
+.text {
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 8px;
+	text-wrap: nowrap;
+}
+.check {
+	bottom: 16px;
+	right: 16px;
+
+	color: #00bc00;
+
+	@include autoAlpha;
+}
+
+.toolsContainer {
+	left: 20%;
+
+	.icon {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+	.ban {
+		color: #b93030;
+		opacity: 0.8;
+		font-size: 104px;
+		transform: rotate(90deg);
+	}
+}
+.computerContainer {
+	left: 36%;
+}
+.internetContainer {
+	left: 52%;
 }

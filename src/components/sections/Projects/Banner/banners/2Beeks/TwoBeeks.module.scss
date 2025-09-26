@@ -5,5 +5,118 @@ $accent-color-2: #f7e653;
 $accent-color-3: #ffb800;
 
 .background {
+	position: relative;
 	background-color: $primary-color;
+}
+.logo {
+	position: absolute;
+	bottom: 16px;
+	left: 16px;
+	z-index: 1;
+
+	width: 200px;
+}
+.swarm {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.line {
+	position: absolute;
+	z-index: 1;
+
+	color: #000;
+	text-align: left;
+
+	background-color: rgba($accent-color-3, 0.9);
+	border-radius: 4px;
+
+	padding: 4px;
+
+	&.line1 {
+		display: flex;
+		gap: 4px;
+
+		top: 80px;
+		left: 24px;
+	}
+	&.line2 {
+		top: 136px;
+		left: 24px;
+		width: 240px;
+	}
+	&.line3 {
+		top: 264px;
+		left: 24px;
+		width: 240px;
+	}
+	&.line4 {
+		position: relative;
+
+		width: 280px;
+	}
+	&.line5 {
+		position: relative;
+
+		text-align: right;
+		border-bottom-right-radius: 0;
+	}
+	&.line6 {
+		position: relative;
+		border-top: none;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+	}
+}
+.group4 {
+	position: absolute;
+	bottom: 40px;
+	left: 360px;
+
+	display: flex;
+	gap: 16px;
+
+	align-items: flex-end;
+
+	.rightCol {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 16px;
+	}
+	.group5 {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+	}
+}
+
+.apiaryText {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+
+	border-bottom: 1px solid #000;
+	cursor: help;
+
+	.magnifier {
+		margin-bottom: 2px;
+		font-size: 12px;
+	}
+}
+.buttons {
+	z-index: 1;
+
+	display: flex;
+	gap: 36px;
+
+	.button {
+		font-family: inherit;
+		font-weight: 700;
+		letter-spacing: 0.5px;
+		font-size: 16px;
+	}
 }

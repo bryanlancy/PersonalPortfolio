@@ -4,15 +4,20 @@ import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
 import useState from 'react-usestateref'
+import { VT323 } from 'next/font/google'
+
+const vt323 = VT323({
+	subsets: ['latin'],
+	weight: '400',
+	// variable: '--font-vt',
+})
 
 import { cn } from '@/utils/react'
 import TypeText from '@/utils/components/TypeText'
 
 import styles from './Chapter2.module.scss'
 
-gsap.registerPlugin(useGSAP)
-gsap.registerPlugin(SplitText)
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger)
 
 /*
 	Animation timeline
@@ -148,7 +153,7 @@ const Chapter2 = () => {
 	}, [])
 
 	return (
-		<div className={cn('chapter2', styles.chapter2)}>
+		<div className={cn('chapter2', styles.chapter2, vt323.className)}>
 			<div
 				ref={containerRef}
 				className={cn('c2-container', styles.container)}>

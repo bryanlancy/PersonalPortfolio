@@ -13,8 +13,8 @@ import { faComment } from '@awesome.me/kit-ddd907bdb7/icons/sharp/thin'
 
 import styles from './Chapter1.module.scss'
 
-gsap.registerPlugin(useGSAP)
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(useGSAP, ScrollTrigger)
+
 /*
 	Animation timeline
 

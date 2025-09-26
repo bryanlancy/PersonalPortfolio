@@ -2,8 +2,10 @@
 
 .section {
 	padding: 0 !important;
+	padding-top: 120px !important;
 	@include tablet {
 		padding: 32px 0 !important;
+		padding-top: 120px !important;
 	}
 }
 

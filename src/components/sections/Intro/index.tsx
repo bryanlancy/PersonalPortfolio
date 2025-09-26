@@ -1,7 +1,6 @@
 'use client'
 
 import { useRef } from 'react'
-import Link from 'next/link'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
@@ -10,6 +9,7 @@ import AnimatedText from './AnimatedText'
 import AnimatedIcons from './AnimatedIcons'
 
 import styles from './Intro.module.scss'
+import { cn } from '@/utils/react'
 
 gsap.registerPlugin(useGSAP)
 gsap.registerPlugin(ScrollToPlugin)
@@ -26,8 +26,31 @@ const Intro = () => {
 		})
 	})
 
+	const skipToProjects = () => {
+		const projectsDiv = document.getElementById('projects')
+		projectsDiv?.scrollIntoView({ behavior: 'instant' })
+	}
+
+	/*
+		Titles
+		- software engineer
+		- tinkerer
+		- learner
+	*/
+
 	return (
 		<section ref={sectionRef} className={styles.section}>
+			<div className={styles.titles}>
+				<div className={cn(styles.title, styles.software)}>
+					<h1>Software Engineer</h1>
+				</div>
+				<div className={cn(styles.title, styles.tinkerer)}>
+					<h1>Tinkerer</h1>
+				</div>
+				<div className={cn(styles.title, styles.learner)}>
+					<h1>Learner</h1>
+				</div>
+			</div>
 			<div className={styles.text}>
 				<h1 className={styles.title}>Hello, I'm Bryan.</h1>
 
@@ -46,9 +69,9 @@ const Intro = () => {
 				<button className={styles.auto} onClick={handleAuto}>
 					Play Story
 				</button>
-				<Link href='#projects' className={styles.skip}>
-					Skip
-				</Link>
+				<button onClick={skipToProjects} className={styles.skip}>
+					Skip to Projects
+				</button>
 
 				<div className={styles.keepScrolling}>
 					<p>or</p>

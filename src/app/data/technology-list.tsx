@@ -175,6 +175,24 @@ const technologyList: { [technologyName: string]: Technology } = {
 		category: 'styles',
 		description: [''],
 	},
+	bootstrap: {
+		title: 'Bootstrap',
+		name: 'bootstrap',
+		color: '#5a437f',
+		// TODO Add Icon
+		icon: null,
+		category: 'styles',
+		description: [''],
+	},
+	tailwindsBootstrap: {
+		title: 'Tailwinds/Bootstrap',
+		name: 'tailwindsBootstrap',
+		color: ['#00bcff', '#5a437f'],
+		// TODO Add Icon
+		icon: null,
+		category: 'styles',
+		description: [''],
+	},
 	gsapMotion: {
 		title: 'GSAP/Motion',
 		name: 'gsapMotion',

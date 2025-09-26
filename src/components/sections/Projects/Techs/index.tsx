@@ -23,7 +23,7 @@ const lists = {
 		'git',
 		'figma',
 		'sass',
-		'tailwinds',
+		'tailwindsBootstrap',
 		'fontAwesome',
 		'gsapMotion',
 		'node',

@@ -3,6 +3,25 @@
 	height: 90vh;
 }
 
+.titles {
+	border: 1px solid white;
+
+	width: 98vw;
+
+	.title {
+	}
+
+	.software {
+		background-color: blue;
+	}
+	.tinkerer {
+		background-color: green;
+	}
+	.learner {
+		background-color: red;
+	}
+}
+
 .text {
 	display: flex;
 	flex-direction: column;
@@ -25,8 +44,13 @@
 	gap: 24px;
 
 	bottom: 20%;
-	> * {
+
+	border: 1px solid red;
+
+	button {
+		position: relative;
 		cursor: pointer;
+		border: none;
 		padding: 8px 24px;
 
 		border-radius: 8px;
@@ -36,7 +60,6 @@
 	}
 	.auto {
 		background-color: rgb(43, 160, 43);
-		border: none;
 	}
 	.keepScrolling {
 		position: absolute;

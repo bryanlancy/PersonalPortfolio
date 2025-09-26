@@ -21,8 +21,7 @@ import { cn } from '@/utils/react'
 
 import styles from './Chapter4.module.scss'
 
-gsap.registerPlugin(ScrollTrigger)
-gsap.registerPlugin(SplitText)
+gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText)
 
 /*
 	Animation timeline
@@ -342,6 +341,7 @@ const Chapter4 = () => {
 			},
 		})
 		line6Tl.to(`.${styles.line6}`, {
+			delay: 1,
 			autoAlpha: 1,
 		})
 	}, [])
@@ -382,7 +382,7 @@ const Chapter4 = () => {
 					/>
 				</div>
 			</div>
-			<div className={styles.lightContainer}>
+			<div className={cn('lightContainer', styles.lightContainer)}>
 				<FontAwesomeIcon
 					icon={faLightbulb}
 					className={styles.lightOff}
