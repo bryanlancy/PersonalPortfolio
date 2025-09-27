@@ -15,11 +15,6 @@ import HexButton from './HexButton'
 
 interface TwoBeeksBannerProps {}
 
-interface NumberRange {
-	min: number
-	max: number
-}
-
 function SVGBeeksLogo(props: SVGProps<SVGSVGElement>) {
 	const { className, ...rest } = props
 
@@ -47,7 +42,7 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 	const line3 =
 		"Now they're looking to expand their reach and asked me to help with their website redesign."
 	const line4 =
-		"I'm designing everything from scratch using Figma. All of the code is being built to integrate with their Square store and a CMS for content management."
+		"I'm designing everything from scratch using Figma. All of the code is being built to integrate with their Square store and a CMS for easy content management."
 	const line5 =
 		"This is a project I'm currently working on so be sure to visit it and bookmark it for later."
 	const line6 = 'Especially if you like homemade, locally-sourced honey!'
@@ -67,10 +62,10 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 			techs={{ frontend: [], backend: [], devops: [] }}>
 			<SVGBeeksLogo className={styles.logo} />
 			<Swarm
-				count={3}
+				count={2}
 				box={[
-					[0, 0],
-					[width, height],
+					{ x: 0, y: 0 },
+					{ x: width, y: height },
 				]}
 				className={styles.swarm}
 			/>

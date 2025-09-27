@@ -5,8 +5,12 @@
 }
 
 .beeContainer {
-	border: 1px solid red;
+	position: absolute;
+	top: 0;
+	left: 0;
+
 	height: 100%;
+	width: 100%;
 }
 .bee {
 	position: absolute;
@@ -42,6 +46,7 @@
 .path {
 	fill: none;
 	stroke-width: 0.5px;
+	width: 100%;
 }
 
 .pathDashed {

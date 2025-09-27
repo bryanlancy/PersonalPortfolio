@@ -1,146 +1,45 @@
 import { FC, useRef } from 'react'
-
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import MotionPathPlugin from 'gsap/MotionPathPlugin'
 import DrawSVGPlugin from 'gsap/DrawSVGPlugin'
 
-import { randomInteger } from '@/utils/general'
 import { cn } from '@/utils/react'
 
 import styles from './AnimatedBee.module.scss'
+import { Coord, getSVGPathData } from './helpers'
+import { randomInteger } from '@/utils/general'
 
 gsap.registerPlugin(useGSAP, MotionPathPlugin, ScrollTrigger, DrawSVGPlugin)
 
-type Coord = [number, number]
-
 type BasicBox = [Coord, Coord]
 
-// function generateRandomWalkCurve(
-// 	numPoints: number,
-// 	xRange: NumberRange,
-// 	yRange: NumberRange
-// ): { x: number; y: number }[] {
-// 	const points = []
-// 	let currentX = xRange.min + Math.random() * (xRange.max - xRange.min)
-// 	let currentY = yRange.min + Math.random() * (yRange.max - yRange.min)
-
-// 	points.push({ x: currentX, y: currentY })
-
-// 	for (let i = 1; i < numPoints; i++) {
-// 		currentX +=
-// 			((Math.random() - 0.5) * (xRange.max - xRange.min)) / numPoints // Small random step in X
-// 		currentY +=
-// 			((Math.random() - 0.5) * (yRange.max - yRange.min)) / numPoints // Small random step in Y
-
-// 		// Clamp coordinates within the defined range if desired
-// 		currentX = Math.max(xRange.min, Math.min(xRange.max, currentX))
-// 		currentY = Math.max(yRange.min, Math.min(yRange.max, currentY))
-
-// 		points.push({ x: currentX, y: currentY })
-// 	}
-// 	return points
-// }
-
-// // Example usage:
-// const curvePoints = generateRandomWalkCurve(
-// 	50,
-// 	{ min: 0, max: 200 },
-// 	{ min: 0, max: 100 }
-// )
-
-// Animated Walking
-function getDistance(pointA: Coord, pointB: Coord) {
-	return Math.sqrt(
-		(pointA[0] - pointB[0]) ** 2 + (pointA[1] - pointB[1]) ** 2
-	)
-}
-
-function getAngle(...points: Coord[]) {
-	const [pointA, pointB, pointC] = points
-	// angle to pointB
-	let a = getDistance(pointA, pointB)
-	let b = getDistance(pointB, pointC)
-	let c = getDistance(pointC, pointA)
-	return Math.acos((a * a + b * b - c * c) / (2 * a * b)) * (180 / Math.PI)
-}
-function getPoint(width: number, height: number, random = true) {
-	const minDistance = height / 6
-	const maxDistance = height
-	const lastTwoPoints: Coord[] = []
-	let x = random ? randomInteger(0, width * 0.6) + width * 0.2 : width
-	let y = random ? randomInteger(0, height * 0.8) + height * 0.2 : height
-
-	let point: Coord = [x, y]
-	if (lastTwoPoints.length < 2) {
-		lastTwoPoints.push(point)
-	} else {
-		if (
-			getAngle(...lastTwoPoints, point) > 20 ||
-			getDistance(lastTwoPoints[1], point) < minDistance ||
-			getDistance(lastTwoPoints[1], point) > maxDistance
-		) {
-			point = getPoint(width, height)
-		} else {
-			lastTwoPoints.shift()
-			lastTwoPoints.push(point)
-		}
-	}
-	return point
-}
-
-function pointString(width: number, height: number, random = true) {
-	let point = getPoint(width, height, random)
-	return `${point[0]} ${point[1]} `
-}
-
-function createPath(numPoints: number, w: number, h: number) {
-	const startPoint = `M ${pointString(
-		0,
-		randomInteger(0, h),
-		false
-	)} C ${pointString(w, h)} ${pointString(w, h)} ${pointString(w, h)}`
-
-	const finalPoint = `C ${pointString(
-		randomInteger(0, w),
-		randomInteger(0, h)
-	)} ${pointString(randomInteger(0, w), randomInteger(0, h))} ${pointString(
-		w,
-		h,
-		false
-	)} `
-
-	let pathString = ''
-
-	for (let i = 0; i < numPoints - 2; i++) {
-		pathString += `S ${pointString(w, h)} ${pointString(w, h)} `
-	}
-	return startPoint + pathString + finalPoint
-}
-
 //==============================
-
-interface BeesProps {
-	count: number
-	box: BasicBox
-	deadZone?: BasicBox
-	className?: string
-}
 
 interface AnimatedBeeProps {
 	width: number
 	height: number
+	index: number
 }
-const AnimatedBee: FC<AnimatedBeeProps> = ({ width, height }) => {
+const AnimatedBee: FC<AnimatedBeeProps> = ({ width, height, index }) => {
 	const pathData = useRef<string>('')
 	const pathDashedRef = useRef<SVGPathElement>(null)
 	const pathMaskRef = useRef<SVGPathElement>(null)
+	const beeRef = useRef<SVGSVGElement>(null)
 
 	useGSAP(() => {
-		pathData.current = createPath(5, width, height)
+		const pathDataString = getSVGPathData(
+			5,
+			{ min: 0, max: width },
+			{ min: 0, max: height },
+			'curve'
+		)
+		console.log(pathDataString)
+		pathData.current = pathDataString
+
 		if (pathDashedRef.current) {
-			gsap.set(`.${styles.bee1}`, {
+			gsap.set(beeRef.current, {
 				xPercent: -50,
 				yPercent: -50,
 				transformOrigin: '50% 50%',
@@ -150,23 +49,23 @@ const AnimatedBee: FC<AnimatedBeeProps> = ({ width, height }) => {
 				defaults: { duration: 1 },
 				scrollTrigger: {
 					trigger: '.TwoBeeksContainer',
-					start: 'top center',
-					end: 'bottom center-=300px',
+					start: `top center+=${randomInteger(0, 300)}`,
+					end: `bottom center-=${randomInteger(150, 450)}px`,
 					scrub: 1,
 				},
 			})
 
 			beeTimeline.fromTo(
-				`.${styles.pathMask}`,
+				pathMaskRef.current,
 				{ drawSVG: '0% 0%' },
-				{ drawSVG: '90% 100%' }
+				{ drawSVG: '95% 100%' }
 			)
 			beeTimeline.to(
-				`.${styles.bee1}`,
+				beeRef.current,
 				{
 					motionPath: {
-						path: `.${styles.pathDashed}`,
-						align: `.${styles.pathDashed}`,
+						path: pathDashedRef.current,
+						align: pathDashedRef.current,
 						alignOrigin: [0.5, 0.5],
 						autoRotate: 90,
 					},
@@ -180,6 +79,7 @@ const AnimatedBee: FC<AnimatedBeeProps> = ({ width, height }) => {
 		<div className={styles.beeContainer}>
 			{/* Bee */}
 			<svg
+				ref={beeRef}
 				className={cn(styles.bee, styles.bee1)}
 				xmlns='http://www.w3.org/2000/svg'
 				viewBox='0 0 576 512'>
@@ -188,7 +88,7 @@ const AnimatedBee: FC<AnimatedBeeProps> = ({ width, height }) => {
 			{/* Bee Trail, Dashed path and mask */}
 			<svg className={styles.outline} viewBox={`0 0 ${width} ${height}`}>
 				<defs>
-					<mask id='pathMask'>
+					<mask id={`pathMask-${index}`}>
 						<path
 							className={cn(styles.path, styles.pathMask)}
 							ref={pathMaskRef}
@@ -202,17 +102,31 @@ const AnimatedBee: FC<AnimatedBeeProps> = ({ width, height }) => {
 					id='pathDashed'
 					className={cn(styles.path, styles.pathDashed)}
 					ref={pathDashedRef}
-					// mask="url('#pathMask'"
+					mask={`url(#pathMask-${index})`}
 					d={pathData.current}></path>
 			</svg>
 		</div>
 	)
 }
 
-export const Swarm: FC<BeesProps> = ({ box, deadZone, className = '' }) => {
-	return (
-		<div className={cn(styles.container, className)}>
-			<AnimatedBee width={250} height={50} />
-		</div>
-	)
+interface SwarmProps {
+	count: number
+	box: BasicBox
+	deadZone?: BasicBox
+	className?: string
+}
+
+export const Swarm: FC<SwarmProps> = ({
+	count,
+	box,
+	deadZone,
+	className = '',
+}) => {
+	const bees: JSX.Element[] = []
+	for (let i = 0; i < count; i++) {
+		bees.push(
+			<AnimatedBee key={`bee-${i}`} width={250} height={50} index={i} />
+		)
+	}
+	return <div className={cn(styles.container, className)}>{bees}</div>
 }
