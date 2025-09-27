@@ -49,8 +49,8 @@ const AnimatedBee: FC<AnimatedBeeProps> = ({ width, height, index }) => {
 				defaults: { duration: 1 },
 				scrollTrigger: {
 					trigger: '.TwoBeeksContainer',
-					start: `top center+=${randomInteger(0, 300)}`,
-					end: `bottom center-=${randomInteger(150, 450)}px`,
+					start: `top center+=${randomInteger(0, 300)}px`,
+					end: `bottom center-=${randomInteger(450, 750)}px`,
 					scrub: 1,
 				},
 			})
