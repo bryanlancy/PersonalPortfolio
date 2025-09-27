@@ -1,17 +1,24 @@
-import React, { FC, SVGProps } from 'react'
+import React, { FC, MutableRefObject, SVGProps, useRef, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass } from '@awesome.me/kit-ddd907bdb7/icons/classic/regular'
+import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
-import useWindowDimensions from '@/hooks/useWindowDimension'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import ProjectCard from '../../ProjectBanner'
 import { projectList } from '@/app/data'
-import { cn } from '@/utils/react'
 import { Swarm } from './AnimatedBee'
 import HexBackground from './HexBackground'
+import HexButton from './HexButton'
+import ToolTip from './ToolTip'
+import PictureFrame from './PictureFrame'
+import useWindowDimensions from '@/hooks/useWindowDimension'
+
+import { cn } from '@/utils/react'
 
 import styles from './TwoBeeks.module.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass } from '@awesome.me/kit-ddd907bdb7/icons/classic/regular'
-import HexButton from './HexButton'
+
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 interface TwoBeeksBannerProps {}
 
@@ -33,7 +40,11 @@ function SVGBeeksLogo(props: SVGProps<SVGSVGElement>) {
 
 const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 	const { twoBeeks: data } = projectList
+	const [showToolTip, setShowToolTip] = useState(false)
 	const { width, height } = useWindowDimensions()
+	const picLargeRef = useRef<HTMLDivElement | null>(null)
+	const picSmall1Ref = useRef<HTMLDivElement | null>(null)
+	const picSmall2Ref = useRef<HTMLDivElement | null>(null)
 
 	const line1a = '2Beeks is a family-owned and operated'
 
@@ -47,13 +58,77 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 		"This is a project I'm currently working on so be sure to visit it and bookmark it for later."
 	const line6 = 'Especially if you like homemade, locally-sourced honey!'
 
-	const apiaryDefinition =
-		'a place where bees are kept; a collection of beehives.'
-	const apiaryOrigin = [
-		['latin', 'apis', 'bee'],
-		['latin', 'apiarium', null],
-		['mid 17th century', 'apiary', null],
+	const images: {
+		url: string
+		alt: string
+		className: string
+		ref: MutableRefObject<HTMLDivElement | null>
+	}[] = [
+		{
+			url: 'https://upload.wikimedia.org/wikipedia/commons/8/84/Apiary_in_Bashkortostan%2C_Russia.jpg',
+			alt: 'apiary',
+			className: styles.picLarge,
+			ref: picLargeRef,
+		},
+		{
+			url: 'https://upload.wikimedia.org/wikipedia/commons/1/11/The_Lone_Pollinator.jpg',
+			alt: 'bee',
+			className: styles.picSmall1,
+			ref: picSmall1Ref,
+		},
+		{
+			url: 'https://upload.wikimedia.org/wikipedia/commons/8/81/Bee_Collecting_Pollen_2004-08-14.jpg',
+			alt: 'bee pollen',
+			className: styles.picSmall2,
+			ref: picSmall2Ref,
+		},
 	]
+
+	useGSAP(() => {
+		// Large Pic Animation
+		const picLargeTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.TwoBeeksContainer',
+				start: 'top center',
+				end: '+=1px',
+				onUpdate: self => {
+					picLargeTl.reversed(self.direction > 0 ? false : true)
+				},
+			},
+		})
+		picLargeTl.to(`.${styles.picLarge}`, {
+			autoAlpha: 1,
+		})
+
+		// Small Pic 1 Animation
+		const picSmall1Tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.TwoBeeksContainer',
+				start: 'top center',
+				end: '+=1px',
+				onUpdate: self => {
+					picSmall1Tl.reversed(self.direction > 0 ? false : true)
+				},
+			},
+		})
+		picSmall1Tl.to(`.${styles.picSmall1}`, {
+			autoAlpha: 1,
+			delay: 0.33,
+		})
+
+		// Small Pic 2 Animation
+		const picSmall2Tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.TwoBeeksContainer',
+				start: 'top center',
+				end: '+=1px',
+				onUpdate: self => {
+					picSmall2Tl.reversed(self.direction > 0 ? false : true)
+				},
+			},
+		})
+		picSmall2Tl.to(`.${styles.picSmall2}`, { autoAlpha: 1, delay: 0.66 })
+	}, [])
 
 	return (
 		<ProjectCard
@@ -61,6 +136,18 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 			projectName='2Beeks'
 			techs={{ frontend: [], backend: [], devops: [] }}>
 			<SVGBeeksLogo className={styles.logo} />
+
+			{images.map((image, i) => {
+				return (
+					<PictureFrame
+						className={cn(styles.pic, image.className)}
+						key={`beeks-image-${i}`}
+						src={image.url}
+						alt={image.alt}
+					/>
+				)
+			})}
+			<ToolTip show={showToolTip} />
 			<Swarm
 				count={2}
 				box={[
@@ -71,12 +158,15 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 			/>
 			<p className={cn(styles.line, styles.line1)}>
 				{line1a}
-				<span className={styles.apiaryText}>
+				<span
+					className={styles.apiaryText}
+					onMouseEnter={() => setShowToolTip(true)}
+					onMouseLeave={() => setShowToolTip(false)}>
 					<FontAwesomeIcon
 						icon={faMagnifyingGlass}
 						className={styles.magnifier}
 					/>
-					apiary{' '}
+					apiary
 				</span>
 				{line1b}
 			</p>
@@ -86,13 +176,13 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 				<p className={cn(styles.line, styles.line4)}>{line4}</p>
 				<div className={styles.rightCol}>
 					<div className={styles.buttons}>
-						<HexButton
+						{/* <HexButton
 							variant='dark'
 							className={cn(styles.button, styles.figma)}
 							href=''
 							target='_blank'>
 							Figma Design
-						</HexButton>
+						</HexButton> */}
 						<HexButton
 							variant='dark'
 							className={cn(styles.button, styles.website)}

@@ -1,3 +1,5 @@
+@import '@/styles/mixins.scss';
+
 $primary-color: #fce300;
 $secondary-color: #3f3f43;
 $accent-color-1: #efefef;
@@ -118,5 +120,27 @@ $accent-color-3: #ffb800;
 		font-weight: 700;
 		letter-spacing: 0.5px;
 		font-size: 16px;
+	}
+}
+
+.pic {
+	position: absolute !important;
+
+	@include autoAlpha;
+
+	&Large {
+		$height: 200px;
+		top: 80px;
+		right: 200px;
+		width: calc($height * 1.33) !important;
+		height: $height !important;
+	}
+	&Small1 {
+		top: 40px;
+		right: 480px;
+	}
+	&Small2 {
+		top: 64px;
+		right: 32px;
 	}
 }

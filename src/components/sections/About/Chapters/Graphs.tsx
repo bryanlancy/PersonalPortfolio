@@ -5,8 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import styles from './Graphs.module.scss'
 import { cn } from '@/utils/react'
 
-gsap.registerPlugin(useGSAP)
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const Graphs = () => {
 	useGSAP(() => {

@@ -28,7 +28,7 @@ const Button: FC<ButtonProps> = ({ animProgress }) => {
 					className={styles.button}
 					href='https://walk-ons.com/'
 					target='_blank'>
-					<p>Check out the site!</p>
+					<p>Check it out!</p>
 					<div className={styles.iconContainer}>
 						<FontAwesomeIcon
 							className={styles.icon}
