@@ -122,11 +122,9 @@ export const Swarm: FC<SwarmProps> = ({
 	deadZone,
 	className = '',
 }) => {
-	const bees: JSX.Element[] = []
-	for (let i = 0; i < count; i++) {
-		bees.push(
-			<AnimatedBee key={`bee-${i}`} width={250} height={50} index={i} />
-		)
-	}
+	const bees = Array.from({ length: count }, (_, i) => (
+		<AnimatedBee key={`bee-${i}`} width={250} height={50} index={i} />
+	))
+
 	return <div className={cn(styles.container, className)}>{bees}</div>
 }
