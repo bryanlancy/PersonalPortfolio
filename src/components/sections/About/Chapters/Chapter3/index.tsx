@@ -173,7 +173,7 @@ const Chapter3 = () => {
 	}, [])
 
 	return (
-		<div className={cn('chapter3', styles.chapter3)}>
+		<div id='Chapter3' className={cn('chapter3', styles.chapter3)}>
 			<h1 ref={titleRef} className={styles.title}>
 				{title}
 			</h1>

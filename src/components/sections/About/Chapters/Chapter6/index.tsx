@@ -60,7 +60,7 @@ const Chapter6 = () => {
 	const line3 = "I've been building software professionally ever since,"
 	const line4 = ` while continuing to work on passion projects at home.`
 	return (
-		<div className={cn('chapter6', styles.chapter6)}>
+		<div id='Chapter6' className={cn('chapter6', styles.chapter6)}>
 			<div ref={containerRef} className={styles.container}>
 				<h1 className={cn('c6-title', styles.title)}>{title}</h1>
 				<p className={cn(styles.line, styles.line1)}>{line1}</p>

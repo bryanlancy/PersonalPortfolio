@@ -4,8 +4,6 @@
 	position: relative;
 	// height: 4000px;
 
-	border: 1px solid red;
-
 	overflow: hidden;
 }
 
@@ -106,7 +104,7 @@
 	}
 	.lightOn {
 		position: absolute;
-		color: rgb(220, 220, 43);
+		color: #dcdc2b;
 
 		@include autoAlpha;
 	}
@@ -156,6 +154,6 @@
 	text-align: left;
 }
 .line6 {
-	top: 57%;
+	top: 59%;
 	left: 45%;
 }

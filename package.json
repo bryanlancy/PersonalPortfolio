@@ -9,7 +9,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@awesome.me/kit-ddd907bdb7": "^1.0.4",
+		"@awesome.me/kit-ddd907bdb7": "^1.0.7",
 		"@fortawesome/react-fontawesome": "^0.2.2",
 		"@gsap/react": "^2.1.2",
 		"@uidotdev/usehooks": "^2.4.1",

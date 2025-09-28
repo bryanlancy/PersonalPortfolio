@@ -251,7 +251,7 @@ const Chapter1 = () => {
 	}, [])
 
 	return (
-		<div className={cn(styles.chapter1, 'chapter1')}>
+		<div id='Chapter1' className={cn(styles.chapter1, 'chapter1')}>
 			<div className={cn('c1-container', styles.container)}>
 				<h1 className={cn('c1-title', styles.title)}>{title}</h1>
 				<div className={cn(styles.emoji, 'c1-emoji')}>

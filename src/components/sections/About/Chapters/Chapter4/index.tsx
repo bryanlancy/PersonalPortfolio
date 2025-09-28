@@ -20,6 +20,7 @@ import {
 import { cn } from '@/utils/react'
 
 import styles from './Chapter4.module.scss'
+import DayNight from './DayNight'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText)
 
@@ -61,7 +62,7 @@ const Chapter4 = () => {
 			scrollTrigger: {
 				trigger: containerRef.current,
 				start: 'top top',
-				end: '+=5000',
+				end: '+=4250',
 				pin: true,
 			},
 		})
@@ -328,28 +329,78 @@ const Chapter4 = () => {
 		line4Tl.to(`.${styles.line5}`, {
 			autoAlpha: 1,
 		})
-
-		// Line 6 Animation
-		const line6Tl = gsap.timeline({
+		const lightFlickerTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter4',
-				start: 'top top-=4500px',
+				start: 'top top-=3500px',
 				end: '+=1px',
 				onUpdate: self => {
-					line6Tl.reversed(self.direction > 0 ? false : true)
+					if (!(self.direction > 0)) {
+						lightFlickerTl.restart(true)
+					} else {
+					}
+					lightFlickerTl.reversed(self.direction > 0 ? false : true)
 				},
 			},
 		})
-		line6Tl.to(`.${styles.line6}`, {
+		// On
+		const lightOn = (glow: boolean = false) => {
+			lightFlickerTl.to(`.${styles.lightOn}`, {
+				filter: glow ? 'drop-shadow(0 0 0.75rem #dcdc2b)' : undefined,
+				autoAlpha: 1,
+				duration: 0.1,
+				delay: 0.05,
+			})
+			lightFlickerTl.to(
+				`.${styles.lightOff}`,
+				{
+					autoAlpha: 0,
+					duration: 0.1,
+				},
+				'<'
+			)
+		}
+		// Off
+		const lightOff = () => {
+			lightFlickerTl.to(`.${styles.lightOn}`, {
+				autoAlpha: 0,
+				duration: 0.1,
+			})
+			lightFlickerTl.to(
+				`.${styles.lightOff}`,
+				{
+					autoAlpha: 1,
+
+					duration: 0.1,
+				},
+				'<'
+			)
+		}
+		const flicker = () => {
+			lightOn()
+			lightOff()
+		}
+
+		flicker()
+		flicker()
+		flicker()
+		flicker()
+		flicker()
+		lightOn(true)
+
+		// Line 6 Animation
+		lightFlickerTl.to(`.${styles.line6}`, {
 			delay: 1,
 			autoAlpha: 1,
 		})
 	}, [])
 
 	return (
-		<div className={cn('chapter4', styles.chapter4)}>
+		<div id='Chapter4' className={cn('chapter4', styles.chapter4)}>
 			<div ref={containerRef} className={styles.container}>
 				<h1 className={styles.title}>{title}</h1>
+
+				<DayNight start={750} />
 
 				<p className={cn(styles.line, styles.line1)}>{line1}</p>
 				<p className={cn(styles.line, styles.line2)}>{line2}</p>

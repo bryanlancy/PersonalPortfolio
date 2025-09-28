@@ -184,7 +184,7 @@ const Chapter5 = () => {
 	}, [])
 
 	return (
-		<div className={cn('chapter5', styles.chapter5)}>
+		<div id='Chapter5' className={cn('chapter5', styles.chapter5)}>
 			<div className={styles.container} ref={containerRef}>
 				<div className={styles.networkContainer}>Network Animation</div>
 				<h1 className={cn('c5-title', styles.title)}>
