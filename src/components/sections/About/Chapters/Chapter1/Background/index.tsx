@@ -18,11 +18,10 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+import { randomInteger } from '@/utils/general'
 import { cn } from '@/utils/react'
 
 import styles from './Background.module.scss'
-import { randomInteger } from '@/utils/general'
-import { px } from 'motion'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -82,7 +81,7 @@ const FallingIcon: FC<FallingIconProps> = ({ icon, className }) => {
 
 const Background = () => {
 	return (
-		<div className={cn(styles.icon, styles.container)}>
+		<div className={styles.container}>
 			{icons.map(({ icon, className }, i) => {
 				return (
 					<FallingIcon
