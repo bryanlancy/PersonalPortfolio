@@ -1,15 +1,16 @@
 import {
 	faDesktop,
 	faFaceAwesome,
+	faFaceThinking,
 	faUserTie,
 } from '@awesome.me/kit-ddd907bdb7/icons/sharp-duotone/solid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faComment } from '@awesome.me/kit-ddd907bdb7/icons/sharp/thin'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import { cn } from '@/utils/react'
-import { faComment } from '@awesome.me/kit-ddd907bdb7/icons/sharp/thin'
 
 import styles from './Chapter1.module.scss'
 
@@ -72,7 +73,6 @@ const Chapter1 = () => {
 		emojiTl.to(
 			'.c1-emoji',
 			{
-				autoAlpha: 1,
 				y: 200,
 				scrollTrigger: {
 					trigger: '.chapter1',
@@ -83,7 +83,6 @@ const Chapter1 = () => {
 			'<'
 		)
 		emojiTl.to('.c1-emoji', {
-			autoAlpha: 1,
 			x: -100,
 			scrollTrigger: {
 				trigger: '.chapter1',
@@ -214,6 +213,14 @@ const Chapter1 = () => {
 			autoAlpha: 1,
 			duration: 1,
 		})
+		speechTl.to(`.${styles.happy}`, {
+			autoAlpha: 0,
+			duration: 0.25,
+		})
+		speechTl.to(`.${styles.wonder}`, {
+			autoAlpha: 1,
+			duration: 0.25,
+		})
 
 		// Computer animations
 		const computerTl = gsap.timeline({
@@ -255,11 +262,18 @@ const Chapter1 = () => {
 			<div className={cn('c1-container', styles.container)}>
 				<h1 className={cn('c1-title', styles.title)}>{title}</h1>
 				<div className={cn(styles.emoji, 'c1-emoji')}>
-					<FontAwesomeIcon
-						icon={faFaceAwesome}
-						// className={}
-						fontSize={'40px'}
-					/>
+					<div className={styles.me}>
+						<FontAwesomeIcon
+							icon={faFaceAwesome}
+							className={styles.happy}
+							fontSize={'40px'}
+						/>
+						<FontAwesomeIcon
+							icon={faFaceThinking}
+							className={styles.wonder}
+							fontSize={'40px'}
+						/>
+					</div>
 					<FontAwesomeIcon
 						icon={faDesktop}
 						className={cn(styles.computer, 'c1-computer')}

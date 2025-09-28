@@ -22,6 +22,7 @@ const Intro = () => {
 	const handleAuto = contextSafe(() => {
 		gsap.to(window, {
 			duration: 90,
+			ease: 'none',
 			scrollTo: { y: '#projects', autoKill: true },
 		})
 	})

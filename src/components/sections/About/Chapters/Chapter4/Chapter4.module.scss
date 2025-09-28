@@ -60,15 +60,31 @@
 	height: 64px;
 
 	transform: translateX(-1000px);
+	> * {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
 }
 .happy {
 	height: 100%;
 }
 .sleeping {
 	height: 100%;
+
+	@include autoAlpha;
 }
 .smart {
 	height: 100%;
+
+	@include autoAlpha;
+}
+.hearts {
+	height: 100%;
+	transform: translate(-50%, -50%), scale(0);
+
+	@include autoAlpha;
 }
 
 .bed {

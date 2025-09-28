@@ -24,6 +24,23 @@
 
 	@include autoAlpha;
 }
+.me {
+	position: relative;
+
+	> * {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+	}
+	.happy {
+		transform: translate(-50%, -50%);
+	}
+	.wonder {
+		transform: translate(-50%, -50%);
+
+		@include autoAlpha;
+	}
+}
 
 .title {
 	display: flex;

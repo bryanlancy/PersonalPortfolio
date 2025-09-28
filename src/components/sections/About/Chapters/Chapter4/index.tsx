@@ -13,6 +13,9 @@ import {
 	faBedEmpty,
 	faComputerClassic,
 	faFaceAwesome,
+	faFaceGlasses,
+	faFaceGrinHearts,
+	faFaceSleeping,
 	faLightbulb,
 	faLightbulbOn,
 } from '@awesome.me/kit-ddd907bdb7/icons/sharp-duotone/solid'
@@ -127,14 +130,28 @@ const Chapter4 = () => {
 				},
 			},
 		})
+
 		faceOnBedTl.to(`.${styles.me}`, {
-			x: 60,
-			y: -90,
-		})
-		faceOnBedTl.to(`.${styles.me}`, {
-			x: 120,
+			x: 136,
 			y: -45,
+			ease: 'elastic',
 		})
+		faceOnBedTl.to(
+			`.${styles.sleeping}`,
+			{
+				duration: 0.1,
+				autoAlpha: 1,
+			},
+			'<'
+		)
+		faceOnBedTl.to(
+			`.${styles.happy}`,
+			{
+				duration: 0.1,
+				autoAlpha: 0,
+			},
+			'<'
+		)
 
 		//! Change to sleeping emoji
 
@@ -150,7 +167,7 @@ const Chapter4 = () => {
 		})
 		faceToComputerTl.to(`.${styles.me}`, {
 			rotateY: '+=180deg',
-			x: -136,
+			x: -104,
 			y: 0,
 		})
 		faceToComputerTl.to(`.${styles.line4}`, {
@@ -161,6 +178,22 @@ const Chapter4 = () => {
 			{
 				autoAlpha: 0,
 				stagger: 0.25,
+			},
+			'<'
+		)
+		faceToComputerTl.to(
+			`.${styles.smart}`,
+			{
+				duration: 0.1,
+				autoAlpha: 1,
+			},
+			'<'
+		)
+		faceToComputerTl.to(
+			`.${styles.sleeping}`,
+			{
+				duration: 0.1,
+				autoAlpha: 0,
 			},
 			'<'
 		)
@@ -393,6 +426,21 @@ const Chapter4 = () => {
 			delay: 1,
 			autoAlpha: 1,
 		})
+		lightFlickerTl.to(
+			`.${styles.hearts}`,
+			{ autoAlpha: 1, scale: 1, duration: 0.15 },
+			'<'
+		)
+		lightFlickerTl.to(
+			`.${styles.smart}`,
+			{
+				autoAlpha: 0,
+				scale: 0,
+
+				duration: 0.15,
+			},
+			'<'
+		)
 	}, [])
 
 	return (
@@ -424,6 +472,18 @@ const Chapter4 = () => {
 						<FontAwesomeIcon
 							className={styles.happy}
 							icon={faFaceAwesome}
+						/>
+						<FontAwesomeIcon
+							className={styles.sleeping}
+							icon={faFaceSleeping}
+						/>
+						<FontAwesomeIcon
+							className={styles.smart}
+							icon={faFaceGlasses}
+						/>
+						<FontAwesomeIcon
+							className={styles.hearts}
+							icon={faFaceGrinHearts}
 						/>
 					</div>
 					<FontAwesomeIcon icon={faBedEmpty} className={styles.bed} />
