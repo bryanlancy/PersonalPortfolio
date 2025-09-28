@@ -9,6 +9,7 @@ import { faComment } from '@awesome.me/kit-ddd907bdb7/icons/sharp/thin'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Background from './Background'
 
 import { cn } from '@/utils/react'
 
@@ -259,6 +260,7 @@ const Chapter1 = () => {
 
 	return (
 		<div id='Chapter1' className={cn(styles.chapter1, 'chapter1')}>
+			<Background />
 			<div className={cn('c1-container', styles.container)}>
 				<h1 className={cn('c1-title', styles.title)}>{title}</h1>
 				<div className={cn(styles.emoji, 'c1-emoji')}>

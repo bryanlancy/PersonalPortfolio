@@ -1,0 +1,45 @@
+.container {
+	border: 1px solid red;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.icon {
+	position: absolute;
+	z-index: -1;
+
+	font-size: 40px;
+}
+
+.computer {
+}
+.gamepad {
+	color: #868686;
+}
+.camera {
+	--fa-primary-color: #868686;
+	--fa-secondary-color: #9c733c;
+}
+.tv {
+	--fa-primary-color: #6c7f8c;
+	--fa-secondary-color: #a8977e;
+}
+.mp3 {
+}
+.flux {
+	--fa-primary-color: #9696ff;
+	--fa-secondary-color: #969cd6;
+}
+.gameboy {
+	color: #1793a9;
+}
+.alien {
+	--fa-primary-color: #800080;
+	--fa-secondary-color: #3d003d;
+}
+.block {
+	// color: yellow;
+	--fa-primary-color: yellow;
+	--fa-secondary-color: orange;
+}
