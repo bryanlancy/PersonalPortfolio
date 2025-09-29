@@ -31,17 +31,21 @@ const Pie = () => {
 			.to(`.${styles.circle1}`, { drawSVG: '0% 37%' })
 			.to(`.${styles.circle2}`, { drawSVG: '37% 82%' }, 0)
 			.to(`.${styles.circle3}`, { drawSVG: '82% 100%' }, 0)
-			.to(`.${styles.circle1}`, {
-				x: 1,
-				y: -1,
-				delay: 0.5,
-			})
+			.to(
+				`.${styles.circle1}`,
+				{
+					x: 1,
+					y: -1,
+					delay: 0.4,
+				},
+				'<'
+			)
 
 		const pieTransitionTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter3',
 				start: 'top center',
-				end: '+=1px',
+				end: '+=100px',
 				onUpdate: self => {
 					pieTransitionTl.reversed(self.direction > 0 ? false : true)
 				},
@@ -49,6 +53,7 @@ const Pie = () => {
 		})
 		pieTransitionTl
 			.to(`.${styles.circle1}`, {
+				delay: 0.5,
 				x: 0,
 				y: 0,
 			})

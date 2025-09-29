@@ -21,7 +21,6 @@
 	height: 100%;
 
 	background-color: #f008;
-	transform-origin: center;
 }
 .pie {
 	position: absolute;
@@ -39,10 +38,10 @@
 			stroke: #4c8dee;
 		}
 		&2 {
-			stroke: #18930d;
+			stroke: #1ac7b3;
 		}
 		&3 {
-			stroke: #dc3434;
+			stroke: #541adc;
 		}
 	}
 }
