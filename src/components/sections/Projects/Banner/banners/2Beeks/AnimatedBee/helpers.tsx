@@ -1,11 +1,4 @@
-import { randomInteger } from '@/utils/general'
-
-export type Coord = { x: number; y: number }
-
-interface NumberRange {
-	min: number
-	max: number
-}
+import { Coord, NumberRange, randomInteger } from '@/utils/general'
 
 function randomPoint(xRange: NumberRange, yRange: NumberRange): Coord {
 	return {
@@ -71,8 +64,6 @@ export function getSVGPathData(
 					point.y - curveRange,
 					point.y + curveRange
 				)
-
-				// const curvePoint = randomPoint(xRange, yRange)
 
 				pathString += `S ${curveX} ${curveY} ${point.x} ${point.y} `
 			}

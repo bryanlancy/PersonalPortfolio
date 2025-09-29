@@ -100,7 +100,7 @@ const Chapter2 = () => {
 		ScrollTrigger.create({
 			trigger: '.chapter2',
 			start: `top top-=${line2Offset}px`,
-			end: '+=1200px',
+			end: '+=1000px',
 			onUpdate: self => {
 				if (self.isActive !== showLine2State[2].current) {
 					showLine2State[1](self.isActive)

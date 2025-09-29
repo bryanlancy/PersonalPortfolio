@@ -8,8 +8,8 @@ import DrawSVGPlugin from 'gsap/DrawSVGPlugin'
 import { cn } from '@/utils/react'
 
 import styles from './AnimatedBee.module.scss'
-import { Coord, getSVGPathData } from './helpers'
-import { randomInteger } from '@/utils/general'
+import { getSVGPathData } from './helpers'
+import { randomInteger, Coord } from '@/utils/general'
 
 gsap.registerPlugin(useGSAP, MotionPathPlugin, ScrollTrigger, DrawSVGPlugin)
 

@@ -28,6 +28,7 @@ const Graphs = () => {
 			delay: 0.5,
 			autoAlpha: 1,
 		})
+
 		// Timeline for transition between Chapter 2 and Chapter 3
 		const graphTransitionTl = gsap.timeline({
 			scrollTrigger: {

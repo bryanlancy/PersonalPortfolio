@@ -1,3 +1,10 @@
+export type Coord = { x: number; y: number }
+
+export interface NumberRange {
+	min: number
+	max: number
+}
+
 /**
  *
  * @param num value to be mapped to new ranger
