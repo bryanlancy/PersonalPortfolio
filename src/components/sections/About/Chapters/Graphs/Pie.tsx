@@ -29,8 +29,8 @@ const Pie = () => {
 			})
 
 			.to(`.${styles.circle1}`, { drawSVG: '0% 37%' })
-			.to(`.${styles.circle2}`, { drawSVG: '37% 82%' })
-			.to(`.${styles.circle3}`, { drawSVG: '82% 100%' })
+			.to(`.${styles.circle2}`, { drawSVG: '37% 82%' }, 0)
+			.to(`.${styles.circle3}`, { drawSVG: '82% 100%' }, 0)
 			.to(`.${styles.circle1}`, {
 				x: 1,
 				y: -1,
@@ -47,10 +47,18 @@ const Pie = () => {
 				},
 			},
 		})
-		pieTransitionTl.to(`.${styles.circle1}`, {
-			x: 0,
-			y: 0,
-		})
+		pieTransitionTl
+			.to(`.${styles.circle1}`, {
+				x: 0,
+				y: 0,
+			})
+			.to(
+				`.${styles.pie}`,
+				{
+					rotate: 120,
+				},
+				'<'
+			)
 	}, [])
 
 	return (
