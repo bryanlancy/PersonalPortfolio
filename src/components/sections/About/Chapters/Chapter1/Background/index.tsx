@@ -54,6 +54,7 @@ const FallingIcon: FC<FallingIconProps> = ({ icon, className }) => {
 			left: `${randomInteger(0, 100)}%`,
 			fontSize: `${randomInteger(24, 48)}`,
 			filter: `blur(${Math.random() * 2}px)`,
+			autoAlpha: 1,
 		})
 		const distance = randomInteger(750, 1500)
 		const iconTl = gsap.timeline({

@@ -4,6 +4,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import styles from './Graphs.module.scss'
 import { cn } from '@/utils/react'
+import Bar from './Bar'
+import Pie from './Pie'
+import Scatter from './Scatter'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -61,7 +64,13 @@ const Graphs = () => {
 		})
 	}, [])
 
-	return <div className={cn('graphs', styles.graphs)}>Graphs</div>
+	return (
+		<div className={cn('graphs', styles.graphs)}>
+			<Bar />
+			<Pie />
+			<Scatter />
+		</div>
+	)
 }
 
 export default Graphs

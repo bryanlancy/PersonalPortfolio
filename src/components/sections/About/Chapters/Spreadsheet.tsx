@@ -62,7 +62,7 @@ const Spreadsheet: FC<SpreadsheetProps> = ({}) => {
 			},
 		})
 		spreadsheetTransitionTl.to('.spreadsheet', {
-			yPercent: -50,
+			yPercent: -60,
 		})
 
 		// Timeline for exit transition

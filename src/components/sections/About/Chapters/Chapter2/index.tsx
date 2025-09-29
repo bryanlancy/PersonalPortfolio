@@ -154,7 +154,7 @@ const Chapter2 = () => {
 
 	return (
 		<div
-			id='Chapter2'
+			id='chapter2'
 			className={cn('chapter2', styles.chapter2, vt323.className)}>
 			<div
 				ref={containerRef}

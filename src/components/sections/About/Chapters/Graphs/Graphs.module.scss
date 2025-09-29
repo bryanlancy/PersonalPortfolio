@@ -1,0 +1,57 @@
+@import '@/styles/mixins.scss';
+
+.graphs {
+	position: fixed;
+	top: 480px;
+	left: 16px;
+	z-index: 1;
+
+	width: 50%;
+	height: 400px;
+
+	@include autoAlpha;
+}
+
+.bar {
+	position: absolute;
+	top: 0;
+	right: 0;
+
+	width: 400px;
+	height: 100%;
+
+	background-color: #f008;
+}
+.pie {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 400px;
+	height: 100%;
+
+	fill: none;
+	stroke-width: 2.5px;
+
+	.circle {
+		&1 {
+			stroke: #4c8dee;
+		}
+		&2 {
+			stroke: #18930d;
+		}
+		&3 {
+			stroke: #dc3434;
+		}
+	}
+}
+.scatter {
+	position: absolute;
+	bottom: 100%;
+	left: 80%;
+
+	width: 400px;
+	height: 100%;
+
+	background-color: #00f8;
+}

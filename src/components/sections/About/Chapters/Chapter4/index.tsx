@@ -444,7 +444,7 @@ const Chapter4 = () => {
 	}, [])
 
 	return (
-		<div id='Chapter4' className={cn('chapter4', styles.chapter4)}>
+		<div id='c∂hapter4' className={cn('chapter4', styles.chapter4)}>
 			<div ref={containerRef} className={styles.container}>
 				<h1 className={styles.title}>{title}</h1>
 
