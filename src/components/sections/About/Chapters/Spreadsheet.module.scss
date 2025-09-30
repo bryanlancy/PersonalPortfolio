@@ -11,6 +11,8 @@
 
 	border-collapse: collapse;
 
+	filter: drop-shadow(-4px 4px 12px#0008);
+
 	@include autoAlpha;
 
 	--spreadsheet-radius: 8px;

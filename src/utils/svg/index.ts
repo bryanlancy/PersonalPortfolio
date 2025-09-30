@@ -35,13 +35,9 @@ export function generatePoints(
 				const yDist = Math.abs(yRange[1] - yRange[0])
 				const yMid = (yRange[0] + yRange[1]) / 2
 
-				console.log(yRange)
-				console.log(yDist)
-				console.log(yMid)
-
 				const point: Coord = {
 					x: randomInteger(...xRange),
-					y: randomInteger(yMid - 100, yMid + 100),
+					y: randomInteger(yMid - yDist * 0.2, yMid + yDist * 0.2),
 				}
 
 				coords.push(point)
@@ -151,8 +147,6 @@ function generateLineFromPoints(
 		x: xMax * 1.1,
 		y: height - (xMax * 1.1 * slope + intercept),
 	}
-	console.log(bestLineStart)
-	console.log(bestLineEnd)
 
 	return `M ${printPoint(bestLineStart)} L ${printPoint(bestLineEnd)}`
 }

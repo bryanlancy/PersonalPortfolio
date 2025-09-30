@@ -4,7 +4,7 @@
 	position: fixed;
 	top: 480px;
 	left: 16px;
-	z-index: 1;
+	z-index: 10000;
 
 	width: 50%;
 	height: 400px;
@@ -12,7 +12,7 @@
 	@include autoAlpha;
 }
 
-.bar {
+.barContainer {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -20,8 +20,67 @@
 	width: 400px;
 	height: 100%;
 
-	background-color: #f008;
+	.bar {
+		width: 10px;
+
+		transform: scale(1, 0);
+		transform-origin: bottom;
+	}
+
+	.main {
+		display: flex;
+		align-items: flex-end;
+
+		height: 100%;
+
+		> .bar {
+			@for $i from 1 through 6 {
+				&:nth-child(#{$i}) {
+					width: 40px + (10px * $i);
+					height: 40px + (20px * $i * $i/5);
+					z-index: $i * 1;
+					box-shadow: -4px 0px 2px 1px #000800 inset;
+				}
+			}
+			&:nth-child(6) {
+				box-shadow: none;
+			}
+		}
+	}
+	.overflow {
+		position: absolute;
+		bottom: 0;
+		left: 100%;
+
+		display: flex;
+		align-items: flex-end;
+
+		width: 50vw;
+		height: 100vw;
+		border: 1px solid red;
+
+		> .bar {
+			@for $i from 1 through 5 {
+				&:nth-child(#{$i}) {
+					width: 140px + (25px * $i);
+					height: 160px + (140px * $i * $i/2);
+				}
+			}
+		}
+	}
+	.swipe {
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: 100vw;
+		height: 100vh;
+
+		background-color: #f002;
+
+		@include autoAlpha;
+	}
 }
+
 .pie {
 	position: absolute;
 	top: 0;
