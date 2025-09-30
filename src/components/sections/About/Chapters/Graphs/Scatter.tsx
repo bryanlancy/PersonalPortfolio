@@ -13,12 +13,12 @@ gsap.registerPlugin(useGSAP, DrawSVGPlugin, ScrollTrigger)
 
 const Scatter = () => {
 	const svgWidth = 1000
-	const svgHeight = 1000
+	const svgHeight = 500
 	const zeroPos: Coord = { x: svgWidth * 0.1, y: svgHeight * 0.1 }
 	const xLinePath = `M ${zeroPos.x} ${svgHeight * 0.9} L ${svgWidth * 0.9} ${
 		svgHeight * 0.9
 	}`
-	const yLinePath = `M ${printPoint(zeroPos)} L ${zeroPos.y} ${
+	const yLinePath = `M ${printPoint(zeroPos)} L ${zeroPos.x} ${
 		svgHeight * 0.9
 	}`
 
@@ -57,19 +57,6 @@ const Scatter = () => {
 			{ drawSVG: '0% 0%' },
 			{ drawSVG: '0% 100%', delay: 1 }
 		)
-		const xTransitionTl = gsap.timeline({
-			scrollTrigger: {
-				trigger: '.chapter3',
-				start: 'top center',
-				end: '+=100px',
-				onUpdate: self => {
-					xTransitionTl.reversed(self.direction > 0 ? false : true)
-				},
-			},
-		})
-		xTransitionTl.to(xLineRef.current, {
-			stroke: '#fff',
-		})
 
 		const yTl = gsap.timeline({
 			scrollTrigger: {
@@ -86,19 +73,23 @@ const Scatter = () => {
 			{ drawSVG: '100% 100%' },
 			{ drawSVG: '0% 100%', delay: 1 }
 		)
-		const yTransitionTl = gsap.timeline({
+		const lineTransitionTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter3',
 				start: 'top center',
 				end: '+=100px',
 				onUpdate: self => {
-					yTransitionTl.reversed(self.direction > 0 ? false : true)
+					lineTransitionTl.reversed(self.direction > 0 ? false : true)
 				},
 			},
 		})
-		yTransitionTl.to(yLineRef.current, {
-			stroke: '#fff',
-		})
+
+		lineTransitionTl.to(
+			[yLineRef.current, xLineRef.current, `.${styles.bestDashed}`],
+			{
+				stroke: '#fff',
+			}
+		)
 
 		// Points Animation
 		if (points.length > 0) {
@@ -147,6 +138,25 @@ const Scatter = () => {
 			{ drawSVG: '0% 0%' },
 			{ drawSVG: '0% 100%', delay: 2 }
 		)
+
+		const scatterTransitionTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.chapter3',
+				start: 'top center',
+				end: '+=100px',
+				onUpdate: self => {
+					scatterTransitionTl.reversed(
+						self.direction > 0 ? false : true
+					)
+				},
+			},
+		})
+		scatterTransitionTl.to(`.${styles.scatter}`, {
+			ease: 'power1',
+
+			x: -80,
+			y: 320,
+		})
 	}, [points])
 
 	return (

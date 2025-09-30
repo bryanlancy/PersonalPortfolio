@@ -58,11 +58,12 @@ const Graphs = () => {
 				},
 			},
 		})
-		graphExitTl.to(`.graphs`, {
-			delay: 0.5,
-			autoAlpha: 0,
-			y: -500,
-		})
+		// graphExitTl.to(`.graphs`, {
+		// 	delay: 0.5,
+		// 	duration
+		// 	autoAlpha: 0,
+		// 	y: -500,
+		// })
 	}, [])
 
 	return (

@@ -13,6 +13,7 @@ import Graphs from './Chapters/Graphs'
 import { SpreadsheetContextProvider } from '@/context/spreadsheetContext'
 
 import styles from './Story.module.scss'
+import BarSwipe from './Chapters/Graphs/BarSwipe'
 
 interface StoryProps {}
 
@@ -37,6 +38,7 @@ const Story: FC<StoryProps> = ({}) => {
 				<Spreadsheet />
 				<Graphs />
 				<Chapter3 />
+				<BarSwipe />
 			</SpreadsheetContextProvider>
 			<Chapter4 />
 			<Chapter5 />

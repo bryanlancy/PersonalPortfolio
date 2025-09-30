@@ -60,6 +60,20 @@ const Chapter4 = () => {
 	const containerRef = useRef<HTMLDivElement>(null)
 
 	useGSAP(() => {
+		const hideBarSwipe = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.chapter4',
+				start: 'top top',
+				end: '+=1px',
+				onUpdate: self => {
+					hideBarSwipe.reversed(self.direction > 0 ? false : true)
+				},
+			},
+		})
+		hideBarSwipe.to(`#barSwipe`, {
+			autoAlpha: 0,
+			duration: 0.01,
+		})
 		// Container scroll with screen
 		gsap.to(containerRef.current, {
 			scrollTrigger: {
@@ -444,7 +458,7 @@ const Chapter4 = () => {
 	}, [])
 
 	return (
-		<div id='c∂hapter4' className={cn('chapter4', styles.chapter4)}>
+		<div id='chapter4' className={cn('chapter4', styles.chapter4)}>
 			<div ref={containerRef} className={styles.container}>
 				<h1 className={styles.title}>{title}</h1>
 

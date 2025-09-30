@@ -9,14 +9,16 @@
 	height: 70vh;
 	z-index: 10000;
 
-	border-collapse: collapse;
-
-	filter: drop-shadow(-4px 4px 12px#0008);
+	--spreadsheet-radius: 8px;
+	border-radius: var(--spreadsheet-radius);
+	box-shadow: -4px 4px 12px 0px #0008;
 
 	@include autoAlpha;
-
-	--spreadsheet-radius: 8px;
-
+	table {
+		width: 100%;
+		height: 100%;
+		border-collapse: collapse;
+	}
 	td {
 		border: 1px solid #0003;
 		color: #000;
@@ -38,6 +40,7 @@
 		background-color: #29784d;
 
 		border-left: 1px solid #fff3;
+
 		&:first-child {
 			border-left: none;
 		}
@@ -61,7 +64,7 @@
 	}
 }
 .rows {
-	$numRows: 11;
+	$numRows: 12;
 	width: 100%;
 
 	td {
@@ -96,6 +99,7 @@
 			border-bottom-right-radius: var(--spreadsheet-radius);
 		}
 		td {
+			border-top: 2px solid #0008;
 			border-bottom: none;
 		}
 	}

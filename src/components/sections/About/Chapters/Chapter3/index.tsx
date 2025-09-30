@@ -157,8 +157,8 @@ const Chapter3 = () => {
 		const line3Tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter3',
-				start: `top center-=100px`,
-				end: '+=3000px',
+				start: `top top-=1400px`,
+				end: '+=4000px',
 				onUpdate: self => {
 					line1Tl.reversed(self.direction > 0 ? false : true)
 					if (self.isActive !== showLine3State[2].current) {
@@ -173,7 +173,7 @@ const Chapter3 = () => {
 	}, [])
 
 	return (
-		<div id='Chapter3' className={cn('chapter3', styles.chapter3)}>
+		<div id='chapter3' className={cn('chapter3', styles.chapter3)}>
 			<h1 ref={titleRef} className={styles.title}>
 				{title}
 			</h1>
