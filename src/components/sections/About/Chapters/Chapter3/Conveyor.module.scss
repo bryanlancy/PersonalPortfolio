@@ -1,3 +1,5 @@
+@import '@/styles/mixins.scss';
+
 .conveyor {
 	position: absolute;
 	bottom: 0;
@@ -9,11 +11,16 @@
 	height: 400px;
 	width: 100%;
 
-	transform: translateX(1200px);
+	border: 1px solid red;
+	overflow: hidden;
 }
 
 .boxContainer {
-	position: relative;
+	position: absolute;
+	top: 50%;
+	left: 100%;
+
+	transform: translateY(-50%);
 
 	display: flex;
 
@@ -38,5 +45,37 @@
 		color: #fff;
 
 		font-size: 12px;
+	}
+
+	.scanCount {
+		position: absolute;
+		bottom: 110%;
+		left: 0;
+
+		font-size: 16px;
+
+		border: 1px solid red;
+		.plus {
+			position: absolute;
+			top: 0;
+
+			display: flex;
+			gap: 2px;
+
+			color: green;
+
+			@include autoAlpha;
+		}
+		.minus {
+			position: absolute;
+			top: 0;
+
+			display: flex;
+			gap: 2px;
+
+			color: red;
+
+			@include autoAlpha;
+		}
 	}
 }

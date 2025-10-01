@@ -7,9 +7,26 @@ import { Coord } from '@/utils/general'
 import { generatePoints, lineOfBestFit, printPoint } from '@/utils/svg'
 
 import styles from './Graphs.module.scss'
-import { useRef, useState } from 'react'
+import { FC, useRef, useState } from 'react'
+import { NoSsr } from '@/utils/next'
 
 gsap.registerPlugin(useGSAP, DrawSVGPlugin, ScrollTrigger)
+
+interface RandomPointProps {
+	point: Coord
+	i: number
+}
+const RandomPoint: FC<RandomPointProps> = ({ point, i }) => {
+	return (
+		<circle
+			key={`scatter-point-${i}`}
+			className={styles.point}
+			r={0}
+			cx={point.x}
+			cy={point.y}
+		/>
+	)
+}
 
 const Scatter = () => {
 	const svgWidth = 1000

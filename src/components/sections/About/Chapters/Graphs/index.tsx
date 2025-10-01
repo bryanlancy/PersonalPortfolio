@@ -7,6 +7,7 @@ import { cn } from '@/utils/react'
 import Bar from './Bar'
 import Pie from './Pie'
 import Scatter from './Scatter'
+import { NoSsr } from '@/utils/next'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -70,7 +71,9 @@ const Graphs = () => {
 		<div className={cn('graphs', styles.graphs)}>
 			<Bar />
 			<Pie />
-			<Scatter />
+			<NoSsr>
+				<Scatter />
+			</NoSsr>
 		</div>
 	)
 }

@@ -1,3 +1,5 @@
+@import '@/styles/mixins.scss';
+
 .scanner {
 	&Container {
 		position: absolute;
@@ -8,14 +10,11 @@
 		width: 100%; // 544px
 		height: 200px;
 
-		// overflow: hidden;
-
-		border: 1px solid blue;
+		@include autoAlpha;
 	}
 	&Gun {
 		position: absolute;
 
-		border: 1px solid red;
 		width: 64px;
 		height: 64px;
 
@@ -26,14 +25,24 @@
 		.beam {
 			position: absolute;
 			top: 0;
-			left: 0;
-			// right: 100%;
-			// transform: rotateZ(-90deg);
-			// transform-origin: 'top right';
-			border: 1px solid green;
+			left: 50%;
+
+			transform: translateY(-40px);
+
+			width: fit-content;
+			height: fit-content;
 
 			stroke: none;
-			fill: red;
+			fill: url(#beamGradient);
+
+			@include autoAlpha;
+
+			.color1 {
+				stop-color: #f00c;
+			}
+			.color2 {
+				stop-color: #f000;
+			}
 		}
 	}
 }

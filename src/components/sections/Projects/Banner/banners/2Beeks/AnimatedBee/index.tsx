@@ -115,17 +115,10 @@ const AnimatedBee: FC<AnimatedBeeProps> = ({ width, height, index }) => {
 
 interface SwarmProps {
 	count: number
-	box: BasicBox
-	deadZone?: BasicBox
 	className?: string
 }
 
-export const Swarm: FC<SwarmProps> = ({
-	count,
-	box,
-	deadZone,
-	className = '',
-}) => {
+export const Swarm: FC<SwarmProps> = ({ count, className = '' }) => {
 	const bees = Array.from({ length: count }, (_, i) => (
 		<AnimatedBee key={`bee-${i}`} width={250} height={50} index={i} />
 	))

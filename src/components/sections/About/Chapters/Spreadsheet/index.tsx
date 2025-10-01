@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -7,6 +7,11 @@ import { cn } from '@/utils/react'
 
 import styles from './Spreadsheet.module.scss'
 import Scanner from './Scanner'
+import {
+	InventoryList,
+	SpreadsheetCols,
+	useSpreadsheetContext,
+} from '@/context/spreadsheetContext'
 
 gsap.registerPlugin(useGSAP)
 gsap.registerPlugin(ScrollTrigger)
@@ -23,18 +28,12 @@ gsap.registerPlugin(ScrollTrigger)
  * // → 2 + 5 + 6 = 13
  * ```
  */
-function sumLastElements(arr: cols[]): number {
+function sumLastElements(arr: SpreadsheetCols[]): number {
 	return arr.reduce((sum, inner) => {
 		const itemTotal = inner[3] * inner[2]
 		return sum + itemTotal
 	}, 0)
 }
-type cols = [
-	partId: string,
-	partName: string,
-	unitCost: number,
-	quantity: number
-]
 
 function formatDollar(amount: number): string {
 	return amount.toLocaleString('en', {
@@ -44,9 +43,36 @@ function formatDollar(amount: number): string {
 	})
 }
 
+function inventoryToTable(
+	inventory: InventoryList
+): [SpreadsheetCols[], number] {
+	const parts: SpreadsheetCols[] = Object.values(inventory)
+		.sort((a, b) => {
+			return a.partId - b.partId
+		})
+		.map(part => {
+			return [
+				part.partNumber,
+				part.partName,
+				part.unitPrice,
+				part.quantity,
+			]
+		})
+	return [parts, sumLastElements(parts)]
+}
+
 interface SpreadsheetProps {}
 const Spreadsheet: FC<SpreadsheetProps> = ({}) => {
 	const spreadsheetRef = useRef<HTMLTableElement>(null)
+	const { inventoryState } = useSpreadsheetContext()
+	const [tableData, setTableData] = useState<[SpreadsheetCols[], number]>([
+		[],
+		0,
+	])
+
+	useEffect(() => {
+		setTableData(inventoryToTable(inventoryState[0]))
+	}, [inventoryState])
 
 	useGSAP(() => {
 		// Timeline for Chapter 2
@@ -97,40 +123,7 @@ const Spreadsheet: FC<SpreadsheetProps> = ({}) => {
 		spreadsheetTransitionTl.to('.spreadsheet', {
 			yPercent: -60,
 		})
-
-		// // Timeline for exit transition
-		// const spreadsheetExitTl = gsap.timeline({
-		// 	scrollTrigger: {
-		// 		trigger: '.chapter4',
-		// 		start: 'top bottom',
-		// 		end: '+=200px',
-		// 		onUpdate: self => {
-		// 			spreadsheetExitTl.reversed(
-		// 				self.direction > 0 ? false : true
-		// 			)
-		// 		},
-		// 	},
-		// })
-		// spreadsheetExitTl.to('.spreadsheet', {
-		// 	autoAlpha: 0,
-		// 	y: -500,
-		// })
 	}, [])
-
-	const tableData: cols[] = [
-		['TEH-92X7', 'Conductor', 0.65, 120],
-		['RSR-17B4', 'Flux', 420.0, 4],
-		['PSC-8MZ2', 'Hydrocoptic marzlevanes', 310.4, 6],
-		['HDR-63K9', 'Waneshaft', 720.75, 2],
-		['PFC-4D11', 'Copper Wire', 9.98, 100],
-		['ISG-55L8', 'Semi-boloid mill bit', 149.6, 1],
-		['BOV-7TQ3', 'Tremie pipe', 185.2, 6],
-		['NCM-29R5', 'Girdle spring', 39.99, 16],
-		['CTR-90H6', 'Encabulator housing', 489.7, 1],
-		['SBA-81V2', 'Grammeters', 249.95, 4],
-		['PSK-62V8', 'Phlogiston seal kit', 44.2, 3],
-	]
-	const totalCost = sumLastElements(tableData)
 
 	return (
 		<div
@@ -147,27 +140,25 @@ const Spreadsheet: FC<SpreadsheetProps> = ({}) => {
 					</tr>
 				</thead>
 				<tbody className={styles.rows}>
-					{tableData.map(
-						([partId, partName, unitCost, quantity], i) => {
-							return (
-								<tr key={`spreadsheet-row-${i}`}>
-									<td>{partName}</td>
-									<td>{partId}</td>
-									<td>${formatDollar(unitCost)}</td>
-									<td>{quantity}</td>
-									<td>
-										${formatDollar(quantity * unitCost)}
-									</td>
-								</tr>
-							)
-						}
-					)}
+					{tableData[0].map((part, i) => {
+						if (!part) return null
+						const [partId, partName, unitCost, quantity] = part
+						return (
+							<tr key={`spreadsheet-row-${i}`}>
+								<td>{partName}</td>
+								<td>{partId}</td>
+								<td>${formatDollar(unitCost)}</td>
+								<td>{quantity}</td>
+								<td>${formatDollar(quantity * unitCost)}</td>
+							</tr>
+						)
+					})}
 					<tr>
 						<td>Total</td>
 						<td></td>
 						<td></td>
 						<td></td>
-						<td>${formatDollar(totalCost)}</td>
+						<td>${formatDollar(tableData[1])}</td>
 					</tr>
 				</tbody>
 			</table>
