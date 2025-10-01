@@ -18,6 +18,7 @@ import { arrRotator } from '@/utils/general'
 import { cn } from '@/utils/react'
 
 import styles from './Chapter5.module.scss'
+import Network from './Network'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText)
 
@@ -184,9 +185,9 @@ const Chapter5 = () => {
 	}, [])
 
 	return (
-		<div id='Chapter5' className={cn('chapter5', styles.chapter5)}>
+		<div id='chapter5' className={cn('chapter5', styles.chapter5)}>
 			<div className={styles.container} ref={containerRef}>
-				<div className={styles.networkContainer}>Network Animation</div>
+				<Network />
 				<h1 className={cn('c5-title', styles.title)}>
 					{duplicateWords(title, 8).map((word, i) => {
 						return (

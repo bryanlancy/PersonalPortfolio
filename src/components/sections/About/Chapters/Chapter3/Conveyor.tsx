@@ -95,7 +95,7 @@ const Box: FC<BoxProps> = ({ part, index }) => {
 				trigger: `.${styles.conveyor}`,
 				start: `bottom bottom-=${index * 200 - 600}`,
 				// start: 'bottom bottom',
-				end: `+=${window.innerWidth / 2}px`,
+				end: `+=${window.innerWidth / 1.01}px`,
 				scrub: true,
 				onUpdate: () => {
 					// console.log('test')

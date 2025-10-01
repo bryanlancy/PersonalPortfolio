@@ -1,0 +1,60 @@
+.container {
+	position: absolute;
+	top: 16px;
+	left: 16px;
+	right: 16px;
+
+	height: 40%;
+
+	border: 1px solid #36a4ff;
+}
+.node {
+	position: absolute;
+	padding: 36px;
+
+	background-color: #6000c0;
+	background: linear-gradient(60deg, #6000c0 0%, #9600c0 100%);
+	border-radius: 40px;
+
+	.icon {
+		width: 64px;
+		height: 64px;
+	}
+
+	&.database {
+		bottom: 5%;
+		left: 80%;
+		transform: translateX(-50%);
+	}
+	&.server {
+		bottom: 5%;
+		left: 65%;
+		transform: translateX(-50%);
+	}
+	&.computer {
+		bottom: 5%;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	&.tablet {
+		bottom: 5%;
+		left: 15%;
+		transform: translateX(-50%);
+	}
+	&.satellite {
+		top: 0;
+		left: 15%;
+		transform: translateX(-50%);
+		.icon {
+			transform: rotateZ(-90deg);
+		}
+	}
+	&.satDish {
+		top: 0%;
+		left: 65%;
+		transform: translateX(-50%);
+		.icon {
+			transform: rotateZ(180deg);
+		}
+	}
+}

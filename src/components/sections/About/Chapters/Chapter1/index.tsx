@@ -259,7 +259,7 @@ const Chapter1 = () => {
 	}, [])
 
 	return (
-		<div id='Chapter1' className={cn(styles.chapter1, 'chapter1')}>
+		<div id='chapter1' className={cn(styles.chapter1, 'chapter1')}>
 			<Background />
 			<div className={cn('c1-container', styles.container)}>
 				<h1 className={cn('c1-title', styles.title)}>{title}</h1>
