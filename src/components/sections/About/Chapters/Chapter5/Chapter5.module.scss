@@ -37,16 +37,16 @@
 	@include autoAlpha;
 }
 .line1 {
-	top: 50%;
-	left: 16px;
+	top: 53%;
+	left: 55%;
 }
 .line2 {
-	top: 52%;
-	left: 16px;
+	top: 56%;
+	left: 55%;
 }
 .line3 {
-	top: 66%;
-	left: 16px;
+	top: 60%;
+	left: 20%;
 }
 
 .proContainer {
@@ -74,7 +74,9 @@
 	height: 160px;
 	width: 100%;
 
-	background-color: #36a4ff;
+	background: linear-gradient(60deg, #07727a 0%, #9600c0 80%);
+	box-shadow: 4px 4px 8px 0px #0008;
+
 	border-radius: 16px;
 
 	@include autoAlpha;

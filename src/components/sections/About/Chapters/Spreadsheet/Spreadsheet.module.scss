@@ -7,7 +7,7 @@
 
 	width: 544px;
 	height: 70vh;
-	z-index: 10000;
+	z-index: 100; // Needs to be under graph(101) for animation
 
 	--spreadsheet-radius: 8px;
 	border-radius: var(--spreadsheet-radius);

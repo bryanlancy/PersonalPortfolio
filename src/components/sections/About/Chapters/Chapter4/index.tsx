@@ -167,8 +167,6 @@ const Chapter4 = () => {
 			'<'
 		)
 
-		//! Change to sleeping emoji
-
 		const faceToComputerTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter4',
@@ -211,8 +209,6 @@ const Chapter4 = () => {
 			},
 			'<'
 		)
-
-		//! Change to glasses emoji
 
 		// House Transition to Inside Animation
 		const houseTransitionTl = gsap.timeline({
@@ -279,7 +275,9 @@ const Chapter4 = () => {
 				start: 'top bottom',
 				end: '+=1px',
 				onUpdate: self => {
-					houseExitTl.reversed(self.direction > 0 ? false : true)
+					houseExitTl
+						.timeScale(self.direction > 0 ? 1 : 2)
+						.reversed(self.direction > 0 ? false : true)
 				},
 			},
 		})
@@ -336,6 +334,7 @@ const Chapter4 = () => {
 			'<'
 		)
 		houseExitTl.to(`.${styles.lightContainer}`, {
+			y: 80,
 			scale: 1.3,
 		})
 
@@ -384,7 +383,6 @@ const Chapter4 = () => {
 				onUpdate: self => {
 					if (!(self.direction > 0)) {
 						lightFlickerTl.restart(true)
-					} else {
 					}
 					lightFlickerTl.reversed(self.direction > 0 ? false : true)
 				},

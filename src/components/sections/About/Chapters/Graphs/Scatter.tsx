@@ -8,7 +8,6 @@ import { generatePoints, lineOfBestFit, printPoint } from '@/utils/svg'
 
 import styles from './Graphs.module.scss'
 import { FC, useRef, useState } from 'react'
-import { NoSsr } from '@/utils/next'
 
 gsap.registerPlugin(useGSAP, DrawSVGPlugin, ScrollTrigger)
 

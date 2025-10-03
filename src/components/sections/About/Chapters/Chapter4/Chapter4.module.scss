@@ -46,10 +46,13 @@
 }
 .houseOut {
 	position: absolute;
+
+	color: #0096a1;
 }
 
 .houseIn {
 	position: absolute;
+
 	@include autoAlpha;
 }
 
@@ -84,6 +87,8 @@
 	height: 100%;
 	transform: translate(-50%, -50%), scale(0);
 
+	--fa-primary-color: #b30074;
+
 	@include autoAlpha;
 }
 
@@ -95,6 +100,23 @@
 	height: 80px;
 
 	transform: rotateY(180deg);
+
+	--fa-primary-color: #553414;
+	--fa-secondary-color: #4500b3;
+
+	@include autoAlpha;
+}
+.computer {
+	position: absolute;
+	bottom: 10%;
+	left: 20%;
+
+	transform: translate(-50%, -50%);
+
+	height: 48px;
+
+	--fa-primary-color: #0096a188;
+
 	@include autoAlpha;
 }
 
@@ -102,8 +124,15 @@
 	position: fixed;
 	top: 50%;
 	left: 50%;
+	z-index: 1;
 
 	transform: translate(-50%, -50%);
+
+	border-radius: 16px;
+	border-radius: 50%;
+
+	box-shadow: 4px 4px 8px 0px #0000;
+	padding: 40px;
 
 	@include autoAlpha;
 
@@ -120,22 +149,14 @@
 	}
 	.lightOn {
 		position: absolute;
+
+		width: 48px;
+		height: 48px;
+
 		color: #dcdc2b;
 
 		@include autoAlpha;
 	}
-}
-
-.computer {
-	position: absolute;
-	bottom: 10%;
-	left: 20%;
-
-	transform: translate(-50%, -50%);
-
-	height: 48px;
-
-	@include autoAlpha;
 }
 
 .line {

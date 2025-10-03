@@ -19,6 +19,7 @@ import { cn } from '@/utils/react'
 
 import styles from './Chapter5.module.scss'
 import Network from './Network'
+import { NoSsr } from '@/utils/next'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText)
 
@@ -31,9 +32,7 @@ function duplicateWords(
 	let arr: string[] = []
 	for (let i = 0; i < duplicates; i++) {
 		arr = arr.concat(words)
-		if (divider) {
-			arr.push(divider)
-		}
+		if (divider) arr.push(divider)
 	}
 	return arr
 }
@@ -78,6 +77,18 @@ const Chapter5 = () => {
 			},
 		})
 
+		const backgoundTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.chapter5',
+				start: 'top top',
+				end: '+=750px',
+				scrub: true,
+			},
+		})
+		backgoundTl.to(['.chapter5'], {
+			backgroundColor: '#32005c',
+		})
+
 		// Title Animation
 		SplitText.create(`.${styles.title}`, {
 			type: 'lines',
@@ -118,11 +129,10 @@ const Chapter5 = () => {
 		const line1Tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter5',
-				start: 'top top+=400px',
-				end: '+=1px',
-				onUpdate: self => {
-					line1Tl.reversed(self.direction > 0 ? false : true)
-				},
+				start: 'top top-=800px',
+
+				end: '+=400px',
+				scrub: true,
 			},
 		})
 		line1Tl.to(`.${styles.line1}`, {
@@ -130,64 +140,64 @@ const Chapter5 = () => {
 		})
 		line1Tl.to(`.${styles.line2}`, {
 			autoAlpha: 1,
+			delay: 1,
 		})
 
 		// Line 3,Tools,Computer,Internet Animation
 		const line3Tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter5',
-				start: 'top top-=200px',
+				start: 'top top-=2750px',
 				end: '+=1px',
 				onUpdate: self => {
-					line3Tl.reversed(self.direction > 0 ? false : true)
+					line3Tl
+						.timeScale(self.direction > 0 ? 1 : 5)
+						.reversed(self.direction > 0 ? false : true)
 				},
 			},
 		})
 		line3Tl.to(`.${styles.line3}`, {
 			autoAlpha: 1,
 		})
-		line3Tl.to(
-			[
-				`.${styles.toolsContainer} p`,
-				`.${styles.toolsContainer}>.${styles.iconContainer}`,
-				`.${styles.toolsContainer} .${styles.check}`,
-			],
-			{
-				delay: 0.5,
-				stagger: 0.3,
-				autoAlpha: 1,
-			}
-		)
-		line3Tl.to(
-			[
-				`.${styles.computerContainer} p`,
-				`.${styles.computerContainer}>.${styles.iconContainer}`,
-				`.${styles.computerContainer} .${styles.check}`,
-			],
-			{
-				delay: 0.5,
-				stagger: 0.3,
-				autoAlpha: 1,
-			}
-		)
-		line3Tl.to(
-			[
-				`.${styles.internetContainer} p`,
-				`.${styles.internetContainer}>.${styles.iconContainer}`,
-				`.${styles.internetContainer} .${styles.check}`,
-			],
-			{
-				delay: 0.5,
-				stagger: 0.3,
-				autoAlpha: 1,
-			}
-		)
+		const pros = [
+			`.${styles.toolsContainer}`,
+			`.${styles.computerContainer}`,
+			`.${styles.internetContainer}`,
+		]
+
+		pros.forEach(pro => {
+			line3Tl.to(
+				[
+					`${pro} p`,
+					`${pro} > .${styles.iconContainer}`,
+					`${pro} .${styles.check}`,
+				],
+				{
+					delay: 0.5,
+					stagger: 0.3,
+					autoAlpha: 1,
+				}
+			)
+			line3Tl.to(
+				`${pro} > .${styles.iconContainer}`,
+				{
+					background:
+						'linear-gradient(150deg, #07727a 0%, #9600c0 80%)',
+					duration: 1,
+					delay: 0.5,
+					ease: 'none',
+				},
+				'<'
+			)
+		})
 	}, [])
 
 	return (
 		<div id='chapter5' className={cn('chapter5', styles.chapter5)}>
 			<div className={styles.container} ref={containerRef}>
-				<Network />
+				<NoSsr>
+					<Network />
+				</NoSsr>
 				<h1 className={cn('c5-title', styles.title)}>
 					{duplicateWords(title, 8).map((word, i) => {
 						return (
