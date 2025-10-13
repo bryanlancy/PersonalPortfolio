@@ -71,6 +71,7 @@
 	}
 }
 .happy {
+	color: rgb(250, 250, 125);
 	height: 100%;
 }
 .sleeping {
@@ -80,6 +81,7 @@
 }
 .smart {
 	height: 100%;
+	color: rgb(250, 250, 125);
 
 	@include autoAlpha;
 }
@@ -87,6 +89,7 @@
 	height: 100%;
 	transform: translate(-50%, -50%), scale(0);
 
+	color: rgb(250, 250, 125);
 	--fa-primary-color: #b30074;
 
 	@include autoAlpha;

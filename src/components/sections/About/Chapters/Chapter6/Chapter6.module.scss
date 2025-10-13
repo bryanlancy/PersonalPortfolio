@@ -2,9 +2,40 @@
 
 .chapter6 {
 	position: relative;
-	// height: 4000px;
+	width: 100%;
+}
 
-	border: 1px solid red;
+.container {
+	position: relative;
+	height: 100vh;
+	width: 100%;
+}
 
-	overflow: hidden;
+.line {
+	position: absolute;
+}
+
+.line1 {
+	top: 120px;
+	left: 520px;
+
+	@include autoAlpha;
+}
+.line2 {
+	top: 144px;
+	left: 520px;
+
+	@include autoAlpha;
+}
+.line3 {
+	bottom: 264px;
+	left: 120px;
+
+	@include autoAlpha;
+}
+.line4 {
+	bottom: 240px;
+	left: 120px;
+
+	@include autoAlpha;
 }
