@@ -2,10 +2,8 @@ import React, { FC, PropsWithChildren } from 'react'
 
 import styles from './Container.module.scss'
 import { cn } from '../react'
-import { motion, HTMLMotionProps } from 'motion/react'
 
-type MotionWithChildren = PropsWithChildren<ContainerProps> &
-	HTMLMotionProps<'div'>
+type MotionWithChildren = PropsWithChildren<ContainerProps>
 
 interface ContainerProps {
 	/** The Container Component comes wih default styling. Use this prop to override or add additional styling. */
@@ -27,9 +25,9 @@ const Container: FC<MotionWithChildren> = props => {
 	const { children, className, ...rest } = props
 
 	return (
-		<motion.div className={cn(styles.content, className)} {...rest}>
+		<div className={cn(styles.content, className)} {...rest}>
 			{children}
-		</motion.div>
+		</div>
 	)
 }
 
