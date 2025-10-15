@@ -16,6 +16,7 @@ const Boxes: FC<BoxesProps> = ({ hobby, pro }) => {
 	for (let i = 0; i < hobby; i++) {
 		hobbyBoxes.push(
 			<Box
+				key={`hob-box-${Math.random().toFixed(4)}`}
 				start={200 + i * 400}
 				type='hobby'
 				endY={-i * boxOffset}
@@ -26,6 +27,7 @@ const Boxes: FC<BoxesProps> = ({ hobby, pro }) => {
 	for (let i = 0; i < pro; i++) {
 		proBoxes.push(
 			<Box
+				key={`pro-box-${Math.random().toFixed(4)}`}
 				start={2000 + i * 350}
 				type='pro'
 				endY={-i * boxOffset}

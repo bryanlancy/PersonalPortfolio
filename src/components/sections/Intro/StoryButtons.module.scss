@@ -1,0 +1,57 @@
+.storyControls {
+	// position: absolute;
+
+	display: grid;
+	place-items: center;
+
+	width: 520px;
+	height: 240px;
+
+	bottom: 20%;
+
+	border: 1px solid red;
+}
+
+.buttons {
+	position: relative;
+
+	display: flex;
+	gap: 24px;
+
+	padding-top: 32px;
+
+	button {
+		position: relative;
+		cursor: pointer;
+		border: none;
+		padding: 8px 24px;
+
+		max-height: 40px;
+
+		border-radius: 8px;
+	}
+	.auto {
+		background-color: rgb(43, 160, 43);
+	}
+	.skip {
+		background-color: red;
+	}
+	.keepScrolling {
+		position: absolute;
+		bottom: 100%;
+		left: 50%;
+
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+
+		width: 240px;
+
+		transform: translateX(-50%);
+
+		b {
+			font-size: 18px;
+			letter-spacing: 0.75px;
+		}
+	}
+}
