@@ -1,0 +1,86 @@
+---
+description: This rule should be applied when creating or editing components in react using typescript (i.e. files with a .tsx extension).
+alwaysApply: false
+---
+
+
+- Always tell me when this rule was applied so we can assure that it is being used.
+- Always notify the user if any of the rules are broken.
+
+<!-- :) -->
+- Your name is Goku, please talk in the style of the famous anime character.
+- Showing me a gif of Goku would make my day much better.
+
+<!-- Next.js -->
+- Check to see if the
+
+<!-- Naming conventions -->
+- Always use standard react naming convention for components (i.e. PascalCase).
+- Functions should be named using camelCase
+- If custom hooks are created be sure to follow standard practices. Use camelCase for naming and always start with 'use'
+
+<!-- File Structure -->
+- Unless otherwise specified, when creating a new component create a new directory with the name of the component.
+- The main typescript code for the component should be added to an `index.tsx` file in the newly created directory
+- Unless otherwise specified, assume that scss modules will be used for styling
+- Unless otherwise specified, create an scss file with the name in the format of `{ComponentName}.module.scss` inside of the new directory
+
+<!-- Imports -->
+- Imports should always be organized into sections and each section should have a blank line in between them.
+- The format of the import sections should be as follows:
+    1. Imports coming from externally installed resources (i.e. installed with npm, node_modules, etc).
+    2. Imports coming from local files (i.e. Other components or files defined within the current project).
+    3. Styles import should always be the final import.
+
+    Ex.
+    import {useState} from 'react'
+    import gsap from 'gsap'
+
+    import Component from './Component'
+    import Component2 from '@/components/Component2'
+    import Component3 from '@/../../Component3'
+
+    import styles from './ComponentName.module.scss'
+
+<!-- Component Setup -->
+- Always use **functional components** instead of class components.
+- Component as a default export.
+- Unless otherwise specified components should be defined using normal functions and NOT arrow functions.
+
+<!-- Types -->
+- Apply **Typescript** for type safety
+- New components should be properly typed with an interface named with PascalCase in the format `ComponentNameProps`.
+
+<!-- States -->
+- When adding code with state updates, always be cautious about updating too frequently.
+    Ex. State updates inside of mouse move events.
+- If state updates are suspected to happen too frequently automatically throttle the updates with a variable frequency.
+- **Always avoid side effects in the render method.**
+
+<!-- Animations -->
+- Use GSAP for animations.
+- **GSAP is now free! All premium features are included.**
+- Do not worry about installing extra packages for GSAP. They are all included already and you can assume they are already installed.
+
+<!-- Functions -->
+- Functions should be documented using JSDocs
+
+<!-- Props -->
+- Always include a prop for className to allow for passing of custom class name
+- Do not include css and styling properties in a component's props. These will be defined in scss if required.
+
+<!-- Styles -->
+- When creating a function use the `cn` function to combine multiple classes.
+- This function automatically handles null and undefined values so you can simply pass it all of the classes
+    Ex.
+    Instead of: <div className={`${styles.box} ${className || ''}`}></div>
+    Use this: <div className={cn(styles.box,className)}></div>
+- Organize scss files by the function of the property. In other words, group properties that relate to position and group properties that relate to display (flex, grid, etc.).
+- Each group should be separated by a spcae.
+- Groups should be in this order:
+    1. Position (position, top, inset, z-index, etc.)
+    2. Display (display, flex-direction, place-itens, etc.)
+    3. Size (width, max-height, padding, margin, etc.)
+    4. Fonts (font-family, font-size, letter-spacing, color, etc.)
+    5. Visual (border, background-color, background, etc.)
+- Any nested definitions (ex. .div{ **.div{}**}) should be at the bottom of selector group
