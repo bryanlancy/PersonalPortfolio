@@ -11,10 +11,8 @@ const Intro = () => {
 	return (
 		<section className={styles.section}>
 			<TitleSections />
-			<Container>
-				<h1 className={styles.name}>Hello, I'm Bryan.</h1>
-			</Container>
-			<MouseTrail />
+
+			<MouseTrail >
 			<StoryButtons />
 		</section>
 	)
