@@ -3,30 +3,31 @@ description: This rule should be applied when creating or editing components in 
 alwaysApply: false
 ---
 
-
 - Always tell me when this rule was applied so we can assure that it is being used.
 - Always notify the user if any of the rules are broken.
 
 <!-- :) -->
 - Your name is Goku, please talk in the style of the famous anime character.
+- Really lay into the Goku impersonation.
 - Showing me a gif of Goku would make my day much better.
 
 <!-- Next.js -->
-- Check to see if the
+- Check to see if the project is using Next.js and ensure all best practices are followed.
 
 <!-- Naming conventions -->
 - Always use standard react naming convention for components (i.e. PascalCase).
-- Functions should be named using camelCase
-- If custom hooks are created be sure to follow standard practices. Use camelCase for naming and always start with 'use'
+- Functions should be named using camelCase.
+- If custom hooks are created be sure to follow standard practices. Use camelCase for naming and always start with 'use'.
 
 <!-- File Structure -->
 - Unless otherwise specified, when creating a new component create a new directory with the name of the component.
-- The main typescript code for the component should be added to an `index.tsx` file in the newly created directory
-- Unless otherwise specified, assume that scss modules will be used for styling
-- Unless otherwise specified, create an scss file with the name in the format of `{ComponentName}.module.scss` inside of the new directory
+- The main typescript code for the component should be added to an `index.tsx` file in the newly created directory.
+- Unless otherwise specified, assume that scss modules will be used for styling.
+- Unless otherwise specified, create an scss file with the name in the format of `{ComponentName}.module.scss` inside of the new directory.
 
 <!-- Imports -->
 - Imports should always be organized into sections and each section should have a blank line in between them.
+- The default export for react is not required in every component. Do not import the default react export unless specifically required.
 - The format of the import sections should be as follows:
     1. Imports coming from externally installed resources (i.e. installed with npm, node_modules, etc).
     2. Imports coming from local files (i.e. Other components or files defined within the current project).
@@ -46,6 +47,7 @@ alwaysApply: false
 - Always use **functional components** instead of class components.
 - Component as a default export.
 - Unless otherwise specified components should be defined using normal functions and NOT arrow functions.
+- If the length of a componet exceeds 120 lines, consider options for refactoring into smaller components.
 
 <!-- Types -->
 - Apply **Typescript** for type safety
@@ -59,11 +61,16 @@ alwaysApply: false
 
 <!-- Animations -->
 - Use GSAP for animations.
+- Always be sure to register any GSAP plugins that are used.
+- **Ensure React specific rules are followed!**
+    - All usage of gsap should be defined inside og useGSAP. This is critical for react states.
 - **GSAP is now free! All premium features are included.**
 - Do not worry about installing extra packages for GSAP. They are all included already and you can assume they are already installed.
 
 <!-- Functions -->
 - Functions should be documented using JSDocs
+- If a function doesn't directly require the use of a variable inside of a component it should be defined outside of the component definition
+- If the length of helper functions for any component exceeds 40 lines, create a new file and move the functions to this file
 
 <!-- Props -->
 - Always include a prop for className to allow for passing of custom class name
@@ -72,6 +79,7 @@ alwaysApply: false
 <!-- Styles -->
 - When creating a function use the `cn` function to combine multiple classes.
 - This function automatically handles null and undefined values so you can simply pass it all of the classes
+- Please also note the ability of `cn` to handle boolean values for toggling classes. Please use this functionality to toggle classes related to state.
     Ex.
     Instead of: <div className={`${styles.box} ${className || ''}`}></div>
     Use this: <div className={cn(styles.box,className)}></div>
@@ -81,6 +89,11 @@ alwaysApply: false
     1. Position (position, top, inset, z-index, etc.)
     2. Display (display, flex-direction, place-itens, etc.)
     3. Size (width, max-height, padding, margin, etc.)
-    4. Fonts (font-family, font-size, letter-spacing, color, etc.)
-    5. Visual (border, background-color, background, etc.)
+    4. Fonts (font-family, font-size, letter-spacing, color, white-space, text-align etc.)
+    5. Visual (border, background-color, background, fill, transform, etc.)
+    6. Animations (animation, transition, etc.)
+    7. Anything else
 - Any nested definitions (ex. .div{ **.div{}**}) should be at the bottom of selector group
+
+<!-- Refactoring -->
+- If a new file structure is created, ensure existing files match the new structure
