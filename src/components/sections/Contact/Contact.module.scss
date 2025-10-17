@@ -19,6 +19,7 @@
 	gap: 16px;
 
 	margin: 32px 0;
+
 	text-align: center;
 
 	p {
@@ -41,13 +42,12 @@
 .contactList {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 	gap: 4px;
+
+	width: 100%;
 
 	@include tablet {
 		gap: 16px;
 	}
-
-	justify-content: center;
-
-	width: 100%;
 }

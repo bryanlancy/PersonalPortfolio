@@ -9,36 +9,35 @@
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-	margin: 0 auto;
 
 	max-width: 1164px;
+	margin: 0 auto;
 	padding: 0 48px;
-
+	padding-bottom: 40px;
 	gap: 4px;
+
+	perspective: 75em;
+
 	@include laptop {
 		gap: 16px;
 	}
-
-	padding-bottom: 40px;
-	perspective: 75em;
 }
 
 // Individual Tech cards
 
 .tech {
-	visibility: hidden;
-
 	position: relative;
-	--primaryColor: #fff; //! Changed in frontend
-	border: 1px solid var(--primaryColor);
 
 	width: 48%;
 	height: 100px;
-	overflow: hidden;
 
+	visibility: hidden;
+	--primaryColor: #fff; //! Changed in frontend
+	border: 1px solid var(--primaryColor);
+	border-radius: 8px;
+	overflow: hidden;
 	transform-style: preserve-3d;
 
-	border-radius: 8px;
 	@include laptop {
 		width: 240px;
 	}
@@ -110,11 +109,11 @@
 
 	display: flex;
 	align-items: center;
-	mix-blend-mode: difference;
 
 	padding: 4px;
 
 	background-color: #fff0;
+	mix-blend-mode: difference;
 	transition: all 0.2s 0s;
 
 	&:hover {

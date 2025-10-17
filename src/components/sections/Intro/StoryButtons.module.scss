@@ -1,13 +1,12 @@
 .storyControls {
 	// position: absolute;
+	bottom: 20%;
 
 	display: grid;
 	place-items: center;
 
 	width: 520px;
 	height: 240px;
-
-	bottom: 20%;
 
 	border: 1px solid red;
 }
@@ -23,11 +22,11 @@
 	button {
 		position: relative;
 		cursor: pointer;
-		border: none;
-		padding: 8px 24px;
 
+		padding: 8px 24px;
 		max-height: 40px;
 
+		border: none;
 		border-radius: 8px;
 	}
 	.auto {

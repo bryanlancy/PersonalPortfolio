@@ -1,9 +1,10 @@
 .titles {
-	border: 1px solid white;
 	position: relative;
 
 	width: 98vw;
 	height: 80vh;
+
+	border: 1px solid white;
 }
 
 .name {
@@ -19,27 +20,29 @@
 	display: flex;
 	text-wrap: nowrap;
 
-	font-size: 40px;
 	height: 75px;
+
+	font-size: 40px;
 }
 
 .drag {
-	// border: 1px dotted red;
 	position: absolute;
 	inset: 0;
+
+	// border: 1px dotted red;
 }
 
 .cards {
 	position: absolute;
 	bottom: 0px;
 	right: 0px;
+	z-index: 1;
 
 	width: 600px;
 	height: 600px;
 
 	perspective: 1100px;
 	transform-style: preserve-3d;
-	z-index: 1;
 	h2 {
 		position: absolute;
 		bottom: 8px;
@@ -48,7 +51,6 @@
 		width: 120px;
 
 		font-size: 36px;
-
 		white-space: nowrap;
 		text-align: right;
 	}
