@@ -110,3 +110,67 @@ export const generateCurvedPath = (points: Point[]): string => {
 
 	return path
 }
+
+/**
+ * Calculates the SHA256 hash of a string after preprocessing
+ * @param input - The string to hash
+ * @returns Promise that resolves to the SHA256 hash as a hexadecimal string
+ */
+export const calculateSHA256Hash = async (input: string): Promise<string> => {
+	// Preprocess the string: convert to lowercase and trim whitespace
+	const preprocessedString = input.toLowerCase().trim()
+
+	// Check if crypto.subtle is available (only works in secure contexts)
+	if (!crypto?.subtle) {
+		throw new Error(
+			'Crypto API is not available. This feature requires a secure context (HTTPS or localhost).'
+		)
+	}
+
+	// Encode the string as UTF-8
+	const encoder = new TextEncoder()
+	const data = encoder.encode(preprocessedString)
+
+	// Calculate SHA256 hash
+	const hashBuffer = await crypto.subtle.digest('SHA-256', data)
+
+	// Convert to hexadecimal string
+	const hashArray = Array.from(new Uint8Array(hashBuffer))
+	const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
+
+	return hashHex
+}
+
+/**
+ * Simple hash function that works in all contexts (fallback for non-secure environments)
+ * @param input - The string to hash
+ * @returns A simple hash string
+ */
+const simpleHash = (input: string): string => {
+	let hash = 0
+	for (let i = 0; i < input.length; i++) {
+		const char = input.charCodeAt(i)
+		hash = (hash << 5) - hash + char
+		hash = hash & hash // Convert to 32-bit integer
+	}
+	return Math.abs(hash).toString(16)
+}
+
+/**
+ * Calculates a hash of a string with fallback for non-secure contexts
+ * @param input - The string to hash
+ * @returns Promise that resolves to a hash string
+ */
+export const calculateHashWithFallback = async (
+	input: string
+): Promise<string> => {
+	try {
+		return await calculateSHA256Hash(input)
+	} catch (error) {
+		console.warn(
+			'Falling back to simple hash due to crypto API unavailability:',
+			error
+		)
+		return simpleHash(input.toLowerCase().trim())
+	}
+}

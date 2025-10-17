@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import { cn } from '@/utils/react'
 
@@ -7,6 +7,7 @@ import { useMouseTrail } from './hooks/useMouseTrail'
 import { generateCurvedPath } from './utils'
 import { useClickEffects, useMouseLeave } from './hooks'
 import { DebugCircles, FireworksList } from './components'
+import CircularImage, { CircularImageRef } from './components/CircularImage'
 
 import styles from './MouseEffects.module.scss'
 
@@ -20,8 +21,18 @@ function MouseTrail({
 	text = "Hello, I'm Bryan",
 	debug = false,
 }: MouseTrailProps) {
+	const circularImageRef = useRef<CircularImageRef>(null)
+
+	// Get path data from circular image ref
+	const getCircularPathData = (): string | undefined => {
+		return circularImageRef.current?.getPathData() || undefined
+	}
+
 	const { points, svgRef, returnPointsTop, returnPointsBottom } =
-		useMouseTrail()
+		useMouseTrail({
+			top: getCircularPathData,
+			bottom: getCircularPathData,
+		})
 	const pathData = generateCurvedPath(points)
 
 	// Use custom hook for click effects management
@@ -45,6 +56,8 @@ function MouseTrail({
 		)
 	}, [clickPositions, clickCircleRefs])
 
+	const circleRadius = 100
+
 	return (
 		<svg
 			ref={svgRef}
@@ -65,7 +78,18 @@ function MouseTrail({
 					<path d={pathData} className={styles.path} />
 				</>
 			)}
-
+			<CircularImage
+				ref={circularImageRef}
+				imageUrl={
+					'https://gravatar.com/avatar/' + // Gravatar URL
+					'e198f1211a23c23d967a61304e7240865b9133734a783cc30e44302c0349827e' + // Bryan's Gravatar hash
+					`?s=${circleRadius * 2}` // Size of the image
+				}
+				radius={circleRadius}
+				x={300}
+				y={600}
+				className={styles.circularImage}
+			/>
 			<FireworksList
 				fireworks={fireworks}
 				onRemoveFirework={removeFirework}

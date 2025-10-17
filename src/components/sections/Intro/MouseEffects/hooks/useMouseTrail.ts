@@ -10,13 +10,18 @@ import {
 	DEFAULT_HOME_POSITION,
 	DEFAULT_RETURN_POINTS,
 } from '../constants'
-import { calculateCirclePoints } from '../utils'
 
 /**
  * Custom hook for managing mouse trail animation logic
+ * @param options - Optional object with custom return paths
+ * @param options.top - Optional SVG path string or function returning path string for top return path
+ * @param options.bottom - Optional SVG path string or function returning path string for bottom return path
  * @returns Object containing trail points and control functions
  */
-export const useMouseTrail = () => {
+export const useMouseTrail = (options?: {
+	top?: string | (() => string | undefined)
+	bottom?: string | (() => string | undefined)
+}) => {
 	const [points, setPoints] = useState<Point[]>(DEFAULT_RETURN_POINTS)
 	const svgRef = useRef<SVGSVGElement | null>(null)
 	const lastPos = useRef<Point | null>(null)
@@ -28,24 +33,81 @@ export const useMouseTrail = () => {
 	const lastReturnFrameTime = useRef<number | null>(null)
 	const isReturning = useRef(false)
 
-	// Calculate return points
-	const returnPointsTop = calculateCirclePoints(
-		DEFAULT_HOME_POSITION[0] - MAX_LENGTH,
-		DEFAULT_HOME_POSITION[1] - 100,
-		100,
-		20
-	)
-		.slice(-14, -9)
-		.reverse()
-	returnPointsTop.push(...DEFAULT_RETURN_POINTS)
+	/**
+	 * Converts SVG path data to an array of points
+	 * @param pathData - SVG path string
+	 * @returns Array of points along the path, or empty array if path is invalid
+	 */
+	const pathDataToPoints = (pathData: string | undefined): Point[] => {
+		// Handle invalid or empty path data
+		if (!pathData || pathData.trim() === '') {
+			return []
+		}
 
-	const returnPointsBottom = calculateCirclePoints(
-		DEFAULT_HOME_POSITION[0] - MAX_LENGTH,
-		DEFAULT_HOME_POSITION[1] + 100,
-		100,
-		20
-	).slice(-10, -5)
-	returnPointsBottom.push(...DEFAULT_RETURN_POINTS)
+		try {
+			// Create a temporary SVG path element to get points
+			const path = document.createElementNS(
+				'http://www.w3.org/2000/svg',
+				'path'
+			)
+			path.setAttribute('d', pathData)
+
+			// Get path length - if this fails, the path is invalid
+			const pathLength = path.getTotalLength()
+			if (pathLength === 0) {
+				return []
+			}
+
+			const numPoints = Math.max(10, Math.floor(pathLength / 20)) // Sample every ~20 units
+			const points: Point[] = []
+
+			for (let i = 0; i <= numPoints; i++) {
+				const point = path.getPointAtLength(
+					(i / numPoints) * pathLength
+				)
+				points.push([point.x, point.y])
+			}
+
+			return points
+		} catch (error) {
+			// If path parsing fails, return empty array
+			console.warn('Invalid SVG path data:', pathData, error)
+			return []
+		}
+	}
+
+	// Calculate default return paths as SVG strings
+	const defaultTopPath = `M ${DEFAULT_HOME_POSITION[0] - MAX_LENGTH},${
+		DEFAULT_HOME_POSITION[1] - 100
+	} A 100,100 0 0,1 ${DEFAULT_HOME_POSITION[0] - MAX_LENGTH + 50},${
+		DEFAULT_HOME_POSITION[1] - 50
+	} L ${DEFAULT_HOME_POSITION[0]},${DEFAULT_HOME_POSITION[1]}`
+	const defaultBottomPath = `M ${DEFAULT_HOME_POSITION[0] - MAX_LENGTH},${
+		DEFAULT_HOME_POSITION[1] + 100
+	} A 100,100 0 0,1 ${DEFAULT_HOME_POSITION[0] - MAX_LENGTH + 50},${
+		DEFAULT_HOME_POSITION[1] + 50
+	} L ${DEFAULT_HOME_POSITION[0]},${DEFAULT_HOME_POSITION[1]}`
+
+	/**
+	 * Gets the current path data, evaluating functions if needed
+	 */
+	const getCurrentPathData = (
+		pathOrFunction: string | (() => string | undefined) | undefined,
+		defaultPath: string
+	): string => {
+		if (!pathOrFunction) return defaultPath
+		const result =
+			typeof pathOrFunction === 'function'
+				? pathOrFunction()
+				: pathOrFunction
+		return result || defaultPath
+	}
+
+	// Get current path data (will be re-evaluated when needed)
+	const getCurrentTopPath = () =>
+		getCurrentPathData(options?.top, defaultTopPath)
+	const getCurrentBottomPath = () =>
+		getCurrentPathData(options?.bottom, defaultBottomPath)
 
 	/**
 	 * Updates the trail with new points, maintaining the maximum length constraint
@@ -134,24 +196,27 @@ export const useMouseTrail = () => {
 					const finalPosition = prev[prev.length - 1]
 					const [, finalY] = finalPosition
 
-					// If final position is below DEFAULT_HOME_POSITION, use bottom points
+					// Get current path data dynamically
+					let currentPathData: string
 					if (finalY > DEFAULT_HOME_POSITION[1]) {
-						pointsToFollow =
-							returnPointsBottom && returnPointsBottom.length > 0
-								? returnPointsBottom
-								: [DEFAULT_HOME_POSITION]
+						currentPathData = getCurrentBottomPath()
 					} else {
-						// Otherwise use top points (default)
-						pointsToFollow =
-							returnPointsTop && returnPointsTop.length > 0
-								? returnPointsTop
-								: [DEFAULT_HOME_POSITION]
+						currentPathData = getCurrentTopPath()
 					}
+
+					// Convert current path to points
+					const currentPoints = pathDataToPoints(currentPathData)
+					pointsToFollow =
+						currentPoints && currentPoints.length > 0
+							? currentPoints
+							: [DEFAULT_HOME_POSITION]
 				} else {
 					// No trail points, default to top points
+					const currentPathData = getCurrentTopPath()
+					const currentPoints = pathDataToPoints(currentPathData)
 					pointsToFollow =
-						returnPointsTop && returnPointsTop.length > 0
-							? returnPointsTop
+						currentPoints && currentPoints.length > 0
+							? currentPoints
 							: [DEFAULT_HOME_POSITION]
 				}
 
@@ -331,7 +396,9 @@ export const useMouseTrail = () => {
 	return {
 		points,
 		svgRef,
-		returnPointsTop,
-		returnPointsBottom,
+		returnPointsTop: pathDataToPoints(getCurrentTopPath()),
+		returnPointsBottom: pathDataToPoints(getCurrentBottomPath()),
+		topPath: getCurrentTopPath(),
+		bottomPath: getCurrentBottomPath(),
 	}
 }
