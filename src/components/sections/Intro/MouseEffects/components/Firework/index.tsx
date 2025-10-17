@@ -29,7 +29,8 @@ function Firework({ onComplete, className }: FireworkProps) {
 	 */
 	const generateParticles = () => {
 		const particles = []
-		const particleCount = 12 + Math.floor(Math.random() * 8) // 12-19 particles
+		// Reduced particle count for better performance
+		const particleCount = 8 + Math.floor(Math.random() * 4) // 8-11 particles
 
 		for (let i = 0; i < particleCount; i++) {
 			const angle =
@@ -92,8 +93,7 @@ function Firework({ onComplete, className }: FireworkProps) {
 
 				// Initial state - particles start at center (0, 0)
 				gsap.set(element, {
-					x: 0,
-					y: 0,
+					attr: { cx: 0, cy: 0 },
 					opacity: 0,
 					scale: 0,
 				})
@@ -104,8 +104,7 @@ function Firework({ onComplete, className }: FireworkProps) {
 				tl.to(
 					element,
 					{
-						x: particle.x,
-						y: particle.y,
+						attr: { cx: particle.x, cy: particle.y },
 						opacity: 1,
 						scale: 1,
 						duration: 0.3,
@@ -116,8 +115,8 @@ function Firework({ onComplete, className }: FireworkProps) {
 					.to(
 						element,
 						{
-							duration: 2,
-							y: '+=72px',
+							attr: { cy: `+=48` },
+							duration: 0.6, // Reduced duration for better performance
 						},
 						0.4 + delay
 					)
@@ -126,7 +125,7 @@ function Firework({ onComplete, className }: FireworkProps) {
 						{
 							opacity: 0,
 							scale: 0.3,
-							duration: 0.6,
+							duration: 0.4, // Faster fade out
 							ease: 'power2.out',
 						},
 						'<'

@@ -22,6 +22,13 @@ export const useClickEffects = (svgRef: React.RefObject<SVGSVGElement>) => {
 		}>
 	>([])
 
+	// Maximum number of simultaneous fireworks for performance
+	const MAX_FIREWORKS = 8
+
+	// Throttle clicks to prevent performance issues
+	const lastClickTime = useRef(0)
+	const CLICK_THROTTLE_MS = 100 // Minimum 100ms between clicks
+
 	// Refs for click circle elements to animate
 	const clickCircleRefs = useRef<(SVGCircleElement | null)[]>([])
 
@@ -36,6 +43,11 @@ export const useClickEffects = (svgRef: React.RefObject<SVGSVGElement>) => {
 		(e: React.MouseEvent<SVGSVGElement>) => {
 			if (!svgRef.current) return
 
+			// Throttle clicks to prevent performance issues
+			const now = Date.now()
+			if (now - lastClickTime.current < CLICK_THROTTLE_MS) return
+			lastClickTime.current = now
+
 			const rect = svgRef.current.getBoundingClientRect()
 			const x = e.clientX - rect.left
 			const y = e.clientY - rect.top
@@ -43,11 +55,19 @@ export const useClickEffects = (svgRef: React.RefObject<SVGSVGElement>) => {
 			// Add the new click position to the array
 			setClickPositions(prev => [...prev, [x, y]])
 
-			// Create a new firework at the click position
-			const fireworkId = `firework-${Date.now()}-${Math.random()}`
-			setFireworks(prev => [...prev, { id: fireworkId, x, y }])
+			// Create a new firework at the click position (with limit)
+			setFireworks(prev => {
+				// Remove oldest fireworks if we exceed the limit
+				const currentFireworks =
+					prev.length >= MAX_FIREWORKS
+						? prev.slice(-(MAX_FIREWORKS - 1))
+						: prev
+
+				const fireworkId = `firework-${Date.now()}-${Math.random()}`
+				return [...currentFireworks, { id: fireworkId, x, y }]
+			})
 		},
-		[svgRef]
+		[svgRef, MAX_FIREWORKS, CLICK_THROTTLE_MS]
 	)
 
 	/**
