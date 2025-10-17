@@ -21,7 +21,10 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
 	({ title, className }, ref) => {
 		return (
 			<div className={cn(styles.card, className)} ref={ref}>
-				<h2>{title}</h2>
+				<div className={styles.front}>
+					<h2>{title}</h2>
+				</div>
+				<div className={styles.back}></div>
 			</div>
 		)
 	}
@@ -64,35 +67,39 @@ const TitleCards = () => {
 
 		for (let i = 0; i < cardsArr.length; i++) {
 			const rotateReg = new RegExp(/(?<=rotateX\()(.*?)(?=\s*deg\))/gm)
-			cardsTl.to(cardsArr, {
-				rotationX: `+=${360 / cardsArr.length}`,
-				rotationY: `+=360`,
-				duration: 7.5,
-				ease: 'elastic.in',
+			cardsTl.to(
+				cardsArr,
+				{
+					rotationX: `+=${360 / cardsArr.length}`,
+					rotationY: `+=360`,
+					duration: 7.5,
+					ease: 'elastic.in',
 
-				onComplete: () => {
-					const current = cards[i].ref.current
-					if (current) {
-						const match =
-							current.style['transform'].match(rotateReg)
-						if (match) {
-							const rotation = Number(match[0])
+					onComplete: () => {
+						const current = cards[i].ref.current
+						if (current) {
+							const match =
+								current.style['transform'].match(rotateReg)
+							if (match) {
+								const rotation = Number(match[0])
 
-							switch (rotation) {
-								case 120:
-									setCurrentTitle('Learner')
-									break
-								case 360:
-									setCurrentTitle('Tinkerer')
-									break
-								case 600:
-									setCurrentTitle('Software Engineer')
-									break
+								switch (rotation) {
+									case 120:
+										setCurrentTitle('Learner')
+										break
+									case 360:
+										setCurrentTitle('Tinkerer')
+										break
+									case 600:
+										setCurrentTitle('Software Engineer')
+										break
+								}
 							}
 						}
-					}
+					},
 				},
-			})
+				'+=3'
+			)
 		}
 	}, [])
 
@@ -112,17 +119,6 @@ const TitleCards = () => {
 					/>
 				))}
 			</div>
-
-			{/* <div className={styles.text}>
-				<h2 className={styles.subtext}>
-					And I'm a{' '}
-					<AnimatedText
-						text={'Test'}
-						color={'#ff0000'}
-						duration={5000}
-					/>
-				</h2>
-			</div> */}
 		</div>
 	)
 }

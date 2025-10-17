@@ -3,8 +3,6 @@
 
 	width: 98vw;
 	height: 80vh;
-
-	border: 1px solid white;
 }
 
 .name {
@@ -28,14 +26,12 @@
 .drag {
 	position: absolute;
 	inset: 0;
-
-	// border: 1px dotted red;
 }
 
 .cards {
 	position: absolute;
-	bottom: 0px;
-	right: 0px;
+	bottom: 24px;
+	right: 16px;
 	z-index: 1;
 
 	width: 600px;
@@ -43,6 +39,7 @@
 
 	perspective: 1100px;
 	transform-style: preserve-3d;
+
 	h2 {
 		position: absolute;
 		bottom: 8px;
@@ -64,23 +61,49 @@
 	height: 100%;
 
 	border-radius: 24px;
+	transform-style: preserve-3d;
 
-	h2 {
+	.front,
+	.back {
 		position: absolute;
-		bottom: 8px;
-		left: 8px;
+		inset: 0;
+		border-radius: 24px;
+		backface-visibility: hidden;
+	}
 
-		white-space: nowrap;
-		text-align: left;
+	.front {
+		z-index: 2;
+
+		h2 {
+			position: absolute;
+			bottom: 8px;
+			left: 8px;
+			white-space: nowrap;
+			text-align: left;
+		}
+	}
+
+	.back {
+		transform: rotateY(180deg);
+		z-index: 1;
 	}
 
 	&.software {
-		background-color: rgb(0, 0, 103);
+		.front,
+		.back {
+			background-color: rgb(0, 0, 103);
+		}
 	}
 	&.tinkerer {
-		background-color: green;
+		.front,
+		.back {
+			background-color: green;
+		}
 	}
 	&.learner {
-		background-color: rgb(122, 0, 0);
+		.front,
+		.back {
+			background-color: rgb(122, 0, 0);
+		}
 	}
 }
