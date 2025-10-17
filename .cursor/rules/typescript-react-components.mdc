@@ -27,7 +27,7 @@ alwaysApply: false
 
 <!-- Imports -->
 - Imports should always be organized into sections and each section should have a blank line in between them.
-- The default export for react is not required in every component. Do not import the default react export unless specifically required.
+- The default export for react is not required in every component. **Do not import the default react export unless specifically required.**
 - The format of the import sections should be as follows:
     1. Imports coming from externally installed resources (i.e. installed with npm, node_modules, etc).
     2. Imports coming from local files (i.e. Other components or files defined within the current project).
@@ -63,6 +63,8 @@ alwaysApply: false
 - Use GSAP for animations.
 - Always be sure to register any GSAP plugins that are used.
 - **Ensure React specific rules are followed!**
+    - Use these docs: https://gsap.com/resources/React/
+    - Functions created to control gsap animations or timelines **must** follow the proper `contextSafe` practices.
     - All usage of gsap should be defined inside og useGSAP. This is critical for react states.
 - **GSAP is now free! All premium features are included.**
 - Do not worry about installing extra packages for GSAP. They are all included already and you can assume they are already installed.
