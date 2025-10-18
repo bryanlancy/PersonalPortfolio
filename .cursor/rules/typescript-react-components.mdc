@@ -43,6 +43,9 @@ alwaysApply: false
 
     import styles from './ComponentName.module.scss'
 
+<!-- Context -->
+- **Always separate context definitions into a separate file.** That file should be placed in the main context directory.
+
 <!-- Component Setup -->
 - Always use **functional components** instead of class components.
 - Component as a default export.
@@ -65,7 +68,7 @@ alwaysApply: false
 - **Ensure React specific rules are followed!**
     - Use these docs: https://gsap.com/resources/React/
     - Functions created to control gsap animations or timelines **must** follow the proper `contextSafe` practices.
-    - All usage of gsap should be defined inside og useGSAP. This is critical for react states.
+    - All usage of gsap should be defined inside of useGSAP. This is critical for react states. **Instead of useEffect,  use useGSAP**
 - **GSAP is now free! All premium features are included.**
 - Do not worry about installing extra packages for GSAP. They are all included already and you can assume they are already installed.
 
@@ -80,7 +83,8 @@ alwaysApply: false
 
 <!-- Styles -->
 - When creating a function use the `cn` function to combine multiple classes.
-- This function automatically handles null and undefined values so you can simply pass it all of the classes
+- This function automatically handles null and undefined values so you can simply pass it all of the classes.
+- **Only use `cn` if an element needs more than 1 className!**
 - Please also note the ability of `cn` to handle boolean values for toggling classes. Please use this functionality to toggle classes related to state.
     Ex.
     Instead of: <div className={`${styles.box} ${className || ''}`}></div>
