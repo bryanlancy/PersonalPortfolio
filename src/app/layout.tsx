@@ -6,6 +6,7 @@ import './globals.scss'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import { cn } from '@/utils/react'
+import { LoadingProvider } from '@/context/loadingContext'
 config.autoAddCss = false
 
 // Display/title fonts
@@ -27,7 +28,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en' className={cn(bebasNeue.className)}>
-			<body>{children}</body>
+			<body>
+				<LoadingProvider>{children}</LoadingProvider>
+			</body>
 		</html>
 	)
 }
