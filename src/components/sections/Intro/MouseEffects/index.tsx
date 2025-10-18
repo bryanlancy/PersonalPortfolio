@@ -1,11 +1,10 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 
 import { cn } from '@/utils/react'
-import { useLoading } from '@/context/loadingContext'
 import { MouseTrailProps } from './types'
 import { useMouseTrail } from './hooks/useMouseTrail'
 import { generateCurvedPath } from './utils'
@@ -28,8 +27,6 @@ function MouseTrail({
 	debug = false,
 }: MouseTrailProps) {
 	const circularImageRef = useRef<CircularImageRef>(null)
-	const { isLoading } = useLoading()
-	const [isReady, setIsReady] = useState(false)
 
 	// Get path data from circular image ref
 	const getCircularPathData = (): string | undefined => {
@@ -71,31 +68,16 @@ function MouseTrail({
 
 	const circleRadius = 100
 
-	// Wait for loading to complete before initializing animations
-	useEffect(() => {
-		if (!isLoading) {
-			// Add a small delay to ensure DOM is fully ready
-			const timer = setTimeout(() => {
-				setIsReady(true)
-			}, 200)
-			return () => clearTimeout(timer)
-		}
-	}, [isLoading])
-
 	return (
 		<svg
 			ref={svgRef}
 			className={cn(styles.mousePath, className)}
-			onClick={isReady ? handleClick : undefined}
-			style={{
-				opacity: isReady ? 1 : 0.3,
-				pointerEvents: isReady ? 'auto' : 'none',
-			}}>
+			onClick={handleClick}>
 			<defs>
 				<path id='trailPath' d={pathData} />
 			</defs>
 
-			{debug && isReady && (
+			{debug && (
 				<>
 					<DebugCircles
 						returnPointsTop={returnPointsTop}
@@ -118,33 +100,29 @@ function MouseTrail({
 				y={600}
 				className={styles.circularImage}
 			/>
-			{isReady && (
-				<>
-					<FireworksList
-						fireworks={fireworks}
-						onRemoveFirework={removeFirework}
-					/>
+			<FireworksList
+				fireworks={fireworks}
+				onRemoveFirework={removeFirework}
+			/>
 
-					{/* Debug circles for click positions */}
-					{clickPositions.map((point, i) => (
-						<circle
-							key={`click-${i}`}
-							ref={el => {
-								clickCircleRefs.current[i] = el
-							}}
-							cx={point[0]}
-							cy={point[1]}
-							r={8}
-							fill='#111111'
-							stroke='#080808'
-							strokeWidth={2}
-							className={styles.clickPoint}
-						/>
-					))}
-				</>
-			)}
+			{/* Debug circles for click positions */}
+			{clickPositions.map((point, i) => (
+				<circle
+					key={`click-${i}`}
+					ref={el => {
+						clickCircleRefs.current[i] = el
+					}}
+					cx={point[0]}
+					cy={point[1]}
+					r={8}
+					fill='#111111'
+					stroke='#080808'
+					strokeWidth={2}
+					className={styles.clickPoint}
+				/>
+			))}
 
-			{text && isReady && (
+			{text && (
 				<text className={styles.pathText}>
 					<textPath
 						href='#trailPath'

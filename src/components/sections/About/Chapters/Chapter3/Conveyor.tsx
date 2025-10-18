@@ -98,7 +98,6 @@ const Box: FC<BoxProps> = ({ part, index }) => {
 				end: `+=${window.innerWidth / 1.01}px`,
 				scrub: true,
 				onUpdate: () => {
-					// console.log('test')
 					const rect = boxRef.current?.getBoundingClientRect()
 					if (!rect || !scannerXState[2].current) return
 					const midPoint = (rect.left + rect.right) * 0.48

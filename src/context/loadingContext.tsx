@@ -38,7 +38,7 @@ export function LoadingProvider({ children }: LoadingProviderProps) {
 			if (isLoading) {
 				setLoading(false)
 			}
-		}, 10000) // 10 second maximum
+		}, 30000) // 30 second maximum to allow for exit animations
 
 		return () => clearTimeout(maxLoadTime)
 	}, [isLoading])

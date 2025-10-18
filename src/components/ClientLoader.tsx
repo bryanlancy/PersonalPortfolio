@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLoading } from '@/context/loadingContext'
 import LoadingScreen from './LoadingScreen'
 
@@ -10,43 +10,71 @@ interface ClientLoaderProps {
 
 export default function ClientLoader({ children }: ClientLoaderProps) {
 	const { isLoading, setLoading } = useLoading()
+	const [progress, setProgress] = useState(0)
+	const [isExiting, setIsExiting] = useState(false)
 
+	const minimumLoadTime = 2000
+	const exitAnimationDuration = 2000
+
+	// Handle progress and exit logic - only run when isLoading is true
 	useEffect(() => {
-		// Check if GSAP and other dependencies are loaded
-		const checkDependencies = () => {
-			const isGSAPReady = typeof window !== 'undefined' && window.gsap
-			const isDOMReady = document.readyState === 'complete'
+		if (!isLoading) return
 
-			if (isGSAPReady && isDOMReady) {
-				// Add a small delay to ensure all animations are ready
+		let progressInterval: NodeJS.Timeout
+		let loadTimeout: NodeJS.Timeout
+		let gsapCheckTimeout: NodeJS.Timeout
+
+		// Simulate progress loading
+		const startTime = Date.now()
+		progressInterval = setInterval(() => {
+			const elapsed = Date.now() - startTime
+			const progressPercent = Math.min(
+				(elapsed / minimumLoadTime) * 100,
+				100
+			)
+			setProgress(progressPercent)
+		}, 50)
+
+		// Ensure minimum load time and wait for GSAP to be ready
+		const checkIfReady = () => {
+			const elapsed = Date.now() - startTime
+			const remainingTime = Math.max(0, minimumLoadTime - elapsed)
+
+			loadTimeout = setTimeout(() => {
+				// Start exit animation after showing 100% progress
 				setTimeout(() => {
-					setLoading(false)
-				}, 500)
-			} else {
-				// Check again in 100ms
-				setTimeout(checkDependencies, 100)
-			}
+					setIsExiting(true)
+
+					// Handle exit animation timing
+					setTimeout(() => {
+						setLoading(false)
+					}, exitAnimationDuration)
+				}, 500) // Give time to see 100% progress
+			}, remainingTime)
 		}
 
-		// Start checking after component mounts
-		const timeoutId = setTimeout(checkDependencies, 100)
+		// Start the loading process after a short delay
+		gsapCheckTimeout = setTimeout(() => {
+			checkIfReady()
+		}, 100)
 
-		return () => clearTimeout(timeoutId)
-	}, [setLoading])
+		return () => {
+			clearInterval(progressInterval)
+			clearTimeout(loadTimeout)
+			clearTimeout(gsapCheckTimeout)
+		}
+	}, [isLoading, minimumLoadTime, exitAnimationDuration, setLoading])
 
 	return (
 		<>
+			{children}
 			{isLoading && (
-				<LoadingScreen onLoadComplete={() => setLoading(false)} />
+				<LoadingScreen
+					progress={progress}
+					isExiting={isExiting}
+					exitAnimationDuration={exitAnimationDuration}
+				/>
 			)}
-			<div
-				style={{
-					// opacity: isLoading ? 0 : 1,
-					// transition: 'opacity 0.5s ease-out',
-					pointerEvents: isLoading ? 'none' : 'auto',
-				}}>
-				{children}
-			</div>
 		</>
 	)
 }

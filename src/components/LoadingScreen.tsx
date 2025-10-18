@@ -1,89 +1,45 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styles from './LoadingScreen.module.scss'
+import { cn } from '@/utils/react'
 
 interface LoadingScreenProps {
-	onLoadComplete?: () => void
+	progress: number
+	isExiting: boolean
+	exitAnimationDuration: number
 }
 
-export default function LoadingScreen({ onLoadComplete }: LoadingScreenProps) {
-	const [isVisible, setIsVisible] = useState(true)
-	const [isExiting, setIsExiting] = useState(false)
-	const [progress, setProgress] = useState(0)
-
-	const minimumLoadTime = 4000
-	const exitAnimationDuration = 3000
-
-	// Handle exit animation timing
-	useEffect(() => {
-		if (isExiting) {
-			const timer = setTimeout(() => {
-				setIsVisible(false)
-				onLoadComplete?.()
-			}, exitAnimationDuration)
-
-			return () => clearTimeout(timer)
-		}
-	}, [isExiting, exitAnimationDuration, onLoadComplete])
-
-	useEffect(() => {
-		let progressInterval: NodeJS.Timeout
-		let loadTimeout: NodeJS.Timeout
-		let gsapCheckTimeout: NodeJS.Timeout
-
-		// Simulate progress loading
-		const startTime = Date.now()
-		progressInterval = setInterval(() => {
-			const elapsed = Date.now() - startTime
-			const progressPercent = Math.min(
-				(elapsed / minimumLoadTime) * 100,
-				100
-			)
-			setProgress(progressPercent)
-		}, 50)
-
-		// Ensure minimum load time and wait for GSAP to be ready
-		const checkIfReady = () => {
-			const elapsed = Date.now() - startTime
-			const remainingTime = Math.max(0, minimumLoadTime - elapsed)
-
-			loadTimeout = setTimeout(() => {
-				// Final progress update
-
-				// Start exit animation after showing 100% progress
-				setTimeout(() => {
-					setProgress(100)
-					setIsExiting(true)
-					// Exit animation timing is handled by the useEffect above
-				}, 500) // Give time to see 100% progress
-			}, remainingTime)
-		}
-
-		// Start the loading process after a short delay
-		gsapCheckTimeout = setTimeout(() => {
-			checkIfReady()
-		}, 100)
-
-		return () => {
-			clearInterval(progressInterval)
-			clearTimeout(loadTimeout)
-			clearTimeout(gsapCheckTimeout)
-		}
-	}, [minimumLoadTime, onLoadComplete])
-
-	if (!isVisible) return null
-
+export default function LoadingScreen({
+	progress,
+	isExiting,
+	exitAnimationDuration,
+}: LoadingScreenProps) {
 	return (
 		<div
-			className={`${styles.loadingScreen} ${
-				isExiting ? styles.exiting : ''
-			}`}
+			className={cn(styles.loadingScreen, [isExiting, styles.exiting])}
 			style={
 				{
 					'--exitAnimationDuration': `${exitAnimationDuration}ms`,
 				} as React.CSSProperties
 			}>
+			{/* Left Panel */}
+			<div
+				className={cn(styles.panel, styles.leftPanel, [
+					isExiting,
+					styles.exiting,
+				])}
+			/>
+
+			{/* Right Panel */}
+			<div
+				className={cn(styles.panel, styles.rightPanel, [
+					isExiting,
+					styles.exiting,
+				])}
+			/>
+
+			{/* Content overlay */}
 			<div className={styles.content}>
 				<div className={styles.logo}>
 					<div className={styles.logoText}>Bryan Burns</div>
