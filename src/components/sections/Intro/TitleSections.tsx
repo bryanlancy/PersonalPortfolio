@@ -1,3 +1,5 @@
+'use client'
+
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 
@@ -13,16 +15,18 @@ gsap.registerPlugin(useGSAP, InertiaPlugin)
 interface CardProps {
 	title: string
 	className: string
+	children?: React.ReactNode
 }
 export interface CardPropsWithRef extends CardProps {
 	ref: RefObject<HTMLDivElement>
 }
 const Card = forwardRef<HTMLDivElement, CardProps>(
-	({ title, className }, ref) => {
+	({ title, className, children }, ref) => {
 		return (
 			<div className={cn(styles.card, className)} ref={ref}>
 				<div className={styles.front}>
 					<h2>{title}</h2>
+					{children}
 				</div>
 				<div className={styles.back}></div>
 			</div>
@@ -36,6 +40,7 @@ const TitleCards = () => {
 			title: 'Software Engineer',
 			className: styles.software,
 			ref: useRef<HTMLDivElement>(null),
+			children: <div className={styles.softwareContent}>TEST</div>,
 		},
 		{
 			title: 'Tinkerer',
@@ -115,8 +120,9 @@ const TitleCards = () => {
 						key={`card-${card.className}`}
 						ref={card.ref}
 						title={card.title}
-						className={card.className}
-					/>
+						className={card.className}>
+						{card.children}
+					</Card>
 				))}
 			</div>
 		</div>
