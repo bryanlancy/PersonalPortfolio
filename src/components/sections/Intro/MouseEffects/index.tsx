@@ -1,7 +1,11 @@
-import React, { useEffect, useRef } from 'react'
+'use client'
+
+import React, { useEffect, useRef, useState } from 'react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 
 import { cn } from '@/utils/react'
-
+import { useLoading } from '@/context/loadingContext'
 import { MouseTrailProps } from './types'
 import { useMouseTrail } from './hooks/useMouseTrail'
 import { generateCurvedPath } from './utils'
@@ -10,6 +14,8 @@ import { DebugCircles, FireworksList } from './components'
 import CircularImage, { CircularImageRef } from './components/CircularImage'
 
 import styles from './MouseEffects.module.scss'
+
+gsap.registerPlugin(useGSAP)
 
 /**
  * MouseTrail component that creates an animated trail following the mouse cursor
@@ -22,18 +28,25 @@ function MouseTrail({
 	debug = false,
 }: MouseTrailProps) {
 	const circularImageRef = useRef<CircularImageRef>(null)
+	const { isLoading } = useLoading()
+	const [isReady, setIsReady] = useState(false)
 
 	// Get path data from circular image ref
 	const getCircularPathData = (): string | undefined => {
 		return circularImageRef.current?.getPathData() || undefined
 	}
 
-	const { points, svgRef, returnPointsTop, returnPointsBottom } =
+	const { points, svgRef, returnPointsTop, returnPointsBottom, isAtHome } =
 		useMouseTrail({
 			top: getCircularPathData,
 			bottom: getCircularPathData,
 		})
-	const pathData = generateCurvedPath(points)
+
+	// Use circular path data directly when trail is at home (finished returning home)
+	// Otherwise use generated path from trail points
+	const pathData = isAtHome
+		? getCircularPathData() || ''
+		: generateCurvedPath(points)
 
 	// Use custom hook for click effects management
 	const {
@@ -58,16 +71,31 @@ function MouseTrail({
 
 	const circleRadius = 100
 
+	// Wait for loading to complete before initializing animations
+	useEffect(() => {
+		if (!isLoading) {
+			// Add a small delay to ensure DOM is fully ready
+			const timer = setTimeout(() => {
+				setIsReady(true)
+			}, 200)
+			return () => clearTimeout(timer)
+		}
+	}, [isLoading])
+
 	return (
 		<svg
 			ref={svgRef}
 			className={cn(styles.mousePath, className)}
-			onClick={handleClick}>
+			onClick={isReady ? handleClick : undefined}
+			style={{
+				opacity: isReady ? 1 : 0.3,
+				pointerEvents: isReady ? 'auto' : 'none',
+			}}>
 			<defs>
-				<path id='trailPath' d={pathData} fill='none' />
+				<path id='trailPath' d={pathData} />
 			</defs>
 
-			{debug && (
+			{debug && isReady && (
 				<>
 					<DebugCircles
 						returnPointsTop={returnPointsTop}
@@ -90,12 +118,33 @@ function MouseTrail({
 				y={600}
 				className={styles.circularImage}
 			/>
-			<FireworksList
-				fireworks={fireworks}
-				onRemoveFirework={removeFirework}
-			/>
+			{isReady && (
+				<>
+					<FireworksList
+						fireworks={fireworks}
+						onRemoveFirework={removeFirework}
+					/>
 
-			{text && (
+					{/* Debug circles for click positions */}
+					{clickPositions.map((point, i) => (
+						<circle
+							key={`click-${i}`}
+							ref={el => {
+								clickCircleRefs.current[i] = el
+							}}
+							cx={point[0]}
+							cy={point[1]}
+							r={8}
+							fill='#111111'
+							stroke='#080808'
+							strokeWidth={2}
+							className={styles.clickPoint}
+						/>
+					))}
+				</>
+			)}
+
+			{text && isReady && (
 				<text className={styles.pathText}>
 					<textPath
 						href='#trailPath'

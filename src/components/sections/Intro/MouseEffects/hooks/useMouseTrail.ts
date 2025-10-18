@@ -23,6 +23,7 @@ export const useMouseTrail = (options?: {
 	bottom?: string | (() => string | undefined)
 }) => {
 	const [points, setPoints] = useState<Point[]>(DEFAULT_RETURN_POINTS)
+	const [isAtHome, setIsAtHome] = useState(false)
 	const svgRef = useRef<SVGSVGElement | null>(null)
 	const lastPos = useRef<Point | null>(null)
 	const pendingPoint = useRef<Point | null>(null)
@@ -32,6 +33,7 @@ export const useMouseTrail = (options?: {
 	const currentReturnPointIndex = useRef(0)
 	const lastReturnFrameTime = useRef<number | null>(null)
 	const isReturning = useRef(false)
+	const originalTrailPoints = useRef<Point[]>([])
 
 	/**
 	 * Converts SVG path data to an array of points
@@ -155,6 +157,12 @@ export const useMouseTrail = (options?: {
 	 * Starts the animation to return the trail to the home position(s) with smooth curves
 	 */
 	const startReturnToHome = () => {
+		// Store the current trail points before starting return animation
+		setPoints(currentPoints => {
+			originalTrailPoints.current = [...currentPoints]
+			return currentPoints
+		})
+
 		// Reset the return point index when starting
 		currentReturnPointIndex.current = 0
 		lastReturnFrameTime.current = null
@@ -236,7 +244,15 @@ export const useMouseTrail = (options?: {
 
 				if (dist < 1) {
 					// Reached current target point
-					const newPoints = [...prev, currentTarget]
+					// Combine original trail points with return path points up to current position
+					const returnPathPoints = pointsToFollow.slice(
+						0,
+						currentReturnPointIndex.current + 1
+					)
+					const combinedPoints = [
+						...originalTrailPoints.current,
+						...returnPathPoints,
+					]
 
 					// Move to next return point if available
 					if (
@@ -245,15 +261,24 @@ export const useMouseTrail = (options?: {
 					) {
 						currentReturnPointIndex.current++
 						returnRef.current = requestAnimationFrame(moveToHome)
-						return newPoints
+						return combinedPoints
 					} else {
-						// Reached final point, stop moving
+						// Reached final point, stop moving and clear the trail
 						isReturning.current = false
 						if (returnRef.current) {
 							cancelAnimationFrame(returnRef.current)
 							returnRef.current = null
 						}
-						return newPoints
+
+						// Clear the stored original trail points to prevent unwanted tail
+						originalTrailPoints.current = []
+
+						// Set isAtHome to true to indicate we're at home position
+						setIsAtHome(true)
+
+						// When trail finishes returning home, clear it completely
+						// The path will be handled by the circular path data directly
+						return []
 					}
 				}
 
@@ -262,24 +287,21 @@ export const useMouseTrail = (options?: {
 				const stepRatio = Math.min(1, stepSize / dist)
 				const newX = x + dx * stepRatio
 				const newY = y + dy * stepRatio
-				const newPoints = [...prev, [newX, newY] as Point]
 
-				// Trim to keep total path length within MAX_LENGTH
-				let total = 0
-				let trimmed = [...newPoints]
-				for (let i = trimmed.length - 1; i > 0; i--) {
-					const [x1, y1] = trimmed[i]
-					const [x2, y2] = trimmed[i - 1]
-					const segLength = Math.hypot(x1 - x2, y1 - y2)
-					total += segLength
-					if (total > MAX_LENGTH) {
-						trimmed = trimmed.slice(i)
-						break
-					}
-				}
+				// During return animation, combine original trail with return path points
+				// to maintain smooth animation while preventing unwanted tail
+				const returnPathPoints = pointsToFollow.slice(
+					0,
+					currentReturnPointIndex.current
+				)
+				const newPoints = [
+					...originalTrailPoints.current,
+					...returnPathPoints,
+					[newX, newY] as Point,
+				]
 
 				returnRef.current = requestAnimationFrame(moveToHome)
-				return trimmed
+				return newPoints
 			})
 		}
 
@@ -318,6 +340,10 @@ export const useMouseTrail = (options?: {
 		// Reset return state
 		isReturning.current = false
 		lastReturnFrameTime.current = null
+		// Clear stored original trail points
+		originalTrailPoints.current = []
+		// Set isAtHome to false since mouse is now inside
+		setIsAtHome(false)
 
 		// Capture the initial mouse position for smooth transition
 		if (svgRef.current) {
@@ -400,5 +426,6 @@ export const useMouseTrail = (options?: {
 		returnPointsBottom: pathDataToPoints(getCurrentBottomPath()),
 		topPath: getCurrentTopPath(),
 		bottomPath: getCurrentBottomPath(),
+		isAtHome,
 	}
 }

@@ -55,23 +55,6 @@ function DebugCircles({
 					className={styles.returnPoint}
 				/>
 			))}
-
-			{/* Debug circles for click positions */}
-			{clickPositions.map((point, i) => (
-				<circle
-					key={`click-${i}`}
-					ref={el => {
-						clickCircleRefs.current[i] = el
-					}}
-					cx={point[0]}
-					cy={point[1]}
-					r={8}
-					fill='green'
-					stroke='white'
-					strokeWidth={2}
-					className={styles.clickPoint}
-				/>
-			))}
 		</g>
 	)
 }
