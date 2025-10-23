@@ -47,6 +47,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
 const TitleCards = ({ onTitleChange }: TitleSectionsProps) => {
 	const width = 800
 	const height = 800
+	const endRadius = 2.5
 	const cards: (CardProps & { ref: RefObject<HTMLDivElement> })[] = [
 		{
 			title: 'Software Engineer',
@@ -61,10 +62,10 @@ const TitleCards = ({ onTitleChange }: TitleSectionsProps) => {
 								width,
 								height,
 								type: 'rectangular',
-								turns: 5,
+								turns: 8,
 								pointsPerTurn: 4,
 								startRadius: 0.01,
-								endRadius: 1.5,
+								endRadius,
 							})}
 						/>
 					</svg>
@@ -88,10 +89,10 @@ const TitleCards = ({ onTitleChange }: TitleSectionsProps) => {
 								width,
 								height,
 								type: 'circular',
-								turns: 8,
+								turns: 12,
 								pointsPerTurn: 50,
 								startRadius: 0.05,
-								endRadius: 1.5,
+								endRadius,
 							})}
 						/>
 					</svg>
@@ -115,10 +116,10 @@ const TitleCards = ({ onTitleChange }: TitleSectionsProps) => {
 								width,
 								height,
 								type: 'hexagonal',
-								turns: 6,
+								turns: 10,
 								pointsPerTurn: 6,
 								startRadius: 0.01,
-								endRadius: 1.5,
+								endRadius,
 							})}
 						/>
 					</svg>
@@ -133,6 +134,7 @@ const TitleCards = ({ onTitleChange }: TitleSectionsProps) => {
 		const spiralTimeline = gsap.timeline({ repeat: -1 })
 		spiralTimeline.to(`.${styles.backgroundSvg}`, {
 			rotate: '+=360',
+
 			duration: 60,
 			ease: 'none',
 		})
@@ -194,7 +196,6 @@ const TitleCards = ({ onTitleChange }: TitleSectionsProps) => {
 
 	return (
 		<div className={styles.titles}>
-			<h2>{currentTitle}</h2>
 			<div className={styles.cards}>
 				<h2 className={styles.text}>I'm a</h2>
 				<div className={styles.drag}></div>

@@ -1,7 +1,9 @@
 'use client'
 
 import React from 'react'
+
 import { cn } from '@/utils/react'
+
 import styles from './Background.module.scss'
 
 interface BackgroundProps {
@@ -25,22 +27,18 @@ function Background({ currentTitle, className }: BackgroundProps) {
 			case 'Learner':
 				return styles.learner
 			default:
+				console.warn(`No background color found for title: ${title}`)
 				return styles.default
 		}
 	}
 
 	return (
-		<rect
+		<div
 			className={cn(
 				styles.background,
 				getBackgroundColor(currentTitle),
 				className
-			)}
-			width='100%'
-			height='100%'
-			x='0'
-			y='0'
-		/>
+			)}></div>
 	)
 }
 

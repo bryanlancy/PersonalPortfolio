@@ -1,10 +1,15 @@
 @import '@/styles/colors.scss';
 
 .titles {
-	position: relative;
+	position: absolute;
+	top: 55%;
+	right: 16px;
+	z-index: 450;
 
-	width: 98vw;
-	height: 80vh;
+	transform: translateY(-50%);
+
+	width: 600px;
+	height: 600px;
 }
 
 .name {
@@ -49,7 +54,7 @@
 
 		width: 120px;
 
-		font-size: 36px;
+		font-size: 64px;
 		white-space: nowrap;
 		text-align: right;
 	}

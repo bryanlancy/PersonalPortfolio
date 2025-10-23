@@ -211,7 +211,7 @@ const CelebrationElements = ({
 							href='#goPath'
 							textAnchor='start'
 							startOffset='0%'>
-							{calculateTextRepetitions('GO!', 4.5, 30)}
+							{calculateTextRepetitions('GO!', 4.5, 30, true)}
 						</textPath>
 					</text>
 				</svg>

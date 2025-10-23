@@ -83,8 +83,6 @@ function MouseTrail({
 				<path id='trailPath' d={pathData} />
 			</defs>
 
-			<Background currentTitle={currentTitle} />
-
 			{debug && (
 				<>
 					<DebugCircles

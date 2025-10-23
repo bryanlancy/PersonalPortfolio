@@ -1,0 +1,25 @@
+@import '@/styles/colors.scss';
+
+.background {
+	position: absolute;
+	inset: 0;
+	z-index: 100;
+
+	transition: background-color 0.5s ease-in-out;
+}
+
+.software {
+	background-color: $software-color;
+}
+
+.tinkerer {
+	background-color: $tinkerer-color;
+}
+
+.learner {
+	background-color: $learner-color;
+}
+
+.default {
+	background-color: $default-color;
+}

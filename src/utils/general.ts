@@ -92,25 +92,27 @@ export function enableScroll(): void {
 }
 
 /**
- * Calculates how many times a text string should be repeated to fill a circular path
+ * Calculates how many times a text string should be repeated to fill a path
  * @param text The text string to repeat (e.g., "GO!")
  * @param charWidth The estimated width of each character in the text
- * @param radius The radius of the circular path
- * @returns The repeated text that will fill the circumference
+ * @param distance The distance/length of the path
+ * @param isRadius Whether the distance parameter represents a radius for circular paths (default: false for straight lines)
+ * @returns The repeated text that will fill the path
  */
 export function calculateTextRepetitions(
 	text: string,
 	charWidth: number,
-	radius: number
+	distance: number,
+	isRadius: boolean = false
 ): string {
-	// Calculate circumference of circle
-	const circumference = 2 * Math.PI * radius
+	// Calculate the path length
+	const pathLength = isRadius ? 2 * Math.PI * distance : distance
 
 	// Calculate total width of the text string
 	const textWidth = text.length * charWidth
 
-	// Calculate how many times the text fits in the circumference
-	const repetitions = Math.floor(circumference / textWidth)
+	// Calculate how many times the text fits in the path length
+	const repetitions = Math.floor(pathLength / textWidth)
 
 	// Generate the repeated text with spaces between repetitions
 	return `${text} `.repeat(repetitions).trim()

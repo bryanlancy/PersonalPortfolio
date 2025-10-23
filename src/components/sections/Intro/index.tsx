@@ -1,13 +1,16 @@
 'use client'
 
 import { useState } from 'react'
+
 import TitleSections from './TitleSections'
 import StoryButtons from './StoryButtons'
+import MouseEffects from './MouseEffects'
+import FallingLetters from './FallingLetters'
+import { NoSsr } from '@/utils/next'
+import { cn } from '@/utils/react'
 
 import styles from './Intro.module.scss'
-
-import MouseEffects from './MouseEffects'
-import { NoSsr } from '@/utils/next'
+import Background from './Background'
 
 export default function Intro() {
 	const [currentTitle, setCurrentTitle] =
@@ -17,12 +20,13 @@ export default function Intro() {
 		setCurrentTitle(title)
 	}
 
-	// await new Promise(resolve => setTimeout(resolve, 6000))
 	return (
-		<section className={styles.section}>
+		<section className={cn(styles.section, 'introSection')}>
 			<NoSsr>
-				<TitleSections onTitleChange={handleTitleChange} />
 				<MouseEffects currentTitle={currentTitle} />
+				<Background currentTitle={currentTitle} />
+				<FallingLetters currentTitle={currentTitle} />
+				<TitleSections onTitleChange={handleTitleChange} />
 			</NoSsr>
 			<StoryButtons />
 		</section>
