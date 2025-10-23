@@ -83,6 +83,7 @@ alwaysApply: false
 
 <!-- Styles -->
 - When creating a function use the `cn` function to combine multiple classes.
+- The  `cn` function can be found in the react.ts ('@/utils/react.ts') util file.
 - This function automatically handles null and undefined values so you can simply pass it all of the classes.
 - **Only use `cn` if an element needs more than 1 className!**
 - Please also note the ability of `cn` to handle boolean values for toggling classes. Please use this functionality to toggle classes related to state.
