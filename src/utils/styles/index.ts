@@ -66,3 +66,18 @@ export function interpolateColors(
 
 	return colors
 }
+
+/**
+ * Creates a color rotator function that cycles through an array of colors
+ * @param colors - Array of hex color strings
+ * @returns Function that returns the next color in the sequence
+ */
+export function colorRotator(colors: string[] = ['#f00', '#0f0', '#00f']) {
+	let currentIndex = 0
+
+	return () => {
+		const color = colors[currentIndex]
+		currentIndex = (currentIndex + 1) % colors.length
+		return color
+	}
+}

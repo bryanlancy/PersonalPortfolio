@@ -5,17 +5,43 @@ import { SplitText } from 'gsap/SplitText'
 import { useGSAP } from '@gsap/react'
 
 import { cn } from '@/utils/react'
+import { colorRotator } from '@/utils/styles'
 
 import styles from './FallingLetters.module.scss'
-import { calculateTextRepetitions } from '@/utils/general'
+import { calculateTextRepetitions, toCamelCase } from '@/utils/general'
 
 // Register SplitText plugin
 gsap.registerPlugin(useGSAP, SplitText)
+
+// Create the color rotator instance
+const getNextColor = colorRotator(
+	//     [
+	// 	'#ff6b6b33',
+	// 	'#4ecdc433',
+	// 	'#45b7d133',
+	// 	'#96ceb433',
+	// 	'#feca5733',
+	// 	'#ff9ff333',
+	// 	'#54a0ff33',
+	// 	'#5f27cd33',
+	// 	'#00d2d333',
+	// 	'#ff9f4333',
+	// ]
+	['#fff']
+)
 
 interface FallingLetterComponent {
 	id: string
 	title: string
 }
+
+const hardcodedColors = {
+	softwareEngineer: '#FFD70033',
+	learner: '#FFE55C33',
+	tinkerer: '#F4D03F33',
+} as const
+
+type HardcodedColorKey = keyof typeof hardcodedColors
 
 interface FallingLettersProps {
 	currentTitle: string
@@ -42,7 +68,7 @@ const FallingLetterComponent = memo(function FallingLetterComponent({
 			autoSplit: true,
 			onSplit: ({ chars }) => {
 				// Clone each character multiple times with staggered positions
-				const clonesPerChar = 10 // Number of clones per character
+				const clonesPerChar = 7 // Number of clones per character
 				const clonedChars: HTMLElement[] = []
 				const textTl = gsap.timeline({
 					scrollTrigger: {
@@ -63,8 +89,14 @@ const FallingLetterComponent = memo(function FallingLetterComponent({
 						char.parentNode?.insertBefore(clone, char.nextSibling)
 
 						// Set initial position - clones should be positioned exactly on top of parent
+						const camelCaseTitle = toCamelCase(
+							title
+						) as HardcodedColorKey
 						gsap.set(clone, {
 							position: 'absolute',
+							color:
+								hardcodedColors[camelCaseTitle] ||
+								colorRotator(),
 							left: (char as HTMLElement).offsetLeft,
 							top: (char as HTMLElement).offsetTop,
 							autoAlpha: 0,
@@ -75,8 +107,8 @@ const FallingLetterComponent = memo(function FallingLetterComponent({
 				})
 
 				// Stagger the animation start times for each character group
-				const stagger = 0.3
-				const cloneStagger = 0.25 // Stagger between clones of the same character
+				const stagger = 0.5
+				const cloneStagger = 0.7 // Stagger between clones of the same character
 
 				clonedChars.forEach((char, index) => {
 					const charGroup = Math.floor(index / clonesPerChar)
@@ -100,10 +132,12 @@ const FallingLetterComponent = memo(function FallingLetterComponent({
 						char,
 						{
 							y: window.innerHeight + 200,
+							// color: getNextColor(),
 							scale: 0.5,
-							duration: 7.5,
+							autoAlpha: 0,
+							duration: 9,
 							delay: delay,
-							ease: 'power2.out',
+							ease: 'none',
 						},
 						delay + 0.5
 					)

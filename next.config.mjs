@@ -12,6 +12,11 @@ const nextConfig = {
 				hostname: 'tenor.com',
 				pathname: '/**',
 			},
+			{
+				protocol: 'https',
+				hostname: 'media2.giphy.com',
+				pathname: '/**',
+			},
 		],
 	},
 }

@@ -117,3 +117,16 @@ export function calculateTextRepetitions(
 	// Generate the repeated text with spaces between repetitions
 	return `${text} `.repeat(repetitions).trim()
 }
+
+/**
+ * Converts a string to camelCase format
+ * @param str The string to convert to camelCase
+ * @returns The string in camelCase format
+ */
+export function toCamelCase(str: string): string {
+	return str
+		.replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => {
+			return index === 0 ? word.toLowerCase() : word.toUpperCase()
+		})
+		.replace(/\s+/g, '')
+}

@@ -49,17 +49,6 @@ const DiscouragingElements = ({
 		<div className={styles.discouragingContainer}>
 			{/* Negative emoji elements */}
 			<AnimatedElement
-				x={-120}
-				y={-80}
-				rotation={15}
-				className={cn(styles.discouragingElement, styles.boo)}
-				isVisible={isVisible}
-				duration={duration}
-				continuousAnimation='shake'>
-				👻
-			</AnimatedElement>
-
-			<AnimatedElement
 				x={40}
 				y={-20}
 				rotation={35}
@@ -105,7 +94,7 @@ const DiscouragingElements = ({
 
 			<AnimatedElement
 				x={40}
-				y={160}
+				y={180}
 				rotation={-30}
 				className={cn(styles.discouragingElement, styles.no)}
 				isVisible={isVisible}
@@ -116,9 +105,9 @@ const DiscouragingElements = ({
 
 			{/* Negative image placeholders */}
 			<AnimatedElement
-				x={-76}
-				y={108}
-				rotation={20}
+				x={40}
+				y={60}
+				rotation={30}
 				className={cn(
 					styles.discouragingElement,
 					styles.imagePlaceholder
@@ -130,6 +119,22 @@ const DiscouragingElements = ({
 					<div className={styles.placeholderIcon}>💀</div>
 					<div className={styles.placeholderText}>Don't!</div>
 				</div>
+			</AnimatedElement>
+
+			<AnimatedElement
+				x={-76}
+				y={108}
+				rotation={20}
+				className={cn(styles.discouragingElement, styles.picard)}
+				isVisible={isVisible}
+				duration={duration}
+				continuousAnimation='shake'>
+				<Image
+					src='https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTZka2NyNmNyM3h6c21wc3Z0c3VrNTVsc21neXRkMHByeTEyb2dvcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1PIGU0cftC2pG/giphy.gif'
+					alt='face-palm'
+					width={80}
+					height={80}
+				/>
 			</AnimatedElement>
 
 			<AnimatedElement
@@ -149,9 +154,9 @@ const DiscouragingElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={-270}
-				y={-80}
-				rotation={20}
+				x={-240}
+				y={-160}
+				rotation={40}
 				className={cn(styles.discouragingElement, styles.patrick)}
 				isVisible={isVisible}
 				duration={duration}
@@ -188,21 +193,6 @@ const DiscouragingElements = ({
 					styles.discouragingElement,
 					styles.geometricShape,
 					styles.cross
-				)}
-				isVisible={isVisible}
-				duration={duration}
-				continuousAnimation='shake'>
-				<div></div>
-			</AnimatedElement>
-
-			<AnimatedElement
-				x={40}
-				y={40}
-				rotation={30}
-				className={cn(
-					styles.discouragingElement,
-					styles.geometricShape,
-					styles.arrowDown
 				)}
 				isVisible={isVisible}
 				duration={duration}

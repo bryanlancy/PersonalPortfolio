@@ -14,7 +14,6 @@ import {
 } from '@awesome.me/kit-ddd907bdb7/icons/duotone/regular'
 import styles from './TitleSections.module.scss'
 import { generateSpiralPath } from '@/utils/svg'
-import { NoSsr } from '@/utils/next'
 
 gsap.registerPlugin(useGSAP)
 
