@@ -1,14 +1,18 @@
 .storyControls {
-	// position: absolute;
-	bottom: 20%;
+	position: absolute;
+	bottom: -120px;
+	left: 50%;
+	z-index: 1000;
 
-	display: grid;
-	place-items: center;
+	transform: translateX(-50%);
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 
 	width: 520px;
 	height: 240px;
-
-	border: 1px solid red;
 }
 
 .buttons {
@@ -18,7 +22,6 @@
 	gap: 24px;
 
 	padding-top: 32px;
-
 	button {
 		position: relative;
 		cursor: pointer;
@@ -28,29 +31,41 @@
 
 		border: none;
 		border-radius: 8px;
+
+		transition: all 0.3s ease;
 	}
-	.auto {
-		background-color: rgb(43, 160, 43);
+}
+
+.buttonWrapper {
+	position: relative;
+}
+.auto {
+	background-color: rgb(43, 160, 43);
+
+	&:hover {
+		background-color: rgb(53, 180, 53);
+		transform: scale(1.05);
+		box-shadow: 0 8px 25px rgba(43, 160, 43, 0.3);
 	}
-	.skip {
-		background-color: red;
+}
+.skip {
+	background-color: red;
+
+	&:hover {
+		background-color: rgb(220, 20, 20);
+		transform: scale(1.05);
+		box-shadow: 0 8px 25px rgba(255, 0, 0, 0.3);
 	}
-	.keepScrolling {
-		position: absolute;
-		bottom: 100%;
-		left: 50%;
+}
+.keepScrolling {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
 
-		display: flex;
-		flex-direction: column;
-		gap: 16px;
+	width: 240px;
 
-		width: 240px;
-
-		transform: translateX(-50%);
-
-		b {
-			font-size: 18px;
-			letter-spacing: 0.75px;
-		}
+	b {
+		font-size: 18px;
+		letter-spacing: 0.75px;
 	}
 }

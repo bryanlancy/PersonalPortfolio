@@ -150,3 +150,63 @@ function generateLineFromPoints(
 
 	return `M ${printPoint(bestLineStart)} L ${printPoint(bestLineEnd)}`
 }
+
+export function generateSpiralPath({
+	width,
+	height,
+	type,
+	turns,
+	pointsPerTurn,
+	startRadius,
+	endRadius,
+}: {
+	width: number
+	height: number
+	type: 'rectangular' | 'circular' | 'hexagonal'
+	turns: number
+	pointsPerTurn: number
+	startRadius: number
+	endRadius: number
+}): string {
+	const centerX = width / 2
+	const centerY = height / 2
+	const maxRadius = Math.min(width, height) / 2
+	const totalPoints = turns * pointsPerTurn
+	const pathPoints: string[] = []
+
+	for (let i = 0; i <= totalPoints; i++) {
+		const progress = i / totalPoints
+		const radius = startRadius + (endRadius - startRadius) * progress
+		const angle = (i / pointsPerTurn) * 2 * Math.PI
+
+		let x: number, y: number
+
+		switch (type) {
+			case 'rectangular':
+				x = centerX + Math.cos(angle) * radius * maxRadius
+				y = centerY + Math.sin(angle) * radius * maxRadius
+				break
+			case 'circular':
+				x = centerX + Math.cos(angle) * radius * maxRadius
+				y = centerY + Math.sin(angle) * radius * maxRadius
+				break
+			case 'hexagonal':
+				const hexAngle =
+					Math.floor(angle / (Math.PI / 3)) * (Math.PI / 3)
+				x = centerX + Math.cos(hexAngle) * radius * maxRadius
+				y = centerY + Math.sin(hexAngle) * radius * maxRadius
+				break
+			default:
+				x = centerX + Math.cos(angle) * radius * maxRadius
+				y = centerY + Math.sin(angle) * radius * maxRadius
+		}
+
+		if (i === 0) {
+			pathPoints.push(`M ${x} ${y}`)
+		} else {
+			pathPoints.push(`L ${x} ${y}`)
+		}
+	}
+
+	return pathPoints.join(' ')
+}

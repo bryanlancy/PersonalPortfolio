@@ -9,8 +9,13 @@ import { MouseTrailProps } from './types'
 import { useMouseTrail } from './hooks/useMouseTrail'
 import { generateCurvedPath } from './utils'
 import { useClickEffects, useMouseLeave } from './hooks'
-import { DebugCircles, FireworksList } from './components'
-import CircularImage, { CircularImageRef } from './components/CircularImage'
+import {
+	Background,
+	DebugCircles,
+	FireworksList,
+	CircularImage,
+} from './components'
+import { CircularImageRef } from './components/CircularImage'
 
 import styles from './MouseEffects.module.scss'
 
@@ -25,6 +30,7 @@ function MouseTrail({
 	className,
 	text = "Hello, I'm Bryan",
 	debug = false,
+	currentTitle = 'Software Engineer',
 }: MouseTrailProps) {
 	const circularImageRef = useRef<CircularImageRef>(null)
 
@@ -76,6 +82,8 @@ function MouseTrail({
 			<defs>
 				<path id='trailPath' d={pathData} />
 			</defs>
+
+			<Background currentTitle={currentTitle} />
 
 			{debug && (
 				<>

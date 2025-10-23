@@ -2,15 +2,21 @@
 
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
-
-import InertiaPlugin from 'gsap/InertiaPlugin'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { cn } from '@/utils/react'
 
-import styles from './TitleSections.module.scss'
 import { forwardRef, RefObject, useRef, useState } from 'react'
+import {
+	faBook,
+	faLaptopCode,
+	faScrewdriverWrench,
+} from '@awesome.me/kit-ddd907bdb7/icons/duotone/regular'
+import styles from './TitleSections.module.scss'
+import { generateSpiralPath } from '@/utils/svg'
+import { NoSsr } from '@/utils/next'
 
-gsap.registerPlugin(useGSAP, InertiaPlugin)
+gsap.registerPlugin(useGSAP)
 
 interface CardProps {
 	title: string
@@ -19,6 +25,10 @@ interface CardProps {
 }
 export interface CardPropsWithRef extends CardProps {
 	ref: RefObject<HTMLDivElement>
+}
+
+interface TitleSectionsProps {
+	onTitleChange?: (title: string) => void
 }
 const Card = forwardRef<HTMLDivElement, CardProps>(
 	({ title, className, children }, ref) => {
@@ -34,28 +44,99 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
 	}
 )
 
-const TitleCards = () => {
+const TitleCards = ({ onTitleChange }: TitleSectionsProps) => {
+	const width = 800
+	const height = 800
 	const cards: (CardProps & { ref: RefObject<HTMLDivElement> })[] = [
 		{
 			title: 'Software Engineer',
 			className: styles.software,
 			ref: useRef<HTMLDivElement>(null),
-			children: <div className={styles.softwareContent}>TEST</div>,
+			children: (
+				<div className={styles.softwareContent}>
+					<svg className={styles.backgroundSvg}>
+						<path
+							className={styles.spiralPath}
+							d={generateSpiralPath({
+								width,
+								height,
+								type: 'rectangular',
+								turns: 5,
+								pointsPerTurn: 4,
+								startRadius: 0.01,
+								endRadius: 1.5,
+							})}
+						/>
+					</svg>
+					<FontAwesomeIcon
+						className={styles.icon}
+						icon={faLaptopCode}
+					/>
+				</div>
+			),
 		},
 		{
 			title: 'Tinkerer',
 			className: styles.tinkerer,
 			ref: useRef<HTMLDivElement>(null),
+			children: (
+				<div className={styles.tinkererContent}>
+					<svg className={styles.backgroundSvg}>
+						<path
+							className={styles.spiralPath}
+							d={generateSpiralPath({
+								width,
+								height,
+								type: 'circular',
+								turns: 8,
+								pointsPerTurn: 50,
+								startRadius: 0.05,
+								endRadius: 1.5,
+							})}
+						/>
+					</svg>
+					<FontAwesomeIcon
+						className={styles.icon}
+						icon={faScrewdriverWrench}
+					/>
+				</div>
+			),
 		},
 		{
 			title: 'Learner',
 			className: styles.learner,
 			ref: useRef<HTMLDivElement>(null),
+			children: (
+				<div className={styles.learnerContent}>
+					<svg className={styles.backgroundSvg}>
+						<path
+							className={styles.spiralPath}
+							d={generateSpiralPath({
+								width,
+								height,
+								type: 'hexagonal',
+								turns: 6,
+								pointsPerTurn: 6,
+								startRadius: 0.01,
+								endRadius: 1.5,
+							})}
+						/>
+					</svg>
+					<FontAwesomeIcon className={styles.icon} icon={faBook} />
+				</div>
+			),
 		},
 	]
 	const [currentTitle, setCurrentTitle] = useState<string>(cards[0].title)
 
 	useGSAP(() => {
+		const spiralTimeline = gsap.timeline({ repeat: -1 })
+		spiralTimeline.to(`.${styles.backgroundSvg}`, {
+			rotate: '+=360',
+			duration: 60,
+			ease: 'none',
+		})
+
 		const cardsArr = gsap.utils.toArray(
 			cards.map(card => `.${card.className}`)
 		)
@@ -91,12 +172,15 @@ const TitleCards = () => {
 								switch (rotation) {
 									case 120:
 										setCurrentTitle('Learner')
+										onTitleChange?.('Learner')
 										break
 									case 360:
 										setCurrentTitle('Tinkerer')
+										onTitleChange?.('Tinkerer')
 										break
 									case 600:
 										setCurrentTitle('Software Engineer')
+										onTitleChange?.('Software Engineer')
 										break
 								}
 							}

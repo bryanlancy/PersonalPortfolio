@@ -15,6 +15,9 @@ export interface MouseTrailProps {
 
 	/** Whether to show debug circles for return points */
 	debug?: boolean
+
+	/** Current title that determines background color */
+	currentTitle?: string
 }
 
 /**

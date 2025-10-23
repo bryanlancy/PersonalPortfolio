@@ -1,0 +1,214 @@
+.discouragingContainer {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	pointer-events: none;
+	z-index: 10;
+}
+
+.discouragingElement {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+
+	transform: translate(-50%, -50%);
+	transform-origin: center;
+}
+
+// Negative emoji elements
+.boo,
+.sad,
+.angry,
+.warning,
+.stop,
+.no {
+	font-size: 2rem;
+}
+
+// Negative image placeholders
+.imagePlaceholder {
+	width: 80px;
+	height: 80px;
+
+	background: linear-gradient(
+		135deg,
+		rgba(255, 0, 0, 0.1),
+		rgba(255, 0, 0, 0.05)
+	);
+	backdrop-filter: blur(10px);
+	border: 2px solid rgba(255, 0, 0, 0.3);
+	border-radius: 12px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.placeholderContent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+}
+
+.placeholderIcon {
+	font-size: 1.5rem;
+}
+
+.placeholderText {
+	font-size: 0.7rem;
+	color: rgba(255, 0, 0, 0.8);
+	font-weight: 500;
+	text-align: center;
+}
+
+// Negative geometric shapes
+.geometricShape {
+	width: 40px;
+	height: 40px;
+}
+
+.skull {
+	background: #333;
+	border-radius: 50%;
+	position: relative;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 8px;
+		left: 8px;
+		width: 6px;
+		height: 6px;
+		background: white;
+		border-radius: 50%;
+		box-shadow: 12px 0 0 white;
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		bottom: 8px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 16px;
+		height: 8px;
+		background: white;
+		border-radius: 0 0 8px 8px;
+	}
+}
+
+.brokenHeart {
+	background: #ff6b6b;
+	position: relative;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 20px;
+		height: 20px;
+		background: #ff6b6b;
+		transform: rotate(45deg);
+		border-radius: 50% 0 0 50%;
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 20px;
+		height: 20px;
+		background: #ff6b6b;
+		transform: rotate(-45deg);
+		border-radius: 0 50% 50% 0;
+	}
+}
+
+.cross {
+	background: #ff4757;
+	position: relative;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 4px;
+		height: 40px;
+		background: white;
+		transform: translate(-50%, -50%) rotate(45deg);
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 4px;
+		height: 40px;
+		background: white;
+		transform: translate(-50%, -50%) rotate(-45deg);
+	}
+}
+
+.arrowDown {
+	background: #ff6b6b;
+	position: relative;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 0;
+		height: 0;
+		border-left: 15px solid transparent;
+		border-right: 15px solid transparent;
+		border-top: 20px solid white;
+		transform: translate(-50%, -50%);
+	}
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+	.discouragingElement {
+		transform: translate(
+				calc(-50% + var(--x, 0px) * 0.7),
+				calc(-50% + var(--y, 0px) * 0.7)
+			)
+			rotate(var(--rotation, 0deg));
+	}
+
+	.boo,
+	.sad,
+	.angry,
+	.warning,
+	.stop,
+	.no {
+		font-size: 1.5rem;
+	}
+
+	.imagePlaceholder {
+		width: 60px;
+		height: 60px;
+	}
+
+	.geometricShape {
+		width: 30px;
+		height: 30px;
+	}
+}
+
+.surprisedGuy {
+	width: 80px;
+	height: 80px;
+
+	border-radius: 50%;
+
+	overflow: visible;
+}

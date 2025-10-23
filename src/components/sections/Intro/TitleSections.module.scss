@@ -1,3 +1,5 @@
+@import '@/styles/colors.scss';
+
 .titles {
 	position: relative;
 
@@ -73,6 +75,8 @@
 
 	.front {
 		z-index: 2;
+		border: 2px solid #fff;
+		overflow: hidden;
 
 		h2 {
 			position: absolute;
@@ -86,24 +90,70 @@
 	.back {
 		transform: rotateY(180deg);
 		z-index: 1;
+		filter: hue-rotate(10deg);
 	}
 
 	&.software {
 		.front,
 		.back {
-			background-color: rgb(0, 0, 103);
+			background-color: $software-color;
 		}
 	}
 	&.tinkerer {
 		.front,
 		.back {
-			background-color: green;
+			background-color: $tinkerer-color;
 		}
 	}
 	&.learner {
 		.front,
 		.back {
-			background-color: rgb(122, 0, 0);
+			background-color: $learner-color;
 		}
 	}
+}
+.softwareContent,
+.tinkererContent,
+.learnerContent {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 100%;
+	height: 100%;
+
+	font-size: 80px;
+
+	--fa-secondary-opacity: 1;
+}
+
+.softwareContent {
+	--fa-secondary-color: #000053;
+}
+.tinkererContent {
+	--fa-secondary-color: #004574;
+}
+.learnerContent {
+	--fa-secondary-color: #21006d;
+}
+.icon {
+	position: absolute;
+	z-index: 1;
+}
+
+.backgroundSvg {
+	position: absolute;
+	inset: 0;
+
+	width: 150%;
+	height: 150%;
+
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.spiralPath {
+	fill: none;
+	stroke: #ff03;
+	stroke-width: 2;
 }

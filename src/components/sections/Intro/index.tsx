@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import TitleSections from './TitleSections'
 import StoryButtons from './StoryButtons'
 
@@ -7,12 +10,19 @@ import MouseEffects from './MouseEffects'
 import { NoSsr } from '@/utils/next'
 
 export default function Intro() {
+	const [currentTitle, setCurrentTitle] =
+		useState<string>('Software Engineer')
+
+	const handleTitleChange = (title: string) => {
+		setCurrentTitle(title)
+	}
+
 	// await new Promise(resolve => setTimeout(resolve, 6000))
 	return (
 		<section className={styles.section}>
-			<TitleSections />
 			<NoSsr>
-				<MouseEffects />
+				<TitleSections onTitleChange={handleTitleChange} />
+				<MouseEffects currentTitle={currentTitle} />
 			</NoSsr>
 			<StoryButtons />
 		</section>

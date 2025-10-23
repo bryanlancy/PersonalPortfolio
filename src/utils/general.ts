@@ -59,3 +59,34 @@ export function arrRotator<T>(arr: T[]): () => T {
 		return currValue
 	}
 }
+
+/**
+ * Prevents scrolling on the body element by setting overflow: hidden
+ * and storing the current scroll position
+ */
+export function preventScroll(): void {
+	if (typeof window === 'undefined') return
+
+	const scrollY = window.scrollY
+	document.body.style.position = 'fixed'
+	document.body.style.top = `-${scrollY}px`
+	document.body.style.width = '100%'
+	document.body.style.overflow = 'hidden'
+}
+
+/**
+ * Re-enables scrolling on the body element and restores scroll position
+ */
+export function enableScroll(): void {
+	if (typeof window === 'undefined') return
+
+	const scrollY = document.body.style.top
+	document.body.style.position = ''
+	document.body.style.top = ''
+	document.body.style.width = ''
+	document.body.style.overflow = ''
+
+	if (scrollY) {
+		window.scrollTo(0, parseInt(scrollY || '0') * -1)
+	}
+}

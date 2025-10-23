@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLoading } from '@/context/loadingContext'
 import LoadingScreen from './LoadingScreen'
+import { preventScroll, enableScroll } from '@/utils/general'
 
 interface ClientLoaderProps {
 	children: React.ReactNode
@@ -19,6 +20,9 @@ export default function ClientLoader({ children }: ClientLoaderProps) {
 	// Handle progress and exit logic - only run when isLoading is true
 	useEffect(() => {
 		if (!isLoading) return
+
+		// Prevent scrolling when loading starts
+		preventScroll()
 
 		let progressInterval: NodeJS.Timeout
 		let loadTimeout: NodeJS.Timeout
@@ -64,6 +68,14 @@ export default function ClientLoader({ children }: ClientLoaderProps) {
 			clearTimeout(gsapCheckTimeout)
 		}
 	}, [isLoading, minimumLoadTime, exitAnimationDuration, setLoading])
+
+	// Handle scroll re-enabling when loading completes
+	useEffect(() => {
+		if (!isLoading) {
+			// Re-enable scrolling when loading is complete
+			enableScroll()
+		}
+	}, [isLoading])
 
 	return (
 		<>
