@@ -62,7 +62,7 @@ const DiscouragingElements = ({
 			<AnimatedElement
 				x={40}
 				y={-20}
-				rotation={45}
+				rotation={35}
 				className={cn(styles.discouragingElement, styles.sad)}
 				isVisible={isVisible}
 				duration={duration}
@@ -73,7 +73,7 @@ const DiscouragingElements = ({
 			<AnimatedElement
 				x={-100}
 				y={60}
-				rotation={45}
+				rotation={-25}
 				className={cn(styles.discouragingElement, styles.angry)}
 				isVisible={isVisible}
 				duration={duration}
@@ -116,8 +116,8 @@ const DiscouragingElements = ({
 
 			{/* Negative image placeholders */}
 			<AnimatedElement
-				x={-60}
-				y={120}
+				x={-76}
+				y={108}
 				rotation={20}
 				className={cn(
 					styles.discouragingElement,
@@ -149,7 +149,7 @@ const DiscouragingElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={-250}
+				x={-270}
 				y={-80}
 				rotation={20}
 				className={cn(styles.discouragingElement, styles.patrick)}
