@@ -1,4 +1,3 @@
-import { view } from 'motion/react-client'
 import { Coord, randomInteger } from '../general'
 
 export function printPoint(point: Coord): string {
@@ -209,4 +208,74 @@ export function generateSpiralPath({
 	}
 
 	return pathPoints.join(' ')
+}
+
+/**
+ * Generates an SVG path string for a perfect circle using cubic Bézier curves.
+ *
+ * This function creates a mathematically precise circle by approximating it with four
+ * cubic Bézier curve segments. Each segment represents a quarter of the circle.
+ *
+ * @param centerX - The x-coordinate of the circle's center point
+ * @param centerY - The y-coordinate of the circle's center point
+ * @param radius - The radius of the circle (must be positive)
+ * @returns A string containing the complete SVG path data for the circle
+ *
+ * @example
+ * ```typescript
+ * // Create a circle with center at (100, 100) and radius of 50
+ * const circlePath = generateCircularPath(100, 100, 50);
+ *
+ * // Use in SVG element
+ * <svg>
+ *   <path d={circlePath} fill="blue" stroke="black" strokeWidth="2" />
+ * </svg>
+ * ```
+ *
+ * @example
+ * ```typescript
+ * // Create multiple circles for a pattern
+ * const circles = [
+ *   generateCircularPath(50, 50, 25),   // Small circle
+ *   generateCircularPath(150, 150, 75), // Large circle
+ *   generateCircularPath(250, 100, 40)  // Medium circle
+ * ];
+ * ```
+ *
+ * @throws {Error} When radius is negative or zero
+ *
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#curve_commands} SVG Path Curve Commands
+ */
+export function generateCircularPath(
+	centerX: number,
+	centerY: number,
+	radius: number
+): string {
+	// Validate input parameters
+	if (radius <= 0) {
+		throw new Error('Radius must be a positive number')
+	}
+
+	// Calculate the control points for a smooth circle using cubic Bézier curves
+	// The magic number 0.5522847498 is derived from the mathematical formula:
+	// 4 * (sqrt(2) - 1) / 3, which ensures perfect circle approximation
+	const controlPointOffset = radius * 0.5522847498
+
+	const path = `M ${centerX - radius} ${centerY} C ${centerX - radius} ${
+		centerY - controlPointOffset
+	}, ${centerX - controlPointOffset} ${centerY - radius}, ${centerX} ${
+		centerY - radius
+	} C ${centerX + controlPointOffset} ${centerY - radius}, ${
+		centerX + radius
+	} ${centerY - controlPointOffset}, ${centerX + radius} ${centerY} C ${
+		centerX + radius
+	} ${centerY + controlPointOffset}, ${centerX + controlPointOffset} ${
+		centerY + radius
+	}, ${centerX} ${centerY + radius} C ${centerX - controlPointOffset} ${
+		centerY + radius
+	}, ${centerX - radius} ${centerY + controlPointOffset}, ${
+		centerX - radius
+	} ${centerY} Z`
+
+	return path
 }

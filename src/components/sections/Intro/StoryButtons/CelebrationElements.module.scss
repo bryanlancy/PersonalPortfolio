@@ -141,5 +141,17 @@
 .goGoGo {
 	width: 100px;
 	height: 100px;
-	border: 1px solid red;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	svg {
+		transform-origin: center;
+	}
+
+	text {
+		fill: #85d1e2;
+		font-size: 24px;
+	}
 }

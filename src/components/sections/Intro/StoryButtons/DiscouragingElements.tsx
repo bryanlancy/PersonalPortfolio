@@ -1,9 +1,16 @@
 'use client'
 
+import Image from 'next/image'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { SplitText } from 'gsap/SplitText'
+
 import AnimatedElement from './AnimatedElement'
 import { cn } from '@/utils/react'
+
 import styles from './DiscouragingElements.module.scss'
-import Image from 'next/image'
+
+gsap.registerPlugin(useGSAP, SplitText)
 
 interface DiscouragingElementsProps {
 	isVisible: boolean
@@ -14,6 +21,30 @@ const DiscouragingElements = ({
 	isVisible,
 	duration = 0.6,
 }: DiscouragingElementsProps) => {
+	useGSAP(() => {
+		const booTl = gsap.timeline()
+		SplitText.create('.booText', {
+			type: 'chars',
+			autoSplit: true,
+			onSplit: ({ chars }) => {
+				booTl.to(chars, {
+					color: '#ee9b00',
+					y: -25,
+					x: 10,
+					rotateX: -40,
+					// rotateZ: -10,
+					fontSize: '64px',
+
+					duration: 1,
+					stagger: 0.1,
+					repeat: -1,
+					yoyo: true,
+					ease: 'none',
+				})
+			},
+		})
+	}, [])
+
 	return (
 		<div className={styles.discouragingContainer}>
 			{/* Negative emoji elements */}
@@ -85,9 +116,9 @@ const DiscouragingElements = ({
 
 			{/* Negative image placeholders */}
 			<AnimatedElement
-				x={-140}
-				y={20}
-				rotation={10}
+				x={-60}
+				y={120}
+				rotation={20}
 				className={cn(
 					styles.discouragingElement,
 					styles.imagePlaceholder
@@ -105,11 +136,7 @@ const DiscouragingElements = ({
 				x={160}
 				y={-20}
 				rotation={-10}
-				className={cn(
-					styles.discouragingElement,
-
-					styles.surprisedGuy
-				)}
+				className={cn(styles.discouragingElement, styles.surprisedGuy)}
 				isVisible={isVisible}
 				duration={duration}
 				continuousAnimation='shake'>
@@ -122,43 +149,40 @@ const DiscouragingElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={-60}
-				y={120}
+				x={-250}
+				y={-80}
 				rotation={20}
-				className={cn(
-					styles.discouragingElement,
-					styles.imagePlaceholder
-				)}
+				className={cn(styles.discouragingElement, styles.patrick)}
 				isVisible={isVisible}
 				duration={duration}
 				continuousAnimation='shake'>
-				<div className={styles.placeholderContent}>
-					<div className={styles.placeholderIcon}>🚫</div>
-					<div className={styles.placeholderText}>No!</div>
-				</div>
+				<img
+					src='/assets/patrick.gif'
+					alt='Booo'
+					width={120}
+					height={120}
+				/>
 			</AnimatedElement>
 
 			<AnimatedElement
 				x={60}
-				y={-120}
-				rotation={-20}
+				y={-130}
+				rotation={-60}
 				className={cn(
 					styles.discouragingElement,
-					styles.imagePlaceholder
+					styles.booText,
+					'booText'
 				)}
 				isVisible={isVisible}
 				duration={duration}
 				continuousAnimation='shake'>
-				<div className={styles.placeholderContent}>
-					<div className={styles.placeholderIcon}>💔</div>
-					<div className={styles.placeholderText}>Sad</div>
-				</div>
+				<h2>BOOOOO</h2>
 			</AnimatedElement>
 
 			{/* Negative geometric shapes */}
 			<AnimatedElement
-				x={-40}
-				y={-40}
+				x={120}
+				y={-60}
 				rotation={45}
 				className={cn(
 					styles.discouragingElement,

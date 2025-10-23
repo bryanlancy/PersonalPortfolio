@@ -212,3 +212,25 @@
 
 	overflow: visible;
 }
+.patrick {
+	width: 120px;
+	height: 120px;
+
+	border-radius: 24px;
+	overflow: hidden;
+	transform: rotateY(180deg);
+}
+
+.booText {
+	display: grid;
+	place-items: center;
+
+	width: 240px;
+	height: 120px;
+	font-size: 24px;
+	font-weight: bold;
+	color: #ee0047;
+
+	text-align: center;
+	white-space: nowrap;
+}

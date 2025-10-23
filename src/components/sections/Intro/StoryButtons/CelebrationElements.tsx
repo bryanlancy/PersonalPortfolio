@@ -11,6 +11,8 @@ import { cn } from '@/utils/react'
 
 import styles from './CelebrationElements.module.scss'
 import { calculateCirclePoints } from '../MouseEffects/utils'
+import { generateCircularPath } from '@/utils/svg'
+import { calculateTextRepetitions } from '@/utils/general'
 
 gsap.registerPlugin(useGSAP, SplitText)
 
@@ -62,6 +64,15 @@ const CelebrationElements = ({
 					stagger: 0.025,
 				})
 			},
+		})
+
+		const goTl = gsap.timeline()
+		goTl.to(`.${styles.goGoGo} svg`, {
+			rotateZ: '+=360',
+			duration: 10,
+			repeat: -1,
+			ease: 'none',
+			transformOrigin: '50% 50%',
 		})
 	}, [])
 
@@ -188,12 +199,20 @@ const CelebrationElements = ({
 				isVisible={isVisible}
 				duration={duration}
 				continuousAnimation='float'>
-				<svg width={100} height={100} viewBox='0 0 100 100' fill='none'>
+				<svg width={100} height={100} viewBox='0 0 100 100'>
 					<defs>
-						{/* <path d={calculateCirclePoints(50, 50, 50, 100)}></path> */}
+						<path
+							id='goPath'
+							d={generateCircularPath(50, 50, 30)}></path>
 					</defs>
+
 					<text>
-						<textPath href='#textPath'>GO! GO! GO!</textPath>
+						<textPath
+							href='#goPath'
+							textAnchor='start'
+							startOffset='0%'>
+							{calculateTextRepetitions('GO!', 4.5, 30)}
+						</textPath>
 					</text>
 				</svg>
 			</AnimatedElement>
