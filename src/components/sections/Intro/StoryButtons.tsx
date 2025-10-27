@@ -50,8 +50,8 @@ const StoryButtons = () => {
 	return (
 		<div ref={containerRef} className={styles.storyControls}>
 			<div className={styles.keepScrolling}>
-				<p>Keep scrolling to go at your own pace</p>
-				<b>or</b>
+				<h1>Keep scrolling to go at your own pace</h1>
+				<h2>or</h2>
 			</div>
 			<div className={styles.buttons}>
 				<div className={styles.buttonWrapper}>

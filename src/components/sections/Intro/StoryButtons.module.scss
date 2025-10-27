@@ -1,6 +1,6 @@
 .storyControls {
 	position: absolute;
-	bottom: -120px;
+	bottom: -200px;
 	left: 50%;
 	z-index: 1000;
 
@@ -60,12 +60,15 @@
 .keepScrolling {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	gap: 8px;
 
 	width: 240px;
 
-	b {
-		font-size: 18px;
-		letter-spacing: 0.75px;
+	h1 {
+		white-space: nowrap;
+	}
+	h2 {
+		letter-spacing: 1.5px;
 	}
 }
