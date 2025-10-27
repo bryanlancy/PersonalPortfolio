@@ -17,6 +17,7 @@ import useWindowDimensions from '@/hooks/useWindowDimension'
 import { cn } from '@/utils/react'
 
 import styles from './TwoBeeks.module.scss'
+import Container from '@/utils/components/Container'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -135,19 +136,66 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 			className={cn('TwoBeeksContainer', styles.background)}
 			projectName='2Beeks'
 			techs={{ frontend: [], backend: [], devops: [] }}>
-			<SVGBeeksLogo className={styles.logo} />
+			<Container>
+				<SVGBeeksLogo className={styles.logo} />
 
-			{images.map((image, i) => {
-				return (
-					<PictureFrame
-						className={cn(styles.pic, image.className)}
-						key={`beeks-image-${i}`}
-						src={image.url}
-						alt={image.alt}
-					/>
-				)
-			})}
-			<ToolTip show={showToolTip} />
+				{images.map((image, i) => {
+					return (
+						<PictureFrame
+							className={cn(styles.pic, image.className)}
+							key={`beeks-image-${i}`}
+							src={image.url}
+							alt={image.alt}
+						/>
+					)
+				})}
+				<ToolTip show={showToolTip} />
+				<p className={cn(styles.line, styles.line1)}>
+					{line1a}
+					<span
+						className={styles.apiaryText}
+						onMouseEnter={() => setShowToolTip(true)}
+						onMouseLeave={() => setShowToolTip(false)}>
+						<FontAwesomeIcon
+							icon={faMagnifyingGlass}
+							className={styles.magnifier}
+						/>
+						apiary
+					</span>
+					{line1b}
+				</p>
+				<p className={cn(styles.line, styles.line2)}>{line2}</p>
+				<p className={cn(styles.line, styles.line3)}>{line3}</p>
+				<div className={styles.group4}>
+					<p className={cn(styles.line, styles.line4)}>{line4}</p>
+					<div className={styles.rightCol}>
+						<div className={styles.buttons}>
+							{/* <HexButton
+							variant='dark'
+							className={cn(styles.button, styles.figma)}
+							href=''
+							target='_blank'>
+							Figma Design
+						</HexButton> */}
+							<HexButton
+								variant='dark'
+								className={cn(styles.button, styles.website)}
+								href='https://2beeks.com/'
+								target='_blank'>
+								Website
+							</HexButton>
+						</div>
+						<div className={styles.group5}>
+							<p className={cn(styles.line, styles.line5)}>
+								{line5}
+							</p>
+							<p className={cn(styles.line, styles.line6)}>
+								{line6}
+							</p>
+						</div>
+					</div>
+				</div>
+			</Container>
 			<Swarm
 				count={2}
 				box={[
@@ -156,48 +204,6 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 				]}
 				className={styles.swarm}
 			/>
-			<p className={cn(styles.line, styles.line1)}>
-				{line1a}
-				<span
-					className={styles.apiaryText}
-					onMouseEnter={() => setShowToolTip(true)}
-					onMouseLeave={() => setShowToolTip(false)}>
-					<FontAwesomeIcon
-						icon={faMagnifyingGlass}
-						className={styles.magnifier}
-					/>
-					apiary
-				</span>
-				{line1b}
-			</p>
-			<p className={cn(styles.line, styles.line2)}>{line2}</p>
-			<p className={cn(styles.line, styles.line3)}>{line3}</p>
-			<div className={styles.group4}>
-				<p className={cn(styles.line, styles.line4)}>{line4}</p>
-				<div className={styles.rightCol}>
-					<div className={styles.buttons}>
-						{/* <HexButton
-							variant='dark'
-							className={cn(styles.button, styles.figma)}
-							href=''
-							target='_blank'>
-							Figma Design
-						</HexButton> */}
-						<HexButton
-							variant='dark'
-							className={cn(styles.button, styles.website)}
-							href='https://2beeks.com/'
-							target='_blank'>
-							Website
-						</HexButton>
-					</div>
-					<div className={styles.group5}>
-						<p className={cn(styles.line, styles.line5)}>{line5}</p>
-						<p className={cn(styles.line, styles.line6)}>{line6}</p>
-					</div>
-				</div>
-			</div>
-
 			<HexBackground />
 		</ProjectCard>
 	)
