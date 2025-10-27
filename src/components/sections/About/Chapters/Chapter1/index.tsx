@@ -14,6 +14,7 @@ import Background from './Background'
 import { cn } from '@/utils/react'
 
 import styles from './Chapter1.module.scss'
+import Container from '@/utils/components/Container'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -262,51 +263,57 @@ const Chapter1 = () => {
 		<div id='chapter1' className={cn(styles.chapter1, 'chapter1')}>
 			<Background />
 			<div className={cn('c1-container', styles.container)}>
-				<h1 className={cn('c1-title', styles.title)}>{title}</h1>
-				<div className={cn(styles.emoji, 'c1-emoji')}>
-					<div className={styles.me}>
-						<FontAwesomeIcon
-							icon={faFaceAwesome}
-							className={styles.happy}
-							fontSize={'40px'}
-						/>
-						<FontAwesomeIcon
-							icon={faFaceThinking}
-							className={styles.wonder}
-							fontSize={'40px'}
-						/>
-					</div>
-					<FontAwesomeIcon
-						icon={faDesktop}
-						className={cn(styles.computer, 'c1-computer')}
-						fontSize={'60px'}
-					/>
-					<div className={styles.gpa}>
-						<FontAwesomeIcon
-							icon={faUserTie}
-							className={cn('c1-gpa', styles.body)}
-							fontSize={'80px'}
-						/>
-						<div className={cn('c1-bubble', styles.bubble)}>
+				<Container>
+					<h1 className={cn('c1-title', styles.title)}>{title}</h1>
+					<div className={cn(styles.emoji, 'c1-emoji')}>
+						<div className={styles.me}>
 							<FontAwesomeIcon
-								icon={faComment}
-								fontSize={'160px'}
+								icon={faFaceAwesome}
+								className={styles.happy}
+								fontSize={'40px'}
 							/>
-							<p className={cn('c1-question', styles.question)}>
-								But do you know how it works?
-							</p>
+							<FontAwesomeIcon
+								icon={faFaceThinking}
+								className={styles.wonder}
+								fontSize={'40px'}
+							/>
+						</div>
+						<FontAwesomeIcon
+							icon={faDesktop}
+							className={cn(styles.computer, 'c1-computer')}
+							fontSize={'60px'}
+						/>
+						<div className={styles.gpa}>
+							<FontAwesomeIcon
+								icon={faUserTie}
+								className={cn('c1-gpa', styles.body)}
+								fontSize={'80px'}
+							/>
+							<div className={cn('c1-bubble', styles.bubble)}>
+								<FontAwesomeIcon
+									icon={faComment}
+									fontSize={'160px'}
+								/>
+								<p
+									className={cn(
+										'c1-question',
+										styles.question
+									)}>
+									But do you know how it works?
+								</p>
+							</div>
 						</div>
 					</div>
-				</div>
-				<p className={cn('c1-line1', styles.line, styles.line1)}>
-					{line1}
-				</p>
-				<p className={cn('c1-line2', styles.line, styles.line2)}>
-					{line2}
-				</p>
-				<p className={cn('c1-line3', styles.line, styles.line3)}>
-					{line3}
-				</p>
+					<p className={cn('c1-line1', styles.line, styles.line1)}>
+						{line1}
+					</p>
+					<p className={cn('c1-line2', styles.line, styles.line2)}>
+						{line2}
+					</p>
+					<p className={cn('c1-line3', styles.line, styles.line3)}>
+						{line3}
+					</p>
+				</Container>
 			</div>
 		</div>
 	)

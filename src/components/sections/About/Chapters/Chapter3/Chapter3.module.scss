@@ -16,7 +16,7 @@
 }
 
 .title {
-	position: fixed;
+	position: absolute;
 	bottom: 320px;
 	right: 80px;
 
@@ -33,14 +33,14 @@
 }
 
 .line1 {
-	position: fixed;
+	position: absolute;
 	top: 520px;
 	left: 16px;
 
 	@include autoAlpha;
 }
 .line2 {
-	position: fixed;
+	position: absolute;
 	top: 544px;
 	left: 16px;
 

@@ -9,6 +9,7 @@ import { useRef } from 'react'
 import TypeText from '@/utils/components/TypeText'
 import useStateRef from 'react-usestateref'
 import Conveyor from './Conveyor'
+import Container from '@/utils/components/Container'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -174,41 +175,44 @@ const Chapter3 = () => {
 
 	return (
 		<div id='chapter3' className={cn('chapter3', styles.chapter3)}>
-			<h1 ref={titleRef} className={styles.title}>
-				{title}
-			</h1>
 			<div ref={containerRef} className={styles.container}>
-				<TypeText
-					shouldAnimate={showLine3State[0]}
-					text={line3}
-					shouldBlink={true}
-					className={cn(styles.line, styles.line3)}
-					cursorClassName={styles.cursor}>
-					<p>{line3}</p>
-				</TypeText>
+				<Container>
+					<h1 ref={titleRef} className={styles.title}>
+						{title}
+					</h1>
 
+					<TypeText
+						shouldAnimate={showLine3State[0]}
+						text={line3}
+						shouldBlink={true}
+						className={cn(styles.line, styles.line3)}
+						cursorClassName={styles.cursor}>
+						<p>{line3}</p>
+					</TypeText>
+
+					<TypeText
+						shouldAnimate={showLine1State[0]}
+						text={line1}
+						typeSpeed={0.02}
+						className={cn(styles.line, styles.line1)}
+						cursorClassName={styles.cursor}>
+						<p>{line1}</p>
+					</TypeText>
+					<TypeText
+						shouldAnimate={showLine2State[0]}
+						text={line2a + line2b + 1}
+						delay={1.1}
+						className={cn(styles.line, styles.line2)}
+						cursorClassName={styles.cursor}>
+						<p>
+							{line2a}
+							<span className={styles.moolah}>$</span>
+							{line2b}
+						</p>
+					</TypeText>
+				</Container>
 				<Conveyor />
 			</div>
-			<TypeText
-				shouldAnimate={showLine1State[0]}
-				text={line1}
-				typeSpeed={0.02}
-				className={cn(styles.line, styles.line1)}
-				cursorClassName={styles.cursor}>
-				<p>{line1}</p>
-			</TypeText>
-			<TypeText
-				shouldAnimate={showLine2State[0]}
-				text={line2a + line2b + 1}
-				delay={1.1}
-				className={cn(styles.line, styles.line2)}
-				cursorClassName={styles.cursor}>
-				<p>
-					{line2a}
-					<span className={styles.moolah}>$</span>
-					{line2b}
-				</p>
-			</TypeText>
 		</div>
 	)
 }

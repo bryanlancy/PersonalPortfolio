@@ -24,6 +24,7 @@ import { cn } from '@/utils/react'
 
 import styles from './Chapter4.module.scss'
 import DayNight from './DayNight'
+import Container from '@/utils/components/Container'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText)
 
@@ -458,52 +459,57 @@ const Chapter4 = () => {
 	return (
 		<div id='chapter4' className={cn('chapter4', styles.chapter4)}>
 			<div ref={containerRef} className={styles.container}>
-				<h1 className={styles.title}>{title}</h1>
+				<Container>
+					<h1 className={styles.title}>{title}</h1>
 
-				<DayNight start={750} />
+					<DayNight start={750} />
 
-				<p className={cn(styles.line, styles.line1)}>{line1}</p>
-				<p className={cn(styles.line, styles.line2)}>{line2}</p>
-				<i className={cn(styles.line, styles.line3)}>{line3}</i>
-				<p className={cn(styles.line, styles.line4)}>{line4}</p>
-				<p className={cn(styles.line, styles.line5)}>{line5}</p>
-				<p className={cn(styles.line, styles.line6)}>{line6}</p>
+					<p className={cn(styles.line, styles.line1)}>{line1}</p>
+					<p className={cn(styles.line, styles.line2)}>{line2}</p>
+					<i className={cn(styles.line, styles.line3)}>{line3}</i>
+					<p className={cn(styles.line, styles.line4)}>{line4}</p>
+					<p className={cn(styles.line, styles.line5)}>{line5}</p>
+					<p className={cn(styles.line, styles.line6)}>{line6}</p>
 
-				<div className={styles.house}>
-					<div className={styles.houseContainer}>
+					<div className={styles.house}>
+						<div className={styles.houseContainer}>
+							<FontAwesomeIcon
+								icon={faHouseChimney}
+								className={styles.houseOut}
+							/>
+							<FontAwesomeIcon
+								icon={faHouseChimneyBlank}
+								className={styles.houseIn}
+							/>
+						</div>
+						<div className={styles.me}>
+							<FontAwesomeIcon
+								className={styles.happy}
+								icon={faFaceAwesome}
+							/>
+							<FontAwesomeIcon
+								className={styles.sleeping}
+								icon={faFaceSleeping}
+							/>
+							<FontAwesomeIcon
+								className={styles.smart}
+								icon={faFaceGlasses}
+							/>
+							<FontAwesomeIcon
+								className={styles.hearts}
+								icon={faFaceGrinHearts}
+							/>
+						</div>
 						<FontAwesomeIcon
-							icon={faHouseChimney}
-							className={styles.houseOut}
+							icon={faBedEmpty}
+							className={styles.bed}
 						/>
 						<FontAwesomeIcon
-							icon={faHouseChimneyBlank}
-							className={styles.houseIn}
+							icon={faComputerClassic}
+							className={styles.computer}
 						/>
 					</div>
-					<div className={styles.me}>
-						<FontAwesomeIcon
-							className={styles.happy}
-							icon={faFaceAwesome}
-						/>
-						<FontAwesomeIcon
-							className={styles.sleeping}
-							icon={faFaceSleeping}
-						/>
-						<FontAwesomeIcon
-							className={styles.smart}
-							icon={faFaceGlasses}
-						/>
-						<FontAwesomeIcon
-							className={styles.hearts}
-							icon={faFaceGrinHearts}
-						/>
-					</div>
-					<FontAwesomeIcon icon={faBedEmpty} className={styles.bed} />
-					<FontAwesomeIcon
-						icon={faComputerClassic}
-						className={styles.computer}
-					/>
-				</div>
+				</Container>
 			</div>
 			<div className={cn('lightContainer', styles.lightContainer)}>
 				<FontAwesomeIcon

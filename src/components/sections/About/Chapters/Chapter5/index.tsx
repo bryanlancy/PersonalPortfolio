@@ -20,6 +20,7 @@ import { cn } from '@/utils/react'
 import styles from './Chapter5.module.scss'
 import Network from './Network'
 import { NoSsr } from '@/utils/next'
+import Container from '@/utils/components/Container'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText)
 
@@ -195,78 +196,93 @@ const Chapter5 = () => {
 	return (
 		<div id='chapter5' className={cn('chapter5', styles.chapter5)}>
 			<div className={styles.container} ref={containerRef}>
-				<NoSsr>
-					<Network />
-				</NoSsr>
-				<h1 className={cn('c5-title', styles.title)}>
-					{duplicateWords(title, 8).map((word, i) => {
-						return (
-							<p key={`title-line${i}`} className={styles.word}>
-								{word}
+				<Container>
+					<NoSsr>
+						<Network />
+					</NoSsr>
+					<h1 className={cn('c5-title', styles.title)}>
+						{duplicateWords(title, 8).map((word, i) => {
+							return (
+								<p
+									key={`title-line${i}`}
+									className={styles.word}>
+									{word}
+								</p>
+							)
+						})}
+					</h1>
+
+					<p className={cn(styles.line, styles.line1)}>{line1}</p>
+					<p className={cn(styles.line, styles.line2)}>{line2}</p>
+					<p className={cn(styles.line, styles.line3)}>{line3}</p>
+
+					<div
+						className={cn(
+							styles.proContainer,
+							styles.toolsContainer
+						)}>
+						<div className={styles.iconContainer}>
+							<FontAwesomeIcon
+								icon={faBan}
+								className={styles.ban}
+							/>
+							<FontAwesomeIcon
+								icon={faScrewdriverWrench}
+								className={styles.icon}
+							/>
+						</div>
+						<div className={styles.text}>
+							<FontAwesomeIcon
+								icon={faCheck}
+								className={styles.check}
+							/>
+							<p className={styles.lineTools}>{lineTools}</p>
+						</div>
+					</div>
+					<div
+						className={cn(
+							styles.proContainer,
+							styles.computerContainer
+						)}>
+						<div className={styles.iconContainer}>
+							<FontAwesomeIcon
+								icon={faLaptop}
+								className={styles.icon}
+							/>
+						</div>
+						<div className={styles.text}>
+							<FontAwesomeIcon
+								icon={faCheck}
+								className={styles.check}
+							/>
+							<p className={styles.lineComputer}>
+								{lineComputer}
 							</p>
-						)
-					})}
-				</h1>
+						</div>
+					</div>
 
-				<p className={cn(styles.line, styles.line1)}>{line1}</p>
-				<p className={cn(styles.line, styles.line2)}>{line2}</p>
-				<p className={cn(styles.line, styles.line3)}>{line3}</p>
-
-				<div className={cn(styles.proContainer, styles.toolsContainer)}>
-					<div className={styles.iconContainer}>
-						<FontAwesomeIcon icon={faBan} className={styles.ban} />
-						<FontAwesomeIcon
-							icon={faScrewdriverWrench}
-							className={styles.icon}
-						/>
+					<div
+						className={cn(
+							styles.proContainer,
+							styles.internetContainer
+						)}>
+						<div className={styles.iconContainer}>
+							<FontAwesomeIcon
+								icon={faWifiFair}
+								className={styles.icon}
+							/>
+						</div>
+						<div className={styles.text}>
+							<FontAwesomeIcon
+								icon={faCheck}
+								className={styles.check}
+							/>
+							<p className={styles.lineInternet}>
+								{lineInternet}
+							</p>
+						</div>
 					</div>
-					<div className={styles.text}>
-						<FontAwesomeIcon
-							icon={faCheck}
-							className={styles.check}
-						/>
-						<p className={styles.lineTools}>{lineTools}</p>
-					</div>
-				</div>
-				<div
-					className={cn(
-						styles.proContainer,
-						styles.computerContainer
-					)}>
-					<div className={styles.iconContainer}>
-						<FontAwesomeIcon
-							icon={faLaptop}
-							className={styles.icon}
-						/>
-					</div>
-					<div className={styles.text}>
-						<FontAwesomeIcon
-							icon={faCheck}
-							className={styles.check}
-						/>
-						<p className={styles.lineComputer}>{lineComputer}</p>
-					</div>
-				</div>
-
-				<div
-					className={cn(
-						styles.proContainer,
-						styles.internetContainer
-					)}>
-					<div className={styles.iconContainer}>
-						<FontAwesomeIcon
-							icon={faWifiFair}
-							className={styles.icon}
-						/>
-					</div>
-					<div className={styles.text}>
-						<FontAwesomeIcon
-							icon={faCheck}
-							className={styles.check}
-						/>
-						<p className={styles.lineInternet}>{lineInternet}</p>
-					</div>
-				</div>
+				</Container>
 			</div>
 		</div>
 	)

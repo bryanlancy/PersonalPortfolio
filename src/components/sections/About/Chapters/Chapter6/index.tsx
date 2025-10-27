@@ -8,6 +8,7 @@ import Calendar from './Calendar'
 import Projects from './Projects'
 
 import styles from './Chapter6.module.scss'
+import Container from '@/utils/components/Container'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -114,15 +115,17 @@ const Chapter6 = () => {
 	return (
 		<div id='chapter6' className={cn('chapter6', styles.chapter6)}>
 			<div ref={containerRef} className={styles.container}>
-				<h1 className={cn('c6-title', styles.title)}>{title}</h1>
-				<Calendar />
+				<Container>
+					<h1 className={cn('c6-title', styles.title)}>{title}</h1>
+					<Calendar />
 
-				<p className={cn(styles.line, styles.line1)}>{line1}</p>
-				<p className={cn(styles.line, styles.line2)}>{line2}</p>
-				<p className={cn(styles.line, styles.line3)}>{line3}</p>
-				<p className={cn(styles.line, styles.line4)}>{line4}</p>
+					<p className={cn(styles.line, styles.line1)}>{line1}</p>
+					<p className={cn(styles.line, styles.line2)}>{line2}</p>
+					<p className={cn(styles.line, styles.line3)}>{line3}</p>
+					<p className={cn(styles.line, styles.line4)}>{line4}</p>
 
-				<Projects />
+					<Projects />
+				</Container>
 			</div>
 		</div>
 	)

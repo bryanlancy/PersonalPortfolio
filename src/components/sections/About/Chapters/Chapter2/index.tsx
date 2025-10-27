@@ -16,6 +16,7 @@ import { cn } from '@/utils/react'
 import TypeText from '@/utils/components/TypeText'
 
 import styles from './Chapter2.module.scss'
+import Container from '@/utils/components/Container'
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger)
 
@@ -159,50 +160,52 @@ const Chapter2 = () => {
 			<div
 				ref={containerRef}
 				className={cn('c2-container', styles.container)}>
-				<TypeText
-					shouldAnimate={showTitleState[0]}
-					text={title}
-					shouldBlink={true}
-					typeSpeed={0.075}
-					className={styles.titleContainer}>
-					<h1 ref={titleRef}>{title}</h1>
-				</TypeText>
-				<TypeText
-					shouldAnimate={showLine1State[0]}
-					cursorSpeedAdjust={-50}
-					text={line1}
-					className={cn(styles.line, styles.line1)}>
-					<p>{line1}</p>
-				</TypeText>
-				<TypeText
-					shouldAnimate={showLine2State[0]}
-					text={line2}
-					typeSpeed={0.015}
-					cursorLengthAdjust={4}
-					className={cn(styles.line, styles.line2)}>
-					<p>{line2}</p>
-				</TypeText>
-				<TypeText
-					shouldAnimate={showLine3State[0]}
-					text={line3}
-					cursorLengthAdjust={8}
-					className={cn(styles.line, styles.line3)}>
-					<p>{line3}</p>
-				</TypeText>
-				<TypeText
-					shouldAnimate={showLine4State[0]}
-					text={line4}
-					cursorLengthAdjust={4}
-					className={cn(styles.line, styles.line4)}>
-					<p>{line4}</p>
-				</TypeText>
-				<TypeText
-					shouldAnimate={showLine5State[0]}
-					text={line5}
-					cursorLengthAdjust={4}
-					className={cn(styles.line, styles.line5)}>
-					<p>{line5}</p>
-				</TypeText>
+				<Container>
+					<TypeText
+						shouldAnimate={showTitleState[0]}
+						text={title}
+						shouldBlink={true}
+						typeSpeed={0.075}
+						className={styles.titleContainer}>
+						<h1 ref={titleRef}>{title}</h1>
+					</TypeText>
+					<TypeText
+						shouldAnimate={showLine1State[0]}
+						cursorSpeedAdjust={-50}
+						text={line1}
+						className={cn(styles.line, styles.line1)}>
+						<p>{line1}</p>
+					</TypeText>
+					<TypeText
+						shouldAnimate={showLine2State[0]}
+						text={line2}
+						typeSpeed={0.015}
+						cursorLengthAdjust={4}
+						className={cn(styles.line, styles.line2)}>
+						<p>{line2}</p>
+					</TypeText>
+					<TypeText
+						shouldAnimate={showLine3State[0]}
+						text={line3}
+						cursorLengthAdjust={8}
+						className={cn(styles.line, styles.line3)}>
+						<p>{line3}</p>
+					</TypeText>
+					<TypeText
+						shouldAnimate={showLine4State[0]}
+						text={line4}
+						cursorLengthAdjust={4}
+						className={cn(styles.line, styles.line4)}>
+						<p>{line4}</p>
+					</TypeText>
+					<TypeText
+						shouldAnimate={showLine5State[0]}
+						text={line5}
+						cursorLengthAdjust={4}
+						className={cn(styles.line, styles.line5)}>
+						<p>{line5}</p>
+					</TypeText>
+				</Container>
 			</div>
 		</div>
 	)
