@@ -1,12 +1,8 @@
-import React, {
-	CSSProperties,
-	FC,
-	ReactElement,
-	useEffect,
-	useState,
-} from 'react'
+import { CSSProperties, ReactElement } from 'react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Image from 'next/image'
-import { AnimatePresence, AnimationProps, motion } from 'motion/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
 	faBaseballBatBall,
@@ -18,111 +14,90 @@ import {
 } from '@awesome.me/kit-ddd907bdb7/icons/classic/regular'
 
 import { cn } from '@/utils/react'
-import { mapRange, randomInteger } from '@/utils/general'
 
-import styles from './WalkOns.module.scss'
+import styles from './Tiles.module.scss'
 
-interface TileProps {
-	animProgress: number
-}
-interface ColumnAnimOptions {
-	initial: AnimationProps['initial']
-	animate: AnimationProps['animate']
-	exit: AnimationProps['exit']
-}
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
-const Tiles: FC<TileProps> = ({ animProgress }) => {
-	const enter = 0.01
-	const exit = 0.95
+export default function Tiles() {
+	useGSAP(() => {
+		const step1 = 50
+		const step2 = 45
+		const duration1 = 0.5
+		const duration2 = 5
+		const length = 1200
 
-	const scrollMove = 30
-
-	const [offset, setOffset] = useState(new Array(tiles.length))
-	useEffect(() => {
-		const tempTiles = tiles.map(() => {
-			return randomInteger(0, 10)
+		// Start at y:100%, jump to on screen, continue to scroll to y:-100%
+		const oddTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.walkons',
+				start: 'top center-=100px',
+				end: `+=${length}px`,
+				toggleActions: 'play none resume reverse',
+				scrub: true,
+			},
 		})
-		setOffset(tempTiles)
+		oddTl.to(`.${styles.odd}`, {
+			autoAlpha: 1,
+			y: `${step1}%`,
+			duration: duration1,
+		})
+		oddTl.to(`.${styles.odd}`, {
+			y: `-${step2}%`,
+			duration: duration2,
+		})
+
+		// Start at y:-100%, jump to on screen, continue to scroll to y:100%
+		const evenTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.walkons',
+				start: 'top center-=100px',
+				end: `+=${length}px`,
+				toggleActions: 'play none resume reverse',
+				scrub: true,
+			},
+		})
+		evenTl.to(`.${styles.even}`, {
+			autoAlpha: 1,
+			y: `-${step1}%`,
+			duration: duration1,
+		})
+		evenTl.to(`.${styles.even}`, {
+			y: `${step2}%`,
+			duration: duration2,
+		})
 	}, [])
 
-	const oddColumnAnim: (index: number) => ColumnAnimOptions = index => {
-		return {
-			initial: {
-				opacity: 0,
-				transform: 'translateY(-100%)',
-			},
-			animate: {
-				opacity: 1,
-				transform: `translateY(${
-					mapRange(animProgress, [0, 1], [0, scrollMove]) +
-					offset[index]
-				}%)`,
-			},
-			exit: {
-				opacity: 0,
-				transform: 'translateY(100%)',
-			},
-		}
-	}
-	const evenColumnAnim: (index: number) => ColumnAnimOptions = index => {
-		return {
-			initial: {
-				opacity: 0,
-				transform: 'translateY(100%)',
-			},
-			animate: {
-				opacity: 1,
-				transform: `translateY(-${
-					mapRange(animProgress, [0, 1], [0, scrollMove]) +
-					offset[index]
-				}%)`,
-			},
-			exit: {
-				opacity: 0,
-				transform: 'translateY(-100%)',
-			},
-		}
-	}
 	return (
-		<motion.div key='tiles' className={styles.tiles}>
-			<AnimatePresence>
-				{tiles.map((column, ci) => {
-					return (
-						animProgress >= enter &&
-						animProgress <= exit && (
-							<motion.div
-								{...(ci % 2 === 0
-									? evenColumnAnim(ci)
-									: oddColumnAnim(ci))} // Adds even animation props to even columns, etc..
-								// transition={{ type: 'spring' }}
-								key={ci}
-								className={cn(
-									styles.column,
-									styles[`column${ci}`]
-								)}>
-								{column.map((tile, ti) => {
-									const { backgroundColor, image, icon } =
-										tile
-									return (
-										<div
-											key={ti}
-											className={styles.tile}
-											style={{ backgroundColor }}>
-											{image}
-											{icon}
-										</div>
-									)
-								})}
-							</motion.div>
-						)
-					)
-				})}
-			</AnimatePresence>
-		</motion.div>
+		<div className={styles.tiles}>
+			{tiles.map((column, ci) => {
+				const isEvenColumn = ci % 2 == 0
+				return (
+					<div
+						key={ci}
+						className={cn(styles.column, styles[`column${ci}`], [
+							isEvenColumn,
+							styles.even,
+							styles.odd,
+						])}>
+						{column.map((tile, ti) => {
+							const { backgroundColor, image, icon } = tile
+							return (
+								<div
+									key={ti}
+									className={styles.tile}
+									style={{ backgroundColor }}>
+									{image}
+									{icon}
+								</div>
+							)
+						})}
+					</div>
+				)
+			})}
+		</div>
 	)
 }
-
-export default Tiles
 
 // Tile Data
 
@@ -135,8 +110,8 @@ interface Tile {
 	icon?: ReactElement | ReactElement[]
 	image?: ReactElement
 }
-
-const column0: Tile[] = [
+type Column = Tile[]
+const column0: Column = [
 	{
 		backgroundColor: red,
 		icon: <FontAwesomeIcon icon={faBaseballBatBall} />,
@@ -165,7 +140,7 @@ const column0: Tile[] = [
 		),
 	},
 ]
-const column1: Tile[] = [
+const column1: Column = [
 	{ backgroundColor: blue, icon: <FontAwesomeIcon icon={faBurgerLettuce} /> },
 	{
 		backgroundColor: red,
@@ -180,7 +155,7 @@ const column1: Tile[] = [
 	},
 	{ backgroundColor: yellow, icon: <FontAwesomeIcon icon={faBeerMug} /> },
 ]
-const column2: Tile[] = [
+const column2: Column = [
 	{ backgroundColor: yellow, icon: <FontAwesomeIcon icon={faTrophyStar} /> },
 	{
 		backgroundColor: yellow,
@@ -207,4 +182,4 @@ const column2: Tile[] = [
 	},
 ]
 
-const tiles: Tile[][] = [column0, column1, column2]
+const tiles: Column[] = [column0, column1, column2]

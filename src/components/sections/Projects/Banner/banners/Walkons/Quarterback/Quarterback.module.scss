@@ -1,0 +1,58 @@
+@import '@/styles/mixins.scss';
+@import '../WalkOns.module.scss';
+
+.quarterback {
+	position: absolute;
+	right: -720px;
+	bottom: 48px;
+	z-index: 1;
+
+	display: none;
+
+	background-color: rgba($color: $blue, $alpha: 0.5);
+
+	@include tablet {
+		display: block;
+	}
+	@include laptop {
+		right: 0;
+	}
+}
+
+.svg {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	fill: $blue;
+
+	filter: drop-shadow(2px 2px 16px #0008);
+}
+
+.svgPre {
+	width: 320px;
+	transform: translateX(150px);
+
+	@include autoAlpha;
+}
+
+.svgPost {
+	width: 280px;
+
+	transform: translateX(150px);
+
+	@include autoAlpha;
+}
+
+.footballContainer {
+	position: absolute;
+	bottom: 296px;
+	right: 304px;
+}
+
+.svgFootball {
+	width: 80px;
+
+	transform: translateX(200px) rotate(30deg);
+
+	@include autoAlpha;
+}

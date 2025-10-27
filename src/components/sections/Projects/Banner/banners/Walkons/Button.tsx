@@ -1,44 +1,43 @@
-import React, { FC } from 'react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@awesome.me/kit-ddd907bdb7/icons/classic/regular'
-import { AnimatePresence, motion } from 'motion/react'
 
-import styles from './WalkOns.module.scss'
+import styles from './Button.module.scss'
 
-interface ButtonProps {
-	animProgress: number
-}
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
-const Button: FC<ButtonProps> = ({ animProgress }) => {
-	const enter = 0.01
-	const exit = 0.95
+export default function Button() {
+	useGSAP(() => {
+		const buttonTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.walkons',
+				start: 'top center-=100px',
+				end: '+=400px',
+				toggleActions: 'play none resume reverse',
+			},
+		})
+		buttonTl.to(`.${styles.button}`, {
+			autoAlpha: 1,
+			x: 0,
+			ease: 'elastic.out',
+			duration: 1,
+		})
+	})
 	return (
-		<AnimatePresence>
-			{animProgress >= enter && animProgress <= exit && (
-				<motion.a
-					key='button'
-					initial={{ transform: 'translateX(-150%)', opacity: 0 }}
-					animate={{ transform: 'translateX(0%)', opacity: 1 }}
-					exit={{ transform: 'translateX(-150%)', opacity: 0 }}
-					transition={{
-						type: 'spring',
-						stiffness: 120,
-						delay: 0.2,
-					}}
-					className={styles.button}
-					href='https://walk-ons.com/'
-					target='_blank'>
-					<p>Check it out!</p>
-					<div className={styles.iconContainer}>
-						<FontAwesomeIcon
-							className={styles.icon}
-							icon={faChevronRight}
-						/>
-					</div>
-				</motion.a>
-			)}
-		</AnimatePresence>
+		<a
+			className={styles.button}
+			href='https://walk-ons.com/'
+			target='_blank'>
+			<p>Check it out!</p>
+			<div className={styles.iconContainer}>
+				<FontAwesomeIcon
+					className={styles.icon}
+					icon={faChevronRight}
+				/>
+			</div>
+		</a>
 	)
 }
-
-export default Button

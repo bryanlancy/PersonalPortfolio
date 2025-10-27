@@ -1,8 +1,8 @@
 'use client'
 
 import React, { FC } from 'react'
-import { useBannerScrollProgress } from '@/hooks'
-import { AnimatePresence, motion } from 'motion/react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 
 import Container from '@/utils/components/Container'
 import Background from './Background'
@@ -12,65 +12,64 @@ import QuarterBack from './Quarterback'
 import DescriptionCard from './DescriptionCard'
 import Button from './Button'
 import Border from './Border'
+import { cn } from '@/utils/react'
 
 import { projectList } from '@/app/data'
 
 import styles from './WalkOns.module.scss'
 
-interface WalkOnsBannerProps {}
+gsap.registerPlugin(useGSAP)
 
-const WalkOnsBanner: FC<WalkOnsBannerProps> = ({}) => {
+const WalkOnsBanner: FC = ({}) => {
+	useGSAP(() => {
+		const titleTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: `.walkons`,
+				start: 'top center-=100px',
+				end: '+=400px',
+				toggleActions: 'play none resume reverse',
+			},
+		})
+		titleTl.to(
+			`.${styles.title}`,
+
+			{ autoAlpha: 1, y: 0, duration: 0.5 }
+		)
+	})
+
 	const { walkOns: data } = projectList
 
 	const projectName = "Walk On's"
-	const progress = useBannerScrollProgress(projectName)
 
 	return (
 		<ProjectBanner
-			className={styles.background}
+			className={cn(styles.background, 'walkons')}
 			projectName={projectName}
 			techs={{
 				frontend: ['nextjs', 'typescript', 'scss', 'tailwinds'],
 				backend: ['graphql'],
 				devops: ['cloudflare'],
 			}}>
-			<Background animProgress={progress} />
+			<Background />
 
 			<Container>
-				<DescriptionCard
-					paragraphs={data.description}
-					animProgress={progress}
-				/>
+				<DescriptionCard paragraphs={data.description} />
 
 				{/* Project Link */}
-				<Button animProgress={progress} />
+				<Button />
 
 				{/* Project Title */}
-				<AnimatePresence>
-					{progress > 0.1 && (
-						<motion.h1
-							key='title'
-							initial={{
-								transform: 'translateY(150%)',
-								opacity: 0,
-							}}
-							animate={{
-								transform: 'translateY(0%)',
-								opacity: 1,
-							}}
-							exit={{ transform: 'translateY(150%)', opacity: 0 }}
-							className={styles.title}>
-							{data.name}
-						</motion.h1>
-					)}
-				</AnimatePresence>
 
-				<Tiles animProgress={progress} />
+				<h1 key='title' className={styles.title}>
+					{data.name}
+				</h1>
 
-				<QuarterBack animProgress={progress} />
+				<Tiles />
+
+				<QuarterBack />
 			</Container>
 
-			<Border animProgress={progress} />
+			<Border />
 		</ProjectBanner>
 	)
 }

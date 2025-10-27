@@ -1,79 +1,77 @@
-import React, { FC } from 'react'
-import styles from '../WalkOns.module.scss'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { FootballSVG, PostThrowSVG, PreThrowSVG } from './SVGs'
 import { cn } from '@/utils/react'
-import { AnimatePresence, motion } from 'motion/react'
 
-type QuarterbackProps = {
-	animProgress: number
-}
+import styles from './Quarterback.module.scss'
 
-const QuarterBack: FC<QuarterbackProps> = ({ animProgress }) => {
-	const preEnter = 0.01
-	const preExit = 0.48
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
-	const postEnter = preExit + 0.01
-	const postExit = 0.96
+export default function QuarterBack() {
+	useGSAP(() => {
+		const start1 = 100
+		const end1 = 200
+		const start2 = start1 + end1
 
-	const throwEnter = {
-		transform: 'translateX(0px)',
-		opacity: 1,
-	}
-	const throwExit = {
-		transform: 'translateX(150px)',
-		opacity: 0,
-	}
+		// Quarterback pre throw
+		const quarterBackStartTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.walkons',
+				start: `top center-=${start1}px`,
+				end: `+=${end1}px`,
+				toggleActions: 'play none resume reverse',
+			},
+		})
+		quarterBackStartTl.to(`.${styles.svgPre}`, {
+			x: 0,
+			autoAlpha: 1,
+		})
 
-	const ballEnter = {
-		transform: 'translateX(0px)',
-		opacity: 1,
-	}
-	const ballExit = {
-		transform: 'translateX(250px)',
-		opacity: 0,
-	}
+		// Quarterback post throw
+		const quarterBackEndTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.walkons',
+				start: `top center-=${start2}px`,
+				end: '+=400px',
+				toggleActions: 'play none resume reverse',
+			},
+		})
+		quarterBackEndTl.to(`.${styles.svgPre}`, {
+			x: 150,
+			autoAlpha: 0,
+		})
+		quarterBackEndTl.to(
+			`.${styles.svgPost}`,
+			{
+				x: 0,
+				autoAlpha: 1,
+			},
+			'< += .5'
+		)
+		quarterBackEndTl.to(
+			`.${styles.svgFootball}`,
+			{
+				x: 0,
+				autoAlpha: 1,
+			},
+			'< += .1'
+		)
+	})
 
 	return (
 		<div className={styles.quarterback}>
-			<AnimatePresence>
-				{animProgress >= preEnter && animProgress <= preExit && (
-					<motion.div
-						key='preThrow'
-						initial={throwExit}
-						animate={throwEnter}
-						exit={throwExit}>
-						<PreThrowSVG
-							className={cn(styles.svg, styles.svgPre)}
-						/>
-					</motion.div>
-				)}
+			<div>
+				<PreThrowSVG className={cn(styles.svg, styles.svgPre)} />
+			</div>
 
-				{animProgress >= postEnter && animProgress <= postExit && (
-					<motion.div
-						key='postthrow'
-						initial={throwExit}
-						animate={throwEnter}
-						exit={throwExit}>
-						<PostThrowSVG
-							className={cn(styles.svg, styles.svgPost)}
-						/>
-					</motion.div>
-				)}
-				{animProgress >= postEnter && animProgress <= postExit && (
-					<motion.div
-						key='football'
-						initial={ballExit}
-						animate={ballEnter}
-						exit={ballExit}
-						className={styles.footballContainer}>
-						<FootballSVG
-							className={cn(styles.svg, styles.svgFootball)}
-						/>
-					</motion.div>
-				)}
-			</AnimatePresence>
+			<div>
+				<PostThrowSVG className={cn(styles.svg, styles.svgPost)} />
+			</div>
+
+			<div className={styles.footballContainer}>
+				<FootballSVG className={cn(styles.svg, styles.svgFootball)} />
+			</div>
 		</div>
 	)
 }
-
-export default QuarterBack

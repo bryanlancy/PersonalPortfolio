@@ -1,15 +1,14 @@
 import * as React from 'react'
 import { SVGProps } from 'react'
 
-import styles from './WalkOns.module.scss'
-
 const WalkOnsLogo = (props: SVGProps<SVGSVGElement>) => (
 	<svg
 		xmlns='http://www.w3.org/2000/svg'
 		width={318}
 		height={308}
+		viewBox='0 0 318 308'
 		fill='none'
-		className={styles.logo}
+		className={props.className}
 		{...props}>
 		<path
 			fill='#234DDB'

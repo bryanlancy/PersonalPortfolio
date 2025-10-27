@@ -1,37 +1,67 @@
-import React, { FC } from 'react'
 import Image from 'next/image'
-import { motion } from 'motion/react'
 
-import { mapRange } from '@/utils/general'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
 import WalkOnsLogo from './Logo'
 
-import styles from './WalkOns.module.scss'
+import styles from './Background.module.scss'
 
-interface BackgroundProps {
-	animProgress: number
-}
-
-const Background: FC<BackgroundProps> = ({ animProgress }) => {
+gsap.registerPlugin(useGSAP, ScrollTrigger)
+export default function Background({}) {
 	// const variants
-	const overLayInitA = 0.25
-	const overLayEndA = 0.9
 
+	useGSAP(() => {
+		const imageTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: `.walkons`,
+				start: 'top center-=100px',
+				end: '+=400px',
+				toggleActions: 'play none resume reverse',
+			},
+		})
+		imageTl.to(`.${styles.imageBackground}`, {
+			autoAlpha: 1,
+		})
+		const overLayTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: `.walkons`,
+				start: 'top center-=100px',
+				end: '+=400px',
+				toggleActions: 'play none resume reverse',
+			},
+		})
+		overLayTl.to(`.${styles.overlay}`, {
+			autoAlpha: 0.4,
+		})
+		const colorBackgroundTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: `.${styles.background}`,
+				start: 'top center-=100px',
+				end: '+=400px',
+				toggleActions: 'play none resume reverse',
+			},
+		})
+		colorBackgroundTl.to(`.${styles.colorBackground}`, {
+			autoAlpha: 1,
+		})
+		const logoTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: `.walkons`,
+				start: 'top center-=100px',
+				end: '+=400px',
+				toggleActions: 'play none resume reverse',
+			},
+		})
+		logoTl.to(`.${styles.logo}`, {
+			autoAlpha: 0.4,
+		})
+	})
 	return (
 		<>
-			<motion.div
-				initial={{ opacity: 0 }}
-				animate={{ opacity: mapRange(animProgress, [0, 0.1], [0, 1]) }}
-				className={styles.imageBackground}>
-				<motion.div
-					initial={{ opacity: overLayInitA }}
-					animate={{
-						opacity: mapRange(
-							animProgress,
-							[0, 1],
-							[overLayInitA, overLayEndA]
-						),
-					}}
-					className={styles.overlay}></motion.div>
+			<div className={styles.imageBackground}>
+				<div className={styles.overlay}></div>
 				<Image
 					src='/assets/walkons/walkons.jpg'
 					alt='walkons restaurant'
@@ -40,19 +70,10 @@ const Background: FC<BackgroundProps> = ({ animProgress }) => {
 					height={500}
 					className={styles.image}
 				/>
-			</motion.div>
+			</div>
 			<div className={styles.colorBackground}></div>
-			<motion.div
-				initial={{
-					opacity: 0,
-				}}
-				animate={{
-					opacity: mapRange(animProgress, [0, 0.4], [0, 1]),
-				}}>
-				<WalkOnsLogo />
-			</motion.div>
+
+			<WalkOnsLogo className={styles.logo} />
 		</>
 	)
 }
-
-export default Background

@@ -1,0 +1,69 @@
+@import '@/styles/mixins.scss';
+@import './WalkOns.module.scss';
+
+.tiles {
+	position: absolute;
+	top: -16px;
+	left: 45%;
+	z-index: 2;
+
+	display: flex;
+	align-items: center;
+
+	gap: $gap;
+
+	@include laptop {
+		left: 42%;
+	}
+	@include hd {
+		left: 37%;
+	}
+}
+
+.tile {
+	display: grid;
+	place-items: center;
+
+	width: 100%;
+	aspect-ratio: 1;
+
+	border-radius: $border-radius;
+	box-shadow: $box-shadow;
+
+	overflow: hidden;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+	gap: $gap;
+
+	height: fit-content;
+
+	@include autoAlpha;
+}
+
+.column0 {
+	width: 96px;
+
+	font-size: 48px;
+}
+
+.column1 {
+	width: 128px;
+
+	font-size: 64px;
+}
+
+.column2 {
+	width: 72px;
+
+	font-size: 32px;
+}
+
+.even {
+	transform: translateY(-100%);
+}
+.odd {
+	transform: translateY(100%);
+}
