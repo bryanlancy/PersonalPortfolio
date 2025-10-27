@@ -1,7 +1,10 @@
 'use client'
 
-import { FC } from 'react'
-import { motion, Transition } from 'motion/react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import SplitText from 'gsap/SplitText'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
 	faQuoteLeft,
@@ -10,64 +13,81 @@ import {
 
 import styles from './Quote.module.scss'
 
+gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText)
+
 interface QuoteProps {
 	quote: string
 	author: string
 }
 
-// Animation Properties
-const init = {
-	opacity: 0,
-}
-const final = {
-	opacity: 1,
-}
-const outerTrans: Transition = {
-	delay: 4,
-	duration: 1.5,
-	ease: 'easeIn',
-}
-const innerTrans: Transition = {
-	delay: 1,
-	duration: 1.5,
-}
+export default function Quote({ quote, author }: QuoteProps) {
+	useGSAP(() => {
+		const quoteTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: `.${styles.quoteContainer}`,
+				start: 'top center-=100px',
+				end: '+=400px',
 
-const Quote: FC<QuoteProps> = ({ quote, author }) => {
+				onUpdate: self => {
+					self.direction === 1
+					quoteTl
+						.timeScale(self.direction > 0 ? 1 : 5)
+						.reversed(self.direction > 0 ? false : true)
+				},
+			},
+		})
+		const splitText = SplitText.create(`.${styles.quoteText}`, {
+			type: 'words',
+			onSplit: ({ words }) => {
+				quoteTl.to(words, {
+					autoAlpha: 1,
+					y: 0,
+					duration: 0.25,
+					stagger: 0.1,
+				})
+				quoteTl.to(`.${styles.author}`, {
+					autoAlpha: 1,
+					duration: 0.75,
+				})
+				quoteTl.to(`.${styles.closeQuote}`, {
+					autoAlpha: 1,
+					duration: 0.25,
+					delay: 0.5,
+				})
+				quoteTl.to(
+					`.${styles.openQuote}`,
+					{
+						autoAlpha: 1,
+						duration: 0.25,
+					},
+					'<'
+				)
+				quoteTl.to(
+					`.${styles.me}`,
+					{
+						autoAlpha: 1,
+						duration: 0.25,
+					},
+					'<'
+				)
+			},
+		})
+		console.log('splitText', splitText)
+	})
+
 	return (
 		<div className={styles.quoteContainer}>
-			<motion.div
-				className={styles.openQuote}
-				initial={init}
-				whileInView={final}
-				transition={outerTrans}
-				viewport={{ once: true }}>
+			<div className={styles.openQuote}>
 				<FontAwesomeIcon icon={faQuoteLeft} />
-			</motion.div>
-			<motion.figure
-				className={styles.quote}
-				initial={init}
-				whileInView={final}
-				transition={innerTrans}
-				viewport={{ once: true }}>
-				<q>{quote}</q>
+			</div>
+			<figure className={styles.quote}>
+				<p className={styles.quoteText}>"{quote}"</p>
 				<figcaption className={styles.author}>- {author}</figcaption>
-			</motion.figure>
-			<motion.div
-				initial={init}
-				whileInView={final}
-				transition={outerTrans}
-				viewport={{ once: true }}>
+			</figure>
+			<div className={styles.closeQuote}>
 				<FontAwesomeIcon icon={faQuoteRight} />
-			</motion.div>
-			<motion.h2
-				initial={init}
-				whileInView={final}
-				transition={outerTrans}
-				viewport={{ once: true }}>
-				- Bryan Burns
-			</motion.h2>
+			</div>
+			<h2 className={styles.me}>- Bryan Burns</h2>
 		</div>
 	)
 }
-
-export default Quote
