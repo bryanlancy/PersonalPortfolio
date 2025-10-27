@@ -1,8 +1,7 @@
 ---
-description: This rule should be applied when creating or editing components in react using typescript (i.e. files with a .tsx extension).
+globs: *.tsx
 alwaysApply: false
 ---
-
 - Always tell me when this rule was applied so we can assure that it is being used.
 - Always notify the user if any of the rules are broken.
 
@@ -90,17 +89,6 @@ alwaysApply: false
     Ex.
     Instead of: <div className={`${styles.box} ${className || ''}`}></div>
     Use this: <div className={cn(styles.box,className)}></div>
-- Organize scss files by the function of the property. In other words, group properties that relate to position and group properties that relate to display (flex, grid, etc.).
-- Each group should be separated by a spcae.
-- Groups should be in this order:
-    1. Position (position, top, inset, z-index, etc.)
-    2. Display (display, flex-direction, place-itens, etc.)
-    3. Size (width, max-height, padding, margin, etc.)
-    4. Fonts (font-family, font-size, letter-spacing, color, white-space, text-align etc.)
-    5. Visual (border, background-color, background, fill, transform, etc.)
-    6. Animations (animation, transition, etc.)
-    7. Anything else
-- Any nested definitions (ex. .div{ **.div{}**}) should be at the bottom of selector group
 
 <!-- Refactoring -->
 - If a new file structure is created, ensure existing files match the new structure
