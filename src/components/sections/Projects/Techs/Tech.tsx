@@ -39,8 +39,8 @@ interface TechProps {
 const rotateInverse = [
 	'figma',
 	'typescriptJs',
-	'tailwinds',
-	'gsapMotion',
+	'fontAwesome',
+	'sass',
 	'docker',
 	'craft',
 	'cpp',
@@ -209,13 +209,13 @@ const Tech: FC<TechProps> = ({ tech, techRef, className, onClick, index }) => {
 				</div>
 			)}
 
-			<div onClick={onClick} className={cn(styles.link, styles.fancy)}>
+			{/* <div onClick={onClick} className={cn(styles.link, styles.fancy)}>
 				<FancyText shouldAnimate={animateText}>Learn More </FancyText>
 				<FontAwesomeIcon
 					className={cn(styles.arrow, [animateText, styles.show])}
 					icon={faArrowRight}
 				/>
-			</div>
+			</div> */}
 		</li>
 	)
 }

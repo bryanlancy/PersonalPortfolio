@@ -3,14 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleXmark } from '@awesome.me/kit-ddd907bdb7/icons/sharp-duotone/solid'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-gsap.registerPlugin(useGSAP)
 
 import { createBackground } from '../../Contact/ContactCard'
-
+import { cn } from '@/utils/react'
 import { Technology } from '@/app/data/technology-list'
 
 import styles from './Details.module.scss'
-import { cn } from '@/utils/react'
+
+gsap.registerPlugin(useGSAP)
 
 interface DetailsProps {
 	techRef: Ref<any>
