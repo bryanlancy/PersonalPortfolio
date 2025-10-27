@@ -1,17 +1,15 @@
 'use client'
 
-import React, { FC, PropsWithChildren, useContext, useRef } from 'react'
+import React, { FC, PropsWithChildren, useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
+
 import { cn } from '@/utils/react'
 
 import styles from './ProjectBanner.module.scss'
-import {
-	useMotionValueEvent,
-	useScroll,
-	motion,
-	AnimatePresence,
-} from 'motion/react'
-import { BannerContext } from '@/context/bannerContext'
-import { mapRange } from '@/utils/general'
+
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 interface ProjectTechs {
 	frontend: string[]
@@ -54,46 +52,37 @@ const ProjectBanner: FC<ProjectBannerProps> = ({
 	/** Project banner content. Wraps provided children in a `section` element.  */
 	children,
 }) => {
-	const animRef = useRef(null)
-	const { animState } = useContext(BannerContext)
-
-	const overlayStart = 0.94
-
-	const { scrollYProgress } = useScroll({
-		target: animRef,
-		axis: 'y',
-		offset: ['-100%', '0px'],
-		// smooth: 100,
-	})
-	useMotionValueEvent(scrollYProgress, 'change', latest => {
-		const tempState = { ...animState[0], [projectName]: latest }
-
-		animState[1](tempState)
-	})
+	const overlayRef = useRef(null)
+	const sectionRef = useRef(null)
 
 	// TODO Use framer useTransform instead of mapRange
 	// TODO Add project spec section - techs, company link,
 
+	useGSAP(() => {
+		if (sectionRef.current) {
+			const overlayTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: sectionRef.current,
+					start: 'top top',
+					end: '+=300px',
+					scrub: true,
+				},
+			})
+			overlayTl.to(overlayRef.current, {
+				autoAlpha: 1,
+			})
+		}
+	}, [])
+
 	return (
-		<motion.section className={cn(styles.project, className)} ref={animRef}>
-			<AnimatePresence>
-				{animState[0][projectName] >= overlayStart && (
-					<motion.div
-						key={`overlay${projectName}`}
-						initial={{ opacity: 0 }}
-						animate={{
-							opacity: mapRange(
-								animState[0][projectName],
-								[overlayStart, 1],
-								[0, 0.8]
-							),
-						}}
-						exit={{ opacity: 0 }}
-						className={styles.overlay}></motion.div>
-				)}
-			</AnimatePresence>
+		<section className={cn(styles.project, className)} ref={sectionRef}>
+			<div
+				key={`overlay${projectName}`}
+				className={styles.overlay}
+				ref={overlayRef}></div>
+
 			{children}
-		</motion.section>
+		</section>
 	)
 }
 

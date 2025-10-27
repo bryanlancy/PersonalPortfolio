@@ -35,5 +35,7 @@ $bannerHeightLargeScreen: 450px;
 	position: absolute;
 	inset: 0;
 	z-index: 100;
-	background-color: #000;
+	background-color: #000a;
+
+	@include autoAlpha;
 }
