@@ -1,14 +1,36 @@
-import React from 'react'
+'use client'
+
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
 import { contactList } from '../../../app/data'
 import { Contact as ContactMethod } from '@/app/data/contact-list'
 import ContactCard from './ContactCard'
 
 import styles from './Contact.module.scss'
 
-// TODO Change animation, change container of cards to show cards when viewed NOT each card, stagger
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const Contact = () => {
 	const contactArray: ContactMethod[] = Object.values(contactList)
+
+	useGSAP(() => {
+		const contactCardTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: `.${styles.section}`,
+				start: 'top center-=100px',
+				end: '+=400px',
+				toggleActions: 'play none resume reverse',
+			},
+		})
+		contactCardTl.to(`.${styles.contactCard}`, {
+			autoAlpha: 1,
+			transform: 'translateY(0)',
+			duration: 0.5,
+			stagger: 0.25,
+		})
+	})
 
 	return (
 		<section className={styles.section}>
@@ -27,6 +49,7 @@ const Contact = () => {
 					const copy = contactMethod.name === 'Email' ? true : false // Add method to easily copy email address
 					return (
 						<ContactCard
+							className={styles.contactCard}
 							contactMethod={contactMethod}
 							key={i}
 							i={i}

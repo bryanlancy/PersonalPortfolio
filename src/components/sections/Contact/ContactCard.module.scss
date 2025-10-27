@@ -9,6 +9,10 @@
 	border-radius: 0px;
 	overflow: hidden;
 
+	transform: translateY(40px);
+
+	@include autoAlpha;
+
 	@include tablet {
 		width: 48%;
 		border-radius: var(--border-radius);

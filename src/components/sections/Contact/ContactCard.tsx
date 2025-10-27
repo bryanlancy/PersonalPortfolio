@@ -1,14 +1,12 @@
-'use client'
-
-import React, { FC } from 'react'
-import { Contact } from '../../../app/data/contact-list'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@awesome.me/kit-ddd907bdb7/icons/classic/regular'
 import { faClipboard } from '@awesome.me/kit-ddd907bdb7/icons/sharp-duotone/solid'
-import { motion } from 'motion/react'
+
+import { Contact } from '../../../app/data/contact-list'
 
 import styles from './ContactCard.module.scss'
+
+import { cn } from '@/utils/react'
 
 export const createBackground: (color: Contact['color']) => string = color => {
 	let background: string = ''
@@ -54,24 +52,22 @@ type ContactCardProps = {
 	contactMethod: Contact
 	i: number
 	copy?: boolean
+	className?: string
 }
-const ContactCard: FC<ContactCardProps> = ({
+export default function ContactCard({
 	contactMethod,
 	i,
+	className,
 	copy = false,
-}) => {
+}: ContactCardProps) {
 	const { name, color, icon, link, linkText } = contactMethod
 
 	return (
-		<motion.a
-			className={styles.card}
+		<a
+			className={cn(styles.card, className)}
 			style={{ background: createBackground(color) }}
 			href={name === 'Email' ? 'mailto:' + link : link}
-			target='_blank'
-			initial={{ opacity: 0, transform: 'translateY(40px)' }}
-			whileInView={{ opacity: 1, transform: 'translateY(0)' }}
-			viewport={{ once: true }}
-			transition={{ delay: i * 0.2, ease: 'easeIn' }}>
+			target='_blank'>
 			<div className={styles.name}>
 				<h1>{name}</h1>
 				<div className={styles.linkText}>
@@ -92,8 +88,6 @@ const ContactCard: FC<ContactCardProps> = ({
 			</div>
 
 			<div className={styles.iconMain}>{icon}</div>
-		</motion.a>
+		</a>
 	)
 }
-
-export default ContactCard

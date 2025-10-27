@@ -51,3 +51,7 @@
 		gap: 16px;
 	}
 }
+
+.contactCard {
+	@include autoAlpha;
+}
