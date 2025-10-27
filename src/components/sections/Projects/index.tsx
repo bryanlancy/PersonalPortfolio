@@ -23,6 +23,8 @@ import { cn } from '@/utils/react'
 
 import styles from './Projects.module.scss'
 
+gsap.registerPlugin(useGSAP, ScrollTrigger)
+
 interface ProjectsProps {}
 
 // TODO Add Technology component and sidebar
@@ -41,9 +43,6 @@ const SideBanner: FC<SideBannerProps> = ({ name, children }) => {
 }
 
 const Projects: FC<ProjectsProps> = () => {
-	gsap.registerPlugin(useGSAP)
-	gsap.registerPlugin(ScrollTrigger)
-
 	const scrollTrigger = {
 		trigger: `.proTitle`,
 		start: 'top center',
