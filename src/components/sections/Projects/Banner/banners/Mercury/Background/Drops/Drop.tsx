@@ -1,5 +1,9 @@
-import { CSSProperties, FC } from 'react'
-import { motion } from 'motion/react'
+import { CSSProperties, useRef } from 'react'
+
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
 import {
 	faMessageSmile,
 	faPhoneArrowDownLeft,
@@ -14,6 +18,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from './Drops.module.scss'
 
+gsap.registerPlugin(useGSAP, ScrollTrigger)
+
 interface Droptions extends CSSProperties {
 	/** Size of the raindrop */
 	'--size': string
@@ -27,7 +33,8 @@ interface DropProps {
 	deleteDrop: Function
 }
 
-const Drop: FC<DropProps> = ({ id, droptions, deleteDrop }) => {
+export default function Drop({ id, droptions, deleteDrop }: DropProps) {
+	const dropRef = useRef<HTMLDivElement>(null)
 	const icons = [
 		faMessageSmile,
 		faPhoneArrowDownLeft,
@@ -37,27 +44,37 @@ const Drop: FC<DropProps> = ({ id, droptions, deleteDrop }) => {
 		faAt,
 	]
 
+	useGSAP(() => {
+		const dropDuration = randomInteger(8, 14)
+		const dropDelay = randomInteger(0, 3)
+		const dropTl = gsap.timeline({
+			onComplete: () => deleteDrop(id),
+			scrollTrigger: {
+				trigger: '.mercury',
+				start: 'top center-=100px',
+				end: '+=400px',
+			},
+		})
+		dropTl.to(dropRef.current, {
+			bottom: '0%',
+			duration: dropDuration,
+			delay: dropDelay,
+		})
+		dropTl.to(
+			dropRef.current,
+			{
+				autoAlpha: 0,
+				duration: 0.5,
+			},
+			`-=${dropDuration * 0.4}`
+		)
+	}, [])
 	return (
-		<motion.div
-			className={styles.drop}
-			style={{ ...droptions }}
-			transition={{
-				type: 'keyframes',
-				duration: randomInteger(8, 14),
-				times: [0, 0.25, 0.6, 0.7, 1],
-			}}
-			animate={{
-				bottom: ['100%', '90%', '0%', '-4%', '-10%'],
-				opacity: [1, 1, 1, 0, 0],
-			}}
-			exit={{ bottom: '-20%' }}
-			onAnimationComplete={() => deleteDrop(id)}>
+		<div className={styles.drop} style={{ ...droptions }} ref={dropRef}>
 			<FontAwesomeIcon
 				className={styles.icon}
 				icon={icons[randomInteger(0, icons.length - 1)]}
 			/>
-		</motion.div>
+		</div>
 	)
 }
-
-export default Drop

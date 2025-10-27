@@ -6,6 +6,7 @@ import styles from './Mercury.module.scss'
 import Background from './Background'
 import Bucket from './Bucket'
 import Container from '@/utils/components/Container'
+import { cn } from '@/utils/react'
 
 const MercuryCard = () => {
 	//TODO Add skip animation on click
@@ -21,7 +22,9 @@ const MercuryCard = () => {
 	]
 
 	return (
-		<ProjectCard className={styles.project} projectName='Mercury'>
+		<ProjectCard
+			className={cn(styles.project, 'mercury')}
+			projectName='Mercury'>
 			<Background />
 			<Container variants={{}} initial='hidden' animate='show'>
 				{data.description.map((text, i) => (

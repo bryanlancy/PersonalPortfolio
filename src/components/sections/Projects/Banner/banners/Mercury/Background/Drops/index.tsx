@@ -1,10 +1,15 @@
-import { FC, ReactNode, useEffect } from 'react'
+import { ReactNode, useEffect } from 'react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import useState from 'react-usestateref'
 
 import { randomInteger } from '@/utils/general'
+import Drop from './Drop'
 
 import styles from './Drops.module.scss'
-import Drop from './Drop'
+
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 interface DropsProps {
 	/** Max number of drops */
@@ -18,9 +23,24 @@ type DropsState = {
 
 // TODO Add logic to ensure variety in position and icons
 
-const Drops: FC<DropsProps> = ({ drops }) => {
+export default function Drops({ drops }: DropsProps) {
 	const dropsState = useState<DropsState>([])
+	const makeDrops = useState(false)
 
+	useGSAP(() => {
+		const dropsTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: `.mercury`,
+				start: 'top center-=100px',
+				end: '+=400px',
+				toggleActions: 'play none resume reverse',
+				onUpdate: self => {
+					if (self.isActive !== makeDrops[2].current)
+						makeDrops[1](self.isActive)
+				},
+			},
+		})
+	})
 	const deleteDrop = (idToDelete: string) => {
 		const filteredDrops = dropsState[2].current.filter(
 			drop => drop.id !== idToDelete
@@ -30,7 +50,7 @@ const Drops: FC<DropsProps> = ({ drops }) => {
 
 	useEffect(() => {
 		const currDrops = dropsState[0].length
-		if (currDrops < drops) {
+		if (currDrops < drops && makeDrops[0]) {
 			const tempState = [...dropsState[0]]
 			const newId: DropsState[number]['id'] = (
 				currDrops -
@@ -55,7 +75,7 @@ const Drops: FC<DropsProps> = ({ drops }) => {
 
 			dropsState[1](tempState)
 		}
-	}, [dropsState[0]])
+	}, [dropsState[0], makeDrops[0]])
 
 	return (
 		<div className={styles.drops}>
@@ -63,5 +83,3 @@ const Drops: FC<DropsProps> = ({ drops }) => {
 		</div>
 	)
 }
-
-export default Drops

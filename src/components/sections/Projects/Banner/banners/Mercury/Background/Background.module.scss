@@ -24,11 +24,15 @@
 		top: 0;
 		height: 40px;
 
-		transform: rotate(180deg);
+		transform: translateY(-50px) rotate(180deg);
+		@include autoAlpha;
 	}
 	&.bottom {
 		bottom: 0px;
 		height: 160px;
+
+		transform: translateY(50px);
+		@include autoAlpha;
 
 		@include tablet {
 		}

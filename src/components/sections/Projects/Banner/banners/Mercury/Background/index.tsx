@@ -1,22 +1,54 @@
-import { projectList } from '@/app/data'
-
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Wave from 'react-wavify'
-import { motion } from 'motion/react'
 
 import { cn } from '@/utils/react'
 import Drops from './Drops'
 import Container from '@/utils/components/Container'
 
+import { projectList } from '@/app/data'
+
 import styles from './Background.module.scss'
+
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const Background = () => {
 	const { mercury: data } = projectList
 
 	const numDrops = 3
 
+	useGSAP(() => {
+		const backgroundTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: `.mercury`,
+				start: 'top center-=100px',
+				end: '+=400px',
+				toggleActions: 'play none resume reverse',
+			},
+		})
+		backgroundTl.to(`.${styles.top}`, {
+			y: 0,
+			autoAlpha: 1,
+		})
+
+		const backgroundBottomTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: `.mercury`,
+				start: 'top center+=200px',
+				end: '+=400px',
+				toggleActions: 'play none resume reverse',
+			},
+		})
+		backgroundBottomTl.to(`.${styles.bottom}`, {
+			y: 0,
+			autoAlpha: 1,
+		})
+	})
+
 	return (
 		<>
-			<motion.div className={styles.background}>
+			<div className={styles.background}>
 				<Wave
 					className={cn(styles.wave, styles.top)}
 					paused={false}
@@ -53,7 +85,7 @@ const Background = () => {
 						points: 4,
 					}}
 				/>
-			</motion.div>
+			</div>
 			<svg>
 				<defs>
 					<filter id='smoosh'>

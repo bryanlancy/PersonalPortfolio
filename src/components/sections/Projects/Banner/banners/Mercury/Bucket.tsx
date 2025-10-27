@@ -1,11 +1,16 @@
-import { FC } from 'react'
+import { useRef } from 'react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Wave from 'react-wavify'
 
 import { Project } from '@/app/data/project-list'
 import { cn } from '@/utils/react'
 
 import styles from './Bucket.module.scss'
-import Wave from 'react-wavify'
-import { motion, stagger, Variants } from 'motion/react'
+
+gsap.registerPlugin(useGSAP, ScrollTrigger)
+
 interface BucketProps {
 	/** Text to display inside of the bucket. Pass an array of strings to display multiple lines */
 	text: Project['description'][number]
@@ -18,52 +23,74 @@ interface BucketProps {
 	duration?: number
 }
 
-const Bucket: FC<BucketProps> = ({
+export default function Bucket({
 	text: content,
 	className,
 	delay = 0,
 	duration = 3,
-}) => {
+}: BucketProps) {
 	if (typeof content === 'undefined') return null
 	content = typeof content === 'string' ? [content] : content
 
-	const background: Variants = {
-		hidden: {
-			height: 0,
-			transform: 'translateY(20px)',
-		},
-		show: {
-			height: '100%',
-			transform: 'translateY(0px)',
-			transition: { duration, delay },
-		},
-	}
-	const fade: Variants = {
-		hidden: {
-			opacity: 0,
-		},
-		show: {
-			opacity: 1,
-			transition: { delay },
-		},
-	}
+	const fillRef = useRef<HTMLDivElement>(null)
+	const nibRef = useRef<HTMLDivElement>(null)
+	const lineRef = useRef<HTMLParagraphElement>(null)
 
+	useGSAP(() => {
+		const fadeTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: `.mercury`,
+				start: 'top center-=100px',
+				end: '+=400px',
+				toggleActions: 'play none resume reverse',
+			},
+		})
+		fadeTl.to(lineRef.current, {
+			y: 0,
+			delay,
+			autoAlpha: 1,
+		})
+
+		const backgroundTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: `.mercury`,
+				start: 'top center-=100px',
+				end: '+=400px',
+				toggleActions: 'play none resume reverse',
+			},
+		})
+		backgroundTl.to(fillRef.current, {
+			autoAlpha: 1,
+			delay,
+			duration: 0.1,
+		})
+		backgroundTl.to(fillRef.current, {
+			height: '100%',
+			y: 0,
+			duration,
+		})
+		backgroundTl.to(
+			nibRef.current,
+			{
+				autoAlpha: 1,
+				duration: 0.1,
+			},
+			'<+=.1'
+		)
+	})
 	return (
-		<motion.div
+		<div
 			className={cn(
 				styles.bucket,
 				className !== undefined ? styles[className] : undefined
 			)}>
 			{content.map(line => (
-				<motion.p
-					variants={fade}
-					key={Math.random()}
-					className={styles.line}>
+				<p key={Math.random()} className={styles.line} ref={lineRef}>
 					{line}
-				</motion.p>
+				</p>
 			))}
 			<div className={styles.background}>
-				<motion.div variants={background} className={styles.fill}>
+				<div className={styles.fill} ref={fillRef}>
 					<Wave
 						className={styles.top}
 						paused={false}
@@ -74,11 +101,9 @@ const Bucket: FC<BucketProps> = ({
 							points: 4,
 						}}
 					/>
-				</motion.div>
+				</div>
 			</div>
-			<motion.div variants={fade} className={styles.nib}></motion.div>
-		</motion.div>
+			<div className={styles.nib} ref={nibRef}></div>
+		</div>
 	)
 }
-
-export default Bucket
