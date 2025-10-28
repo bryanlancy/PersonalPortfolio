@@ -127,7 +127,7 @@ const TitleCards = ({ onTitleChange }: TitleSectionsProps) => {
 			),
 		},
 	]
-	const [currentTitle, setCurrentTitle] = useState<string>(cards[0].title)
+	const [_, setCurrentTitle] = useState<string>(cards[0].title)
 
 	useGSAP(() => {
 		const spiralTimeline = gsap.timeline({ repeat: -1 })
