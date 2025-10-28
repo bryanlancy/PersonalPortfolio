@@ -25,15 +25,9 @@ export default function Quote({ quote, author }: QuoteProps) {
 		const quoteTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: `.${styles.quoteContainer}`,
-				start: 'top center-=100px',
+				start: 'top center+=300px',
 				end: '+=400px',
-
-				onUpdate: self => {
-					self.direction === 1
-					quoteTl
-						.timeScale(self.direction > 0 ? 1 : 5)
-						.reversed(self.direction > 0 ? false : true)
-				},
+				toggleActions: 'play none resume reverse',
 			},
 		})
 		const splitText = SplitText.create(`.${styles.quoteText}`, {
@@ -51,14 +45,14 @@ export default function Quote({ quote, author }: QuoteProps) {
 				})
 				quoteTl.to(`.${styles.closeQuote}`, {
 					autoAlpha: 1,
-					duration: 0.25,
+					duration: 2,
 					delay: 0.5,
 				})
 				quoteTl.to(
 					`.${styles.openQuote}`,
 					{
 						autoAlpha: 1,
-						duration: 0.25,
+						duration: 2,
 					},
 					'<'
 				)
@@ -66,7 +60,7 @@ export default function Quote({ quote, author }: QuoteProps) {
 					`.${styles.me}`,
 					{
 						autoAlpha: 1,
-						duration: 0.25,
+						duration: 2,
 					},
 					'<'
 				)

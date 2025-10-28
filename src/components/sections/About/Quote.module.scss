@@ -25,7 +25,7 @@
 .quoteText {
 	> div {
 		@include autoAlpha;
-		transform: translateY(40px);
+		transform: translateY(20px);
 	}
 }
 .author {
