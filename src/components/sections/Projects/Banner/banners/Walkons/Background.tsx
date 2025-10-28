@@ -37,7 +37,7 @@ export default function Background({}) {
 		})
 		const colorBackgroundTl = gsap.timeline({
 			scrollTrigger: {
-				trigger: `.${styles.background}`,
+				trigger: '.walkons',
 				start: 'top center-=100px',
 				end: '+=400px',
 				toggleActions: 'play none resume reverse',
