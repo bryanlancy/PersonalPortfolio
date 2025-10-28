@@ -66,7 +66,6 @@ export default function Quote({ quote, author }: QuoteProps) {
 				)
 			},
 		})
-		console.log('splitText', splitText)
 	})
 
 	return (
