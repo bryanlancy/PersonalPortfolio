@@ -150,6 +150,12 @@ const TitleCards = ({ onTitleChange }: TitleSectionsProps) => {
 
 		const cardsTl = gsap.timeline({
 			repeat: -1,
+			scrollTrigger: {
+				trigger: '.introSection',
+				start: 'top top',
+				end: 'bottom top',
+				toggleActions: 'play pause resume none',
+			},
 		})
 
 		for (let i = 0; i < cardsArr.length; i++) {

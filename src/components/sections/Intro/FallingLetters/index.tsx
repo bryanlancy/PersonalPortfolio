@@ -13,23 +13,6 @@ import { calculateTextRepetitions, toCamelCase } from '@/utils/general'
 // Register SplitText plugin
 gsap.registerPlugin(useGSAP, SplitText)
 
-// Create the color rotator instance
-const getNextColor = colorRotator(
-	//     [
-	// 	'#ff6b6b33',
-	// 	'#4ecdc433',
-	// 	'#45b7d133',
-	// 	'#96ceb433',
-	// 	'#feca5733',
-	// 	'#ff9ff333',
-	// 	'#54a0ff33',
-	// 	'#5f27cd33',
-	// 	'#00d2d333',
-	// 	'#ff9f4333',
-	// ]
-	['#fff']
-)
-
 interface FallingLetterComponent {
 	id: string
 	title: string
@@ -132,7 +115,6 @@ const FallingLetterComponent = memo(function FallingLetterComponent({
 						char,
 						{
 							y: window.innerHeight + 200,
-							// color: getNextColor(),
 							scale: 0.5,
 							autoAlpha: 0,
 							duration: 9,
