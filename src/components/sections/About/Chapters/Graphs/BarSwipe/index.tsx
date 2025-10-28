@@ -14,11 +14,17 @@ const BarSwipe = () => {
 				start: 'top center+=400px',
 				end: '+=1000px',
 				scrub: true,
+				fastScrollEnd: true,
 			},
 		})
 
 		exitTransitionTl.to(`.${styles.swipe}`, {
 			yPercent: -100,
+			duration: 2.5,
+		})
+		exitTransitionTl.to(`.${styles.swipe}`, {
+			autoAlpha: 0,
+			duration: 0.5,
 		})
 	})
 

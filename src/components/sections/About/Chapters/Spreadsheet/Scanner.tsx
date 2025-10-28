@@ -58,10 +58,9 @@ const Scanner = () => {
 				scrollTrigger: {
 					trigger: '.chapter3',
 					start: 'top center',
-					end: '+=1px',
-					onUpdate: self => {
-						scannerTl.reversed(self.direction > 0 ? false : true)
-					},
+					end: '+=300px',
+					fastScrollEnd: true,
+					toggleActions: 'play complete none reverse',
 				},
 			})
 			scannerTl.to(`.${styles.scannerContainer}`, {

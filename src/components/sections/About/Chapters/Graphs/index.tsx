@@ -18,15 +18,14 @@ const Graphs = () => {
 			scrollTrigger: {
 				trigger: '.chapter2',
 				start: `top top-=2200px`,
-				end: '+=1px',
-				onUpdate: self => {
-					graphTl.reversed(self.direction > 0 ? false : true)
-				},
+				end: '+=1000px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
 			},
 		})
 
 		graphTl.to(`.${styles.graphs}`, {
-			delay: 0.5,
+			duration: 0.1,
 			autoAlpha: 1,
 		})
 
@@ -35,36 +34,28 @@ const Graphs = () => {
 			scrollTrigger: {
 				trigger: '.chapter3',
 				start: `top center`,
-				end: '+=1px',
-				onUpdate: self => {
-					graphTransitionTl.reversed(
-						self.direction > 0 ? false : true
-					)
-				},
+				end: '+=600px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
 			},
 		})
 		graphTransitionTl.to(`.${styles.graphs}`, {
-			delay: 0.1,
 			y: -400,
 		})
-
 		// Timeline for exit transition
 		const graphExitTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter4',
 				start: 'top bottom',
 				end: '+=200px',
-				onUpdate: self => {
-					graphExitTl.reversed(self.direction > 0 ? false : true)
-				},
+				fastScrollEnd: true,
+				toggleActions: 'play complete none reverse',
 			},
 		})
-		// graphExitTl.to(`.graphs`, {
-		// 	delay: 0.5,
-		// 	duration
-		// 	autoAlpha: 0,
-		// 	y: -500,
-		// })
+		graphExitTl.to(`.graphs`, {
+			duration: 0.5,
+			autoAlpha: 0,
+		})
 	}, [])
 
 	return (

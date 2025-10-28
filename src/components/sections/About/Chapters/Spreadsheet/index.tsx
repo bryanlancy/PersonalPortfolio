@@ -80,11 +80,13 @@ const Spreadsheet: FC<SpreadsheetProps> = ({}) => {
 			scrollTrigger: {
 				trigger: '.chapter2',
 				start: `top top-=1200px`,
-				end: '+=1px',
-				onUpdate: self => {
-					spreadsheetTl1.reversed(self.direction > 0 ? false : true)
-				},
+				end: '+=1000px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
 			},
+		})
+		spreadsheetTl1.to(`.${styles.spreadsheet}`, {
+			autoAlpha: 0,
 		})
 		spreadsheetTl1.set('.spreadsheet', {
 			x: -120,
@@ -97,10 +99,9 @@ const Spreadsheet: FC<SpreadsheetProps> = ({}) => {
 			scrollTrigger: {
 				trigger: '.chapter2',
 				start: `top top-=2200px`,
-				end: '+=1px',
-				onUpdate: self => {
-					spreadsheetTl2.reversed(self.direction > 0 ? false : true)
-				},
+				end: '+=1000px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
 			},
 		})
 		spreadsheetTl2.to('.spreadsheet', {
@@ -112,16 +113,27 @@ const Spreadsheet: FC<SpreadsheetProps> = ({}) => {
 			scrollTrigger: {
 				trigger: '.chapter3',
 				start: `top center`,
-				end: '+=1px',
-				onUpdate: self => {
-					spreadsheetTransitionTl.reversed(
-						self.direction > 0 ? false : true
-					)
-				},
+				end: '+=1000px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
 			},
 		})
 		spreadsheetTransitionTl.to('.spreadsheet', {
 			yPercent: -60,
+		})
+		// Timeline for exit transition
+		const spreadsheetExitTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.chapter4',
+				start: 'top bottom',
+				end: '+=200px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
+			},
+		})
+		spreadsheetExitTl.to(`.spreadsheet`, {
+			duration: 0.5,
+			autoAlpha: 0,
 		})
 	}, [])
 

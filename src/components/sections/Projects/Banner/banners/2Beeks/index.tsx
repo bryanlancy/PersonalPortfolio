@@ -91,10 +91,9 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 			scrollTrigger: {
 				trigger: '.TwoBeeksContainer',
 				start: 'top center',
-				end: '+=1px',
-				onUpdate: self => {
-					picLargeTl.reversed(self.direction > 0 ? false : true)
-				},
+				end: '+=100px',
+				fastScrollEnd: true,
+				toggleActions: 'play complete none reverse',
 			},
 		})
 		picLargeTl.to(`.${styles.picLarge}`, {
@@ -106,10 +105,9 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 			scrollTrigger: {
 				trigger: '.TwoBeeksContainer',
 				start: 'top center',
-				end: '+=1px',
-				onUpdate: self => {
-					picSmall1Tl.reversed(self.direction > 0 ? false : true)
-				},
+				end: '+=100px',
+				fastScrollEnd: true,
+				toggleActions: 'play complete none reverse',
 			},
 		})
 		picSmall1Tl.to(`.${styles.picSmall1}`, {
@@ -122,10 +120,9 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 			scrollTrigger: {
 				trigger: '.TwoBeeksContainer',
 				start: 'top center',
-				end: '+=1px',
-				onUpdate: self => {
-					picSmall2Tl.reversed(self.direction > 0 ? false : true)
-				},
+				end: '+=100px',
+				fastScrollEnd: true,
+				toggleActions: 'play complete none reverse',
 			},
 		})
 		picSmall2Tl.to(`.${styles.picSmall2}`, { autoAlpha: 1, delay: 0.66 })
@@ -196,14 +193,7 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 					</div>
 				</div>
 			</Container>
-			<Swarm
-				count={2}
-				box={[
-					{ x: 0, y: 0 },
-					{ x: width, y: height },
-				]}
-				className={styles.swarm}
-			/>
+			<Swarm count={2} className={styles.swarm} />
 			<HexBackground />
 		</ProjectCard>
 	)

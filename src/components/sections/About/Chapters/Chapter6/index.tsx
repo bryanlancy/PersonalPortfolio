@@ -47,6 +47,7 @@ const Chapter6 = () => {
 				start: 'top bottom',
 				end: '+=500px',
 				scrub: true,
+				fastScrollEnd: true,
 			},
 		})
 		lightExit.to(`.lightContainer`, {

@@ -11,22 +11,6 @@ import { FC, useRef, useState } from 'react'
 
 gsap.registerPlugin(useGSAP, DrawSVGPlugin, ScrollTrigger)
 
-interface RandomPointProps {
-	point: Coord
-	i: number
-}
-const RandomPoint: FC<RandomPointProps> = ({ point, i }) => {
-	return (
-		<circle
-			key={`scatter-point-${i}`}
-			className={styles.point}
-			r={0}
-			cx={point.x}
-			cy={point.y}
-		/>
-	)
-}
-
 const Scatter = () => {
 	const svgWidth = 1000
 	const svgHeight = 500
@@ -62,10 +46,9 @@ const Scatter = () => {
 			scrollTrigger: {
 				trigger: '.chapter2',
 				start: 'top top-=2200px',
-				end: '+=1px',
-				onUpdate: self => {
-					xTl.reversed(self.direction > 0 ? false : true)
-				},
+				end: '+=100px',
+				fastScrollEnd: true,
+				toggleActions: 'play complete none reverse',
 			},
 		})
 		xTl.fromTo(
@@ -78,10 +61,9 @@ const Scatter = () => {
 			scrollTrigger: {
 				trigger: '.chapter2',
 				start: 'top top-=2200px',
-				end: '+=1px',
-				onUpdate: self => {
-					yTl.reversed(self.direction > 0 ? false : true)
-				},
+				end: '+=100px',
+				fastScrollEnd: true,
+				toggleActions: 'play complete none reverse',
 			},
 		})
 		yTl.fromTo(
@@ -94,9 +76,8 @@ const Scatter = () => {
 				trigger: '.chapter3',
 				start: 'top center',
 				end: '+=100px',
-				onUpdate: self => {
-					lineTransitionTl.reversed(self.direction > 0 ? false : true)
-				},
+				fastScrollEnd: true,
+				toggleActions: 'play complete none reverse',
 			},
 		})
 
@@ -113,10 +94,9 @@ const Scatter = () => {
 				scrollTrigger: {
 					trigger: '.chapter2',
 					start: 'top top-=2200px',
-					end: '+=1px',
-					onUpdate: self => {
-						pointTl.reversed(self.direction > 0 ? false : true)
-					},
+					end: '+=100px',
+					fastScrollEnd: true,
+					toggleActions: 'play complete none reverse',
 				},
 			})
 			pointTl.to(`.${styles.point}`, {
@@ -143,10 +123,9 @@ const Scatter = () => {
 			scrollTrigger: {
 				trigger: '.chapter2',
 				start: 'top top-=2200px',
-				end: '+=1px',
-				onUpdate: self => {
-					bestFitTl.reversed(self.direction > 0 ? false : true)
-				},
+				end: '+=100px',
+				fastScrollEnd: true,
+				toggleActions: 'play complete none reverse',
 			},
 		})
 		bestFitTl.fromTo(
@@ -160,11 +139,8 @@ const Scatter = () => {
 				trigger: '.chapter3',
 				start: 'top center',
 				end: '+=100px',
-				onUpdate: self => {
-					scatterTransitionTl.reversed(
-						self.direction > 0 ? false : true
-					)
-				},
+				fastScrollEnd: true,
+				toggleActions: 'play complete none reverse',
 			},
 		})
 		scatterTransitionTl.to(`.${styles.scatter}`, {

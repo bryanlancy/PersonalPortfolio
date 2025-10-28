@@ -94,13 +94,13 @@ const TypeText: FC<TypeTextProps> = ({
 				})
 
 				// Adjust cursor size based on text size
-				gsap.set(`.${styles.cursor}`, {
+				gsap.set(cursorRef.current, {
 					height: charHeight * 0.58,
 					width: maxWidth * 0.7,
 					y: charHeight * 0.17,
 				})
 
-				cursorTl.current.to(`.${styles.cursor}`, {
+				cursorTl.current.to(cursorRef.current, {
 					delay,
 					duration: typeSpeed * (text.length * 1.08),
 
@@ -110,7 +110,7 @@ const TypeText: FC<TypeTextProps> = ({
 					ease: SteppedEase.config(text.length),
 					onReverseComplete: () => {
 						if (!shouldBlink) {
-							gsap.to(`.${styles.cursor}`, {
+							gsap.to(cursorRef.current, {
 								autoAlpha: 0,
 								duration: 0,
 							})
@@ -118,7 +118,7 @@ const TypeText: FC<TypeTextProps> = ({
 					},
 					onComplete: () => {
 						if (!shouldBlink) {
-							gsap.to(`.${styles.cursor}`, {
+							gsap.to(cursorRef.current, {
 								autoAlpha: 0,
 								duration: 0,
 							})

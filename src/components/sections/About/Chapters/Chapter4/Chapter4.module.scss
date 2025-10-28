@@ -134,6 +134,7 @@
 	border-radius: 16px;
 	border-radius: 50%;
 
+	background: none;
 	box-shadow: 4px 4px 8px 0px #0000;
 	padding: 40px;
 
@@ -168,16 +169,16 @@
 	@include autoAlpha;
 }
 .line1 {
-	top: 50%;
-	left: 24px;
+	top: 60%;
+	left: 50%;
 }
 .line2 {
-	top: 52%;
-	left: 24px;
+	top: 62%;
+	left: 50%;
 }
 .line3 {
-	top: 54%;
-	left: 48px;
+	top: 64%;
+	left: 53%;
 }
 .line4 {
 	bottom: 25%;

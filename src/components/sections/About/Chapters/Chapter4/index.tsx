@@ -61,26 +61,12 @@ const Chapter4 = () => {
 	const containerRef = useRef<HTMLDivElement>(null)
 
 	useGSAP(() => {
-		const hideBarSwipe = gsap.timeline({
-			scrollTrigger: {
-				trigger: '.chapter4',
-				start: 'top top',
-				end: '+=1px',
-				onUpdate: self => {
-					hideBarSwipe.reversed(self.direction > 0 ? false : true)
-				},
-			},
-		})
-		hideBarSwipe.to(`#barSwipe`, {
-			autoAlpha: 0,
-			duration: 0.01,
-		})
 		// Container scroll with screen
 		gsap.to(containerRef.current, {
 			scrollTrigger: {
 				trigger: containerRef.current,
 				start: 'top top',
-				end: '+=4250',
+				end: '+=4750',
 				pin: true,
 			},
 		})
@@ -90,10 +76,8 @@ const Chapter4 = () => {
 			scrollTrigger: {
 				trigger: '.chapter4',
 				start: 'top center',
-				end: '+=1px',
-				onUpdate: self => {
-					titleTl.reversed(self.direction > 0 ? false : true)
-				},
+				end: '+=400px',
+				toggleActions: 'play none resume reverse',
 			},
 		})
 		const splitText = SplitText.create(`.${styles.title}`, {
@@ -111,6 +95,31 @@ const Chapter4 = () => {
 			stagger: 0.5,
 		})
 
+		// Line 1,2,3 Animation
+		const line1Tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.chapter4',
+				start: 'top top-=600px',
+				end: '+=600px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
+			},
+		})
+		line1Tl.set(
+			[`.${styles.line1}`, `.${styles.line2}`, `.${styles.line3}`],
+			{ autoAlpha: 0 }
+		)
+		line1Tl.to(`.${styles.line1}`, {
+			autoAlpha: 1,
+		})
+		line1Tl.to(`.${styles.line2}`, {
+			autoAlpha: 1,
+		})
+		line1Tl.to(`.${styles.line3}`, {
+			delay: 1,
+			autoAlpha: 1,
+		})
+
 		// Face Animation
 		const faceTl = gsap.timeline({
 			scrollTrigger: {
@@ -118,17 +127,13 @@ const Chapter4 = () => {
 				start: 'top top+=200px',
 				end: '+=800px',
 				scrub: true,
+				fastScrollEnd: true,
+
 				onUpdate: self => {
 					const isScrollingDown = self.direction === -1 ? false : true
-					if (isScrollingDown) {
-						gsap.to(`.${styles.me}`, {
-							rotateY: 180,
-						})
-					} else {
-						gsap.to(`.${styles.me}`, {
-							rotateY: 0,
-						})
-					}
+					gsap.to(`.${styles.me}`, {
+						rotateY: isScrollingDown ? 180 : 0,
+					})
 				},
 			},
 		})
@@ -139,10 +144,9 @@ const Chapter4 = () => {
 			scrollTrigger: {
 				trigger: '.chapter4',
 				start: 'top top-=750px',
-				end: '+=1px',
-				onUpdate: self => {
-					faceOnBedTl.reversed(self.direction > 0 ? false : true)
-				},
+				end: '+=400px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
 			},
 		})
 
@@ -168,60 +172,14 @@ const Chapter4 = () => {
 			'<'
 		)
 
-		const faceToComputerTl = gsap.timeline({
-			scrollTrigger: {
-				trigger: '.chapter4',
-				start: 'top top-=2500px',
-				end: '+=1px',
-				onUpdate: self => {
-					faceToComputerTl.reversed(self.direction > 0 ? false : true)
-				},
-			},
-		})
-		faceToComputerTl.to(`.${styles.me}`, {
-			rotateY: '+=180deg',
-			x: -104,
-			y: 0,
-		})
-		faceToComputerTl.to(`.${styles.line4}`, {
-			autoAlpha: 1,
-		})
-		faceToComputerTl.to(
-			[`.${styles.line1}`, `.${styles.line2}`, `.${styles.line3}`],
-			{
-				autoAlpha: 0,
-				stagger: 0.25,
-			},
-			'<'
-		)
-		faceToComputerTl.to(
-			`.${styles.smart}`,
-			{
-				duration: 0.1,
-				autoAlpha: 1,
-			},
-			'<'
-		)
-		faceToComputerTl.to(
-			`.${styles.sleeping}`,
-			{
-				duration: 0.1,
-				autoAlpha: 0,
-			},
-			'<'
-		)
-
 		// House Transition to Inside Animation
 		const houseTransitionTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter4',
 				start: 'top top-=600px',
-				end: '+=1px',
-				onUpdate: self => {
-					houseTransitionTl.reversed(
-						self.direction > 0 ? false : true
-					)
-				},
+				end: '+=400px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
 			},
 		})
 		houseTransitionTl.to(`.${styles.houseOut}`, {
@@ -255,6 +213,8 @@ const Chapter4 = () => {
 		houseTransitionTl.to(
 			`.${styles.lightContainer}`,
 			{
+				// boxShadow: '4px 4px 8px 0px #0000',
+				// background: 'none',
 				duration: 0.25,
 				autoAlpha: 1,
 			},
@@ -269,17 +229,161 @@ const Chapter4 = () => {
 			'<'
 		)
 
+		// Face to Computer Animation
+		const faceToComputerTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.chapter4',
+				start: 'top top-=2500px',
+				end: '+=600px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
+			},
+		})
+		faceToComputerTl.set(`.${styles.line4}`, { autoAlpha: 0 })
+		faceToComputerTl.to(`.${styles.me}`, {
+			rotateY: '+=180deg',
+			x: -104,
+			y: 0,
+		})
+		faceToComputerTl.to(`.${styles.line4}`, {
+			autoAlpha: 1,
+		})
+		faceToComputerTl.to(
+			[`.${styles.line1}`, `.${styles.line2}`, `.${styles.line3}`],
+			{
+				autoAlpha: 0.5,
+				stagger: 0.25,
+			},
+			'<'
+		)
+		faceToComputerTl.to(
+			`.${styles.smart}`,
+			{
+				duration: 0.1,
+				autoAlpha: 1,
+			},
+			'<'
+		)
+		faceToComputerTl.to(
+			`.${styles.sleeping}`,
+			{
+				duration: 0.1,
+				autoAlpha: 0,
+			},
+			'<'
+		)
+
+		// Line 4,5 Animation
+		const line4Tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.chapter4',
+				start: 'top top-=3500px',
+				end: '+=400px',
+				toggleActions: 'play complete none reset',
+			},
+		})
+		line4Tl.to(`.${styles.line4}`, { autoAlpha: 0.5 }, '<')
+		line4Tl.to(`.${styles.line5}`, {
+			autoAlpha: 1,
+		})
+		const lightFlickerTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.chapter4',
+				start: 'top top-=3500px',
+				end: '+=600px',
+				toggleActions: 'play complete none reset',
+				fastScrollEnd: true,
+			},
+		})
+
+		// On
+		const lightOn = (glow: boolean = false) => {
+			lightFlickerTl.to(`.${styles.lightOn}`, {
+				filter: glow ? 'drop-shadow(0 0 0.75rem #dcdc2b)' : undefined,
+				autoAlpha: 1,
+				duration: 0.1,
+				delay: 0.05,
+			})
+			lightFlickerTl.to(
+				`.${styles.lightOff}`,
+				{
+					autoAlpha: 0,
+					duration: 0.1,
+				},
+				'<'
+			)
+		}
+		// Off
+		const lightOff = () => {
+			lightFlickerTl.to(`.${styles.lightOn}`, {
+				autoAlpha: 0,
+				duration: 0.1,
+			})
+			lightFlickerTl.to(
+				`.${styles.lightOff}`,
+				{
+					autoAlpha: 1,
+
+					duration: 0.1,
+				},
+				'<'
+			)
+		}
+		const flicker = () => {
+			lightOn()
+			lightOff()
+		}
+
+		flicker()
+		flicker()
+		flicker()
+		flicker()
+		flicker()
+		lightOn(true)
+
+		lightFlickerTl.to(
+			[`.${styles.line1}`, `.${styles.line2}`, `.${styles.line3}`],
+			{
+				autoAlpha: 0,
+				stagger: 0.25,
+			},
+			'<'
+		)
+		lightFlickerTl.to(`.${styles.line4}`, { autoAlpha: 0 }, '<')
+		// Line 6 Animation
+		lightFlickerTl.to(`.${styles.line6}`, {
+			delay: 1,
+			autoAlpha: 1,
+		})
+		lightFlickerTl.to(
+			`.${styles.hearts}`,
+			{ autoAlpha: 1, scale: 1, duration: 0.15 },
+			'<'
+		)
+		lightFlickerTl.to(
+			`.${styles.smart}`,
+			{
+				autoAlpha: 0,
+				scale: 0,
+
+				duration: 0.15,
+			},
+			'<'
+		)
+
 		// House Exit Animation
 		const houseExitTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter5',
 				start: 'top bottom',
-				end: '+=1px',
-				onUpdate: self => {
-					houseExitTl
-						.timeScale(self.direction > 0 ? 1 : 2)
-						.reversed(self.direction > 0 ? false : true)
-				},
+				end: '+=600px',
+				fastScrollEnd: true,
+				toggleActions: 'play complete none reverse',
+				// onUpdate: self => {
+				// 	houseExitTl
+				// 		.timeScale(self.direction > 0 ? 1 : 2)
+				// 		.reversed(self.direction > 0 ? false : true)
+				// },
 			},
 		})
 
@@ -338,122 +442,6 @@ const Chapter4 = () => {
 			y: 80,
 			scale: 1.3,
 		})
-
-		// Line 1,2,3 Animation
-		const line1Tl = gsap.timeline({
-			scrollTrigger: {
-				trigger: '.chapter4',
-				start: 'top top-=600px',
-				end: '+=1px',
-				onUpdate: self => {
-					line1Tl.reversed(self.direction > 0 ? false : true)
-				},
-			},
-		})
-		line1Tl.to(`.${styles.line1}`, {
-			autoAlpha: 1,
-		})
-		line1Tl.to(`.${styles.line2}`, {
-			autoAlpha: 1,
-		})
-		line1Tl.to(`.${styles.line3}`, {
-			delay: 1,
-			autoAlpha: 1,
-		})
-
-		// Line 4,5 Animation
-		const line4Tl = gsap.timeline({
-			scrollTrigger: {
-				trigger: '.chapter4',
-				start: 'top top-=3500px',
-				end: '+=1px',
-				onUpdate: self => {
-					line4Tl.reversed(self.direction > 0 ? false : true)
-				},
-			},
-		})
-		line4Tl.to(`.${styles.line4}`, { autoAlpha: 0 }, '<')
-		line4Tl.to(`.${styles.line5}`, {
-			autoAlpha: 1,
-		})
-		const lightFlickerTl = gsap.timeline({
-			scrollTrigger: {
-				trigger: '.chapter4',
-				start: 'top top-=3500px',
-				end: '+=1px',
-				onUpdate: self => {
-					if (!(self.direction > 0)) {
-						lightFlickerTl.restart(true)
-					}
-					lightFlickerTl.reversed(self.direction > 0 ? false : true)
-				},
-			},
-		})
-		// On
-		const lightOn = (glow: boolean = false) => {
-			lightFlickerTl.to(`.${styles.lightOn}`, {
-				filter: glow ? 'drop-shadow(0 0 0.75rem #dcdc2b)' : undefined,
-				autoAlpha: 1,
-				duration: 0.1,
-				delay: 0.05,
-			})
-			lightFlickerTl.to(
-				`.${styles.lightOff}`,
-				{
-					autoAlpha: 0,
-					duration: 0.1,
-				},
-				'<'
-			)
-		}
-		// Off
-		const lightOff = () => {
-			lightFlickerTl.to(`.${styles.lightOn}`, {
-				autoAlpha: 0,
-				duration: 0.1,
-			})
-			lightFlickerTl.to(
-				`.${styles.lightOff}`,
-				{
-					autoAlpha: 1,
-
-					duration: 0.1,
-				},
-				'<'
-			)
-		}
-		const flicker = () => {
-			lightOn()
-			lightOff()
-		}
-
-		flicker()
-		flicker()
-		flicker()
-		flicker()
-		flicker()
-		lightOn(true)
-
-		// Line 6 Animation
-		lightFlickerTl.to(`.${styles.line6}`, {
-			delay: 1,
-			autoAlpha: 1,
-		})
-		lightFlickerTl.to(
-			`.${styles.hearts}`,
-			{ autoAlpha: 1, scale: 1, duration: 0.15 },
-			'<'
-		)
-		lightFlickerTl.to(
-			`.${styles.smart}`,
-			{
-				autoAlpha: 0,
-				scale: 0,
-
-				duration: 0.15,
-			},
-			'<'
-		)
 	}, [])
 
 	return (

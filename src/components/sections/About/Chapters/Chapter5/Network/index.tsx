@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useMemo, useRef, useState } from 'react'
+import { RefObject, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -57,18 +57,6 @@ const Network = () => {
 					paused: true,
 					repeat: -1,
 					delay: opts.delay,
-					// scrollTrigger: {
-					// 	trigger: '.chapter5',
-					// 	start: 'top top',
-					// 	onUpdate: self => {
-					// 		if (!(self.direction > 0)) {
-					// 			binaryDataTl.restart(true)
-					// 		}
-					// 		binaryDataTl.reversed(
-					// 			self.direction > 0 ? false : true
-					// 		)
-					// 	},
-					// },
 				})
 
 				binaryDataTl.to(className, {
@@ -103,54 +91,51 @@ const Network = () => {
 		500, 100,
 	])
 
-	const showNode = contextSafe(
-		(
-			className: string | string[],
-			offset: number,
-			duration: number,
-			binaryTl: GSAPTimeline | null
-		) => {
-			const nodeTl = gsap.timeline({
-				scrollTrigger: {
-					trigger: '.chapter5',
-					start: `top top-=${offset}`,
-					end: `+=${duration}px`,
-					scrub: true,
-					onUpdate: self => {
-						console.log(className, binaryTl)
-
-						if (binaryTl) {
-							console.log(self.progress)
-							if (self.direction > 0 && self.progress >= 0.95) {
-								binaryTl.play()
-							} else {
-								binaryTl.pause(0)
-							}
-						}
-					},
-				},
-			})
-			nodeTl.to(className, {
-				autoAlpha: 1,
-				duration: 0.1,
-			})
-			nodeTl.to(className, {
-				boxShadow:
-					'inset 5px 5px 10px #140025, inset -5px -5px 10px #500093',
-				duration: 1,
-			})
-			nodeTl.to(
-				`${className} .${styles.icon}`,
-				{
-					autoAlpha: 1,
-					delay: 0.2,
-					duration: 1,
-				},
-				'<'
-			)
-			return nodeTl
-		}
-	)
+	// const showNode = contextSafe(
+	// 	(
+	// 		className: string | string[],
+	// 		offset: number,
+	// 		duration: number,
+	// 		binaryTl: GSAPTimeline | null
+	// 	) => {
+	// 		const nodeTl = gsap.timeline({
+	// 			scrollTrigger: {
+	// 				trigger: '.chapter5',
+	// 				start: `top top-=${offset}`,
+	// 				end: `+=${duration}px`,
+	// 				scrub: true,
+	// 				onUpdate: self => {
+	// 					if (binaryTl) {
+	// 						if (self.direction > 0 && self.progress >= 0.95) {
+	// 							binaryTl.play()
+	// 						} else {
+	// 							binaryTl.pause(0)
+	// 						}
+	// 					}
+	// 				},
+	// 			},
+	// 		})
+	// 		nodeTl.to(className, {
+	// 			autoAlpha: 1,
+	// 			duration: 0.1,
+	// 		})
+	// 		nodeTl.to(className, {
+	// 			boxShadow:
+	// 				'inset 5px 5px 10px #140025, inset -5px -5px 10px #500093',
+	// 			duration: 1,
+	// 		})
+	// 		nodeTl.to(
+	// 			`${className} .${styles.icon}`,
+	// 			{
+	// 				autoAlpha: 1,
+	// 				delay: 0.2,
+	// 				duration: 1,
+	// 			},
+	// 			'<'
+	// 		)
+	// 		return nodeTl
+	// 	}
+	// )
 
 	function scaleDimensions(x: number, y: number): [number, number] {
 		const cx = (x / 100) * svgDimensions[0]
@@ -246,10 +231,9 @@ const Network = () => {
 			scrollTrigger: {
 				trigger: '.chapter5',
 				start: 'top top-=999px',
-				end: '+=1px',
-				onUpdate: self => {
-					nodeAlphaTl.reversed(self.direction > 0 ? false : true)
-				},
+				end: '+=200px',
+				fastScrollEnd: true,
+				toggleActions: 'play complete none reverse',
 			},
 		})
 		nodeAlphaTl.to(`.${styles.node}`, {
@@ -263,8 +247,9 @@ const Network = () => {
 			scrollTrigger: {
 				trigger: '.chapter5',
 				start: 'top top',
-				end: '+=1px',
-
+				end: '+=300px',
+				fastScrollEnd: true,
+				toggleActions: 'play complete none reverse',
 				onUpdate: self => {
 					lightNodeTl
 						.timeScale(self.direction > 0 ? 1 : 5)
@@ -298,6 +283,8 @@ const Network = () => {
 				start: `top top-=${750}`,
 				end: `+=${400}px`,
 				scrub: true,
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
 				onUpdate: self => {
 					if (binary1Tl.current) {
 						if (self.direction > 0 && self.progress >= 0.95) {
@@ -314,6 +301,7 @@ const Network = () => {
 			duration: 0.1,
 		})
 		node1Tl.to(nodeClasses[0], {
+			backgroundColor: '#32005cff',
 			boxShadow:
 				'inset 5px 5px 10px #140025, inset -5px -5px 10px #500093',
 			duration: 1,
@@ -340,6 +328,8 @@ const Network = () => {
 				start: `top top-=${1150}`,
 				end: `+=${400}px`,
 				scrub: true,
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
 				onUpdate: self => {
 					if (binary2Tl.current) {
 						if (self.direction > 0 && self.progress >= 0.95) {
@@ -356,6 +346,7 @@ const Network = () => {
 			duration: 0.1,
 		})
 		node2Tl.to(nodeClasses[1], {
+			backgroundColor: '#32005cff',
 			boxShadow:
 				'inset 5px 5px 10px #140025, inset -5px -5px 10px #500093',
 			duration: 1,
@@ -378,6 +369,8 @@ const Network = () => {
 				start: `top top-=${1550}`,
 				end: `+=${400}px`,
 				scrub: true,
+				toggleActions: 'play complete nonw reverse',
+				fastScrollEnd: true,
 				onUpdate: self => {
 					if (binary3Tl.current) {
 						if (self.direction > 0 && self.progress >= 0.95) {
@@ -394,6 +387,7 @@ const Network = () => {
 			duration: 0.1,
 		})
 		node3Tl.to(nodeClasses[2], {
+			backgroundColor: '#32005cff',
 			boxShadow:
 				'inset 5px 5px 10px #140025, inset -5px -5px 10px #500093',
 			duration: 1,
@@ -414,6 +408,8 @@ const Network = () => {
 				start: `top top-=${1950}`,
 				end: `+=${400}px`,
 				scrub: true,
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
 			},
 		})
 		node4Tl.to(nodeClasses[3], {
@@ -421,6 +417,7 @@ const Network = () => {
 			duration: 0.1,
 		})
 		node4Tl.to(nodeClasses[3], {
+			backgroundColor: '#32005cff',
 			boxShadow:
 				'inset 5px 5px 10px #140025, inset -5px -5px 10px #500093',
 			duration: 1,
@@ -451,6 +448,8 @@ const Network = () => {
 				start: `top top-=${2150}`,
 				end: `+=${400}px`,
 				scrub: true,
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
 			},
 		})
 		node5Tl.to(nodeClasses[4], {
@@ -458,6 +457,7 @@ const Network = () => {
 			duration: 0.1,
 		})
 		node5Tl.to(nodeClasses[4], {
+			backgroundColor: '#32005cff',
 			boxShadow:
 				'inset 5px 5px 10px #140025, inset -5px -5px 10px #500093',
 			duration: 1,
@@ -478,6 +478,8 @@ const Network = () => {
 				start: `top top-=${2350}`,
 				end: `+=${400}px`,
 				scrub: true,
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
 				onUpdate: self => {
 					if (binary4Tl.current) {
 						if (self.direction > 0 && self.progress >= 0.95) {
@@ -494,6 +496,7 @@ const Network = () => {
 			duration: 0.1,
 		})
 		node6Tl.to(nodeClasses[5], {
+			backgroundColor: '#32005cff',
 			boxShadow:
 				'inset 5px 5px 10px #140025, inset -5px -5px 10px #500093',
 			duration: 1,

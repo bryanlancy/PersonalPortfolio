@@ -149,7 +149,8 @@ const Chapter5 = () => {
 			scrollTrigger: {
 				trigger: '.chapter5',
 				start: 'top top-=2750px',
-				end: '+=1px',
+				end: '+=200px',
+
 				onUpdate: self => {
 					line3Tl
 						.timeScale(self.direction > 0 ? 1 : 5)

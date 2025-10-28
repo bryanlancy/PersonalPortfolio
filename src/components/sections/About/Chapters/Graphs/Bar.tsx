@@ -27,10 +27,10 @@ const Bar = () => {
 			scrollTrigger: {
 				trigger: '.chapter2',
 				start: 'top top-=2200px',
-				end: '+=1px',
-				onUpdate: self => {
-					mainBarTl.reversed(self.direction > 0 ? false : true)
-				},
+				end: '+=300px',
+				fastScrollEnd: true,
+
+				toggleActions: 'play complete none reverse',
 			},
 		})
 
@@ -43,12 +43,9 @@ const Bar = () => {
 			scrollTrigger: {
 				trigger: '.chapter3',
 				start: 'top center',
-				end: '+=100px',
-				onUpdate: self => {
-					mainBarTransitionTl.reversed(
-						self.direction > 0 ? false : true
-					)
-				},
+				end: '+=300px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
 			},
 		})
 		mainBarTransitionTl.to(`.${styles.barContainer}`, {
@@ -59,10 +56,10 @@ const Bar = () => {
 			scrollTrigger: {
 				trigger: '.chapter4',
 				start: 'top bottom+=1000px',
-				end: '+=200px',
-				onUpdate: self => {
-					overflowTl.reversed(self.direction > 0 ? false : true)
-				},
+				end: '+=1300px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
+				// preventOverlaps: true,
 			},
 		})
 		overflowTl.to(`.${styles.barLast}`, {
@@ -85,22 +82,26 @@ const Bar = () => {
 			scale: 1,
 			stagger: 0.1,
 		})
-		overflowTl.to('.graphs', {
-			duration: 0.01,
+		// overflowTl.to('.graphs', {
+		// 	duration: 0.3,
+		// 	autoAlpha: 0,
+		// })
+		// overflowTl.to(
+		// 	'.spreadsheet',
+		// 	{
+		// 		duration: 0.1,
+		// 		autoAlpha: 0,
+		// 	},
+		// 	'<'
+		// )
+		overflowTl.to(`.${styles.barContainer}`, {
+			duration: 0.1,
 			autoAlpha: 0,
 		})
 		overflowTl.to(
-			'.spreadsheet',
-			{
-				duration: 0.01,
-				autoAlpha: 0,
-			},
-			'<'
-		)
-		overflowTl.to(
 			'.chapter3 > div',
 			{
-				duration: 0.01,
+				duration: 0.1,
 				autoAlpha: 0,
 			},
 			'<'

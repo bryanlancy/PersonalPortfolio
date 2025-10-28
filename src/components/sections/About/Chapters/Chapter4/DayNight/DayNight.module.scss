@@ -18,10 +18,12 @@
 
 .moon {
 	font-size: 48px;
+	@include autoAlpha;
 }
 .sun {
 	position: absolute;
 	right: 100%;
 	font-size: 48px;
 	color: yellow;
+	@include autoAlpha;
 }

@@ -38,7 +38,7 @@ const DayNight: FC<DayNightProps> = ({ start }) => {
 			scrollTrigger: {
 				trigger: '.chapter4',
 				start: `top top-=${start}px`,
-				end: '+=1px',
+				end: '+=300px',
 				// scrub:true
 			},
 		})
@@ -59,37 +59,73 @@ const DayNight: FC<DayNightProps> = ({ start }) => {
 					scrub: true,
 				},
 			})
+			sunMoonTl.addLabel('nightStart')
 			sunMoonTl.to(`.${styles.moon}`, {
-				duration: 1,
-				motionPath: {
-					path: sunMoonRef.current,
-					align: sunMoonRef.current,
-					alignOrigin: [0.5, 0.5],
-				},
+				autoAlpha: 1,
+				duration: 0.25,
 			})
+			sunMoonTl.to(
+				`.${styles.moon}`,
+				{
+					duration: 1,
+					motionPath: {
+						path: sunMoonRef.current,
+						align: sunMoonRef.current,
+						alignOrigin: [0.5, 0.5],
+						autoRotate: 180,
+					},
+				},
+				'<'
+			)
+			sunMoonTl.to(
+				`.${styles.moon}`,
+				{
+					autoAlpha: 0,
+					duration: 0.75,
+				},
+				'>-.5'
+			)
 			sunMoonTl.to(
 				'.chapter4',
 				{
 					duration: 0.5,
 					backgroundColor: '#1d005c',
 				},
+				'nightStart'
+			)
+			sunMoonTl.addLabel('dayStart')
+			sunMoonTl.to(`.${styles.sun}`, {
+				autoAlpha: 1,
+				duration: 0.25,
+			})
+			sunMoonTl.to(
+				`.${styles.sun}`,
+				{
+					duration: 1,
+					motionPath: {
+						path: sunMoonRef.current,
+						align: sunMoonRef.current,
+						alignOrigin: [0.5, 0.5],
+						autoRotate: 180,
+					},
+				},
 				'<'
 			)
-			sunMoonTl.to(`.${styles.sun}`, {
-				duration: 1,
-				motionPath: {
-					path: sunMoonRef.current,
-					align: sunMoonRef.current,
-					alignOrigin: [0.5, 0.5],
+			sunMoonTl.to(
+				`.${styles.sun}`,
+				{
+					autoAlpha: 0,
+					duration: 0.75,
 				},
-			})
+				'>-.5'
+			)
 			sunMoonTl.to(
 				`.chapter4`,
 				{
 					duration: 0.5,
 					backgroundColor: '#00a2ff',
 				},
-				'<'
+				'dayStart'
 			)
 			sunMoonTl.to('.chapter4', {
 				duration: 0.5,

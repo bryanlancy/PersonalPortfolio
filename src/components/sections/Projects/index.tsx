@@ -16,7 +16,7 @@ import {
 	TwoBeeksBanner,
 	WalkOnsBanner,
 } from './Banner'
-import { BannerContextProvider } from '@/context/bannerContext'
+
 import Container from '@/utils/components/Container'
 import Techs from './Techs'
 import { cn } from '@/utils/react'
@@ -83,7 +83,7 @@ const Projects: FC<ProjectsProps> = () => {
 	}, [])
 
 	return (
-		<BannerContextProvider>
+		<>
 			<section id='projects' className={styles.projects}>
 				<div className={styles.proText}>
 					<h1 className={cn(styles.title, 'proTitle')}>
@@ -118,23 +118,23 @@ const Projects: FC<ProjectsProps> = () => {
 			</section>
 			{/* <section className={styles.projects}>
 				<div className={styles.homeText}>
-					<h1 className={styles.title}>Personal Projects</h1>
-					<p className={styles.description}>
-						I still love learning new things in my free time. Here's
-						a couple technologies and projects I'm currently working
-						on at home.
-					</p>
-					<SideBanner name='homeTechs'>Technologies</SideBanner>
-					<Techs type='home' />
+				<h1 className={styles.title}>Personal Projects</h1>
+				<p className={styles.description}>
+				I still love learning new things in my free time. Here's
+				a couple technologies and projects I'm currently working
+				on at home.
+				</p>
+				<SideBanner name='homeTechs'>Technologies</SideBanner>
+				<Techs type='home' />
 				</div>
 
 				<ul>
-					<SideBanner name='homeProjects'>Projects</SideBanner>
-					<HomeNetworkBanner />
-					<CarputerBanner />
+				<SideBanner name='homeProjects'>Projects</SideBanner>
+				<HomeNetworkBanner />
+				<CarputerBanner />
 				</ul>
-			</section> */}
-		</BannerContextProvider>
+				</section> */}
+		</>
 	)
 }
 

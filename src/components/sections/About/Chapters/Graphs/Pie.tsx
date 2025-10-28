@@ -15,19 +15,16 @@ const Pie = () => {
 			transformOrigin: 'center center',
 		})
 
-		const pieTl = gsap
-			.timeline({
-				defaults: { duration: 1, ease: 'sine.inOut' },
-				scrollTrigger: {
-					trigger: '.chapter2',
-					start: 'top top-=2200px',
-					end: '+=1px',
-					onUpdate: self => {
-						pieTl.reversed(self.direction > 0 ? false : true)
-					},
-				},
-			})
-
+		const pieTl = gsap.timeline({
+			defaults: { duration: 1, ease: 'sine.inOut' },
+			scrollTrigger: {
+				trigger: '.chapter2',
+				start: 'top top-=2200px',
+				end: '+=600px',
+				toggleActions: 'play complete none reverse',
+			},
+		})
+		pieTl
 			.to(`.${styles.circle1}`, { drawSVG: '0% 37%' })
 			.to(`.${styles.circle2}`, { drawSVG: '37% 82%' }, 0)
 			.to(`.${styles.circle3}`, { drawSVG: '82% 100%' }, 0)
@@ -45,10 +42,8 @@ const Pie = () => {
 			scrollTrigger: {
 				trigger: '.chapter3',
 				start: 'top center',
-				end: '+=100px',
-				onUpdate: self => {
-					pieTransitionTl.reversed(self.direction > 0 ? false : true)
-				},
+				end: '+=600px',
+				toggleActions: 'play complete none reverse',
 			},
 		})
 		pieTransitionTl

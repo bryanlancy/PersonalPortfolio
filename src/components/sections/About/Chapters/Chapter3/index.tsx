@@ -61,41 +61,23 @@ const Chapter3 = () => {
 			scrollTrigger: {
 				trigger: '.chapter3',
 				start: 'top center',
-				end: '+=400px',
-				onUpdate: self => {
-					titleInTl.reversed(!self.isActive)
-				},
+				end: '+=600px',
+				toggleActions: 'play reverse resume reset',
 			},
 		})
 		titleInTl.to(`.${styles.title}`, {
 			duration: 0.25,
 			autoAlpha: 1,
 		})
-		// const titleOutTl = gsap.timeline({
-		// 	scrollTrigger: {
-		// 		trigger: '.chapter',
-		// 		start: 'top top',
-		// 		end: '+=1px',
-		// 		onUpdate: self => {
-		// 			titleOutTl.reversed(self.direction > 0 ? false : true)
-		// 		},
-		// 	},
-		// })
-		// titleOutTl.to(`.${styles.title}`, {
-		// 	duration: 0.25,
-		// 	autoAlpha: 0,
-		// })
 
 		// Background Animation
 		const backgroundTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter3',
 				start: 'top center',
-				end: '+=1px',
-
-				onUpdate: self => {
-					backgroundTl.reversed(self.direction > 0 ? false : true)
-				},
+				end: '+=1000px',
+				toggleActions: 'play pause resume reverse',
+				fastScrollEnd: true,
 			},
 		})
 		backgroundTl.to(['.chapter2', '.chapter3'], {
@@ -116,8 +98,8 @@ const Chapter3 = () => {
 				trigger: '.chapter3',
 				start: `top center-=100px`,
 				end: '+=3000px',
-				onUpdate: self => {
-					line1Tl.reversed(self.direction > 0 ? false : true)
+				toggleActions: 'play none resume reverse',
+				onToggle: self => {
 					if (self.isActive !== showLine1State[2].current) {
 						showLine1State[1](self.isActive)
 					}
@@ -134,8 +116,8 @@ const Chapter3 = () => {
 				trigger: '.chapter3',
 				start: `top center-=100px`,
 				end: '+=3000px',
-				onUpdate: self => {
-					line1Tl.reversed(self.direction > 0 ? false : true)
+				toggleActions: 'play none resume reverse',
+				onToggle: self => {
 					if (self.isActive !== showLine2State[2].current) {
 						showLine2State[1](self.isActive)
 					}
@@ -160,8 +142,8 @@ const Chapter3 = () => {
 				trigger: '.chapter3',
 				start: `top top-=1400px`,
 				end: '+=4000px',
-				onUpdate: self => {
-					line1Tl.reversed(self.direction > 0 ? false : true)
+				toggleActions: 'play none resume reverse',
+				onToggle: self => {
 					if (self.isActive !== showLine3State[2].current) {
 						showLine3State[1](self.isActive)
 					}

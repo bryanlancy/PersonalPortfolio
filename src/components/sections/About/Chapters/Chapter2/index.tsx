@@ -6,18 +6,17 @@ import { SplitText } from 'gsap/SplitText'
 import useState from 'react-usestateref'
 import { VT323 } from 'next/font/google'
 
+import Container from '@/utils/components/Container'
+import { cn } from '@/utils/react'
+import TypeText from '@/utils/components/TypeText'
+
+import styles from './Chapter2.module.scss'
+
 const vt323 = VT323({
 	subsets: ['latin'],
 	weight: '400',
 	// variable: '--font-vt',
 })
-
-import { cn } from '@/utils/react'
-import TypeText from '@/utils/components/TypeText'
-
-import styles from './Chapter2.module.scss'
-import Container from '@/utils/components/Container'
-
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger)
 
 /*
@@ -78,7 +77,7 @@ const Chapter2 = () => {
 		ScrollTrigger.create({
 			trigger: '.chapter2',
 			start: 'top top',
-			onUpdate: self => {
+			onToggle: self => {
 				if (self.isActive !== showTitleState[2].current) {
 					showTitleState[1](self.isActive)
 				}
@@ -86,70 +85,112 @@ const Chapter2 = () => {
 		})
 
 		// Line 1 Animation
-		ScrollTrigger.create({
-			trigger: '.chapter2',
-			start: `top top-=${line1Offset}px`,
-			end: '+=1200px',
-			onUpdate: self => {
-				if (self.isActive !== showLine1State[2].current) {
-					showLine1State[1](self.isActive)
-				}
+		const line1Tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.chapter2',
+				start: `top top-=${line1Offset}px`,
+				end: '+=1200px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
+				onToggle: self => {
+					if (self.isActive !== showLine1State[2].current) {
+						showLine1State[1](self.isActive)
+					}
+				},
 			},
+		})
+		line1Tl.to(`.${styles.line1}`, {
+			autoAlpha: 1,
+			duration: 0.5,
 		})
 
 		// Line 2 Animation
-		ScrollTrigger.create({
-			trigger: '.chapter2',
-			start: `top top-=${line2Offset}px`,
-			end: '+=1000px',
-			onUpdate: self => {
-				if (self.isActive !== showLine2State[2].current) {
-					showLine2State[1](self.isActive)
-				}
+		const line2Tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.chapter2',
+				start: `top top-=${line2Offset}px`,
+				end: '+=1000px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
+				onToggle: self => {
+					if (self.isActive !== showLine2State[2].current) {
+						showLine2State[1](self.isActive)
+					}
+				},
 			},
+		})
+		line2Tl.to(`.${styles.line2}`, {
+			autoAlpha: 1,
+			duration: 0.5,
 		})
 
 		// Line 3 Animation
-		ScrollTrigger.create({
-			trigger: '.chapter2',
-			start: `top top-=${line3Offset}px`,
-			end: '+=1200px',
-			onUpdate: self => {
-				if (self.isActive !== showLine3State[2].current) {
-					showLine3State[1](self.isActive)
-				}
+		const line3Tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.chapter2',
+				start: `top top-=${line3Offset}px`,
+				end: '+=1200px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
+				onToggle: self => {
+					if (self.isActive !== showLine3State[2].current) {
+						showLine3State[1](self.isActive)
+					}
+				},
 			},
 		})
+		line3Tl.to(`.${styles.line3}`, {
+			autoAlpha: 1,
+			duration: 0.5,
+		})
+
 		// Line 4 Animation
-		ScrollTrigger.create({
-			trigger: '.chapter2',
-			start: `top top-=${line4Offset}px`,
-			end: '+=1200px',
-			onUpdate: self => {
-				if (self.isActive !== showLine4State[2].current) {
-					showLine4State[1](self.isActive)
-				}
+		const line4Tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.chapter2',
+				start: `top top-=${line4Offset}px`,
+				end: '+=1200px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
+				onToggle: self => {
+					if (self.isActive !== showLine4State[2].current) {
+						showLine4State[1](self.isActive)
+					}
+				},
 			},
 		})
+		line4Tl.to(`.${styles.line4}`, {
+			autoAlpha: 1,
+			duration: 0.5,
+		})
 
-		// Line 5 Animation
-		ScrollTrigger.create({
-			trigger: '.chapter2',
-			start: `top top-=${line5Offset}px`,
-
-			onUpdate: self => {
-				if (self.isActive !== showLine5State[2].current) {
-					showLine5State[1](self.isActive)
-				}
+		const line5Tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.chapter2',
+				start: `top top-=${line5Offset + 400}px`,
+				end: '+=1200px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
+				onToggle: self => {
+					if (self.isActive !== showLine5State[2].current) {
+						showLine5State[1](self.isActive)
+					}
+				},
 			},
 		})
-		gsap.to(`.${styles.line5}`, {
-			y: '+=400',
+		line5Tl.to(`.${styles.line5}`, {
+			autoAlpha: 1,
+			duration: 0.5,
+		})
+		const line5TransitionTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter2',
 				start: `top top-=${line5Offset + 400}px`,
 				scrub: true,
 			},
+		})
+		line5TransitionTl.to(`.${styles.line5}`, {
+			y: '+=400',
 		})
 	}, [])
 
