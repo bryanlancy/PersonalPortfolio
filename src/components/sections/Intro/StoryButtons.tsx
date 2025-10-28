@@ -62,11 +62,7 @@ const StoryButtons = () => {
 						onMouseLeave={handleMouseLeave}>
 						Play Story
 					</button>
-					<CelebrationElements
-						isVisible={isHovered}
-						duration={0.4}
-						stagger={0.05}
-					/>
+					<CelebrationElements isVisible={isHovered} duration={0.4} />
 				</div>
 				<div className={styles.buttonWrapper}>
 					<button
@@ -79,7 +75,6 @@ const StoryButtons = () => {
 					<DiscouragingElements
 						isVisible={isSkipHovered}
 						duration={0.4}
-						stagger={0.05}
 					/>
 				</div>
 			</div>
