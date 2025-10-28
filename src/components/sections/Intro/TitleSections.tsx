@@ -154,7 +154,7 @@ const TitleCards = ({ onTitleChange }: TitleSectionsProps) => {
 				trigger: '.introSection',
 				start: 'top top',
 				end: 'bottom top',
-				toggleActions: 'play pause resume none',
+				toggleActions: 'play pause resume resume',
 			},
 		})
 
