@@ -1,11 +1,4 @@
 .storyControls {
-	position: absolute;
-	bottom: -280px;
-	left: 50%;
-	z-index: 1000;
-
-	transform: translateX(-50%);
-
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -13,6 +6,8 @@
 
 	width: 520px;
 	height: 240px;
+
+	margin-bottom: 80px;
 }
 
 .buttons {

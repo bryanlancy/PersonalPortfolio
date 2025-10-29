@@ -7,8 +7,8 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { SplitText } from 'gsap/SplitText'
 import { Bebas_Neue } from 'next/font/google'
 
-import CelebrationElements from './StoryButtons/CelebrationElements'
-import DiscouragingElements from './StoryButtons/DiscouragingElements'
+import CelebrationElements from './CelebrationElements'
+import DiscouragingElements from './DiscouragingElements'
 import { cn } from '@/utils/react'
 
 import styles from './StoryButtons.module.scss'
@@ -89,6 +89,7 @@ const StoryButtons = () => {
 
 	return (
 		<div
+			id='storyButtons'
 			ref={containerRef}
 			className={cn(styles.storyControls, bebasNeue.className)}>
 			<div className={styles.keepScrolling}>

@@ -3,14 +3,14 @@
 import { useState } from 'react'
 
 import TitleSections from './TitleSections'
-import StoryButtons from './StoryButtons'
+
 import MouseEffects from './MouseEffects'
 import FallingLetters from './FallingLetters'
+import Background from './Background'
 import { NoSsr } from '@/utils/next'
 import { cn } from '@/utils/react'
 
 import styles from './Intro.module.scss'
-import Background from './Background'
 
 export default function Intro() {
 	const [currentTitle, setCurrentTitle] =
@@ -28,7 +28,6 @@ export default function Intro() {
 				<FallingLetters currentTitle={currentTitle} />
 				<TitleSections onTitleChange={handleTitleChange} />
 			</NoSsr>
-			<StoryButtons />
 		</section>
 	)
 }
