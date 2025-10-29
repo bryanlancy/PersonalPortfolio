@@ -44,8 +44,6 @@ export default function Bucket({
 				end: '+=400px',
 				toggleActions: 'play none resume reverse',
 				onToggle: self => {
-					console.log(self.isActive)
-
 					backgroundTl
 						.timeScale(self.isActive ? 1 : 5)
 						.reversed(self.isActive ? false : true)
