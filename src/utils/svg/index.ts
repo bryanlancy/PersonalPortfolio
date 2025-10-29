@@ -78,8 +78,7 @@ export function generatePoints(
 
 export function lineOfBestFit(
 	points: Coord[],
-	viewBox: [number, number, number, number],
-	numPoints: number = 10
+	viewBox: [number, number, number, number]
 ): string {
 	const n = points.length
 

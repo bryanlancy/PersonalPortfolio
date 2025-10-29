@@ -9,7 +9,10 @@ interface CarputerCardProps {}
 const CarputerCard: FC<CarputerCardProps> = ({}) => {
 	const { carputer: data } = projectList
 	return (
-		<ProjectCard className={styles.background} projectName='Carputer'>
+		<ProjectCard
+			techs={{ frontend: [], backend: [], devops: [] }}
+			className={styles.background}
+			projectName='Carputer'>
 			<h1 className={styles.title}>{data.name}</h1>
 		</ProjectCard>
 	)

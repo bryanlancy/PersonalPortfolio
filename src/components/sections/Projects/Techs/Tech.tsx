@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
 	FC,
 	MouseEventHandler,
@@ -6,7 +6,7 @@ import {
 	useEffect,
 	useState,
 } from 'react'
-import { faArrowRight } from '@awesome.me/kit-ddd907bdb7/icons/classic/regular'
+// import { faArrowRight } from '@awesome.me/kit-ddd907bdb7/icons/classic/regular'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
@@ -16,7 +16,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 import { cn } from '@/utils/react'
 import { createBackground } from '../../Contact/ContactCard'
-import FancyText from '@/utils/components/FancyText'
+// import FancyText from '@/utils/components/FancyText'
 import { Technology } from '@/app/data/technology-list'
 
 import styles from './Techs.module.scss'
@@ -47,24 +47,6 @@ const rotateInverse = [
 ]
 const rotateIgnore = ['cloudflare']
 
-const mouseMove: MouseEventHandler<any> = e => {
-	const { currentTarget: t } = e
-
-	// Filter any events not related to `li` element
-
-	if (t.tagName !== 'LI') return
-	const rect = t.getBoundingClientRect()
-
-	const width = rect.width
-	const height = rect.height
-
-	const mouseX = e.clientX - rect.left
-	const mouseY = e.clientY - rect.top
-
-	const xPct = mouseX / width
-	const yPct = mouseY / height
-}
-
 /*
 	TODO Add holographic hover effect
 	Use icons as part of holographic layer
@@ -72,7 +54,13 @@ const mouseMove: MouseEventHandler<any> = e => {
 	https://www.joshdance.com/100/day50/
 */
 
-const Tech: FC<TechProps> = ({ tech, techRef, className, onClick, index }) => {
+const Tech: FC<TechProps> = ({
+	tech,
+	techRef,
+	className,
+	// onClick,
+	index,
+}) => {
 	let rotation = 10
 	if (rotateIgnore.includes(tech.name)) rotation = 0
 	if (rotateInverse.includes(tech.name)) rotation *= -1
@@ -82,7 +70,7 @@ const Tech: FC<TechProps> = ({ tech, techRef, className, onClick, index }) => {
 		return null
 	}
 
-	const [animateText, setAnimateText] = useState(false)
+	const [_, setAnimateText] = useState(false)
 
 	const { title, color, icon } = tech
 	const [name, setName] = useState(title)
@@ -180,7 +168,6 @@ const Tech: FC<TechProps> = ({ tech, techRef, className, onClick, index }) => {
 			}}
 			onMouseEnter={() => setAnimateText(true)}
 			onMouseLeave={() => setAnimateText(false)}
-			onMouseMove={mouseMove}
 			className={cn(
 				'tech',
 				styles.tech,

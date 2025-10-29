@@ -190,7 +190,6 @@ const Chapter2 = () => {
 					</TypeText>
 					<TypeText
 						shouldAnimate={showLine1State[0]}
-						cursorSpeedAdjust={-50}
 						text={line1}
 						className={cn(styles.line, styles.line1)}>
 						<p>{line1}</p>

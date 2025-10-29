@@ -28,7 +28,7 @@ export default function Drops({ drops }: DropsProps) {
 	const makeDrops = useState(false)
 
 	useGSAP(() => {
-		const dropsTl = gsap.timeline({
+		gsap.timeline({
 			scrollTrigger: {
 				trigger: `.mercury`,
 				start: 'top center-=100px',

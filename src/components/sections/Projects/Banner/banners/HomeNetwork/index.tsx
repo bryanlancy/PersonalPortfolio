@@ -10,7 +10,10 @@ const HomeNetworkCard: FC<HomeNetworkCardProps> = ({}) => {
 	const { lab: data } = projectList
 
 	return (
-		<ProjectCard className={styles.background} projectName='Home Lab'>
+		<ProjectCard
+			techs={{ frontend: [], backend: [], devops: [] }}
+			className={styles.background}
+			projectName='Home Lab'>
 			<h1 className={styles.title}>{data.name}</h1>
 		</ProjectCard>
 	)

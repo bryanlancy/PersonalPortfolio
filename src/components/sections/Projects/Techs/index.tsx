@@ -1,4 +1,4 @@
-import { createRef, FC, RefObject, useEffect, useRef, useState } from 'react'
+import { createRef, FC, RefObject, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { Flip } from 'gsap/Flip'
 import { useGSAP } from '@gsap/react'

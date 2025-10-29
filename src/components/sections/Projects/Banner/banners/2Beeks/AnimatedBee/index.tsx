@@ -9,13 +9,9 @@ import { cn } from '@/utils/react'
 
 import styles from './AnimatedBee.module.scss'
 import { getSVGPathData } from './helpers'
-import { randomInteger, Coord } from '@/utils/general'
+import { randomInteger } from '@/utils/general'
 
 gsap.registerPlugin(useGSAP, MotionPathPlugin, ScrollTrigger, DrawSVGPlugin)
-
-type BasicBox = [Coord, Coord]
-
-//==============================
 
 interface AnimatedBeeProps {
 	width: number

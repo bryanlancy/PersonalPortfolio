@@ -1,23 +1,20 @@
 import React, { FC, MutableRefObject, SVGProps, useRef, useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass } from '@awesome.me/kit-ddd907bdb7/icons/classic/regular'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass } from '@awesome.me/kit-ddd907bdb7/icons/classic/regular'
 
 import ProjectCard from '../../ProjectBanner'
-import { projectList } from '@/app/data'
 import { Swarm } from './AnimatedBee'
 import HexBackground from './HexBackground'
 import HexButton from './HexButton'
 import ToolTip from './ToolTip'
 import PictureFrame from './PictureFrame'
-import useWindowDimensions from '@/hooks/useWindowDimension'
-
+import Container from '@/utils/components/Container'
 import { cn } from '@/utils/react'
 
 import styles from './TwoBeeks.module.scss'
-import Container from '@/utils/components/Container'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -40,9 +37,8 @@ function SVGBeeksLogo(props: SVGProps<SVGSVGElement>) {
 }
 
 const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
-	const { twoBeeks: data } = projectList
 	const [showToolTip, setShowToolTip] = useState(false)
-	const { width, height } = useWindowDimensions()
+
 	const picLargeRef = useRef<HTMLDivElement | null>(null)
 	const picSmall1Ref = useRef<HTMLDivElement | null>(null)
 	const picSmall2Ref = useRef<HTMLDivElement | null>(null)

@@ -29,8 +29,7 @@ interface TypeTextProps extends PropsWithChildren {
 	/** Number of seconds to spend typing each character. Defaults to .025 */
 	typeSpeed?: number
 	delay?: number
-	/** Adjust speed of cursor animation by given amount to fix timing errors */
-	cursorSpeedAdjust?: number //! Can this be fixed?
+
 	/** Adjust length of cursor (px) animation by given amount to fix timing errors */
 	cursorLengthAdjust?: number //! Can this be fixed?
 	cursorClassName?: string
@@ -45,7 +44,7 @@ const TypeText: FC<TypeTextProps> = ({
 	children,
 	className,
 	cursorLengthAdjust = 0,
-	cursorSpeedAdjust = 0,
+
 	cursorClassName,
 	delay = 0.0,
 	reverse = true,

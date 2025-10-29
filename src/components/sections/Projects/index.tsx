@@ -9,10 +9,10 @@ import { faCloud } from '@awesome.me/kit-ddd907bdb7/icons/classic/solid'
 import { faLightCeiling } from '@awesome.me/kit-ddd907bdb7/icons/sharp-duotone/solid'
 
 import {
-	CarputerBanner,
-	HomeNetworkBanner,
-	MercuryBanner,
+	// CarputerBanner,
+	// HomeNetworkBanner,
 	// OttoBanner,
+	MercuryBanner,
 	TwoBeeksBanner,
 	WalkOnsBanner,
 } from './Banner'

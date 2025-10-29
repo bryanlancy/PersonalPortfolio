@@ -52,7 +52,6 @@ const Contact = () => {
 							className={styles.contactCard}
 							contactMethod={contactMethod}
 							key={i}
-							i={i}
 							copy={copy}
 						/>
 					)

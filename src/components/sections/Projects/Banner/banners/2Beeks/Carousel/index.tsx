@@ -1,5 +1,3 @@
-import { FC } from 'react'
-
 import PictureFrame from '../PictureFrame'
 
 import styles from './Carousel.module.scss'
@@ -23,8 +21,6 @@ const Carousel = () => {
 					key={`bee-carousel-image-${i}`}
 					src={image.url}
 					alt={image.alt}
-					width={200}
-					height={200}
 				/>
 			))}
 		</div>

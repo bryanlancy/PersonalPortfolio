@@ -23,11 +23,11 @@ const ToolTip: FC<ToolTipsProps> = ({ show }) => {
 		'https://upload.wikimedia.org/wikipedia/commons/8/84/Apiary_in_Bashkortostan%2C_Russia.jpg'
 
 	const definition = 'a place where bees are kept; a collection of beehives.'
-	const origin = [
-		['latin', 'apis', 'bee'],
-		['latin', 'apiarium', null],
-		['mid 17th century', 'apiary', null],
-	]
+	// const origin = [
+	// 	['latin', 'apis', 'bee'],
+	// 	['latin', 'apiarium', null],
+	// 	['mid 17th century', 'apiary', null],
+	// ]
 	const pronunciation = '/ˈāpēˌerē/'
 
 	useGSAP(() => {

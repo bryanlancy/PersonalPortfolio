@@ -7,7 +7,7 @@ import { Coord } from '@/utils/general'
 import { generatePoints, lineOfBestFit, printPoint } from '@/utils/svg'
 
 import styles from './Graphs.module.scss'
-import { FC, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 gsap.registerPlugin(useGSAP, DrawSVGPlugin, ScrollTrigger)
 

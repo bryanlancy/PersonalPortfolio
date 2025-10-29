@@ -50,13 +50,11 @@ const copyLink: (
 
 type ContactCardProps = {
 	contactMethod: Contact
-	i: number
 	copy?: boolean
 	className?: string
 }
 export default function ContactCard({
 	contactMethod,
-	i,
 	className,
 	copy = false,
 }: ContactCardProps) {

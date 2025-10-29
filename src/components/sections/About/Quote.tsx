@@ -30,7 +30,7 @@ export default function Quote({ quote, author }: QuoteProps) {
 				toggleActions: 'play none resume reverse',
 			},
 		})
-		const splitText = SplitText.create(`.${styles.quoteText}`, {
+		SplitText.create(`.${styles.quoteText}`, {
 			type: 'words',
 			onSplit: ({ words }) => {
 				quoteTl.to(words, {

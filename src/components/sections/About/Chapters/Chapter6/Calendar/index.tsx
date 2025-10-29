@@ -52,12 +52,7 @@ const Calendar = () => {
 
 	return (
 		<div className={styles.calendar}>
-			<Page
-				ref={page7Ref}
-				title='2021'
-				className={styles.pageFinal}
-				last={true}
-			/>
+			<Page ref={page7Ref} title='2021' className={styles.pageFinal} />
 			<Page ref={page6Ref} title='2020' className={styles.pageAnim} />
 			<Page ref={page5Ref} title='2019' className={styles.pageAnim} />
 			<Page ref={page4Ref} title='2018' className={styles.pageAnim} />

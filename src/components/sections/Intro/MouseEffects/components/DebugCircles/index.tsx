@@ -12,10 +12,6 @@ export interface DebugCirclesProps {
 	returnPointsTop: Point[]
 	/** Array of return points for bottom path */
 	returnPointsBottom: Point[]
-	/** Array of click positions to render as debug circles */
-	clickPositions: Point[]
-	/** Array of refs for click circle elements */
-	clickCircleRefs: React.MutableRefObject<(SVGCircleElement | null)[]>
 	/** Optional className to apply to the debug circles container */
 	className?: string
 }
@@ -26,8 +22,6 @@ export interface DebugCirclesProps {
 function DebugCircles({
 	returnPointsTop,
 	returnPointsBottom,
-	clickPositions,
-	clickCircleRefs,
 	className,
 }: DebugCirclesProps) {
 	return (

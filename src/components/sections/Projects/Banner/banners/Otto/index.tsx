@@ -9,7 +9,10 @@ interface OttoCardProps {}
 const OttoCard: FC<OttoCardProps> = ({}) => {
 	const { otto: data } = projectList
 	return (
-		<ProjectCard className={styles.background} projectName='Otto'>
+		<ProjectCard
+			techs={{ frontend: [], backend: [], devops: [] }}
+			className={styles.background}
+			projectName='Otto'>
 			<h1 className={styles.title}>{data.name}</h1>
 		</ProjectCard>
 	)

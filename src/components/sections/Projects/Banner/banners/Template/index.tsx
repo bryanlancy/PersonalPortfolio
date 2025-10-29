@@ -9,7 +9,10 @@ interface TemplateBannerProps {}
 const TemplateBanner: FC<TemplateBannerProps> = ({}) => {
 	const { template: data } = projectList
 	return (
-		<ProjectCard className={styles.background} projectName='Template'>
+		<ProjectCard
+			techs={{ frontend: [], backend: [], devops: [] }}
+			className={styles.background}
+			projectName='Template'>
 			<h1 className={styles.title}>{data.name}</h1>
 		</ProjectCard>
 	)

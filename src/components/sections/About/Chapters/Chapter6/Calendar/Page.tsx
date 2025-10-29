@@ -12,11 +12,10 @@ gsap.registerPlugin(useGSAP, ScrollTrigger)
 interface PageProps {
 	title: string
 	className?: string
-	last?: boolean
 }
 
 const Page = forwardRef<HTMLDivElement, PageProps>(
-	({ title, className, last = true }, ref) => {
+	({ title, className }, ref) => {
 		useGSAP(() => {
 			const pageTl = gsap.timeline({
 				scrollTrigger: {
