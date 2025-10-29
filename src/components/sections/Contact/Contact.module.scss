@@ -1,0 +1,57 @@
+@import '@/styles/mixins.scss';
+
+.section {
+	padding: 0 !important;
+	padding-top: 120px !important;
+	@include tablet {
+		padding: 32px 0 !important;
+		padding-top: 120px !important;
+	}
+}
+
+.title {
+	font-size: 32px;
+}
+.text {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+
+	margin: 32px 0;
+
+	text-align: center;
+
+	p {
+		width: 144px;
+	}
+	@include tablet {
+		p:nth-of-type(1) {
+			width: 316px;
+		}
+		p:nth-of-type(2) {
+			width: 176px;
+		}
+	}
+	@include desktop {
+		p:nth-of-type(2) {
+			width: 216px;
+		}
+	}
+}
+.contactList {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 4px;
+
+	width: 100%;
+
+	@include tablet {
+		gap: 16px;
+	}
+}
+
+.contactCard {
+	@include autoAlpha;
+}

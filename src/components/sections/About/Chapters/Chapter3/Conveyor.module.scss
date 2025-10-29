@@ -1,0 +1,79 @@
+@import '@/styles/mixins.scss';
+
+.conveyor {
+	position: absolute;
+	bottom: 0;
+
+	display: flex;
+	align-items: center;
+	gap: 120px;
+
+	height: 400px;
+	width: 100%;
+
+	overflow: hidden;
+}
+
+.boxContainer {
+	position: absolute;
+	top: 50%;
+	left: 100%;
+
+	transform: translateY(-50%);
+
+	display: flex;
+
+	width: fit-content;
+	.box {
+		font-size: 120px;
+		color: #705731;
+	}
+	.barcode {
+		position: absolute;
+		bottom: 16px;
+		left: 8px;
+
+		font-size: 24px;
+		color: #000;
+	}
+	.partNumber {
+		position: absolute;
+		bottom: 16px;
+		right: 8px;
+
+		color: #fff;
+
+		font-size: 12px;
+	}
+
+	.scanCount {
+		position: absolute;
+		bottom: 110%;
+		left: 0;
+
+		font-size: 16px;
+
+		.plus {
+			position: absolute;
+			top: 0;
+
+			display: flex;
+			gap: 2px;
+
+			color: green;
+
+			@include autoAlpha;
+		}
+		.minus {
+			position: absolute;
+			top: 0;
+
+			display: flex;
+			gap: 2px;
+
+			color: red;
+
+			@include autoAlpha;
+		}
+	}
+}

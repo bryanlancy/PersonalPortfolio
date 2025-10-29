@@ -1,0 +1,157 @@
+.celebrationContainer {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	pointer-events: none;
+	z-index: 10;
+}
+
+.celebrationElement {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+
+	transform: translate(-50%, -50%);
+	transform-origin: center;
+}
+
+// Fun emoji elements
+.star,
+.heart,
+.sparkle,
+.rocket,
+.confetti,
+.fireworks {
+	font-size: 2rem;
+}
+
+// Image placeholders
+.imagePlaceholder {
+	width: 80px;
+	height: 80px;
+
+	background: linear-gradient(
+		135deg,
+		rgba(255, 255, 255, 0.1),
+		rgba(255, 255, 255, 0.05)
+	);
+	backdrop-filter: blur(10px);
+	border: 2px solid rgba(255, 255, 255, 0.2);
+	border-radius: 12px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.placeholderContent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+}
+
+.placeholderIcon {
+	font-size: 1.5rem;
+}
+
+.placeholderText {
+	font-size: 0.7rem;
+	color: rgba(255, 255, 255, 0.8);
+	font-weight: 500;
+	text-align: center;
+}
+
+// Geometric shapes
+.geometricShape {
+	width: 40px;
+	height: 40px;
+}
+
+.triangle {
+	width: 0;
+	height: 0;
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-bottom: 35px solid #ff6b6b;
+	background: transparent;
+}
+
+.circle {
+	background: #4ecdc4;
+	border-radius: 50%;
+}
+
+.square {
+	background: #45b7d1;
+	border-radius: 4px;
+}
+
+.diamond {
+	background: #96ceb4;
+	transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y)))
+		rotate(45deg);
+	border-radius: 4px;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+	.celebrationElement {
+		transform: translate(
+				calc(-50% + var(--x, 0px) * 0.7),
+				calc(-50% + var(--y, 0px) * 0.7)
+			)
+			rotate(var(--rotation, 0deg));
+	}
+
+	.star,
+	.heart,
+	.sparkle,
+	.rocket,
+	.confetti,
+	.fireworks {
+		font-size: 1.5rem;
+	}
+
+	.imagePlaceholder {
+		width: 60px;
+		height: 60px;
+	}
+
+	.geometricShape {
+		width: 30px;
+		height: 30px;
+	}
+}
+
+.coolGif {
+	width: 120px;
+	height: 120px;
+	border-radius: 16px;
+	overflow: hidden;
+}
+.doItGif {
+	width: 120px;
+	height: 120px;
+	border-radius: 16px;
+	overflow: hidden;
+}
+.goGoGo {
+	width: 100px;
+	height: 100px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	svg {
+		transform-origin: center;
+	}
+
+	text {
+		fill: #85d1e2;
+		font-size: 24px;
+	}
+}

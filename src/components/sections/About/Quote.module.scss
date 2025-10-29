@@ -1,0 +1,43 @@
+@import '@/styles/mixins.scss';
+
+.quoteContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+
+	margin-top: 16px;
+
+	h2 {
+		margin-top: 8px;
+	}
+}
+
+.quote {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+
+	margin: 8px 0;
+	figcaption {
+		margin-top: 4px;
+	}
+}
+.quoteText {
+	> div {
+		@include autoAlpha;
+		transform: translateY(20px);
+	}
+}
+.author {
+	@include autoAlpha;
+}
+.openQuote {
+	align-self: flex-start;
+	@include autoAlpha;
+}
+.closeQuote {
+	@include autoAlpha;
+}
+.me {
+	@include autoAlpha;
+}

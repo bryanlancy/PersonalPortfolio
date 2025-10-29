@@ -1,0 +1,29 @@
+@import '@/styles/mixins.scss';
+
+.container {
+	position: absolute;
+	top: 80px;
+	left: 0;
+
+	width: 100%;
+	height: 480px;
+
+	@include autoAlpha;
+}
+
+.sunMoonPath {
+	fill: none;
+	stroke: none;
+}
+
+.moon {
+	font-size: 48px;
+	@include autoAlpha;
+}
+.sun {
+	position: absolute;
+	right: 100%;
+	font-size: 48px;
+	color: yellow;
+	@include autoAlpha;
+}

@@ -1,0 +1,33 @@
+@import '@/styles/mixins.scss';
+
+.swipe {
+	position: fixed;
+	left: 0;
+	top: 100%;
+	z-index: 999999;
+
+	width: 100vw;
+	height: 100vh;
+
+	display: flex;
+	align-items: flex-end;
+
+	@include autoAlpha;
+
+	> .bar {
+		transform: scale(1, 0);
+		transform-origin: bottom;
+
+		@for $i from 1 through 4 {
+			&:nth-child(#{$i}) {
+				width: 200px + (150px * $i);
+				height: 100vh;
+				z-index: $i * 1;
+				box-shadow: -4px 0px 2px 0px #000800 inset;
+			}
+		}
+		&:nth-child(6) {
+			box-shadow: none;
+		}
+	}
+}

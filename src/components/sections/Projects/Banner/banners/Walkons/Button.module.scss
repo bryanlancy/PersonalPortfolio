@@ -1,0 +1,73 @@
+@import '@/styles/mixins.scss';
+@import './WalkOns.module.scss';
+
+.button {
+	position: absolute;
+	left: 0;
+	bottom: calc(var(--borderHeight) + 56px);
+	z-index: 10;
+
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	padding: 8px;
+
+	font-size: 20px;
+	text-wrap: nowrap;
+	background-color: $red;
+	border-radius: var(--border-radius);
+	box-shadow: $box-shadow;
+
+	transform: translateX(-150%);
+	@include autoAlpha;
+
+	::selection {
+		background: $red;
+		color: #fff;
+	}
+	p {
+		position: relative;
+		margin: 0 16px;
+		&::after {
+			content: '';
+			position: absolute;
+			width: 100%;
+			transform: scaleX(0);
+			height: 2px;
+			bottom: 0;
+			left: 0;
+			background-color: #fff;
+			transform-origin: bottom right;
+			transition: transform 0.25s ease-out;
+		}
+	}
+	&:hover {
+		.icon {
+			transform: translateX(2px);
+		}
+		p::after {
+			transform: scaleX(1);
+			transform-origin: bottom left;
+		}
+	}
+}
+
+.iconContainer {
+	display: grid;
+	place-items: center;
+
+	width: 40px;
+	aspect-ratio: 1;
+
+	border-radius: 4px;
+	background-color: #fff;
+
+	color: $red;
+}
+
+.icon {
+	font-size: 16px;
+
+	transition: all 0.25s ease;
+}

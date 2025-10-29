@@ -1,0 +1,41 @@
+@import '@/styles/mixins.scss';
+
+.chapter6 {
+	position: relative;
+	width: 100%;
+}
+
+.container {
+	position: relative;
+	height: 100vh;
+	width: 100%;
+}
+
+.line {
+	position: absolute;
+}
+
+.line1 {
+	top: 120px;
+	left: 520px;
+
+	@include autoAlpha;
+}
+.line2 {
+	top: 144px;
+	left: 520px;
+
+	@include autoAlpha;
+}
+.line3 {
+	bottom: 424px;
+	right: 264px;
+
+	@include autoAlpha;
+}
+.line4 {
+	bottom: 400px;
+	right: 264px;
+
+	@include autoAlpha;
+}

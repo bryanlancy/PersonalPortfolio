@@ -1,0 +1,94 @@
+.storyControls {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	width: 520px;
+	height: 240px;
+
+	margin-bottom: 80px;
+}
+
+.buttons {
+	position: relative;
+
+	display: flex;
+	gap: 24px;
+
+	padding-top: 32px;
+
+	button {
+		position: relative;
+		cursor: pointer;
+
+		padding: 24px 72px;
+		// max-height: 40px;
+
+		border: none;
+		border-radius: 8px;
+
+		font-size: 24px;
+		font-family: var(--font-bebas);
+		text-wrap: nowrap;
+
+		transition: all 0.3s ease;
+	}
+}
+
+.buttonWrapper {
+	position: relative;
+
+	button {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		span {
+			font-size: 16px;
+			font-weight: 400;
+			letter-spacing: 0.5px;
+		}
+	}
+}
+.auto {
+	background-color: rgb(43, 160, 43);
+
+	&:hover {
+		background-color: rgb(53, 180, 53);
+		transform: scale(1.05);
+		box-shadow: 0 8px 25px rgba(43, 160, 43, 0.3);
+	}
+
+	span {
+		color: #70e03c;
+	}
+}
+.skip {
+	background-color: red;
+
+	&:hover {
+		background-color: rgb(220, 20, 20);
+		transform: scale(1.05);
+		box-shadow: 0 8px 25px rgba(255, 0, 0, 0.3);
+	}
+	span {
+		color: #ff8e8e;
+	}
+}
+.keepScrolling {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+
+	width: 240px;
+
+	h1 {
+		white-space: nowrap;
+	}
+	h2 {
+		color: #d5e03c;
+		letter-spacing: 1.5px;
+		font-size: 36px;
+	}
+}

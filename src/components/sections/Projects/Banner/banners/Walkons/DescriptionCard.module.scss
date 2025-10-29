@@ -1,0 +1,55 @@
+@import '@/styles/mixins.scss';
+@import './WalkOns.module.scss';
+
+.card {
+	position: absolute;
+	top: 64px;
+	left: 0;
+	z-index: 3;
+
+	display: flex;
+
+	width: 320px;
+
+	box-shadow: $box-shadow;
+	border-radius: $border-radius;
+
+	transform: translateX(-150%);
+	@include autoAlpha;
+
+	@include tablet {
+		width: 360px;
+	}
+
+	@include laptop {
+		top: 32px;
+		width: 400px;
+	}
+
+	.text {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+
+		width: 100%;
+		padding: 24px 32px 24px 24px;
+
+		background-color: #fff;
+		border-radius: 0 $border-radius $border-radius 0;
+
+		p {
+			color: #000;
+			text-align: left;
+			&:nth-of-type(2n) {
+				text-align: right;
+			}
+		}
+	}
+}
+
+.color {
+	width: 16px;
+
+	background-color: $lightBlue;
+	border-radius: $border-radius 0 0 $border-radius;
+}

@@ -1,0 +1,50 @@
+@import '@/styles/mixins.scss';
+
+// Design Tokens
+$red: #e31f2e;
+$blue: #03055e;
+$lightBlue: #004ddb;
+$yellow: #f1a043;
+$grey: #f7f8fd;
+$border-radius: 12px;
+$box-shadow: 2px 2px 16px #0008;
+$gap: 16px;
+
+.background {
+	background-color: $grey;
+
+	z-index: 100;
+
+	--borderHeight: 64px;
+
+	::selection {
+		background: $red;
+		color: black;
+	}
+
+	@include tablet {
+		--borderHeight: 80px;
+	}
+}
+
+.title {
+	position: absolute;
+	left: 0;
+	bottom: calc(var(--borderHeight) - 40px);
+	right: 45%;
+	z-index: 5;
+
+	text-align: left;
+	text-wrap: nowrap;
+
+	@include autoAlpha;
+	transform: translateY(-150%);
+
+	@include tablet {
+		bottom: calc(var(--borderHeight) - 56px);
+	}
+	&::selection {
+		background: $red;
+		color: #fff;
+	}
+}

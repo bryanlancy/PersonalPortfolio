@@ -1,0 +1,14 @@
+// Firework component styles
+
+.firework {
+	// Position
+	position: absolute;
+	pointer-events: none;
+	z-index: 10;
+
+	// Display
+	transform-origin: center;
+
+	// Visual
+	filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+}

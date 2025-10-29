@@ -1,0 +1,158 @@
+@import '@/styles/mixins.scss';
+
+.container {
+	position: relative;
+}
+
+.list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+
+	max-width: 1164px;
+	margin: 0 auto;
+	padding: 0 48px;
+	padding-bottom: 40px;
+	gap: 4px;
+
+	perspective: 75em;
+
+	@include laptop {
+		gap: 16px;
+	}
+}
+
+// Individual Tech cards
+
+.tech {
+	position: relative;
+
+	width: 48%;
+	height: 100px;
+
+	visibility: hidden;
+	--primaryColor: #fff; //! Changed in frontend
+	border: 1px solid var(--primaryColor);
+	border-radius: 8px;
+	overflow: hidden;
+	transform-style: preserve-3d;
+
+	@include laptop {
+		width: 240px;
+	}
+
+	> div {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.arrow {
+		opacity: 0;
+		transform: translateX(40px);
+
+		transition: all 0.2s 0s;
+	}
+	&:hover {
+		.arrow {
+			// color: #000;
+			mix-blend-mode: normal;
+			opacity: 1;
+			transform: translateX(0px);
+		}
+	}
+	h3 {
+		font-size: 24px;
+	}
+}
+
+.tech1 {
+	position: absolute;
+	bottom: 8px;
+	left: 8px;
+}
+.tech2 {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+}
+
+.icon {
+	> * {
+		width: 56px;
+		height: 56px;
+
+		opacity: 0.2;
+
+		@include tablet {
+			width: 80px;
+			height: 80px;
+		}
+	}
+}
+.background1 {
+	position: absolute;
+	bottom: 4px;
+	left: 16px;
+}
+.background2 {
+	position: absolute;
+	top: 4px;
+	right: 16px;
+}
+
+.link {
+	position: absolute;
+	bottom: 4px;
+	right: 4px;
+
+	display: flex;
+	align-items: center;
+
+	padding: 4px;
+
+	background-color: #fff0;
+	mix-blend-mode: difference;
+	transition: all 0.2s 0s;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.gsapMotion {
+	.title2 {
+		color: #000;
+	}
+}
+
+.fancy {
+	border-radius: 4px;
+	p {
+		position: relative;
+
+		&::after {
+			content: '';
+			position: absolute;
+			width: 100%;
+			transform: scaleX(0);
+			height: 2px;
+			bottom: 0;
+			left: 0;
+			background-color: #fff;
+			transform-origin: bottom left;
+			transition: transform 0.25s ease-out;
+		}
+	}
+	&:hover {
+		background-color: #fff2;
+		.icon {
+			transform: translateX(2px);
+		}
+		p::after {
+			transform: scaleX(1);
+			transform-origin: bottom left;
+		}
+	}
+}

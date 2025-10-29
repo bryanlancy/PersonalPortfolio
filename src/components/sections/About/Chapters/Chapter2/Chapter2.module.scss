@@ -1,0 +1,60 @@
+@import '@/styles/mixins.scss';
+
+.chapter2 {
+	position: relative;
+	height: 4000px;
+
+	overflow: hidden;
+	background-color: #fff;
+	color: #000;
+}
+.container {
+	position: relative;
+	height: 100vh;
+	width: 100vw;
+}
+
+.titleContainer {
+	position: absolute;
+	top: 16px;
+	left: 16px;
+
+	display: flex;
+	align-items: center;
+}
+
+.line {
+	position: absolute;
+	width: fit-content;
+}
+
+.line1 {
+	top: 120px;
+	right: 80px;
+
+	@include autoAlpha;
+}
+.line2 {
+	top: 240px;
+	left: 16px;
+
+	@include autoAlpha;
+}
+.line3 {
+	top: 320px;
+	left: 16px;
+
+	@include autoAlpha;
+}
+.line4 {
+	top: 376px;
+	left: 16px;
+
+	@include autoAlpha;
+}
+.line5 {
+	top: 432px;
+	left: 16px;
+
+	@include autoAlpha;
+}

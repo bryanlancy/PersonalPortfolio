@@ -1,0 +1,41 @@
+@import '@/styles/mixins.scss';
+
+$bannerHeightSmallScreen: 500px;
+$bannerHeightLargeScreen: 450px;
+
+.project {
+	position: relative;
+
+	height: $bannerHeightSmallScreen;
+	width: 100%;
+	max-width: 100% !important;
+
+	overflow: hidden;
+
+	h1 {
+		font-size: 64px;
+
+		text-shadow: 2px 2px 16px #0008;
+	}
+
+	@include tablet {
+		h1 {
+			font-size: 80px;
+		}
+	}
+	@include laptop {
+		height: $bannerHeightLargeScreen;
+		h1 {
+			font-size: 88px;
+		}
+	}
+}
+
+.overlay {
+	position: absolute;
+	inset: 0;
+	z-index: 100;
+	background-color: #000a;
+
+	@include autoAlpha;
+}

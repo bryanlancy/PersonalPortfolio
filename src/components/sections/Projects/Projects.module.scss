@@ -1,0 +1,108 @@
+@import '@/styles/mixins.scss';
+
+.projects {
+	position: relative;
+	max-width: 100% !important;
+
+	ul {
+		position: relative;
+
+		width: 100%;
+		padding-top: 64px;
+	}
+}
+
+.projectList {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+
+	width: 100%;
+}
+
+:is(.title, .description, .tech) {
+	margin-bottom: 48px;
+}
+
+:is(.proText, .homeText) {
+	position: relative;
+	width: 100%;
+}
+.title {
+	display: flex;
+	justify-content: center;
+
+	span {
+		position: relative;
+	}
+	.professional {
+		margin-right: 8px;
+	}
+	.cloud {
+		position: absolute;
+		bottom: 0px;
+		left: -4px;
+
+		height: 32px;
+
+		visibility: hidden;
+		color: #aeaeae;
+	}
+	.high {
+		display: block;
+		transform-origin: top;
+	}
+	.lights {
+		display: block;
+
+		.light {
+			position: absolute;
+			top: 36px;
+			left: 6.5px;
+			z-index: -1;
+
+			font-size: 24px;
+
+			visibility: hidden;
+			--fa-primary-color: #fff;
+			--fa-secondary-color: inherit;
+			--fa-secondary-opacity: 1;
+			filter: drop-shadow(0px 0px 4px #e9fa79);
+		}
+	}
+}
+
+.sideBanner {
+	position: absolute;
+	top: 0px;
+
+	width: 100%;
+
+	display: flex;
+
+	> * {
+		border: 1px solid blue;
+	}
+	h2 {
+		position: absolute;
+		left: 0;
+	}
+}
+.proTechs {
+	top: 80px;
+}
+.proProjects {
+	h2 {
+		left: unset;
+		right: 0;
+	}
+}
+.homeTechs {
+	top: 180px;
+}
+.homeProjects {
+	h2 {
+		left: unset;
+		right: 0;
+	}
+}

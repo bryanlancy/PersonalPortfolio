@@ -1,0 +1,122 @@
+@import '@/styles/mixins.scss';
+
+$primary-color: #fce300;
+$secondary-color: #3f3f43;
+$accent-color-1: #efefef;
+$accent-color-2: #f7e653;
+$accent-color-3: #ffb800;
+
+// Hexagon measurements
+$size: 276px;
+$rowD: 146px; // Difference in 'top' property between rows
+$columndD: 254px; // Difference in 'left' property between columns
+
+// Premade row labels
+$top: -216px;
+$middle: $top + $rowD;
+$bottom: $top + ($rowD * 2);
+$under: $top + ($rowD * 3);
+
+.hexContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+
+	--start: 0px;
+	@include hd {
+		// --start: 104px;
+		--start: calc(50% - 720px);
+	}
+	@include desktop {
+		--start: 0px;
+	}
+	@include mobile {
+		--start: -76px;
+	}
+}
+
+.hexagon {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	height: $size;
+
+	background-color: rgba($primary-color, 0.1);
+	filter: drop-shadow(8px 8px 8px #0006);
+
+	aspect-ratio: 1 / cos(30deg);
+	clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
+
+	&:hover {
+		background-color: rgba($primary-color, 0.12);
+	}
+
+	> label {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+
+		color: #fff;
+	}
+}
+
+.hex1 {
+	top: $top;
+	left: calc(var(--start));
+}
+.hex2 {
+	top: $bottom;
+	left: calc(var(--start));
+}
+.hex3 {
+	top: $middle;
+	left: calc(var(--start) + $columndD);
+}
+.hex4 {
+	top: $bottom;
+	left: calc(var(--start) + ($columndD * 2));
+}
+.hex5 {
+	top: $middle;
+	left: calc(var(--start) + ($columndD * 3));
+}
+.hex6 {
+	top: $under;
+	left: calc(var(--start) + ($columndD * 3));
+}
+.hex7 {
+	top: $top;
+	left: calc(var(--start) + ($columndD * 4));
+}
+.hex8 {
+	top: $middle;
+	left: calc(var(--start) + ($columndD * 5));
+}
+.hex9 {
+	top: $bottom;
+	left: calc(var(--start) + ($columndD * 6));
+}
+.hex10 {
+	top: $middle;
+	left: calc(var(--start) + ($columndD * -1));
+}
+.hex11 {
+	top: $under;
+	left: calc(var(--start) + ($columndD * 1));
+
+	label {
+		color: #000 !important;
+	}
+}
+.hex12 {
+	top: $bottom;
+	left: calc(var(--start) + ($columndD * 4));
+}
+
+.ref {
+	display: none;
+}

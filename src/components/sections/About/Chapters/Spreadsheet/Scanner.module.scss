@@ -1,0 +1,57 @@
+@import '@/styles/mixins.scss';
+
+.scanner {
+	&Container {
+		position: absolute;
+		top: 100%;
+		left: -160px;
+		z-index: -1;
+
+		width: 100%; // 544px
+		height: 200px;
+
+		@include autoAlpha;
+	}
+	&Gun {
+		position: absolute;
+
+		width: 64px;
+		height: 64px;
+
+		fill: #8a8a8a;
+		transform: rotateZ(90deg) rotateX(180deg) translateY(-64px);
+		transform-origin: center;
+
+		.beam {
+			position: absolute;
+			top: 0;
+			left: 50%;
+
+			transform: translateY(-40px);
+
+			width: fit-content;
+			height: fit-content;
+
+			stroke: none;
+			fill: url(#beamGradient);
+
+			@include autoAlpha;
+
+			.color1 {
+				stop-color: #f00c;
+			}
+			.color2 {
+				stop-color: #f000;
+			}
+		}
+	}
+}
+
+.wireContainer {
+	width: 100%;
+	height: 100%;
+	.wire {
+		fill: none;
+		stroke: #c2c2c2;
+	}
+}

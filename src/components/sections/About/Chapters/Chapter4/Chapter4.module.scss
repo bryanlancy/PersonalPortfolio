@@ -1,0 +1,200 @@
+@import '@/styles/mixins.scss';
+
+.chapter4 {
+	position: relative;
+	// height: 4000px;
+
+	overflow: hidden;
+}
+
+.container {
+	position: relative;
+
+	height: 100vh;
+	width: 100vw;
+}
+
+.title {
+	position: absolute;
+	top: 24px;
+	left: 24px;
+
+	word-wrap: normal;
+
+	text-align: left;
+	width: 120px;
+}
+
+.house {
+	position: absolute;
+	top: 65%;
+	left: 50%;
+
+	height: 600px;
+	width: 600px;
+
+	transform: translate(-50%, -50%);
+}
+
+.houseContainer {
+	> * {
+		height: 100%;
+
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+.houseOut {
+	position: absolute;
+
+	color: #0096a1;
+}
+
+.houseIn {
+	position: absolute;
+
+	@include autoAlpha;
+}
+
+.me {
+	position: absolute;
+	left: 50%;
+	bottom: 8%;
+	height: 64px;
+
+	transform: translateX(-1000px);
+	> * {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+}
+.happy {
+	color: rgb(250, 250, 125);
+	height: 100%;
+}
+.sleeping {
+	height: 100%;
+
+	@include autoAlpha;
+}
+.smart {
+	height: 100%;
+	color: rgb(250, 250, 125);
+
+	@include autoAlpha;
+}
+.hearts {
+	height: 100%;
+	transform: translate(-50%, -50%), scale(0);
+
+	color: rgb(250, 250, 125);
+	--fa-primary-color: #b30074;
+
+	@include autoAlpha;
+}
+
+.bed {
+	position: absolute;
+	bottom: 5%;
+	right: 15%;
+
+	height: 80px;
+
+	transform: rotateY(180deg);
+
+	--fa-primary-color: #553414;
+	--fa-secondary-color: #4500b3;
+
+	@include autoAlpha;
+}
+.computer {
+	position: absolute;
+	bottom: 10%;
+	left: 20%;
+
+	transform: translate(-50%, -50%);
+
+	height: 48px;
+
+	--fa-primary-color: #0096a188;
+
+	@include autoAlpha;
+}
+
+.lightContainer {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	z-index: 1;
+
+	transform: translate(-50%, -50%);
+
+	border-radius: 16px;
+	border-radius: 50%;
+
+	background: none;
+	box-shadow: 4px 4px 8px 0px #0000;
+	padding: 40px;
+
+	@include autoAlpha;
+
+	> * {
+		top: 50%;
+		left: 50%;
+
+		height: 40px;
+
+		transform: translate(-50%, -50%) rotate(-180deg);
+	}
+	.lightOff {
+		position: absolute;
+	}
+	.lightOn {
+		position: absolute;
+
+		width: 48px;
+		height: 48px;
+
+		color: #dcdc2b;
+
+		@include autoAlpha;
+	}
+}
+
+.line {
+	position: absolute;
+
+	@include autoAlpha;
+}
+.line1 {
+	top: 60%;
+	left: 50%;
+}
+.line2 {
+	top: 62%;
+	left: 50%;
+}
+.line3 {
+	top: 64%;
+	left: 53%;
+}
+.line4 {
+	bottom: 25%;
+	left: 35%;
+
+	width: 200px;
+	text-align: left;
+}
+.line5 {
+	top: 53%;
+	left: 45%;
+
+	width: 144px;
+	text-align: left;
+}
+.line6 {
+	top: 59%;
+	left: 45%;
+}

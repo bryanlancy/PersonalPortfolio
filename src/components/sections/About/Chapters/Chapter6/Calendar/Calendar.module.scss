@@ -1,0 +1,106 @@
+@import '@/styles/mixins.scss';
+
+.calendar {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 520px;
+	height: 480px;
+	perspective: 1000px;
+
+	transform: translateX(-600px);
+	@include autoAlpha;
+	z-index: 1;
+}
+.pageAnim {
+	transform-origin: top left;
+
+	backface-visibility: hidden;
+}
+.pageFinal {
+}
+.pageContainer {
+	position: absolute;
+	top: -16px;
+	left: -8px;
+
+	width: 100%;
+	height: 100%;
+
+	transform-origin: top left;
+}
+.page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	width: 100%;
+	height: 100%;
+
+	background-color: #fff;
+	box-shadow: 4px 4px 8px 0px #0008;
+
+	.header {
+		width: 100%;
+		height: fit-content;
+		background-color: #9284fd;
+		border: 1px solid #000;
+		h1 {
+			color: #000;
+		}
+	}
+}
+.back {
+	position: absolute;
+	transform-origin: center center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #a395ba;
+	transform: rotateX(180deg);
+
+	z-index: -1000;
+}
+.grid {
+	display: flex;
+	flex-direction: column;
+
+	width: 100%;
+	height: 100%;
+}
+.row {
+	display: flex;
+
+	width: 100%;
+	height: 100%;
+
+	$color: #beb5fc;
+
+	&:nth-child(1) {
+		> :nth-child(odd) {
+			background-color: $color;
+		}
+	}
+	&:nth-child(2) {
+		> :nth-child(even) {
+			background-color: $color;
+		}
+	}
+	&:nth-child(3) {
+		> :nth-child(odd) {
+			background-color: $color;
+		}
+	}
+}
+.month {
+	border: 1px solid #000;
+	width: 100%;
+	height: 100%;
+	padding-top: 8px;
+
+	b {
+		color: #000;
+	}
+}

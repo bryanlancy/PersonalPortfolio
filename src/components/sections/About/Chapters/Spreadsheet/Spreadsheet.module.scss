@@ -1,0 +1,106 @@
+@import '@/styles/mixins.scss';
+
+.spreadsheet {
+	position: fixed;
+	top: 240px;
+	right: 8px;
+
+	width: 544px;
+	height: 70vh;
+	z-index: 100; // Needs to be under graph(101) for animation
+
+	--spreadsheet-radius: 8px;
+	border-radius: var(--spreadsheet-radius);
+	box-shadow: -4px 4px 12px 0px #0008;
+
+	@include autoAlpha;
+	table {
+		width: 100%;
+		height: 100%;
+		border-collapse: collapse;
+	}
+	td {
+		border: 1px solid #0003;
+		color: #000;
+	}
+}
+
+.header {
+	height: 72px;
+
+	tr {
+		:first-child {
+			border-top-left-radius: var(--spreadsheet-radius);
+		}
+		:last-child {
+			border-top-right-radius: var(--spreadsheet-radius);
+		}
+	}
+	th {
+		background-color: #29784d;
+
+		border-left: 1px solid #fff3;
+
+		&:first-child {
+			border-left: none;
+		}
+
+		// Column Widths
+		&:nth-child(1) {
+			width: 200px;
+		}
+		&:nth-child(2) {
+			width: 100px;
+		}
+		&:nth-child(3) {
+			width: 100px;
+		}
+		&:nth-child(4) {
+			width: 72px;
+		}
+		&:nth-child(5) {
+			width: 120px;
+		}
+	}
+}
+.rows {
+	$numRows: 12;
+	width: 100%;
+
+	td {
+		height: 100% / $numRows;
+	}
+
+	tr {
+		background-color: #dbdbdb;
+		&:nth-child(even) {
+			background-color: #fafafa;
+		}
+
+		:first-child {
+			border-left: none;
+		}
+		:last-child {
+			border-right: none;
+		}
+
+		width: 100%;
+	}
+	> :first-child {
+		td {
+			border-top: 1px solid #000;
+		}
+	}
+	> :last-child {
+		:first-child {
+			border-bottom-left-radius: var(--spreadsheet-radius);
+		}
+		:last-child {
+			border-bottom-right-radius: var(--spreadsheet-radius);
+		}
+		td {
+			border-top: 2px solid #0008;
+			border-bottom: none;
+		}
+	}
+}
