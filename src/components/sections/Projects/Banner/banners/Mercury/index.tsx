@@ -14,19 +14,20 @@ const MercuryCard = () => {
 
 	const timings: { delay: number; duration: number }[] = [
 		{ delay: 0, duration: 2 }, // Bucket 1
-		{ delay: 3, duration: 2 }, // Bucket 2
-		{ delay: 6, duration: 2 }, // Bucket 3
-		{ delay: 9, duration: 2 }, // Bucket 4
-		{ delay: 13, duration: 2 }, // Bucket 5
-		{ delay: 17, duration: 2 }, // Bucket 5
+		{ delay: 2, duration: 2 }, // Bucket 2
+		{ delay: 4, duration: 2 }, // Bucket 3
+		{ delay: 6, duration: 2 }, // Bucket 4
+		{ delay: 9, duration: 2 }, // Bucket 5
+		{ delay: 13, duration: 2 }, // Bucket 6
 	]
 
 	return (
 		<ProjectCard
+			techs={{ frontend: [], backend: [], devops: [] }}
 			className={cn(styles.project, 'mercury')}
 			projectName='Mercury'>
 			<Background />
-			<Container variants={{}} initial='hidden' animate='show'>
+			<Container>
 				{data.description.map((text, i) => (
 					<Bucket
 						key={i}

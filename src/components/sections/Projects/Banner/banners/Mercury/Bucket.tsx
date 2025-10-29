@@ -37,33 +37,34 @@ export default function Bucket({
 	const lineRef = useRef<HTMLParagraphElement>(null)
 
 	useGSAP(() => {
-		const fadeTl = gsap.timeline({
-			scrollTrigger: {
-				trigger: `.mercury`,
-				start: 'top center-=100px',
-				end: '+=400px',
-				toggleActions: 'play none resume reverse',
-			},
-		})
-		fadeTl.to(lineRef.current, {
-			y: 0,
-			delay,
-			autoAlpha: 1,
-		})
-
 		const backgroundTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: `.mercury`,
 				start: 'top center-=100px',
 				end: '+=400px',
 				toggleActions: 'play none resume reverse',
+				onToggle: self => {
+					console.log(self.isActive)
+
+					backgroundTl
+						.timeScale(self.isActive ? 1 : 5)
+						.reversed(self.isActive ? false : true)
+				},
 			},
 		})
-		backgroundTl.to(fillRef.current, {
-			autoAlpha: 1,
+		backgroundTl.to(lineRef.current, {
+			y: 0,
 			delay,
-			duration: 0.1,
+			autoAlpha: 1,
 		})
+		backgroundTl.to(
+			fillRef.current,
+			{
+				autoAlpha: 1,
+				duration: 0.1,
+			},
+			'<'
+		)
 		backgroundTl.to(fillRef.current, {
 			height: '100%',
 			y: 0,
