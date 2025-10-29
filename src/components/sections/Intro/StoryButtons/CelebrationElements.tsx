@@ -10,7 +10,7 @@ import AnimatedElement from './AnimatedElement'
 import { cn } from '@/utils/react'
 
 import styles from './CelebrationElements.module.scss'
-import { calculateCirclePoints } from '../MouseEffects/utils'
+
 import { generateCircularPath } from '@/utils/svg'
 import { calculateTextRepetitions } from '@/utils/general'
 
@@ -39,16 +39,6 @@ const CelebrationElements = ({
 		'#2ed573', // Lime Green
 	])
 
-	const circlePoints = calculateCirclePoints(50, 50, 50, 100)
-
-	const getRandomColor = () => {
-		const colors = celebrationColorsRef.current
-		const firstColor = colors[0]
-		// Rotate the array: move first element to the end
-		celebrationColorsRef.current = [...colors.slice(1), firstColor]
-		return firstColor
-	}
-
 	useGSAP(() => {
 		const yesSplitTl = gsap.timeline({})
 		SplitText.create(`.yesText > h2`, {
@@ -76,12 +66,15 @@ const CelebrationElements = ({
 		})
 	}, [])
 
+	const xFactor = 1.5
+	const yFactor = 1.2
+
 	return (
 		<div className={styles.celebrationContainer}>
 			{/* Fun shapes */}
 			<AnimatedElement
-				x={-120}
-				y={-80}
+				x={-120 * xFactor}
+				y={-80 * yFactor}
 				rotation={15}
 				className={cn(styles.celebrationElement, styles.star)}
 				isVisible={isVisible}
@@ -91,8 +84,8 @@ const CelebrationElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={40}
-				y={-8}
+				x={40 * xFactor}
+				y={-8 * yFactor}
 				rotation={40}
 				className={cn(styles.celebrationElement, styles.heart)}
 				isVisible={isVisible}
@@ -102,8 +95,8 @@ const CelebrationElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={-100}
-				y={60}
+				x={-100 * xFactor}
+				y={60 * yFactor}
 				rotation={45}
 				className={cn(styles.celebrationElement, styles.sparkle)}
 				isVisible={isVisible}
@@ -113,8 +106,8 @@ const CelebrationElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={40}
-				y={64}
+				x={40 * xFactor}
+				y={64 * yFactor}
 				rotation={90}
 				className={cn(styles.celebrationElement, styles.rocket)}
 				isVisible={isVisible}
@@ -124,8 +117,8 @@ const CelebrationElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={-32}
-				y={-40}
+				x={-32 * xFactor}
+				y={-40 * yFactor}
 				rotation={30}
 				className={cn(styles.celebrationElement, styles.confetti)}
 				isVisible={isVisible}
@@ -135,8 +128,8 @@ const CelebrationElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={0}
-				y={-80}
+				x={0 * xFactor}
+				y={-80 * yFactor}
 				rotation={-30}
 				className={cn(styles.celebrationElement, styles.fireworks)}
 				isVisible={isVisible}
@@ -147,8 +140,8 @@ const CelebrationElements = ({
 
 			{/* Image placeholders */}
 			<AnimatedElement
-				x={-152}
-				y={0}
+				x={-152 * xFactor}
+				y={0 * yFactor}
 				rotation={10}
 				className={cn(styles.celebrationElement, styles.coolGif)}
 				isVisible={isVisible}
@@ -164,8 +157,8 @@ const CelebrationElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={140}
-				y={-20}
+				x={140 * xFactor}
+				y={-20 * yFactor}
 				rotation={-10}
 				className={cn(styles.celebrationElement, styles.doItGif)}
 				isVisible={isVisible}
@@ -181,8 +174,8 @@ const CelebrationElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={-60}
-				y={120}
+				x={-60 * xFactor}
+				y={120 * yFactor}
 				rotation={20}
 				className={cn(styles.celebrationElement, 'yesText')}
 				isVisible={isVisible}
@@ -192,8 +185,8 @@ const CelebrationElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={60}
-				y={-120}
+				x={60 * xFactor}
+				y={-120 * yFactor}
 				rotation={-20}
 				className={cn(styles.celebrationElement, styles.goGoGo)}
 				isVisible={isVisible}
@@ -219,8 +212,8 @@ const CelebrationElements = ({
 
 			{/* Geometric shapes */}
 			<AnimatedElement
-				x={20}
-				y={40}
+				x={20 * xFactor}
+				y={40 * yFactor}
 				rotation={60}
 				className={cn(
 					styles.celebrationElement,
@@ -234,8 +227,8 @@ const CelebrationElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={160}
-				y={64}
+				x={160 * xFactor}
+				y={64 * yFactor}
 				rotation={0}
 				className={cn(
 					styles.celebrationElement,
@@ -249,8 +242,8 @@ const CelebrationElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={-80}
-				y={-100}
+				x={-80 * xFactor}
+				y={-100 * yFactor}
 				rotation={45}
 				className={cn(
 					styles.celebrationElement,
@@ -264,8 +257,8 @@ const CelebrationElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={40}
-				y={104}
+				x={40 * xFactor}
+				y={104 * yFactor}
 				rotation={30}
 				className={cn(
 					styles.celebrationElement,

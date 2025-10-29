@@ -2,6 +2,7 @@
 
 import Quote from './Quote'
 import Story from './Story'
+import StoryControls from './StoryControls'
 
 import styles from './About.module.scss'
 
@@ -16,6 +17,7 @@ const About = () => {
 
 			<Quote quote={quote} author={author} />
 			<Story />
+			<StoryControls />
 		</section>
 	)
 }

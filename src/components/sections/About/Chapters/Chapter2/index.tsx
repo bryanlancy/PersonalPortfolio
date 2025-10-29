@@ -15,30 +15,8 @@ import styles from './Chapter2.module.scss'
 const vt323 = VT323({
 	subsets: ['latin'],
 	weight: '400',
-	// variable: '--font-vt',
 })
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger)
-
-/*
-	Animation timeline
-
-	Animation:
-	TODO Add hammer smashing pc animation for first line
-
-    !"I started using spreadsheets..."
-	Spreadsheet fades in
-    Mouse icon manually clicking on each cell, typing animation adds data (typo for funsies)
-    !"fascinated by how much..."
-    Spreadsheet drag
-
-	Transition:
-    !"I automated nighlty math tasks..."
-    Spreadsheet slides up revealing more empty rows, remains on screen during next chapter
-    !"and later..."
-    Under the bottom of the spreadsheet the conveyor belt used in next chapter is revealed
-
-
-*/
 
 const Chapter2 = () => {
 	const title = 'Early Tech Work'
@@ -52,7 +30,7 @@ const Chapter2 = () => {
 	const line2Offset = 1200
 	const line3Offset = 1800
 	const line4Offset = 2200
-	const line5Offset = 2800
+	const line5Offset = 2400
 	const titleRef = useRef<HTMLHeadingElement>(null)
 	const containerRef = useRef<HTMLDivElement>(null)
 	const showTitleState = useState<boolean>(false)
@@ -68,7 +46,7 @@ const Chapter2 = () => {
 			scrollTrigger: {
 				trigger: '.c2-container',
 				start: 'top top',
-				end: '+=3100',
+				end: '+=2800',
 				pin: true,
 			},
 		})

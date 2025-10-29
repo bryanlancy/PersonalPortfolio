@@ -32,10 +32,12 @@
 
 	&.leftPanel {
 		left: 0;
+		box-shadow: 8px 0 10px 0px #0008;
 	}
 
 	&.rightPanel {
 		right: 0;
+		box-shadow: -8px 0 10px 0px #0008;
 	}
 
 	&.exiting {

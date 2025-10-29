@@ -12,20 +12,6 @@ import Container from '@/utils/components/Container'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
-/*
-	Animation timeline
-
-	Animation:
-	Calendar slides in and starts flipping
-	Projects stack up in the hobby pile
-	When the calendar reaches 2021 it stops flipping and the year glows
-	The first professional project/job appears
-
-
-	Transition:
-
-*/
-
 const Chapter6 = () => {
 	const containerRef = useRef<HTMLDivElement>(null)
 

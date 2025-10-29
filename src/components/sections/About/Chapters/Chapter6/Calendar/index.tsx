@@ -29,6 +29,7 @@ const Calendar = () => {
 			},
 		})
 		calendarTl.to(`.${styles.calendar}`, {
+			autoAlpha: 1,
 			ease: 'elastic.out',
 			duration: 0.75,
 			x: 0,

@@ -38,19 +38,6 @@ function duplicateWords(
 	return arr
 }
 
-/*
-	Animation timeline
-
-	Animation:
-    Lines draw out from the computer connecting different devices
-    Each device has an on/off button on its display as well as current status of light
-    !"It's accessibility..."
-    Emoji airplane moving around to different places with scroll
-
-	Transition:
-
-*/
-
 const Chapter5 = () => {
 	const title = 'Turning to Web Development'
 
@@ -175,8 +162,8 @@ const Chapter5 = () => {
 					`${pro} .${styles.check}`,
 				],
 				{
-					delay: 0.5,
-					stagger: 0.3,
+					delay: 0.25,
+					stagger: 0.15,
 					autoAlpha: 1,
 				}
 			)
@@ -185,8 +172,8 @@ const Chapter5 = () => {
 				{
 					background:
 						'linear-gradient(150deg, #07727a 0%, #9600c0 80%)',
-					duration: 1,
-					delay: 0.5,
+					duration: 0.75,
+					delay: 0.25,
 					ease: 'none',
 				},
 				'<'

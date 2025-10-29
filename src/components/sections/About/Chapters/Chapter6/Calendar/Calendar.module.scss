@@ -1,3 +1,5 @@
+@import '@/styles/mixins.scss';
+
 .calendar {
 	position: absolute;
 	top: 0;
@@ -8,6 +10,7 @@
 	perspective: 1000px;
 
 	transform: translateX(-600px);
+	@include autoAlpha;
 	z-index: 1;
 }
 .pageAnim {

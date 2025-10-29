@@ -1,3 +1,4 @@
+@import '@/styles/mixins.scss';
 @import '@/styles/colors.scss';
 
 .titles {
@@ -69,6 +70,8 @@
 
 	border-radius: 24px;
 	transform-style: preserve-3d;
+
+	@include autoAlpha;
 
 	.front,
 	.back {

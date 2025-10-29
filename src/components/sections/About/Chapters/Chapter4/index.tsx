@@ -28,27 +28,6 @@ import Container from '@/utils/components/Container'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText)
 
-/*
-	Animation timeline
-
-	Animation:
-    Woozy emoji face starts rolling across the screen
-    !"In 2015, while trying..."
-    A basic "ground" appears to add to movement animation
-    House comes into view and emoji goes inside and sleeps (animated z's floating above?)
-    !"waking up early..."
-    Rotate sun and moon overhead, indicating sleeping for days
-    On final night cycle, house rotates with scene, revealing new scene and text
-    !"I bought an Arduino..."
-    Curious emoji with small circuit and light
-    Hook1 text starts fading in and light icon flickers on, face turns to happy
-    Hook2 text appears, face and hook1 fade out, followed shortly by hook2
-
-	Transition:
-    Light icon remains on screen, and scales down (zoom out effect)
-    Zoom out of computer screen from earlier animation to emoji face sitting at computer
-*/
-
 const Chapter4 = () => {
 	const title = 'The Arduino Moment'
 	const line1 = 'In 2015'
@@ -213,8 +192,6 @@ const Chapter4 = () => {
 		houseTransitionTl.to(
 			`.${styles.lightContainer}`,
 			{
-				// boxShadow: '4px 4px 8px 0px #0000',
-				// background: 'none',
 				duration: 0.25,
 				autoAlpha: 1,
 			},
@@ -379,18 +356,12 @@ const Chapter4 = () => {
 				end: '+=600px',
 				fastScrollEnd: true,
 				toggleActions: 'play complete none reverse',
-				// onUpdate: self => {
-				// 	houseExitTl
-				// 		.timeScale(self.direction > 0 ? 1 : 2)
-				// 		.reversed(self.direction > 0 ? false : true)
-				// },
 			},
 		})
 
 		houseExitTl.to(
 			`.${styles.houseIn}`,
 			{
-				// duration: 0.1,
 				autoAlpha: 0,
 			},
 			'<'
@@ -398,7 +369,6 @@ const Chapter4 = () => {
 		houseExitTl.to(
 			`.${styles.bed}`,
 			{
-				// duration: 0.25,
 				autoAlpha: 0,
 			},
 			'<'
@@ -406,7 +376,6 @@ const Chapter4 = () => {
 		houseExitTl.to(
 			`.${styles.computer}`,
 			{
-				// duration: 0.25,
 				autoAlpha: 0,
 			},
 			'<'
@@ -414,7 +383,6 @@ const Chapter4 = () => {
 		houseExitTl.to(
 			`.${styles.me}`,
 			{
-				// duration: 0.25,
 				autoAlpha: 0,
 			},
 			'<'
@@ -422,7 +390,6 @@ const Chapter4 = () => {
 		houseExitTl.to(
 			`.${styles.computer}`,
 			{
-				// duration: 0.25,
 				autoAlpha: 0,
 			},
 			'<'

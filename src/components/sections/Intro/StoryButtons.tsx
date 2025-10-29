@@ -4,12 +4,22 @@ import { useRef, useState } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+import { SplitText } from 'gsap/SplitText'
+import { Bebas_Neue } from 'next/font/google'
 
-import styles from './StoryButtons.module.scss'
 import CelebrationElements from './StoryButtons/CelebrationElements'
 import DiscouragingElements from './StoryButtons/DiscouragingElements'
+import { cn } from '@/utils/react'
 
-gsap.registerPlugin(useGSAP, ScrollToPlugin)
+import styles from './StoryButtons.module.scss'
+
+gsap.registerPlugin(useGSAP, ScrollToPlugin, SplitText)
+
+const bebasNeue = Bebas_Neue({
+	subsets: ['latin'],
+	weight: '400',
+	variable: '--font-bebas',
+})
 
 const StoryButtons = () => {
 	const containerRef = useRef<HTMLDivElement>(null)
@@ -47,8 +57,40 @@ const StoryButtons = () => {
 		setIsSkipHovered(false)
 	}
 
+	useGSAP(() => {
+		const keepScrollingTl = gsap.timeline({
+			repeat: -1,
+			yoyo: true,
+		})
+		SplitText.create(`.${styles.keepScrolling} h1`, {
+			type: 'chars',
+			autoSplit: true,
+			onSplit: ({ chars }) => {
+				keepScrollingTl.to(chars, {
+					y: -12,
+					duration: 0.4,
+					ease: 'power2.inOut',
+					stagger: 0.025,
+				})
+				keepScrollingTl.to(
+					chars,
+					{
+						y: 0,
+						duration: 0.4,
+						ease: 'power2.inOut',
+						stagger: 0.025,
+						delay: 0.425,
+					},
+					'<'
+				)
+			},
+		})
+	})
+
 	return (
-		<div ref={containerRef} className={styles.storyControls}>
+		<div
+			ref={containerRef}
+			className={cn(styles.storyControls, bebasNeue.className)}>
 			<div className={styles.keepScrolling}>
 				<h1>Keep scrolling to go at your own pace</h1>
 				<h2>or</h2>
@@ -60,7 +102,7 @@ const StoryButtons = () => {
 						onClick={handleAuto}
 						onMouseEnter={handleMouseEnter}
 						onMouseLeave={handleMouseLeave}>
-						Play Story
+						Play Story <span>(Auto Scroll)</span>
 					</button>
 					<CelebrationElements isVisible={isHovered} duration={0.4} />
 				</div>
@@ -70,7 +112,7 @@ const StoryButtons = () => {
 						className={styles.skip}
 						onMouseEnter={handleSkipMouseEnter}
 						onMouseLeave={handleSkipMouseLeave}>
-						Skip to Projects
+						Skip to Projects <span>(Boring)</span>
 					</button>
 					<DiscouragingElements
 						isVisible={isSkipHovered}

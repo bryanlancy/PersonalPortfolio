@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { cn } from '@/utils/react'
 
-import { forwardRef, RefObject, useRef, useState } from 'react'
+import { forwardRef, RefObject, useEffect, useRef, useState } from 'react'
 import {
 	faBook,
 	faLaptopCode,
@@ -47,6 +47,8 @@ const TitleCards = ({ onTitleChange }: TitleSectionsProps) => {
 	const width = 800
 	const height = 800
 	const endRadius = 2.5
+	const [isLoaded, setIsLoaded] = useState(false)
+
 	const cards: (CardProps & { ref: RefObject<HTMLDivElement> })[] = [
 		{
 			title: 'Software Engineer',
@@ -129,6 +131,10 @@ const TitleCards = ({ onTitleChange }: TitleSectionsProps) => {
 	]
 	const [_, setCurrentTitle] = useState<string>(cards[0].title)
 
+	useEffect(() => {
+		setIsLoaded(true)
+	}, [])
+
 	useGSAP(() => {
 		const spiralTimeline = gsap.timeline({ repeat: -1 })
 		spiralTimeline.to(`.${styles.backgroundSvg}`, {
@@ -197,7 +203,21 @@ const TitleCards = ({ onTitleChange }: TitleSectionsProps) => {
 				'+=3'
 			)
 		}
+		cardsTl.play()
 	}, [])
+
+	useGSAP(() => {
+		const cardsArr = gsap.utils.toArray(
+			cards.map(card => `.${card.className}`)
+		)
+		const cardsShowTl = gsap.timeline({})
+		cardsShowTl.to(cardsArr, {
+			autoAlpha: 1,
+			duration: 3,
+			delay: 4,
+			ease: 'power2.inOut',
+		})
+	}, [isLoaded])
 
 	return (
 		<div className={styles.titles}>

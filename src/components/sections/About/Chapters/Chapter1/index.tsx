@@ -18,25 +18,6 @@ import Container from '@/utils/components/Container'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
-/*
-	Animation timeline
-
-	Animation:
-	!"I've always been drawn...."
-    Happy emoji appears and tech icons move by with scroll (parallax effect?)
-    Emoji face moves from icon to icon as they scroll by
-    Computer icon is last icon, centers on screen when in appropriate spot
-	!"until my grandfather..."
-    Adult slides into view
-    Question speech bubble pops up from adult
-	!"sparked the..."
-    Curiosity? question mark
-
-	Transition:
-    Blue skidoo we can too into computer and zoom in on screen, revealing the next chapter
-
-*/
-
 const Chapter1 = () => {
 	const title = 'How it Started'
 
@@ -52,7 +33,7 @@ const Chapter1 = () => {
 			scrollTrigger: {
 				trigger: '.c1-container',
 				start: 'top top',
-				end: '+=2400',
+				end: '+=3000',
 				pin: true,
 			},
 		})
@@ -98,16 +79,16 @@ const Chapter1 = () => {
 		const titleTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter1',
-				start: 'top top+=400px',
+				start: 'top top',
 				end: '+=900',
-				// scrub: true,
+				toggleActions: 'play none none reverse',
 			},
 		})
 		titleTl.to('.c1-title', {
 			autoAlpha: 1,
 			left: 0,
 			x: 20,
-			y: 200,
+			y: 80,
 			duration: 1.5,
 		})
 		titleTl.to('.c1-title', {
@@ -142,9 +123,9 @@ const Chapter1 = () => {
 			y: 0,
 		})
 		line1Tl.to('.c1-line1', {
-			autoAlpha: 0,
-			y: -100,
-			duration: 5,
+			autoAlpha: 0.3,
+			y: -40,
+			duration: 2,
 		})
 		// Line 2 animations
 		const line2Tl = gsap.timeline({
@@ -164,15 +145,14 @@ const Chapter1 = () => {
 			duration: 4,
 		})
 		line2Tl.to('.c1-line2', {
-			autoAlpha: 0,
-			y: -100,
-			duration: 5,
+			autoAlpha: 0.3,
+			duration: 2,
 		})
 		// Line 3 animations
 		const line3Tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter1',
-				start: 'top top-=1200px',
+				start: 'top top-=1800px',
 				end: '+=1200',
 				scrub: true,
 			},
@@ -186,9 +166,8 @@ const Chapter1 = () => {
 			duration: 4,
 		})
 		line3Tl.to('.c1-line3', {
-			autoAlpha: 0,
-			y: -100,
-			duration: 5,
+			autoAlpha: 0.3,
+			duration: 2,
 		})
 
 		// Gpa animations

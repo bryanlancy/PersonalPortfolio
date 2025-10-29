@@ -32,7 +32,6 @@ const DiscouragingElements = ({
 					y: -25,
 					x: 10,
 					rotateX: -40,
-					// rotateZ: -10,
 					fontSize: '64px',
 
 					duration: 1,
@@ -45,12 +44,15 @@ const DiscouragingElements = ({
 		})
 	}, [])
 
+	const xFactor = 1.5
+	const yFactor = 1.2
+
 	return (
 		<div className={styles.discouragingContainer}>
 			{/* Negative emoji elements */}
 			<AnimatedElement
-				x={40}
-				y={-20}
+				x={40 * xFactor}
+				y={-20 * yFactor}
 				rotation={35}
 				className={cn(styles.discouragingElement, styles.sad)}
 				isVisible={isVisible}
@@ -60,8 +62,8 @@ const DiscouragingElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={-100}
-				y={60}
+				x={-100 * xFactor}
+				y={60 * yFactor}
 				rotation={-25}
 				className={cn(styles.discouragingElement, styles.angry)}
 				isVisible={isVisible}
@@ -71,8 +73,8 @@ const DiscouragingElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={120}
-				y={120}
+				x={120 * xFactor}
+				y={120 * yFactor}
 				rotation={-15}
 				className={cn(styles.discouragingElement, styles.warning)}
 				isVisible={isVisible}
@@ -82,8 +84,8 @@ const DiscouragingElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={-80}
-				y={-100}
+				x={-80 * xFactor}
+				y={-100 * yFactor}
 				rotation={30}
 				className={cn(styles.discouragingElement, styles.stop)}
 				isVisible={isVisible}
@@ -93,8 +95,8 @@ const DiscouragingElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={40}
-				y={180}
+				x={40 * xFactor}
+				y={180 * yFactor}
 				rotation={-30}
 				className={cn(styles.discouragingElement, styles.no)}
 				isVisible={isVisible}
@@ -105,8 +107,8 @@ const DiscouragingElements = ({
 
 			{/* Negative image placeholders */}
 			<AnimatedElement
-				x={40}
-				y={60}
+				x={40 * xFactor}
+				y={60 * yFactor}
 				rotation={30}
 				className={cn(
 					styles.discouragingElement,
@@ -122,8 +124,8 @@ const DiscouragingElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={-76}
-				y={108}
+				x={-76 * xFactor}
+				y={108 * yFactor}
 				rotation={20}
 				className={cn(styles.discouragingElement, styles.picard)}
 				isVisible={isVisible}
@@ -138,8 +140,8 @@ const DiscouragingElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={160}
-				y={-20}
+				x={160 * xFactor}
+				y={-20 * yFactor}
 				rotation={-10}
 				className={cn(styles.discouragingElement, styles.surprisedGuy)}
 				isVisible={isVisible}
@@ -154,8 +156,8 @@ const DiscouragingElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={-240}
-				y={-160}
+				x={-240 * xFactor}
+				y={-160 * yFactor}
 				rotation={40}
 				className={cn(styles.discouragingElement, styles.patrick)}
 				isVisible={isVisible}
@@ -170,8 +172,8 @@ const DiscouragingElements = ({
 			</AnimatedElement>
 
 			<AnimatedElement
-				x={60}
-				y={-130}
+				x={60 * xFactor}
+				y={-130 * yFactor}
 				rotation={-60}
 				className={cn(
 					styles.discouragingElement,
@@ -186,8 +188,8 @@ const DiscouragingElements = ({
 
 			{/* Negative geometric shapes */}
 			<AnimatedElement
-				x={120}
-				y={-60}
+				x={120 * xFactor}
+				y={-60 * yFactor}
 				rotation={45}
 				className={cn(
 					styles.discouragingElement,

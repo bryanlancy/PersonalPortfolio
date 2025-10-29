@@ -13,23 +13,6 @@ import Container from '@/utils/components/Container'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
-/*
-	Animation timeline
-
-	Animation:
-    Smug emoji face "walks" into view
-    Packages sliding past scanner
-    Scanner scans package and info is added to table as item is scanned
-    Graph changes as items are added
-
-	Transition:
-    Convery belt speeds up and graph breaks out of its container
-    Graph bars continue to grow off screen, bars "wrap around" to other side and wipe across screen
-    Emoji face get scared/nervous as bars bury him on panel
-    Bars clear revealing a woozy emoji face
-
-*/
-
 const Chapter3 = () => {
 	const title = 'Finding the Limits'
 	const line1 = 'added barcode-scanning functionality to a spreadsheet'
@@ -51,7 +34,7 @@ const Chapter3 = () => {
 			scrollTrigger: {
 				trigger: containerRef.current,
 				start: 'top top',
-				end: '+=3100',
+				end: '+=2800',
 				pin: true,
 			},
 		})
@@ -96,8 +79,8 @@ const Chapter3 = () => {
 		const line1Tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter3',
-				start: `top center-=100px`,
-				end: '+=3000px',
+				start: `top top`,
+				end: '+=1800px',
 				toggleActions: 'play none resume reverse',
 				onToggle: self => {
 					if (self.isActive !== showLine1State[2].current) {
@@ -114,8 +97,8 @@ const Chapter3 = () => {
 		const line2Tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter3',
-				start: `top center-=100px`,
-				end: '+=3000px',
+				start: `top top`,
+				end: '+=1800px',
 				toggleActions: 'play none resume reverse',
 				onToggle: self => {
 					if (self.isActive !== showLine2State[2].current) {
@@ -140,8 +123,8 @@ const Chapter3 = () => {
 		const line3Tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter3',
-				start: `top top-=1400px`,
-				end: '+=4000px',
+				start: `top top-=1000px`,
+				end: '+=1000px',
 				toggleActions: 'play none resume reverse',
 				onToggle: self => {
 					if (self.isActive !== showLine3State[2].current) {
