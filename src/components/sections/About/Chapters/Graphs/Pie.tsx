@@ -25,6 +25,10 @@ const Pie = () => {
 			},
 		})
 		pieTl
+			.to(`.${styles.pie}`, {
+				duration: 0.1,
+				autoAlpha: 1,
+			})
 			.to(`.${styles.circle1}`, { drawSVG: '0% 37%' })
 			.to(`.${styles.circle2}`, { drawSVG: '37% 82%' }, 0)
 			.to(`.${styles.circle3}`, { drawSVG: '82% 100%' }, 0)

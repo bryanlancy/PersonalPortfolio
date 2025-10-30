@@ -41,6 +41,19 @@ const Scatter = () => {
 	)
 
 	useGSAP(() => {
+		const showScatterTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.chapter2',
+				start: 'top top-=2200px',
+				end: '+=100px',
+				fastScrollEnd: true,
+				toggleActions: 'play complete none reverse',
+			},
+		})
+		showScatterTl.to(`.${styles.scatter}`, {
+			duration: 0.1,
+			autoAlpha: 1,
+		})
 		// Axis Lines Animations
 		const xTl = gsap.timeline({
 			scrollTrigger: {
