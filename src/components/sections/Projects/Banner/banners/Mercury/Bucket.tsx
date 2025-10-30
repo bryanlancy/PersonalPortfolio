@@ -42,11 +42,13 @@ export default function Bucket({
 				trigger: `.mercury`,
 				start: 'top center-=100px',
 				end: '+=400px',
-				toggleActions: 'play none resume reverse',
-				onToggle: self => {
-					backgroundTl
-						.timeScale(self.isActive ? 1 : 5)
-						.reversed(self.isActive ? false : true)
+				toggleActions: 'play none none reverse',
+
+				onEnter: () => {
+					backgroundTl.timeScale(1).reversed(false)
+				},
+				onLeaveBack: () => {
+					backgroundTl.timeScale(5).reversed(true)
 				},
 			},
 		})
