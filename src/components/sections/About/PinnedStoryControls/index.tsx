@@ -44,6 +44,13 @@ const StoryControls = ({ className }: StoryControlsProps) => {
 		})
 	})
 
+	const backToTop = contextSafe(() => {
+		gsap.to(window, {
+			duration: 0,
+			scrollTo: { y: 0, autoKill: true },
+		})
+	})
+
 	const skipToProjects = () => {
 		const projectsDiv = document.getElementById('projects')
 		projectsDiv?.scrollIntoView({ behavior: 'instant' })
@@ -111,6 +118,9 @@ const StoryControls = ({ className }: StoryControlsProps) => {
 						<button className={styles.auto} onClick={handleAuto}>
 							<FontAwesomeIcon icon={faPlay} />
 							Play Story
+						</button>
+						<button onClick={backToTop} className={styles.top}>
+							Back to Top
 						</button>
 						<button
 							onClick={skipToProjects}

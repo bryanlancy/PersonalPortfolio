@@ -97,3 +97,17 @@
 		color: #ff8e8e;
 	}
 }
+
+.top {
+	background-color: #f6e27a; // soft yellow
+
+	&:hover {
+		background-color: #f8ea9a;
+		transform: scale(1.05);
+		box-shadow: 0 8px 25px rgba(246, 226, 122, 0.4);
+	}
+
+	span {
+		color: #c8a800;
+	}
+}
