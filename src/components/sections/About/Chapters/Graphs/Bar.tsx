@@ -33,7 +33,10 @@ const Bar = () => {
 				toggleActions: 'play complete none reverse',
 			},
 		})
-
+		mainBarTl.to(`.${styles.barContainer}`, {
+			duration: 0.1,
+			autoAlpha: 0,
+		})
 		mainBarTl.to(`.${styles.main} > .${styles.bar}`, {
 			scale: 1,
 			delay: 1,
@@ -65,6 +68,10 @@ const Bar = () => {
 		overflowTl.to(`.${styles.barLast}`, {
 			duration: 0.15,
 			boxShadow: '-4px 0px 2px 0px #000800ff inset',
+		})
+		overflowTl.to(`.${styles.overflow}`, {
+			duration: 0.15,
+			autoAlpha: 1,
 		})
 		overflowTl.to(
 			`.${styles.overflow} > .${styles.bar}`,

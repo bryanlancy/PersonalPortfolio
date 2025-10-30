@@ -21,6 +21,8 @@
 	width: 400px;
 	// height: 100%;
 
+	@include autoAlpha;
+
 	.bar {
 		width: 10px;
 
@@ -65,6 +67,8 @@
 		width: 50vw;
 		height: 190px;
 
+		@include autoAlpha;
+
 		> .bar {
 			background-color: red;
 
@@ -91,6 +95,8 @@
 	fill: none;
 	stroke-width: 2.5px;
 
+	@include autoAlpha;
+
 	.circle {
 		&1 {
 			stroke: #4c8dee;
@@ -110,6 +116,8 @@
 
 	width: 400px;
 	height: 100%;
+
+	@include autoAlpha;
 
 	> svg {
 		width: 100%;
