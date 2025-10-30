@@ -15,14 +15,26 @@ import type { TechSection } from './text'
 import { getAsciiArt, getHelloArt } from './text'
 import { normalizeLines, padLinesToUniformWidth } from './format'
 import { printAsciiAndHello, printErrorAndTechOverview } from './sections'
-import { interpolateColors } from '../styles'
 
 let hasPrinted = false
 
+export interface ConsoleEasterEggOptions {
+	/** When true, always print regardless of environment. Defaults to false. */
+	debug?: boolean
+}
+
 /**
  * Print the full DevTools easter egg in the console.
+ *
+ * @param options - Optional configuration.
+ * @param options.debug - When true, always print regardless of environment. Defaults to false.
  */
-export default function consoleEasterEgg(): void {
+export default function consoleEasterEgg(
+	options: ConsoleEasterEggOptions = {}
+): void {
+	// Only run in production builds unless explicitly debugging
+	const { debug = false } = options
+	if (!debug && process.env.NODE_ENV !== 'production') return
 	if (hasPrinted) return
 	if (typeof window !== 'undefined') {
 		if ((window as any).__consoleEasterEggPrinted) return
@@ -59,12 +71,8 @@ export default function consoleEasterEgg(): void {
 	// Compute a unified target width across all blocks
 	const asciiRaw = getAsciiArt()
 	const helloRaw = getHelloArt()
-	const asciiUniform = padLinesToUniformWidth(
-		normalizeLines(asciiRaw.split('\n'))
-	)
-	const helloUniform = padLinesToUniformWidth(
-		normalizeLines(helloRaw.split('\n'))
-	)
+	const asciiUniform = padLinesToUniformWidth(normalizeLines(asciiRaw.lines))
+	const helloUniform = padLinesToUniformWidth(normalizeLines(helloRaw.lines))
 	const errorTechUniform = (() => {
 		const lines: string[] = []
 		const errorLines = [
@@ -87,15 +95,13 @@ export default function consoleEasterEgg(): void {
 		...errorTechUniform.map(l => l.length),
 	]
 	const targetWidth = widths.reduce((m, n) => (n > m ? n : m), 0)
-	const helloLinesCount = helloUniform.length
-	const asciiLinesCount = asciiUniform.length
 
 	printAsciiAndHello(
 		targetWidth,
-		asciiRaw,
-		helloRaw,
-		interpolateColors('#a83244', '#a88b32', helloLinesCount),
-		interpolateColors('#22d3ee', '#10b981', asciiLinesCount)
+		asciiRaw.lines.join('\n'),
+		helloRaw.lines.join('\n'),
+		helloRaw.color,
+		asciiRaw.color
 	)
 	printErrorAndTechOverview(techSections, targetWidth)
 }

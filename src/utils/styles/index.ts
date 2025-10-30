@@ -32,39 +32,53 @@ function rgbToHex(r: number, g: number, b: number): string {
 }
 
 /**
- * Generate an array of evenly spaced colors between two hex values.
+ * Generate an array of evenly spaced colors through multiple hex color stops.
  *
- * @param start - The starting hex color (e.g. "#ff0000").
- * @param end - The ending hex color (e.g. "#0000ff").
- * @param steps - Number of colors to generate (must be >= 2).
- *                Includes both start and end colors.
- * @returns An array of hex color strings representing the gradient.
+ * The gradient will include the first color and the last color, and will
+ * smoothly interpolate across each adjacent pair of colors provided.
+ *
+ * @param colors - Ordered list of hex colors (e.g. ["#ff0000", "#00ff00", "#0000ff"]).
+ *                 Must contain at least 2 colors.
+ * @param steps - Number of colors to generate (>= 2). Includes the first and last.
+ * @returns An array of hex color strings representing the full multi-stop gradient.
  *
  * @example
  * ```ts
- * interpolateColors("#ff0000", "#0000ff", 5);
- * // → ['#ff0000', '#bf003f', '#800080', '#4000bf', '#0000ff']
+ * interpolateColors(["#ff0000", "#00ff00", "#0000ff"], 7)
+ * // → ['#ff0000', '#aa5500', '#55aa00', '#00ff00', '#0055aa', '#0000aa', '#0000ff']
  * ```
  */
-export function interpolateColors(
-	start: string,
-	end: string,
-	steps: number
-): string[] {
-	const [r1, g1, b1] = hexToRgb(start)
-	const [r2, g2, b2] = hexToRgb(end)
-
-	const colors: string[] = []
-
-	for (let i = 0; i < steps; i++) {
-		const t = i / (steps - 1) // value from 0 → 1
-		const r = Math.round(r1 + (r2 - r1) * t)
-		const g = Math.round(g1 + (g2 - g1) * t)
-		const b = Math.round(b1 + (b2 - b1) * t)
-		colors.push(rgbToHex(r, g, b))
+export function interpolateColors(colors: string[], steps: number): string[] {
+	if (!Array.isArray(colors) || colors.length < 2) {
+		throw new Error('interpolateColors: provide at least two colors')
+	}
+	if (steps < 2) {
+		throw new Error('interpolateColors: steps must be >= 2')
 	}
 
-	return colors
+	const rgbStops = colors.map(hexToRgb)
+	const segmentCount = rgbStops.length - 1
+
+	const result: string[] = []
+	for (let i = 0; i < steps; i++) {
+		const tGlobal = i / (steps - 1) // 0 → 1 across entire gradient
+		// Map global t to segment index and local t within that segment
+		let segmentIndex = Math.floor(tGlobal * segmentCount)
+		if (segmentIndex >= segmentCount) segmentIndex = segmentCount - 1
+		const segmentStartT = segmentIndex / segmentCount
+		const segmentEndT = (segmentIndex + 1) / segmentCount
+		const tLocal = (tGlobal - segmentStartT) / (segmentEndT - segmentStartT)
+
+		const [r1, g1, b1] = rgbStops[segmentIndex]
+		const [r2, g2, b2] = rgbStops[segmentIndex + 1]
+
+		const r = Math.round(r1 + (r2 - r1) * tLocal)
+		const g = Math.round(g1 + (g2 - g1) * tLocal)
+		const b = Math.round(b1 + (b2 - b1) * tLocal)
+		result.push(rgbToHex(r, g, b))
+	}
+
+	return result
 }
 
 /**
