@@ -14,11 +14,8 @@
 import type { TechSection } from './text'
 import { getAsciiArt, getHelloArt } from './text'
 import { normalizeLines, padLinesToUniformWidth } from './format'
-import {
-	printAsciiArt,
-	printHello,
-	printErrorAndTechOverview,
-} from './sections'
+import { printAsciiAndHello, printErrorAndTechOverview } from './sections'
+import { interpolateColors } from '../styles'
 
 let hasPrinted = false
 
@@ -39,6 +36,14 @@ export default function consoleEasterEgg(): void {
 			items: [
 				'Next.js + TypeScript',
 				'SCSS for styling + GSAP for animations.',
+				'  GSAP plugins used:',
+				'  - useGSAP',
+				'  - ScrollTrigger',
+				'  - SplitText',
+				'  - MotionPath',
+				'  - DrawSVG',
+				'  - Flip',
+				'  - ScrollTo',
 			],
 		},
 		{
@@ -50,14 +55,15 @@ export default function consoleEasterEgg(): void {
 		},
 	]
 
-	printAsciiArt()
-	printHello()
+	// We'll print after we determine a unified target width for consistent alignment
 	// Compute a unified target width across all blocks
+	const asciiRaw = getAsciiArt()
+	const helloRaw = getHelloArt()
 	const asciiUniform = padLinesToUniformWidth(
-		normalizeLines(getAsciiArt().split('\n'))
+		normalizeLines(asciiRaw.split('\n'))
 	)
 	const helloUniform = padLinesToUniformWidth(
-		normalizeLines(getHelloArt().split('\n'))
+		normalizeLines(helloRaw.split('\n'))
 	)
 	const errorTechUniform = (() => {
 		const lines: string[] = []
@@ -81,8 +87,15 @@ export default function consoleEasterEgg(): void {
 		...errorTechUniform.map(l => l.length),
 	]
 	const targetWidth = widths.reduce((m, n) => (n > m ? n : m), 0)
+	const helloLinesCount = helloUniform.length
+	const asciiLinesCount = asciiUniform.length
 
-	printAsciiArt(targetWidth)
-	printHello(targetWidth)
+	printAsciiAndHello(
+		targetWidth,
+		asciiRaw,
+		helloRaw,
+		interpolateColors('#a83244', '#a88b32', helloLinesCount),
+		interpolateColors('#22d3ee', '#10b981', asciiLinesCount)
+	)
 	printErrorAndTechOverview(techSections, targetWidth)
 }
