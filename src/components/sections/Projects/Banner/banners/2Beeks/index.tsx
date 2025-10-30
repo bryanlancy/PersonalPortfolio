@@ -54,7 +54,7 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 	const line4 =
 		"I'm designing everything from scratch using Figma. All of the code is being built to integrate with their Square store and a CMS for easy content management."
 	const line5 =
-		"This is a project I'm currently working on so be sure to visit it and bookmark it for later."
+		"This is a project I'm currently working on so be sure to visit it and bookmark it for later!"
 	const line6 = 'Especially if you like homemade, locally-sourced honey!'
 
 	const images: {

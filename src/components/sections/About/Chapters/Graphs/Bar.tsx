@@ -8,7 +8,7 @@ import { cn } from '@/utils/react'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
-export const barColors = interpolateColors('00ffff', '3d248e', 15)
+export const barColors = interpolateColors(['00ffff', '3d248e'], 15)
 
 const Bar = () => {
 	useGSAP(() => {
