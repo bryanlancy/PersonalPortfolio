@@ -59,12 +59,8 @@ export default function consoleEasterEgg(): void {
 	// Compute a unified target width across all blocks
 	const asciiRaw = getAsciiArt()
 	const helloRaw = getHelloArt()
-	const asciiUniform = padLinesToUniformWidth(
-		normalizeLines(asciiRaw.split('\n'))
-	)
-	const helloUniform = padLinesToUniformWidth(
-		normalizeLines(helloRaw.split('\n'))
-	)
+	const asciiUniform = padLinesToUniformWidth(normalizeLines(asciiRaw.lines))
+	const helloUniform = padLinesToUniformWidth(normalizeLines(helloRaw.lines))
 	const errorTechUniform = (() => {
 		const lines: string[] = []
 		const errorLines = [
@@ -87,15 +83,13 @@ export default function consoleEasterEgg(): void {
 		...errorTechUniform.map(l => l.length),
 	]
 	const targetWidth = widths.reduce((m, n) => (n > m ? n : m), 0)
-	const helloLinesCount = helloUniform.length
-	const asciiLinesCount = asciiUniform.length
 
 	printAsciiAndHello(
 		targetWidth,
-		asciiRaw,
-		helloRaw,
-		interpolateColors('#a83244', '#a88b32', helloLinesCount),
-		interpolateColors('#22d3ee', '#10b981', asciiLinesCount)
+		asciiRaw.lines.join('\n'),
+		helloRaw.lines.join('\n'),
+		helloRaw.color,
+		asciiRaw.color
 	)
 	printErrorAndTechOverview(techSections, targetWidth)
 }
