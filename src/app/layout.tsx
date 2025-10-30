@@ -5,7 +5,6 @@ import './globals.scss'
 // Fix Font Awesome icons
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
-import { cn } from '@/utils/react'
 import { LoadingProvider } from '@/context/loadingContext'
 config.autoAddCss = false
 
