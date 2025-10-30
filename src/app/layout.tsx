@@ -27,7 +27,7 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html lang='en' className={cn(bebasNeue.className)}>
+		<html lang='en' className={bebasNeue.className}>
 			<body>
 				<LoadingProvider>{children}</LoadingProvider>
 			</body>
