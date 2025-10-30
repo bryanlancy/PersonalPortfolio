@@ -5,7 +5,6 @@ import './globals.scss'
 // Fix Font Awesome icons
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
-import { cn } from '@/utils/react'
 import { LoadingProvider } from '@/context/loadingContext'
 config.autoAddCss = false
 
@@ -27,7 +26,7 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html lang='en' className={cn(bebasNeue.className)}>
+		<html lang='en' className={bebasNeue.className}>
 			<body>
 				<LoadingProvider>{children}</LoadingProvider>
 			</body>
