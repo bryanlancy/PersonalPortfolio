@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react'
+import { FC, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -19,21 +19,18 @@ interface AnimatedBeeProps {
 	index: number
 }
 const AnimatedBee: FC<AnimatedBeeProps> = ({ width, height, index }) => {
-	const pathData = useRef<string>('')
+	const pathDataString = getSVGPathData(
+		5,
+		{ min: 0, max: width },
+		{ min: 0, max: height },
+		'curve'
+	)
+	const pathData = useState<string>(pathDataString)
 	const pathDashedRef = useRef<SVGPathElement>(null)
 	const pathMaskRef = useRef<SVGPathElement>(null)
 	const beeRef = useRef<SVGSVGElement>(null)
 
 	useGSAP(() => {
-		const pathDataString = getSVGPathData(
-			5,
-			{ min: 0, max: width },
-			{ min: 0, max: height },
-			'curve'
-		)
-
-		pathData.current = pathDataString
-
 		if (pathDashedRef.current) {
 			gsap.set(beeRef.current, {
 				xPercent: -50,
@@ -94,7 +91,7 @@ const AnimatedBee: FC<AnimatedBeeProps> = ({ width, height, index }) => {
 							ref={pathMaskRef}
 							strokeWidth={2}
 							stroke='black'
-							d={pathData.current}></path>
+							d={pathData[0]}></path>
 					</mask>
 				</defs>
 
@@ -103,7 +100,7 @@ const AnimatedBee: FC<AnimatedBeeProps> = ({ width, height, index }) => {
 					className={cn(styles.path, styles.pathDashed)}
 					ref={pathDashedRef}
 					mask={`url(#pathMask-${index})`}
-					d={pathData.current}></path>
+					d={pathData[0]}></path>
 			</svg>
 		</div>
 	)

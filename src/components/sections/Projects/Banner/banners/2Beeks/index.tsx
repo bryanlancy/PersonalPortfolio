@@ -15,6 +15,7 @@ import Container from '@/utils/components/Container'
 import { cn } from '@/utils/react'
 
 import styles from './TwoBeeks.module.scss'
+import { NoSsr } from '@/utils/next'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -189,7 +190,10 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 					</div>
 				</div>
 			</Container>
-			<Swarm count={2} className={styles.swarm} />
+
+			<NoSsr>
+				<Swarm count={2} className={styles.swarm} />
+			</NoSsr>
 			<HexBackground />
 		</ProjectCard>
 	)
