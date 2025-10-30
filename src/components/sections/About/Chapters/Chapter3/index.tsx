@@ -45,7 +45,7 @@ const Chapter3 = () => {
 				trigger: '.chapter3',
 				start: 'top center',
 				end: '+=600px',
-				toggleActions: 'play reverse resume reset',
+				toggleActions: 'play none resume reverse',
 			},
 		})
 		titleInTl.to(`.${styles.title}`, {
@@ -97,7 +97,7 @@ const Chapter3 = () => {
 		const line2Tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter3',
-				start: `top top`,
+				start: `top top+=200px`,
 				end: '+=1800px',
 				toggleActions: 'play none resume reverse',
 				onToggle: self => {
@@ -123,7 +123,7 @@ const Chapter3 = () => {
 		const line3Tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter3',
-				start: `top top-=1000px`,
+				start: `top top-=600px`,
 				end: '+=1000px',
 				toggleActions: 'play none resume reverse',
 				onToggle: self => {
@@ -132,6 +132,10 @@ const Chapter3 = () => {
 					}
 				},
 			},
+		})
+		line3Tl.to([`.${styles.line1}`, `.${styles.line2}`], {
+			duration: 0.75,
+			autoAlpha: 0.5,
 		})
 		line3Tl.to(`.${styles.line3}`, {
 			autoAlpha: 1,
