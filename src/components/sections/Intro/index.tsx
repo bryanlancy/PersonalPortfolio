@@ -14,7 +14,7 @@ import consoleEasterEgg from '@/utils/consoleEasterEgg'
 import styles from './Intro.module.scss'
 
 export default function Intro() {
-	consoleEasterEgg()
+	consoleEasterEgg({ debug: true })
 
 	const [currentTitle, setCurrentTitle] =
 		useState<string>('Software Engineer')

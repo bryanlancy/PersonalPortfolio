@@ -22,7 +22,7 @@ export function printAsciiArt(
 	targetWidth?: number,
 	fg?: string | string[]
 ): void {
-	const lines = getAsciiArt().split('\n')
+	const lines = getAsciiArt().lines
 	const normalized = normalizeLines(lines)
 	const uniform = padLinesToUniformWidth(normalized)
 	const width = targetWidth ?? DEFAULT_BLOCK_WIDTH
@@ -45,7 +45,7 @@ export function printAsciiArt(
  * Print a random "Hello!" ASCII greeting block.
  */
 export function printHello(targetWidth?: number, fg?: string | string[]): void {
-	const lines = getHelloArt().split('\n')
+	const lines = getHelloArt().lines
 	const normalized = normalizeLines(lines)
 	const uniform = padLinesToUniformWidth(normalized)
 	const width = targetWidth ?? DEFAULT_BLOCK_WIDTH
@@ -78,13 +78,13 @@ export function printAsciiAndHello(
 	const width = targetWidth ?? DEFAULT_BLOCK_WIDTH
 
 	// Build ASCII block (use provided raw to keep width consistent with precompute)
-	const asciiSource = (asciiRaw ?? getAsciiArt()).split('\n')
+	const asciiSource = asciiRaw?.split('\n') ?? getAsciiArt().lines
 	const asciiNormalized = normalizeLines(asciiSource)
 	const asciiUniform = padLinesToUniformWidth(asciiNormalized)
 	const asciiPadded = padLinesToWidth(asciiUniform, width, true)
 
 	// Build Hello block (use provided raw to keep width consistent with precompute)
-	const helloSource = (helloRaw ?? getHelloArt()).split('\n')
+	const helloSource = helloRaw?.split('\n') ?? getHelloArt().lines
 	const helloNormalized = normalizeLines(helloSource)
 	const helloUniform = padLinesToUniformWidth(helloNormalized)
 	const helloPadded = padLinesToWidth(helloUniform, width, true)
