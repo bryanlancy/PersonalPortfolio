@@ -80,10 +80,11 @@
 
 	display: flex;
 
-	> * {
-		border: 1px solid blue;
-	}
+	// > * {
+	// border: 1px solid blue;
+	// }
 	h2 {
+		font-size: 32px;
 		position: absolute;
 		left: 0;
 	}
