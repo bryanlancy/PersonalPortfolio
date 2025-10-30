@@ -12,6 +12,8 @@
  */
 
 import type { TechSection } from './text'
+import { getAsciiArt, getHelloArt } from './text'
+import { normalizeLines, padLinesToUniformWidth } from './format'
 import {
 	printAsciiArt,
 	printHello,
@@ -50,5 +52,37 @@ export default function consoleEasterEgg(): void {
 
 	printAsciiArt()
 	printHello()
-	printErrorAndTechOverview(techSections)
+	// Compute a unified target width across all blocks
+	const asciiUniform = padLinesToUniformWidth(
+		normalizeLines(getAsciiArt().split('\n'))
+	)
+	const helloUniform = padLinesToUniformWidth(
+		normalizeLines(getHelloArt().split('\n'))
+	)
+	const errorTechUniform = (() => {
+		const lines: string[] = []
+		const errorLines = [
+			'Saw an error and popped open DevTools?',
+			"If you spotted a bug, a broken animation, or something that looks off, I'd love to know!",
+			'Please reach out at bryanburns93@gmail.com — steps to reproduce and screenshots help a ton!',
+		]
+		lines.push(...errorLines)
+		lines.push('')
+		lines.push('Curious about the tech behind this site?')
+		techSections.forEach(section => {
+			lines.push(section.title)
+			section.items.forEach(item => lines.push('  - ' + item))
+		})
+		return padLinesToUniformWidth(normalizeLines(lines))
+	})()
+	const widths = [
+		...asciiUniform.map(l => l.length),
+		...helloUniform.map(l => l.length),
+		...errorTechUniform.map(l => l.length),
+	]
+	const targetWidth = widths.reduce((m, n) => (n > m ? n : m), 0)
+
+	printAsciiArt(targetWidth)
+	printHello(targetWidth)
+	printErrorAndTechOverview(techSections, targetWidth)
 }

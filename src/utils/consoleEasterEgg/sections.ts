@@ -18,11 +18,12 @@ import { logBlock, styles } from './styles'
 /**
  * Print the ASCII welcome block.
  */
-export function printAsciiArt(): void {
+export function printAsciiArt(targetWidth?: number): void {
 	const lines = getAsciiArt().split('\n')
 	const normalized = normalizeLines(lines)
 	const uniform = padLinesToUniformWidth(normalized)
-	const padded = padLinesToWidth(uniform, DEFAULT_BLOCK_WIDTH, true)
+	const width = targetWidth ?? DEFAULT_BLOCK_WIDTH
+	const padded = padLinesToWidth(uniform, width, true)
 	logBlock(padded, {
 		bg: styles.asciiBg,
 		fg: styles.asciiFg,
@@ -33,11 +34,12 @@ export function printAsciiArt(): void {
 /**
  * Print a random "Hello!" ASCII greeting block.
  */
-export function printHello(): void {
+export function printHello(targetWidth?: number): void {
 	const lines = getHelloArt().split('\n')
 	const normalized = normalizeLines(lines)
 	const uniform = padLinesToUniformWidth(normalized)
-	const padded = padLinesToWidth(uniform, DEFAULT_BLOCK_WIDTH, true)
+	const width = targetWidth ?? DEFAULT_BLOCK_WIDTH
+	const padded = padLinesToWidth(uniform, width, true)
 	logBlock(padded, {
 		bg: styles.asciiBg,
 		fg: styles.asciiFg,
@@ -124,7 +126,10 @@ export function printTechOverview(sections: TechSection[]): void {
  * - Email highlighted green inline
  * - Slightly tighter line-height for compactness
  */
-export function printErrorAndTechOverview(sections: TechSection[]): void {
+export function printErrorAndTechOverview(
+	sections: TechSection[],
+	targetWidth?: number
+): void {
 	const lines: string[] = []
 	const titleIndexes = new Set<number>()
 
@@ -151,7 +156,8 @@ export function printErrorAndTechOverview(sections: TechSection[]): void {
 
 	const normalized = normalizeLines(lines)
 	const uniform = padLinesToUniformWidth(normalized)
-	const padded = padLinesToWidth(uniform, DEFAULT_BLOCK_WIDTH)
+	const width = targetWidth ?? DEFAULT_BLOCK_WIDTH
+	const padded = padLinesToWidth(uniform, width)
 	logBlock(padded, {
 		bg: styles.sectionBg,
 		fg: styles.sectionFg,
