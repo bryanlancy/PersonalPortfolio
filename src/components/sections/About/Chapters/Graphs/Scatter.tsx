@@ -151,16 +151,14 @@ const Scatter = () => {
 			scrollTrigger: {
 				trigger: '.chapter3',
 				start: 'top center',
-				end: '+=100px',
+				end: '+=600px',
 				fastScrollEnd: true,
 				toggleActions: 'play complete none reverse',
 			},
 		})
 		scatterTransitionTl.to(`.${styles.scatter}`, {
 			ease: 'power1',
-
-			x: -80,
-			y: 320,
+			y: 160,
 		})
 	}, [points])
 
