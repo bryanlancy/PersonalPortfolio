@@ -21,11 +21,12 @@ gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger)
 const Chapter2 = () => {
 	const title = 'Early Tech Work'
 	const line1 = 'I began with building PCs and doing basic repairs.'
-	const line2 =
-		'In 2011, I started using spreadsheets at my first job and was fascinated by how much you could do with just formulas.'
+	const line2a = 'In 2011, I started using spreadsheets at my first job and'
+	const line2b = 'was fascinated by how much you could do with just formulas.'
 	const line3 = 'I automated nightly math tasks'
 	const line4 = 'learned some basics of data visualization'
 	const line5 = 'and later'
+	const containerScrollLength = 2800
 	const line1Offset = 600
 	const line2Offset = 1200
 	const line3Offset = 1800
@@ -46,7 +47,7 @@ const Chapter2 = () => {
 			scrollTrigger: {
 				trigger: '.c2-container',
 				start: 'top top',
-				end: '+=2800',
+				end: `+=${containerScrollLength}px`,
 				pin: true,
 			},
 		})
@@ -67,7 +68,7 @@ const Chapter2 = () => {
 			scrollTrigger: {
 				trigger: '.chapter2',
 				start: `top top-=${line1Offset}px`,
-				end: '+=1200px',
+				end: `+=${containerScrollLength - line1Offset + 400}px`,
 				toggleActions: 'play complete none reverse',
 				fastScrollEnd: true,
 				onToggle: self => {
@@ -87,7 +88,7 @@ const Chapter2 = () => {
 			scrollTrigger: {
 				trigger: '.chapter2',
 				start: `top top-=${line2Offset}px`,
-				end: '+=1000px',
+				end: `+=${containerScrollLength - line2Offset + 400}px`,
 				toggleActions: 'play complete none reverse',
 				fastScrollEnd: true,
 				onToggle: self => {
@@ -97,9 +98,12 @@ const Chapter2 = () => {
 				},
 			},
 		})
-		line2Tl.to(`.${styles.line2}`, {
+		line2Tl.to([`.${styles.line2a}`, `.${styles.line2b}`], {
 			autoAlpha: 1,
 			duration: 0.5,
+		})
+		line2Tl.to(`.${styles.line1}`, {
+			autoAlpha: 0.5,
 		})
 
 		// Line 3 Animation
@@ -107,7 +111,7 @@ const Chapter2 = () => {
 			scrollTrigger: {
 				trigger: '.chapter2',
 				start: `top top-=${line3Offset}px`,
-				end: '+=1200px',
+				end: `+=${containerScrollLength - line3Offset + 400}px`,
 				toggleActions: 'play complete none reverse',
 				fastScrollEnd: true,
 				onToggle: self => {
@@ -121,13 +125,16 @@ const Chapter2 = () => {
 			autoAlpha: 1,
 			duration: 0.5,
 		})
+		line3Tl.to([`.${styles.line2a}`, `.${styles.line2b}`], {
+			autoAlpha: 0.5,
+		})
 
 		// Line 4 Animation
 		const line4Tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter2',
 				start: `top top-=${line4Offset}px`,
-				end: '+=1200px',
+				end: `+=${containerScrollLength - line4Offset + 400}px`,
 				toggleActions: 'play complete none reverse',
 				fastScrollEnd: true,
 				onToggle: self => {
@@ -141,12 +148,16 @@ const Chapter2 = () => {
 			autoAlpha: 1,
 			duration: 0.5,
 		})
+		line4Tl.to(`.${styles.line3}`, {
+			autoAlpha: 0.5,
+		})
 
+		// Line 5 Animation
 		const line5Tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter2',
 				start: `top top-=${line5Offset + 400}px`,
-				end: '+=1200px',
+				end: `+=${containerScrollLength - line5Offset + 400}px`,
 				toggleActions: 'play complete none reverse',
 				fastScrollEnd: true,
 				onToggle: self => {
@@ -160,6 +171,11 @@ const Chapter2 = () => {
 			autoAlpha: 1,
 			duration: 0.5,
 		})
+		line5Tl.to(`.${styles.line4}`, {
+			autoAlpha: 0.5,
+		})
+
+		// Line 5 Transition Animation
 		const line5TransitionTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter2',
@@ -194,13 +210,23 @@ const Chapter2 = () => {
 						className={cn(styles.line, styles.line1)}>
 						<p>{line1}</p>
 					</TypeText>
+
 					<TypeText
 						shouldAnimate={showLine2State[0]}
-						text={line2}
+						text={line2a}
 						typeSpeed={0.015}
 						cursorLengthAdjust={4}
-						className={cn(styles.line, styles.line2)}>
-						<p>{line2}</p>
+						className={cn(styles.line, styles.line2a)}>
+						<p>{line2a}</p>
+					</TypeText>
+					<TypeText
+						shouldAnimate={showLine2State[0]}
+						text={line2b}
+						typeSpeed={0.015}
+						cursorLengthAdjust={4}
+						delay={1.5}
+						className={cn(styles.line, styles.line2b)}>
+						<p>{line2b}</p>
 					</TypeText>
 					<TypeText
 						shouldAnimate={showLine3State[0]}

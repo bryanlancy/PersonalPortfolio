@@ -34,8 +34,15 @@
 
 	@include autoAlpha;
 }
-.line2 {
+
+.line2a {
 	top: 240px;
+	left: 16px;
+
+	@include autoAlpha;
+}
+.line2b {
+	top: 264px;
 	left: 16px;
 
 	@include autoAlpha;
