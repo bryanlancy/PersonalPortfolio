@@ -15,14 +15,26 @@ import type { TechSection } from './text'
 import { getAsciiArt, getHelloArt } from './text'
 import { normalizeLines, padLinesToUniformWidth } from './format'
 import { printAsciiAndHello, printErrorAndTechOverview } from './sections'
-import { interpolateColors } from '../styles'
 
 let hasPrinted = false
 
+export interface ConsoleEasterEggOptions {
+	/** When true, always print regardless of environment. Defaults to false. */
+	debug?: boolean
+}
+
 /**
  * Print the full DevTools easter egg in the console.
+ *
+ * @param options - Optional configuration.
+ * @param options.debug - When true, always print regardless of environment. Defaults to false.
  */
-export default function consoleEasterEgg(): void {
+export default function consoleEasterEgg(
+	options: ConsoleEasterEggOptions = {}
+): void {
+	// Only run in production builds unless explicitly debugging
+	const { debug = false } = options
+	if (!debug && process.env.NODE_ENV !== 'production') return
 	if (hasPrinted) return
 	if (typeof window !== 'undefined') {
 		if ((window as any).__consoleEasterEggPrinted) return
