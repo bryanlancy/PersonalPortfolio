@@ -7,10 +7,15 @@ interface AsciiArt {
 }
 
 const DUCK_LINES: AsciiLines = [
-	'            __                  ',
-	'          <(o )___              ',
-	'           ( ._> /              ',
-	"            `---'               ",
+	'     __________                 ',
+	'   /  quack!  \\                ',
+	'  |  quack!!  |                 ',
+	'   \\__________/                ',
+	'                 \\             ',
+	'                      __        ',
+	'                    <(o )___    ',
+	'                     ( ._> /    ',
+	"                      `---'     ",
 	'                                ',
 	'  Welcome, curious developer!   ',
 ]
@@ -195,6 +200,36 @@ const BURGER_LINES: AsciiLines = [
 	'                                                                                                    ',
 ]
 
+const BURGER_COLORS = {
+	bunTop: '#e98d09',
+	lettuce: '#62a505',
+	tomato: '#cc1b01',
+	cheese: '#fac302',
+	meat: '#854c36',
+	bunBottom: '#b44900',
+}
+
+const SONIC_COLORS = {
+	blue: '#104797',
+	body: '#fdd3a8',
+	shoes: '#e20b15',
+}
+
+const GOKU_COLORS = {
+	hair: '#c6a536',
+	skin: '#ffdfbf',
+	gi: '#e36a00',
+	shoes: '#183c6c',
+}
+
+const DUCK_COLORS = {
+	duck: '#e3d800',
+	duck2: '#e36a00',
+	bubble: '#4cd9e6',
+	bubble2: '#4cb7e6',
+	text: '#104797',
+}
+
 /**
  * Console easter egg - static text content.
  *
@@ -210,19 +245,75 @@ const BURGER_LINES: AsciiLines = [
 export const ASCII_ARTS: AsciiArt[] = [
 	{
 		lines: DUCK_LINES,
-		color: interpolateColors('#e3d800', '#e36a00', DUCK_LINES.length),
+		color: interpolateColors(
+			[
+				DUCK_COLORS.bubble,
+				DUCK_COLORS.bubble,
+				DUCK_COLORS.bubble2,
+				DUCK_COLORS.duck,
+				DUCK_COLORS.duck2,
+				DUCK_COLORS.text,
+			],
+			DUCK_LINES.length
+		),
 	},
 	{
 		lines: GOKU_LINES,
-		color: interpolateColors('#183c6c', '#e36a00', GOKU_LINES.length),
+		color: interpolateColors(
+			[
+				GOKU_COLORS.hair,
+				GOKU_COLORS.hair,
+				GOKU_COLORS.hair,
+				GOKU_COLORS.skin,
+				GOKU_COLORS.gi,
+				GOKU_COLORS.gi,
+				GOKU_COLORS.gi,
+				GOKU_COLORS.shoes,
+				GOKU_COLORS.shoes,
+			],
+			GOKU_LINES.length
+		),
 	},
 	{
 		lines: SONIC_LINES,
-		color: interpolateColors('#104797', '#e20b15', SONIC_LINES.length),
+		color: interpolateColors(
+			[
+				SONIC_COLORS.blue,
+				SONIC_COLORS.blue,
+				SONIC_COLORS.blue,
+				SONIC_COLORS.body,
+				SONIC_COLORS.blue,
+				SONIC_COLORS.shoes,
+				SONIC_COLORS.shoes,
+				SONIC_COLORS.shoes,
+				SONIC_COLORS.shoes,
+			],
+			SONIC_LINES.length
+		),
 	},
 	{
 		lines: BURGER_LINES,
-		color: interpolateColors('#e98d09', '#b44900', BURGER_LINES.length),
+		color: interpolateColors(
+			[
+				BURGER_COLORS.bunTop,
+				BURGER_COLORS.bunTop,
+				BURGER_COLORS.bunTop,
+				BURGER_COLORS.bunTop,
+				BURGER_COLORS.lettuce,
+				BURGER_COLORS.tomato,
+				BURGER_COLORS.cheese,
+				BURGER_COLORS.meat,
+				BURGER_COLORS.meat,
+				BURGER_COLORS.bunBottom,
+				BURGER_COLORS.bunBottom,
+				BURGER_COLORS.bunBottom,
+				BURGER_COLORS.bunBottom,
+				BURGER_COLORS.bunBottom,
+				BURGER_COLORS.bunBottom,
+				BURGER_COLORS.bunBottom,
+			],
+			BURGER_LINES.length
+		),
 	},
 ]
 
@@ -271,15 +362,15 @@ const HELLO3_LINES: AsciiLines = [
 export const HELLO_ARTS: AsciiArt[] = [
 	{
 		lines: HELLO1_LINES,
-		color: interpolateColors('#5bdede', '#2dc298', HELLO1_LINES.length),
+		color: interpolateColors(['#5bdede', '#2dc298'], HELLO1_LINES.length),
 	},
 	{
 		lines: HELLO2_LINES,
-		color: interpolateColors('#c9a022', '#b00c0c', HELLO2_LINES.length),
+		color: interpolateColors(['#c9a022', '#b00c0c'], HELLO2_LINES.length),
 	},
 	{
 		lines: HELLO3_LINES,
-		color: interpolateColors('#2239c9', '#c22d2d', HELLO3_LINES.length),
+		color: interpolateColors(['#2239c9', '#c22d2d'], HELLO3_LINES.length),
 	},
 ]
 
