@@ -2,6 +2,7 @@ import React, { FC, MutableRefObject, SVGProps, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import SplitText from 'gsap/SplitText'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@awesome.me/kit-ddd907bdb7/icons/classic/regular'
 
@@ -17,7 +18,7 @@ import { cn } from '@/utils/react'
 import styles from './TwoBeeks.module.scss'
 import { NoSsr } from '@/utils/next'
 
-gsap.registerPlugin(useGSAP, ScrollTrigger)
+gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText)
 
 interface TwoBeeksBannerProps {}
 
@@ -83,46 +84,167 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 	]
 
 	useGSAP(() => {
-		// Large Pic Animation
-		const picLargeTl = gsap.timeline({
+		const logoTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.TwoBeeksContainer',
-				start: 'top center',
+				start: 'top center-=50px',
 				end: '+=100px',
 				fastScrollEnd: true,
-				toggleActions: 'play complete none reverse',
+				toggleActions: 'play none none reverse',
 			},
 		})
-		picLargeTl.to(`.${styles.picLarge}`, {
+		logoTl.to(`.${styles.logo}`, {
+			autoAlpha: 1,
+			y: 0,
+			ease: 'elastic',
+			duration: 0.5,
+		})
+
+		const picTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.TwoBeeksContainer',
+				start: 'top center-=50px',
+				end: '+=100px',
+				fastScrollEnd: true,
+				toggleActions: 'play none none reverse',
+				onEnter: () => {
+					picTl.timeScale(1).reversed(false)
+				},
+				onLeaveBack: () => {
+					picTl.timeScale(5).reversed(true)
+				},
+			},
+		})
+		// Large Pic Animation
+		picTl.to(`.${styles.picLarge}`, {
 			autoAlpha: 1,
 		})
 
 		// Small Pic 1 Animation
-		const picSmall1Tl = gsap.timeline({
-			scrollTrigger: {
-				trigger: '.TwoBeeksContainer',
-				start: 'top center',
-				end: '+=100px',
-				fastScrollEnd: true,
-				toggleActions: 'play complete none reverse',
-			},
-		})
-		picSmall1Tl.to(`.${styles.picSmall1}`, {
+		picTl.to(`.${styles.picSmall1}`, {
 			autoAlpha: 1,
-			delay: 0.33,
+			delay: 2,
 		})
 
 		// Small Pic 2 Animation
-		const picSmall2Tl = gsap.timeline({
+		picTl.to(`.${styles.picSmall2}`, { autoAlpha: 1, delay: 2.5 })
+
+		// Button Animation
+		picTl.to(`.${styles.button}`, { autoAlpha: 1, delay: 2 })
+
+		// Line 1 Animation
+		const textTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.TwoBeeksContainer',
-				start: 'top center',
-				end: '+=100px',
+				start: 'top center+=100px',
+				end: '+=400px',
 				fastScrollEnd: true,
-				toggleActions: 'play complete none reverse',
+				toggleActions: 'play none none reverse',
+				onEnter: () => {
+					textTl.timeScale(1).reversed(false)
+				},
+				onLeaveBack: () => {
+					textTl.timeScale(7).reversed(true)
+				},
 			},
 		})
-		picSmall2Tl.to(`.${styles.picSmall2}`, { autoAlpha: 1, delay: 0.66 })
+
+		textTl.to(`.${styles.line1}`, { autoAlpha: 1, scaleX: 1 })
+		SplitText.create(`.${styles.line1}`, {
+			type: 'words',
+			onSplit: ({ words }) => {
+				for (let i = 0; i < words.length; i++) {
+					textTl.to(
+						words[i],
+						{
+							color: '#000',
+						},
+						i * 0.075
+					)
+				}
+			},
+		})
+		textTl.to(
+			`.${styles.apiaryText}`,
+			{ borderBottom: '1px solid #000' },
+			'>-.5'
+		)
+		textTl.to(`.${styles.apiaryText} svg`, { color: '#000' }, '>-.5')
+
+		// Line 2 Animation
+		textTl.to(`.${styles.line2}`, { autoAlpha: 1, scaleY: 1 })
+		SplitText.create(`.${styles.line2}`, {
+			type: 'words',
+			onSplit: ({ words }) => {
+				textTl.to(
+					words,
+					{
+						color: '#000',
+						stagger: 0.1,
+					},
+					'<'
+				)
+			},
+		})
+
+		// Line 3 Animation
+		textTl.to(`.${styles.line3}`, { autoAlpha: 1, scaleY: 1, delay: 0.9 })
+		SplitText.create(`.${styles.line3}`, {
+			type: 'words',
+			onSplit: ({ words }) => {
+				textTl.to(
+					words,
+					{
+						color: '#000',
+						stagger: 0.1,
+					},
+					'<'
+				)
+			},
+		})
+		// Line 4 Animation
+		textTl.to(`.${styles.line4}`, { autoAlpha: 1, scaleY: 1, delay: 0.8 })
+		SplitText.create(`.${styles.line4}`, {
+			type: 'words',
+			onSplit: ({ words }) => {
+				textTl.to(
+					words,
+					{
+						color: '#000',
+						stagger: 0.1,
+					},
+					'<'
+				)
+			},
+		})
+		// Line 5 & 6 Animation
+		textTl.to(`.${styles.line5}`, { autoAlpha: 1, scaleX: 1, delay: 1.5 })
+		SplitText.create(`.${styles.line5}`, {
+			type: 'words',
+			onSplit: ({ words }) => {
+				textTl.to(
+					words,
+					{
+						color: '#000',
+						stagger: 0.1,
+					},
+					'<'
+				)
+			},
+		})
+		textTl.to(`.${styles.line6}`, {
+			autoAlpha: 1,
+			color: '#000',
+			translateY: 0,
+			delay: 1.1,
+		})
+		textTl.to(`.${styles.line5}`, { borderBottomRightRadius: 0 }, '<')
+		SplitText.create(`.${styles.line6}`, {
+			type: 'words',
+			onSplit: ({ words }) => {
+				textTl.to(words, { color: '#000', y: 0, stagger: 0.1 }, '<')
+			},
+		})
 	}, [])
 
 	return (
@@ -163,22 +285,6 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 				<div className={styles.group4}>
 					<p className={cn(styles.line, styles.line4)}>{line4}</p>
 					<div className={styles.rightCol}>
-						<div className={styles.buttons}>
-							{/* <HexButton
-							variant='dark'
-							className={cn(styles.button, styles.figma)}
-							href=''
-							target='_blank'>
-							Figma Design
-						</HexButton> */}
-							<HexButton
-								variant='dark'
-								className={cn(styles.button, styles.website)}
-								href='https://2beeks.com/'
-								target='_blank'>
-								Website
-							</HexButton>
-						</div>
 						<div className={styles.group5}>
 							<p className={cn(styles.line, styles.line5)}>
 								{line5}
@@ -188,6 +294,22 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 							</p>
 						</div>
 					</div>
+				</div>
+				<div className={styles.buttons}>
+					{/* <HexButton
+							variant='dark'
+							className={cn(styles.button, styles.figma)}
+							href=''
+							target='_blank'>
+							Figma Design
+						</HexButton> */}
+					<HexButton
+						variant='dark'
+						className={cn(styles.button, styles.website)}
+						href='https://2beeks.com/'
+						target='_blank'>
+						Website
+					</HexButton>
 				</div>
 			</Container>
 

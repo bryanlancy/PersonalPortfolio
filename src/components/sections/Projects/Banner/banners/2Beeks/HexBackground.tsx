@@ -1,8 +1,38 @@
 import { cn } from '@/utils/react'
 
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
 import styles from './HexBackground.module.scss'
 
+gsap.registerPlugin(useGSAP, ScrollTrigger)
+
 const HexBackground = () => {
+	useGSAP(() => {
+		const backgroundTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.TwoBeeksContainer',
+				start: 'top center+=200px',
+				end: '+=400px',
+				toggleActions: 'play none none reverse',
+				onEnter: () => {
+					backgroundTl.timeScale(1).reversed(false)
+				},
+				onLeaveBack: () => {
+					backgroundTl.timeScale(5).reversed(true)
+				},
+			},
+		})
+		backgroundTl.to('.TwoBeeksContainer', {
+			backgroundColor: '#fce300',
+		})
+		backgroundTl.to(`.${styles.hexagon}`, {
+			autoAlpha: 1,
+			stagger: 0.1,
+		})
+	})
+
 	return (
 		<div className={styles.hexContainer}>
 			<div className={cn(styles.hexagon, styles.hex2)}>

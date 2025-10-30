@@ -8,7 +8,7 @@ $accent-color-3: #ffb800;
 
 .background {
 	position: relative;
-	background-color: $primary-color;
+	background-color: #fff;
 }
 .logo {
 	position: absolute;
@@ -17,6 +17,9 @@ $accent-color-3: #ffb800;
 	z-index: 1;
 
 	width: 200px;
+
+	@include autoAlpha;
+	transform: translateY(40px);
 }
 .swarm {
 	position: absolute;
@@ -34,9 +37,12 @@ $accent-color-3: #ffb800;
 	text-align: left;
 
 	background-color: rgba($accent-color-3, 0.9);
+	color: rgba($accent-color-3, 0.9);
 	border-radius: 4px;
 
 	padding: 4px;
+
+	@include autoAlpha;
 
 	&.line1 {
 		display: flex;
@@ -44,33 +50,54 @@ $accent-color-3: #ffb800;
 
 		top: 80px;
 		left: 24px;
+
+		transform: scaleX(0);
+		transform-origin: left center;
 	}
 	&.line2 {
 		top: 136px;
 		left: 24px;
 		width: 240px;
+
+		transform: scaleY(0);
+		transform-origin: top center;
 	}
 	&.line3 {
 		top: 264px;
 		left: 24px;
 		width: 240px;
+
+		transform: scaleY(0);
+		transform-origin: top center;
 	}
 	&.line4 {
 		position: relative;
 
 		width: 280px;
+
+		transform: scaleY(0);
+		transform-origin: top center;
 	}
 	&.line5 {
 		position: relative;
+		z-index: 1;
 
 		text-align: right;
-		border-bottom-right-radius: 0;
+
+		transform: scaleX(0);
+		transform-origin: right center;
 	}
 	&.line6 {
 		position: relative;
+		z-index: 0;
 		border-top: none;
 		border-top-left-radius: 0;
 		border-top-right-radius: 0;
+
+		transform: translateY(-100%);
+		> div {
+			transform: translateY(-100%);
+		}
 	}
 }
 .group4 {
@@ -95,21 +122,10 @@ $accent-color-3: #ffb800;
 		align-items: flex-end;
 	}
 }
-
-.apiaryText {
-	display: flex;
-	align-items: center;
-	gap: 2px;
-
-	border-bottom: 1px solid #000;
-	cursor: help;
-
-	.magnifier {
-		margin-bottom: 2px;
-		font-size: 12px;
-	}
-}
 .buttons {
+	position: absolute;
+	bottom: 144px;
+	right: 24px;
 	z-index: 1;
 
 	display: flex;
@@ -120,6 +136,21 @@ $accent-color-3: #ffb800;
 		font-weight: 700;
 		letter-spacing: 0.5px;
 		font-size: 16px;
+
+		@include autoAlpha;
+	}
+}
+.apiaryText {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+
+	// border-bottom: 1px solid #000;
+	cursor: help;
+
+	.magnifier {
+		margin-bottom: 2px;
+		font-size: 12px;
 	}
 }
 
