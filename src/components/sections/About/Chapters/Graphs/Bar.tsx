@@ -35,7 +35,7 @@ const Bar = () => {
 		})
 		mainBarTl.to(`.${styles.barContainer}`, {
 			duration: 0.1,
-			autoAlpha: 0,
+			autoAlpha: 1,
 		})
 		mainBarTl.to(`.${styles.main} > .${styles.bar}`, {
 			scale: 1,
