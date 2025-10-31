@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useEffect, useState, ReactNode, RefObject } from 'react'
+import { useRef, useEffect, useState, ReactNode } from 'react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { cn } from '@/utils/react'
 import { useViewportVisibility } from '@/hooks/useViewportVisibility'
@@ -64,9 +64,10 @@ export default function ViewportChapter({
 	return (
 		<div
 			ref={wrapperRef}
-			className={cn(styles.viewportChapter, className, {
-				[styles.hidden]: isHidden,
-			})}
+			className={cn(styles.viewportChapter, className, [
+				isHidden,
+				styles.hidden,
+			])}
 			style={{
 				visibility: isHidden ? 'hidden' : 'visible',
 				pointerEvents: isHidden ? 'none' : 'auto',
@@ -75,4 +76,3 @@ export default function ViewportChapter({
 		</div>
 	)
 }
-
