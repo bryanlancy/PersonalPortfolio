@@ -1,7 +1,5 @@
 import { forwardRef, useImperativeHandle } from 'react'
 
-import { cn } from '@/utils/react'
-
 export interface CircularImageProps {
 	imageUrl: string
 	className?: string
