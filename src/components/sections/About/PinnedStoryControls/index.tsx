@@ -14,6 +14,7 @@ import ShowHide from './ShowHide'
 import styles from './PinnedStoryControls.module.scss'
 import {
 	faPlay,
+	faLeftLongToLine,
 	faRightLongToLine,
 } from '@awesome.me/kit-ddd907bdb7/icons/classic/solid'
 
@@ -41,6 +42,13 @@ const StoryControls = ({ className }: StoryControlsProps) => {
 			duration: 90,
 			ease: 'none',
 			scrollTo: { y: '#projects', autoKill: true },
+		})
+	})
+
+	const backToTop = contextSafe(() => {
+		gsap.to(window, {
+			duration: 0,
+			scrollTo: { y: 0, autoKill: true },
 		})
 	})
 
@@ -108,6 +116,10 @@ const StoryControls = ({ className }: StoryControlsProps) => {
 				<ShowHide isCollapsed={isCollapsed} onToggle={toggleCollapse} />
 				<div ref={controlsRef} className={styles.storyControls}>
 					<div ref={buttonsRef} className={styles.buttons}>
+						<button onClick={backToTop} className={styles.top}>
+							<FontAwesomeIcon icon={faLeftLongToLine} />
+							Back to Top
+						</button>
 						<button className={styles.auto} onClick={handleAuto}>
 							<FontAwesomeIcon icon={faPlay} />
 							Play Story

@@ -5,12 +5,12 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import SplitText from 'gsap/SplitText'
 import { Bebas_Neue } from 'next/font/google'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { cn } from '@/utils/react'
 
 import styles from './ShowHide.module.scss'
-import { faArrowUp } from '@awesome.me/kit-ddd907bdb7/icons/sharp-duotone/solid'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowUp } from '@awesome.me/kit-ddd907bdb7/icons/classic/solid'
 
 gsap.registerPlugin(useGSAP, SplitText)
 

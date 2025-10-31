@@ -97,3 +97,17 @@
 		color: #ff8e8e;
 	}
 }
+
+.top {
+	background-color: #7ecbff; // light blue
+
+	&:hover {
+		background-color: #a6dcff;
+		transform: scale(1.05);
+		box-shadow: 0 8px 25px rgba(126, 203, 255, 0.4);
+	}
+
+	span {
+		color: #006bb3;
+	}
+}
