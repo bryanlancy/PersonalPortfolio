@@ -99,15 +99,15 @@
 }
 
 .top {
-	background-color: #f6e27a; // soft yellow
+	background-color: #7ecbff; // light blue
 
 	&:hover {
-		background-color: #f8ea9a;
+		background-color: #a6dcff;
 		transform: scale(1.05);
-		box-shadow: 0 8px 25px rgba(246, 226, 122, 0.4);
+		box-shadow: 0 8px 25px rgba(126, 203, 255, 0.4);
 	}
 
 	span {
-		color: #c8a800;
+		color: #006bb3;
 	}
 }
