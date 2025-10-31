@@ -1,9 +1,5 @@
 import { forwardRef, useImperativeHandle } from 'react'
 
-import { cn } from '@/utils/react'
-
-import styles from './CircularImage.module.scss'
-
 export interface CircularImageProps {
 	imageUrl: string
 	className?: string
@@ -131,7 +127,7 @@ function CircularImage(
 	)
 
 	return (
-		<g className={cn(styles.circularImage, className)}>
+		<g className={className}>
 			<defs>
 				<clipPath
 					id={`imageClip-${imageUrl.replace(/[^a-zA-Z0-9]/g, '')}`}>
@@ -142,7 +138,6 @@ function CircularImage(
 			{/* Circular path surrounding the image */}
 			<path
 				d={getPathData(1.1)}
-				className={styles.circularPath}
 				fill='none'
 				stroke='currentColor'
 				strokeWidth='2'
@@ -160,7 +155,6 @@ function CircularImage(
 					/[^a-zA-Z0-9]/g,
 					''
 				)})`}
-				className={styles.imageCircle}
 			/>
 		</g>
 	)

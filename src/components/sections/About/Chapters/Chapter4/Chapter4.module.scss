@@ -16,13 +16,25 @@
 
 .title {
 	position: absolute;
-	top: 24px;
-	left: 24px;
+	top: 12px;
+	left: 12px;
 
 	word-wrap: normal;
 
 	text-align: left;
-	width: 120px;
+	width: 90px;
+
+	@include tablet {
+		top: 18px;
+		left: 18px;
+		width: 110px;
+	}
+
+	@include laptop {
+		top: 24px;
+		left: 24px;
+		width: 120px;
+	}
 }
 
 .house {
@@ -30,10 +42,20 @@
 	top: 65%;
 	left: 50%;
 
-	height: 600px;
-	width: 600px;
+	height: 300px;
+	width: 300px;
 
 	transform: translate(-50%, -50%);
+
+	@include tablet {
+		height: 450px;
+		width: 450px;
+	}
+
+	@include laptop {
+		height: 600px;
+		width: 600px;
+	}
 }
 
 .houseContainer {

@@ -14,3 +14,5 @@ export const useDebounce: (
 		}, timeout)
 	}
 }
+
+export { usePerformanceMode, type PerformanceMode } from './usePerformanceMode'

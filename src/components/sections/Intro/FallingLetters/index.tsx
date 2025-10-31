@@ -2,16 +2,17 @@
 import { useRef, useState, useEffect, memo } from 'react'
 import { gsap } from 'gsap'
 import { SplitText } from 'gsap/SplitText'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 
 import { cn } from '@/utils/react'
 import { colorRotator } from '@/utils/styles'
 
 import styles from './FallingLetters.module.scss'
-import { calculateTextRepetitions, toCamelCase } from '@/utils/general'
+import { calculateCharacterRepetitions, toCamelCase } from '@/utils/general'
 
 // Register SplitText plugin
-gsap.registerPlugin(useGSAP, SplitText)
+gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger)
 
 interface FallingLetterComponent {
 	id: string
@@ -43,15 +44,23 @@ const FallingLetterComponent = memo(function FallingLetterComponent({
 	const containerRef = useRef<HTMLDivElement>(null)
 	const titleRef = useRef<HTMLHeadingElement>(null)
 
+	const splitTextRef = useRef<SplitText | null>(null)
 	const { contextSafe } = useGSAP({ dependencies: [title, id] })
 
 	const animateText = contextSafe(() => {
-		return SplitText.create(`.introTitle-${id}`, {
+		// Clean up previous SplitText instance if it exists
+		if (splitTextRef.current) {
+			splitTextRef.current.revert()
+			splitTextRef.current = null
+		}
+
+		const splitText = SplitText.create(`.introTitle-${id}`, {
 			type: 'chars',
 			autoSplit: true,
 			onSplit: ({ chars }) => {
 				// Clone each character multiple times with staggered positions
-				const clonesPerChar = 7 // Number of clones per character
+				// Reduced from 7 to 4 for better CPU performance
+				const clonesPerChar = 4 // Number of clones per character
 				const clonedChars: HTMLElement[] = []
 				const textTl = gsap.timeline({
 					scrollTrigger: {
@@ -89,9 +98,10 @@ const FallingLetterComponent = memo(function FallingLetterComponent({
 					}
 				})
 
-				// Stagger the animation start times for each character group
-				const stagger = 0.5
-				const cloneStagger = 0.7 // Stagger between clones of the same character
+				// Responsive stagger values - smaller on mobile for better visibility
+				const width = window.innerWidth
+				const stagger = width < 600 ? 0.35 : width < 950 ? 0.35 : 0.5
+				const cloneStagger = width < 600 ? 0.5 : width < 950 ? 0.5 : 0.7
 
 				clonedChars.forEach((char, index) => {
 					const charGroup = Math.floor(index / clonesPerChar)
@@ -111,31 +121,53 @@ const FallingLetterComponent = memo(function FallingLetterComponent({
 						delay
 					)
 
+					// Responsive duration - longer on mobile to reduce spacing
+					const duration = width < 600 ? 12 : width < 950 ? 10 : 9
+
 					textTl.to(
 						char,
 						{
 							y: window.innerHeight + 200,
 							scale: 0.5,
 							autoAlpha: 0,
-							duration: 9,
+							duration: duration,
 							delay: delay,
 							ease: 'none',
+							// Force GPU acceleration for better performance
+							force3D: true,
 						},
 						delay + 0.5
 					)
 				})
 			},
 		})
+
+		splitTextRef.current = splitText
+		return splitText
 	})
 
 	useGSAP(() => {
 		animateText()
+		// Cleanup function to kill animation on unmount/change
+		return () => {
+			if (splitTextRef.current) {
+				splitTextRef.current.revert()
+				splitTextRef.current = null
+			}
+		}
 	}, [title, id])
+
+	// Calculate responsive char width based on screen size
+	const getCharWidth = () => {
+		if (window.innerWidth < 600) return 30 // Mobile
+		if (window.innerWidth < 950) return 45 // Tablet
+		return 60 // Desktop
+	}
 
 	return (
 		<div ref={containerRef} className={styles.fallingLetters}>
 			<h1 ref={titleRef} className={cn(styles.title, `introTitle-${id}`)}>
-				{calculateTextRepetitions(title, 60, window.innerWidth - 100)}
+				{calculateCharacterRepetitions(title, getCharWidth(), window.innerWidth)}
 			</h1>
 		</div>
 	)

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 
@@ -16,6 +16,33 @@ import styles from './MouseEffects.module.scss'
 
 gsap.registerPlugin(useGSAP)
 
+// Hook to track window width for responsive positioning
+const useResponsivePosition = () => {
+	const [position, setPosition] = useState({ x: 300, y: 600 })
+
+	useEffect(() => {
+		const updatePosition = () => {
+			const width = window.innerWidth
+			if (width < 950) {
+				// Mobile and Tablet: bottom left with offset from edges
+				// Previous: x = 120, y = window.innerHeight - 80
+				// Adding 12px left (more padding): x = 120 + 12 = 132
+				// Adding 40px bottom, then additional 16px: y = window.innerHeight - 80 - 40 - 16 = window.innerHeight - 136
+				setPosition({ x: 132, y: window.innerHeight - 136 })
+			} else {
+				// Laptop and larger: center-right (original position)
+				setPosition({ x: 300, y: 600 })
+			}
+		}
+
+		updatePosition()
+		window.addEventListener('resize', updatePosition)
+		return () => window.removeEventListener('resize', updatePosition)
+	}, [])
+
+	return position
+}
+
 /**
  * MouseTrail component that creates an animated trail following the mouse cursor
  * within an SVG element. The trail automatically returns to specified home position(s)
@@ -27,6 +54,7 @@ function MouseTrail({
 	debug = false,
 }: MouseTrailProps) {
 	const circularImageRef = useRef<CircularImageRef>(null)
+	const { x, y } = useResponsivePosition()
 
 	// Get path data from circular image ref
 	const getCircularPathData = (): string | undefined => {
@@ -94,8 +122,8 @@ function MouseTrail({
 					`?s=${circleRadius * 2}` // Size of the image
 				}
 				radius={circleRadius}
-				x={300}
-				y={600}
+				x={x}
+				y={y}
 				className={styles.circularImage}
 			/>
 			<FireworksList

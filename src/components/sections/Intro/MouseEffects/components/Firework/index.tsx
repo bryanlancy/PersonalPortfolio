@@ -29,8 +29,8 @@ function Firework({ onComplete, className }: FireworkProps) {
 	 */
 	const generateParticles = () => {
 		const particles = []
-		// Reduced particle count for better performance
-		const particleCount = 8 + Math.floor(Math.random() * 4) // 8-11 particles
+		// Further reduced particle count for better CPU performance
+		const particleCount = 6 + Math.floor(Math.random() * 3) // 6-8 particles
 
 		for (let i = 0; i < particleCount; i++) {
 			const angle =
@@ -109,6 +109,7 @@ function Firework({ onComplete, className }: FireworkProps) {
 						scale: 1,
 						duration: 0.3,
 						ease: 'back.out(1.7)',
+						force3D: true, // Force GPU acceleration
 					},
 					delay
 				)
@@ -117,6 +118,7 @@ function Firework({ onComplete, className }: FireworkProps) {
 						{
 							attr: { cy: `+=48` },
 							duration: 0.6, // Reduced duration for better performance
+							force3D: true, // Force GPU acceleration
 						},
 						0.4 + delay
 					)
@@ -127,6 +129,7 @@ function Firework({ onComplete, className }: FireworkProps) {
 							scale: 0.3,
 							duration: 0.4, // Faster fade out
 							ease: 'power2.out',
+							force3D: true, // Force GPU acceleration
 						},
 						'<'
 					)

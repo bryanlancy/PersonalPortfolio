@@ -11,4 +11,8 @@
 
 	// Visual
 	filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+
+	// GPU acceleration for particle animations
+	will-change: transform, opacity;
+	transform: translateZ(0);
 }

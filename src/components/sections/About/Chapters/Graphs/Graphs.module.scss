@@ -2,26 +2,49 @@
 
 .graphs {
 	position: fixed;
-	top: 480px;
-	left: 16px;
+	top: 300px;
+	left: 8px;
 	z-index: 101; // Needs to be on top of spreadsheet for animation
 
-	width: 50%;
-	height: 400px;
+	width: 95%;
+	height: 250px;
 
 	@include autoAlpha;
+
+	@include tablet {
+		top: 400px;
+		left: 12px;
+		width: 65%;
+		height: 350px;
+	}
+
+	@include laptop {
+		top: 480px;
+		left: 16px;
+		width: 50%;
+		height: 400px;
+	}
 }
 
 .barContainer {
 	position: absolute;
 	bottom: 0;
-	right: -40px;
+	right: -20px;
 	z-index: 1;
 
-	width: 400px;
-	// height: 100%;
+	width: 200px;
 
 	@include autoAlpha;
+
+	@include tablet {
+		right: -30px;
+		width: 300px;
+	}
+
+	@include laptop {
+		right: -40px;
+		width: 400px;
+	}
 
 	.bar {
 		width: 10px;
@@ -89,13 +112,21 @@
 	top: 0;
 	left: 0;
 
-	width: 400px;
+	width: 200px;
 	height: 100%;
 
 	fill: none;
 	stroke-width: 2.5px;
 
 	@include autoAlpha;
+
+	@include tablet {
+		width: 300px;
+	}
+
+	@include laptop {
+		width: 400px;
+	}
 
 	.circle {
 		&1 {
@@ -112,12 +143,22 @@
 .scatter {
 	position: absolute;
 	bottom: 60%;
-	left: 400px;
+	left: 200px;
 
-	width: 400px;
+	width: 200px;
 	height: 100%;
 
 	@include autoAlpha;
+
+	@include tablet {
+		left: 300px;
+		width: 300px;
+	}
+
+	@include laptop {
+		left: 400px;
+		width: 400px;
+	}
 
 	> svg {
 		width: 100%;

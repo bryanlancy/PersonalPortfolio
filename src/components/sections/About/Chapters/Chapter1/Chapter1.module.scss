@@ -55,21 +55,44 @@
 	position: absolute;
 	top: 35%;
 
-	$padding: 20%;
-
 	@include autoAlpha;
 
 	&.line1 {
-		right: $padding;
+		right: 10%;
 	}
 	&.line2 {
-		left: $padding;
+		left: 10%;
 		text-align: left;
-
-		width: 240px;
+		width: 180px;
 	}
 	&.line3 {
-		right: $padding;
+		right: 10%;
+	}
+
+	@include tablet {
+		&.line1 {
+			right: 15%;
+		}
+		&.line2 {
+			left: 15%;
+			width: 220px;
+		}
+		&.line3 {
+			right: 15%;
+		}
+	}
+
+	@include laptop {
+		&.line1 {
+			right: 20%;
+		}
+		&.line2 {
+			left: 20%;
+			width: 240px;
+		}
+		&.line3 {
+			right: 20%;
+		}
 	}
 }
 

@@ -2,11 +2,11 @@
 
 .spreadsheet {
 	position: fixed;
-	top: 240px;
-	right: 8px;
+	top: 150px;
+	right: 4px;
 
-	width: 544px;
-	height: 70vh;
+	width: 95%;
+	height: 60vh;
 	z-index: 100; // Needs to be under graph(101) for animation
 
 	--spreadsheet-radius: 8px;
@@ -14,6 +14,21 @@
 	box-shadow: -4px 4px 12px 0px #0008;
 
 	@include autoAlpha;
+
+	@include tablet {
+		top: 200px;
+		right: 6px;
+		width: 75%;
+		height: 65vh;
+	}
+
+	@include laptop {
+		top: 240px;
+		right: 8px;
+		width: 544px;
+		height: 70vh;
+	}
+
 	table {
 		width: 100%;
 		height: 100%;
