@@ -66,8 +66,8 @@ export default function Background({}) {
 					src='/assets/walkons/walkons.jpg'
 					alt='walkons restaurant'
 					priority
-					width={800}
-					height={500}
+					fill
+					sizes='40vw'
 					className={styles.image}
 				/>
 			</div>
