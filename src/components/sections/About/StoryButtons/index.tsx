@@ -5,21 +5,13 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { SplitText } from 'gsap/SplitText'
-import { Bebas_Neue } from 'next/font/google'
 
 import CelebrationElements from './CelebrationElements'
 import DiscouragingElements from './DiscouragingElements'
-import { cn } from '@/utils/react'
 
 import styles from './StoryButtons.module.scss'
 
 gsap.registerPlugin(useGSAP, ScrollToPlugin, SplitText)
-
-const bebasNeue = Bebas_Neue({
-	subsets: ['latin'],
-	weight: '400',
-	variable: '--font-bebas',
-})
 
 const StoryButtons = () => {
 	const containerRef = useRef<HTMLDivElement>(null)
@@ -91,7 +83,7 @@ const StoryButtons = () => {
 		<div
 			id='storyButtons'
 			ref={containerRef}
-			className={cn(styles.storyControls, bebasNeue.className)}>
+			className={styles.storyControls}>
 			<div className={styles.keepScrolling}>
 				<h1>Keep scrolling to go at your own pace</h1>
 				<h2>or</h2>

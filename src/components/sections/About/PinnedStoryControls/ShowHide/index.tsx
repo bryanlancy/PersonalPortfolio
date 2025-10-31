@@ -4,7 +4,6 @@ import { useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import SplitText from 'gsap/SplitText'
-import { Bebas_Neue } from 'next/font/google'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { cn } from '@/utils/react'
@@ -13,12 +12,6 @@ import styles from './ShowHide.module.scss'
 import { faArrowUp } from '@awesome.me/kit-ddd907bdb7/icons/classic/solid'
 
 gsap.registerPlugin(useGSAP, SplitText)
-
-const bebasNeue = Bebas_Neue({
-	subsets: ['latin'],
-	weight: '400',
-	variable: '--font-bebas',
-})
 
 interface ShowHideProps {
 	isCollapsed: boolean
@@ -90,11 +83,7 @@ const ShowHide = ({ isCollapsed, onToggle, className }: ShowHideProps) => {
 	return (
 		<button
 			ref={buttonRef}
-			className={cn(
-				styles.showHideButton,
-				bebasNeue.className,
-				className
-			)}
+			className={cn(styles.showHideButton, className)}
 			onClick={onToggle}
 			aria-label={isCollapsed ? 'Expand controls' : 'Collapse controls'}>
 			<span className={cn(styles.buttonText, styles.show)}>Show</span>

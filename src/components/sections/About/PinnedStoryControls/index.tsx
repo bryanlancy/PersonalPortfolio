@@ -5,7 +5,6 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Bebas_Neue } from 'next/font/google'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { cn } from '@/utils/react'
@@ -19,12 +18,6 @@ import {
 } from '@awesome.me/kit-ddd907bdb7/icons/classic/solid'
 
 gsap.registerPlugin(useGSAP, ScrollToPlugin, ScrollTrigger)
-
-const bebasNeue = Bebas_Neue({
-	subsets: ['latin'],
-	weight: '400',
-	variable: '--font-bebas',
-})
 
 interface StoryControlsProps {
 	className?: string
@@ -106,12 +99,7 @@ const StoryControls = ({ className }: StoryControlsProps) => {
 	}, [])
 
 	return (
-		<div
-			className={cn(
-				styles.storyControlsContainer,
-				bebasNeue.className,
-				className
-			)}>
+		<div className={cn(styles.storyControlsContainer, className)}>
 			<div className={styles.storyControlsWrapper}>
 				<ShowHide isCollapsed={isCollapsed} onToggle={toggleCollapse} />
 				<div ref={controlsRef} className={styles.storyControls}>
