@@ -4,7 +4,6 @@ import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import { cn } from '@/utils/react'
-import { useScrollTriggerPause } from '@/hooks'
 import Calendar from './Calendar'
 import Projects from './Projects'
 
@@ -15,9 +14,6 @@ gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const Chapter6 = () => {
 	const containerRef = useRef<HTMLDivElement>(null)
-
-	const chapterRef = useRef<HTMLDivElement>(null)
-	const { registerTimeline } = useScrollTriggerPause(chapterRef, '100vh')
 
 	useGSAP(() => {
 		// Container scroll with screen
@@ -40,7 +36,6 @@ const Chapter6 = () => {
 				fastScrollEnd: true,
 			},
 		})
-		registerTimeline(lightExit)
 		lightExit.to(`.lightContainer`, {
 			autoAlpha: 0,
 			y: -200,
@@ -56,7 +51,6 @@ const Chapter6 = () => {
 				toggleActions: 'play none resume reverse',
 			},
 		})
-		registerTimeline(line1Tl)
 		line1Tl.to(`.${styles.line1}`, {
 			autoAlpha: 1,
 		})
@@ -69,7 +63,6 @@ const Chapter6 = () => {
 				toggleActions: 'play none resume reverse',
 			},
 		})
-		registerTimeline(line2Tl)
 		line2Tl.to(`.${styles.line2}`, {
 			autoAlpha: 1,
 		})
@@ -82,7 +75,6 @@ const Chapter6 = () => {
 				toggleActions: 'play none resume reverse',
 			},
 		})
-		registerTimeline(line3Tl)
 		line3Tl.to(`.${styles.line3}`, {
 			autoAlpha: 1,
 		})
@@ -95,7 +87,6 @@ const Chapter6 = () => {
 				toggleActions: 'play none resume reverse',
 			},
 		})
-		registerTimeline(line4Tl)
 		line4Tl.to(`.${styles.line4}`, {
 			autoAlpha: 1,
 		})
@@ -109,10 +100,7 @@ const Chapter6 = () => {
 	const line3 = "I've been building software professionally ever since,"
 	const line4 = ` while continuing to work on passion projects at home.`
 	return (
-		<div
-			id='chapter6'
-			ref={chapterRef}
-			className={cn('chapter6', styles.chapter6)}>
+		<div id='chapter6' className={cn('chapter6', styles.chapter6)}>
 			<div ref={containerRef} className={styles.container}>
 				<Container>
 					<h1 className={cn('c6-title', styles.title)}>{title}</h1>

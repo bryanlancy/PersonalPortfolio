@@ -21,7 +21,6 @@ import {
 } from '@awesome.me/kit-ddd907bdb7/icons/sharp-duotone/solid'
 
 import { cn } from '@/utils/react'
-import { useScrollTriggerPause } from '@/hooks'
 
 import styles from './Chapter4.module.scss'
 import DayNight from './DayNight'
@@ -39,8 +38,6 @@ const Chapter4 = () => {
 	const line6 = 'I was hooked.'
 
 	const containerRef = useRef<HTMLDivElement>(null)
-	const chapterRef = useRef<HTMLDivElement>(null)
-	const { registerTimeline } = useScrollTriggerPause(chapterRef, '100vh')
 
 	useGSAP(() => {
 		// Container scroll with screen
@@ -62,7 +59,6 @@ const Chapter4 = () => {
 				toggleActions: 'play none resume reverse',
 			},
 		})
-		registerTimeline(titleTl)
 		const splitText = SplitText.create(`.${styles.title}`, {
 			type: 'lines',
 			mask: 'lines',
@@ -88,7 +84,6 @@ const Chapter4 = () => {
 				fastScrollEnd: true,
 			},
 		})
-		registerTimeline(line1Tl)
 		line1Tl.set(
 			[`.${styles.line1}`, `.${styles.line2}`, `.${styles.line3}`],
 			{ autoAlpha: 0 }
@@ -121,7 +116,6 @@ const Chapter4 = () => {
 				},
 			},
 		})
-		registerTimeline(faceTl)
 		faceTl.to(`.${styles.me}`, {
 			x: 0,
 		})
@@ -134,7 +128,6 @@ const Chapter4 = () => {
 				fastScrollEnd: true,
 			},
 		})
-		registerTimeline(faceOnBedTl)
 
 		faceOnBedTl.to(`.${styles.me}`, {
 			x: 136,
@@ -168,7 +161,6 @@ const Chapter4 = () => {
 				fastScrollEnd: true,
 			},
 		})
-		registerTimeline(houseTransitionTl)
 		houseTransitionTl.to(`.${styles.houseOut}`, {
 			autoAlpha: 0,
 		})
@@ -224,7 +216,6 @@ const Chapter4 = () => {
 				fastScrollEnd: true,
 			},
 		})
-		registerTimeline(faceToComputerTl)
 		faceToComputerTl.set(`.${styles.line4}`, { autoAlpha: 0 })
 		faceToComputerTl.to(`.${styles.me}`, {
 			rotateY: '+=180deg',
@@ -268,7 +259,6 @@ const Chapter4 = () => {
 				toggleActions: 'play complete none reset',
 			},
 		})
-		registerTimeline(line4Tl)
 		line4Tl.to(`.${styles.line4}`, { autoAlpha: 0.5 }, '<')
 		line4Tl.to(`.${styles.line5}`, {
 			autoAlpha: 1,
@@ -282,7 +272,6 @@ const Chapter4 = () => {
 				fastScrollEnd: true,
 			},
 		})
-		registerTimeline(lightFlickerTl)
 
 		// On
 		const lightOn = (glow: boolean = false) => {
@@ -369,7 +358,6 @@ const Chapter4 = () => {
 				toggleActions: 'play complete none reverse',
 			},
 		})
-		registerTimeline(houseExitTl)
 
 		houseExitTl.to(
 			`.${styles.houseIn}`,
@@ -424,10 +412,7 @@ const Chapter4 = () => {
 	}, [])
 
 	return (
-		<div
-			id='chapter4'
-			ref={chapterRef}
-			className={cn('chapter4', styles.chapter4)}>
+		<div id='chapter4' className={cn('chapter4', styles.chapter4)}>
 			<div ref={containerRef} className={styles.container}>
 				<Container>
 					<h1 className={styles.title}>{title}</h1>

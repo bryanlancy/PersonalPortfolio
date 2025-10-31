@@ -16,5 +16,3 @@ export const useDebounce: (
 }
 
 export { usePerformanceMode, type PerformanceMode } from './usePerformanceMode'
-export { useScrollTriggerPause } from './useScrollTriggerPause'
-export { useViewportVisibility } from './useViewportVisibility'

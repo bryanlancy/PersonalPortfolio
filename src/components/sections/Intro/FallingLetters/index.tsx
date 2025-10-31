@@ -7,7 +7,6 @@ import { useGSAP } from '@gsap/react'
 
 import { cn } from '@/utils/react'
 import { colorRotator } from '@/utils/styles'
-import { useScrollTriggerPause, usePerformanceMode } from '@/hooks'
 
 import styles from './FallingLetters.module.scss'
 import { calculateCharacterRepetitions, toCamelCase } from '@/utils/general'
@@ -46,26 +45,7 @@ const FallingLetterComponent = memo(function FallingLetterComponent({
 	const titleRef = useRef<HTMLHeadingElement>(null)
 
 	const splitTextRef = useRef<SplitText | null>(null)
-	const textTlRef = useRef<gsap.core.Timeline | null>(null)
 	const { contextSafe } = useGSAP({ dependencies: [title, id] })
-	const { mode: performanceMode } = usePerformanceMode()
-
-	// Register with pause hook for intro section visibility
-	const introSectionRef = useRef<HTMLElement | null>(null)
-	useEffect(() => {
-		introSectionRef.current = document.querySelector('.introSection') as HTMLElement
-	}, [])
-	const { registerTimeline } = useScrollTriggerPause(
-		introSectionRef as React.RefObject<HTMLElement>,
-		'200vh'
-	)
-
-	// Register timeline when it's created
-	useEffect(() => {
-		if (textTlRef.current) {
-			registerTimeline(textTlRef.current)
-		}
-	}, [registerTimeline])
 
 	const animateText = contextSafe(() => {
 		// Clean up previous SplitText instance if it exists
@@ -80,8 +60,7 @@ const FallingLetterComponent = memo(function FallingLetterComponent({
 			onSplit: ({ chars }) => {
 				// Clone each character multiple times with staggered positions
 				// Reduced from 7 to 4 for better CPU performance
-				// Further reduce based on performance mode
-				const clonesPerChar = performanceMode === 'low' ? 2 : performanceMode === 'medium' ? 3 : 4 // Number of clones per character
+				const clonesPerChar = 4 // Number of clones per character
 				const clonedChars: HTMLElement[] = []
 				const textTl = gsap.timeline({
 					scrollTrigger: {
@@ -91,8 +70,6 @@ const FallingLetterComponent = memo(function FallingLetterComponent({
 						toggleActions: 'play pause resume reset',
 					},
 				})
-				textTlRef.current = textTl
-				registerTimeline(textTl)
 
 				chars.forEach(char => {
 					// Keep the original character
@@ -200,9 +177,7 @@ export default function FallingLetters({ currentTitle }: FallingLettersProps) {
 	const [fallingComponents, setFallingComponents] = useState<
 		FallingLetterComponent[]
 	>([])
-	const { mode: performanceMode } = usePerformanceMode()
-	// Reduce max components based on performance mode
-	const maxComponents = performanceMode === 'low' ? 1 : performanceMode === 'medium' ? 2 : 3
+	const maxComponents = 3
 
 	// Update components when currentTitle changes
 	useEffect(() => {
