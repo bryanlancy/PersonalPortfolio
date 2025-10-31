@@ -12,6 +12,7 @@ import { cn } from '@/utils/react'
 import consoleEasterEgg from '@/utils/consoleEasterEgg'
 
 import styles from './Intro.module.scss'
+import Container from '@/utils/components/Container'
 
 export default function Intro() {
 	consoleEasterEgg()
@@ -29,7 +30,9 @@ export default function Intro() {
 				<MouseEffects currentTitle={currentTitle} />
 				<Background currentTitle={currentTitle} />
 				<FallingLetters currentTitle={currentTitle} />
-				<TitleSections onTitleChange={handleTitleChange} />
+				<Container>
+					<TitleSections onTitleChange={handleTitleChange} />
+				</Container>
 			</NoSsr>
 		</section>
 	)
