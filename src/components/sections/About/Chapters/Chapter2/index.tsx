@@ -9,6 +9,7 @@ import { VT323 } from 'next/font/google'
 import Container from '@/utils/components/Container'
 import { cn } from '@/utils/react'
 import TypeText from '@/utils/components/TypeText'
+import { useScrollTriggerPause } from '@/hooks'
 
 import styles from './Chapter2.module.scss'
 
@@ -40,6 +41,9 @@ const Chapter2 = () => {
 	const showLine3State = useState<boolean>(false)
 	const showLine4State = useState<boolean>(false)
 	const showLine5State = useState<boolean>(false)
+
+	const chapterRef = useRef<HTMLDivElement>(null)
+	const { registerTimeline } = useScrollTriggerPause(chapterRef, '100vh')
 
 	useGSAP(() => {
 		// Container scroll with screen
@@ -78,6 +82,7 @@ const Chapter2 = () => {
 				},
 			},
 		})
+		registerTimeline(line1Tl)
 		line1Tl.to(`.${styles.line1}`, {
 			autoAlpha: 1,
 			duration: 0.5,
@@ -98,6 +103,7 @@ const Chapter2 = () => {
 				},
 			},
 		})
+		registerTimeline(line2Tl)
 		line2Tl.to([`.${styles.line2a}`, `.${styles.line2b}`], {
 			autoAlpha: 1,
 			duration: 0.5,
@@ -121,6 +127,7 @@ const Chapter2 = () => {
 				},
 			},
 		})
+		registerTimeline(line3Tl)
 		line3Tl.to(`.${styles.line3}`, {
 			autoAlpha: 1,
 			duration: 0.5,
@@ -144,6 +151,7 @@ const Chapter2 = () => {
 				},
 			},
 		})
+		registerTimeline(line4Tl)
 		line4Tl.to(`.${styles.line4}`, {
 			autoAlpha: 1,
 			duration: 0.5,
@@ -167,6 +175,7 @@ const Chapter2 = () => {
 				},
 			},
 		})
+		registerTimeline(line5Tl)
 		line5Tl.to(`.${styles.line5}`, {
 			autoAlpha: 1,
 			duration: 0.5,
@@ -181,8 +190,10 @@ const Chapter2 = () => {
 				trigger: '.chapter2',
 				start: `top top-=${line5Offset + 400}px`,
 				scrub: true,
+				fastScrollEnd: true,
 			},
 		})
+		registerTimeline(line5TransitionTl)
 		line5TransitionTl.to(`.${styles.line5}`, {
 			y: '+=400',
 		})
@@ -191,6 +202,7 @@ const Chapter2 = () => {
 	return (
 		<div
 			id='chapter2'
+			ref={chapterRef}
 			className={cn('chapter2', styles.chapter2, vt323.className)}>
 			<div
 				ref={containerRef}

@@ -11,6 +11,7 @@ import {
 import Spreadsheet from './Chapters/Spreadsheet'
 import Graphs from './Chapters/Graphs'
 import { SpreadsheetContextProvider } from '@/context/spreadsheetContext'
+import ViewportChapter from './ViewportChapter'
 
 import styles from './Story.module.scss'
 import BarSwipe from './Chapters/Graphs/BarSwipe'
@@ -32,17 +33,35 @@ interface StoryProps {}
 const Story: FC<StoryProps> = ({}) => {
 	return (
 		<div className={styles.story}>
-			<Chapter1 />
+			<ViewportChapter>
+				<Chapter1 />
+			</ViewportChapter>
 			<SpreadsheetContextProvider>
-				<Chapter2 />
-				<Spreadsheet />
-				<Graphs />
-				<Chapter3 />
-				<BarSwipe />
+				<ViewportChapter>
+					<Chapter2 />
+				</ViewportChapter>
+				<ViewportChapter>
+					<Spreadsheet />
+				</ViewportChapter>
+				<ViewportChapter>
+					<Graphs />
+				</ViewportChapter>
+				<ViewportChapter>
+					<Chapter3 />
+				</ViewportChapter>
+				<ViewportChapter>
+					<BarSwipe />
+				</ViewportChapter>
 			</SpreadsheetContextProvider>
-			<Chapter4 />
-			<Chapter5 />
-			<Chapter6 />
+			<ViewportChapter>
+				<Chapter4 />
+			</ViewportChapter>
+			<ViewportChapter>
+				<Chapter5 />
+			</ViewportChapter>
+			<ViewportChapter>
+				<Chapter6 />
+			</ViewportChapter>
 		</div>
 	)
 }

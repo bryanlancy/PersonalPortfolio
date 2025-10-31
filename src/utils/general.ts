@@ -114,8 +114,47 @@ export function calculateTextRepetitions(
 	// Calculate how many times the text fits in the path length
 	const repetitions = Math.floor(pathLength / textWidth)
 
+	// Always return at least one repetition, even if text doesn't fully fit
+	const actualRepetitions = Math.max(1, repetitions)
+
 	// Generate the repeated text with spaces between repetitions
-	return `${text} `.repeat(repetitions).trim()
+	return `${text} `.repeat(actualRepetitions).trim()
+}
+
+/**
+ * Calculates and repeats characters from a string until it fills the target width
+ * @param text The text string to repeat (e.g., "Software Engineer")
+ * @param charWidth The estimated width of each character
+ * @param targetWidth The target width to fill
+ * @returns The repeated string that fills the target width exactly
+ */
+export function calculateCharacterRepetitions(
+	text: string,
+	charWidth: number,
+	targetWidth: number
+): string {
+	// Calculate total characters needed (use floor to avoid overflow)
+	const totalCharactersNeeded = Math.floor(targetWidth / charWidth)
+
+	// Subtract one to ensure no overflow
+	const safeCharacterCount = Math.max(1, totalCharactersNeeded - 1)
+
+	// Calculate how many complete repetitions we can fit
+	const fullRepetitions = Math.floor(safeCharacterCount / text.length)
+
+	// Create string with full repetitions
+	let result = text.repeat(fullRepetitions)
+
+	// Add remaining characters to get close to but not exceed target
+	const remainingChars = safeCharacterCount - result.length
+	let charIndex = 0
+
+	for (let i = 0; i < remainingChars; i++) {
+		result += text[charIndex % text.length]
+		charIndex++
+	}
+
+	return result
 }
 
 /**

@@ -3,6 +3,7 @@ import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import { cn } from '@/utils/react'
+import { useScrollTriggerPause } from '@/hooks'
 
 import styles from './Chapter3.module.scss'
 import { useRef } from 'react'
@@ -28,6 +29,9 @@ const Chapter3 = () => {
 	const titleRef = useRef<HTMLHeadingElement>(null)
 	const containerRef = useRef<HTMLDivElement>(null)
 
+	const chapterRef = useRef<HTMLDivElement>(null)
+	const { registerTimeline } = useScrollTriggerPause(chapterRef, '100vh')
+
 	useGSAP(() => {
 		// Container scroll with screen
 		gsap.to(containerRef.current, {
@@ -48,6 +52,7 @@ const Chapter3 = () => {
 				toggleActions: 'play none resume reverse',
 			},
 		})
+		registerTimeline(titleInTl)
 		titleInTl.to(`.${styles.title}`, {
 			duration: 0.25,
 			autoAlpha: 1,
@@ -63,6 +68,7 @@ const Chapter3 = () => {
 				fastScrollEnd: true,
 			},
 		})
+		registerTimeline(backgroundTl)
 		backgroundTl.to(['.chapter2', '.chapter3'], {
 			backgroundColor: '#000',
 		})
@@ -89,6 +95,7 @@ const Chapter3 = () => {
 				},
 			},
 		})
+		registerTimeline(line1Tl)
 
 		line1Tl.to(`.${styles.line1}`, {
 			autoAlpha: 1,
@@ -107,6 +114,7 @@ const Chapter3 = () => {
 				},
 			},
 		})
+		registerTimeline(line2Tl)
 
 		line2Tl.to(`.${styles.line2}`, {
 			autoAlpha: 1,
@@ -133,6 +141,7 @@ const Chapter3 = () => {
 				},
 			},
 		})
+		registerTimeline(line3Tl)
 		line3Tl.to([`.${styles.line1}`, `.${styles.line2}`], {
 			duration: 0.75,
 			autoAlpha: 0.5,
@@ -143,7 +152,10 @@ const Chapter3 = () => {
 	}, [])
 
 	return (
-		<div id='chapter3' className={cn('chapter3', styles.chapter3)}>
+		<div
+			id='chapter3'
+			ref={chapterRef}
+			className={cn('chapter3', styles.chapter3)}>
 			<div ref={containerRef} className={styles.container}>
 				<Container>
 					<h1 ref={titleRef} className={styles.title}>

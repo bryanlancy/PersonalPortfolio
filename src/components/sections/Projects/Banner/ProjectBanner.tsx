@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 
 import { cn } from '@/utils/react'
+import { useScrollTriggerPause } from '@/hooks'
 
 import styles from './ProjectBanner.module.scss'
 
@@ -53,7 +54,10 @@ const ProjectBanner: FC<ProjectBannerProps> = ({
 	children,
 }) => {
 	const overlayRef = useRef(null)
-	const sectionRef = useRef(null)
+	const sectionRef = useRef<HTMLElement>(null)
+
+	// Register pause hook for banner visibility using sectionRef
+	const { registerTimeline } = useScrollTriggerPause(sectionRef, '100vh')
 
 	// TODO Use framer useTransform instead of mapRange
 	// TODO Add project spec section - techs, company link,
@@ -66,13 +70,15 @@ const ProjectBanner: FC<ProjectBannerProps> = ({
 					start: 'top top',
 					end: '+=300px',
 					scrub: true,
+					fastScrollEnd: true,
 				},
 			})
+			registerTimeline(overlayTl)
 			overlayTl.to(overlayRef.current, {
 				autoAlpha: 1,
 			})
 		}
-	}, [])
+	}, [registerTimeline])
 
 	return (
 		<section className={cn(styles.project, className)} ref={sectionRef}>

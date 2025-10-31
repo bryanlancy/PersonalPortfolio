@@ -1,3 +1,5 @@
+@import '@/styles/mixins.scss';
+
 .mousePath {
 	position: absolute;
 	z-index: 450;
@@ -21,11 +23,18 @@
 	pointer-events: none;
 	user-select: none;
 
-	font-size: 48px;
+	font-size: 24px;
 	font-family: var(--font-bebas) !important;
 	letter-spacing: 0.1em;
-
 	fill: white;
+
+	@include tablet {
+		font-size: 32px;
+	}
+
+	@include laptop {
+		font-size: 48px;
+	}
 }
 .textPath {
 	fill: none;

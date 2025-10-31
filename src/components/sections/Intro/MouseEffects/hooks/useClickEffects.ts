@@ -23,11 +23,12 @@ export const useClickEffects = (svgRef: React.RefObject<SVGSVGElement>) => {
 	>([])
 
 	// Maximum number of simultaneous fireworks for performance
-	const MAX_FIREWORKS = 8
+	// Reduced from 8 to 5 for better CPU performance
+	const MAX_FIREWORKS = 5
 
 	// Throttle clicks to prevent performance issues
 	const lastClickTime = useRef(0)
-	const CLICK_THROTTLE_MS = 100 // Minimum 100ms between clicks
+	const CLICK_THROTTLE_MS = 150 // Increased from 100ms to 150ms for better CPU performance
 
 	// Refs for click circle elements to animate
 	const clickCircleRefs = useRef<(SVGCircleElement | null)[]>([])

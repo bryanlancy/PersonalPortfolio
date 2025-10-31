@@ -10,6 +10,8 @@ import styles from './SiteNotice.module.scss'
 interface SiteNoticeProps {
 	/** Optional className to override or extend styling */
 	className?: string
+	/** When true, always show regardless of environment. Defaults to false. */
+	debug?: boolean
 }
 
 /**
@@ -17,7 +19,13 @@ interface SiteNoticeProps {
  * @component
  */
 function SiteNotice(props: SiteNoticeProps) {
-	const { className } = props
+	const { className, debug = false } = props
+
+	// Only show in production builds unless explicitly debugging
+	if (!debug && process.env.NODE_ENV !== 'production') {
+		return null
+	}
+
 	const [isVisible, setIsVisible] = useState(true)
 
 	useEffect(() => {

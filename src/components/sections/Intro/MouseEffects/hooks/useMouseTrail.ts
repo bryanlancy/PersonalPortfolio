@@ -34,9 +34,11 @@ export const useMouseTrail = (options?: {
 	const lastReturnFrameTime = useRef<number | null>(null)
 	const isReturning = useRef(false)
 	const originalTrailPoints = useRef<Point[]>([])
+	const lastMouseMoveTime = useRef<number>(0)
+	const pathPointsCache = useRef<Map<string, Point[]>>(new Map())
 
 	/**
-	 * Converts SVG path data to an array of points
+	 * Converts SVG path data to an array of points with caching for performance
 	 * @param pathData - SVG path string
 	 * @returns Array of points along the path, or empty array if path is invalid
 	 */
@@ -44,6 +46,11 @@ export const useMouseTrail = (options?: {
 		// Handle invalid or empty path data
 		if (!pathData || pathData.trim() === '') {
 			return []
+		}
+
+		// Check cache first
+		if (pathPointsCache.current.has(pathData)) {
+			return pathPointsCache.current.get(pathData)!
 		}
 
 		try {
@@ -60,7 +67,8 @@ export const useMouseTrail = (options?: {
 				return []
 			}
 
-			const numPoints = Math.max(10, Math.floor(pathLength / 20)) // Sample every ~20 units
+			// Reduce point density for better performance (sample every ~25 units instead of 20)
+			const numPoints = Math.max(8, Math.floor(pathLength / 25))
 			const points: Point[] = []
 
 			for (let i = 0; i <= numPoints; i++) {
@@ -69,6 +77,13 @@ export const useMouseTrail = (options?: {
 				)
 				points.push([point.x, point.y])
 			}
+
+			// Cache the result (limit cache size to prevent memory leaks)
+			if (pathPointsCache.current.size > 10) {
+				const firstKey = pathPointsCache.current.keys().next().value
+				pathPointsCache.current.delete(firstKey)
+			}
+			pathPointsCache.current.set(pathData, points)
 
 			return points
 		} catch (error) {
@@ -105,14 +120,44 @@ export const useMouseTrail = (options?: {
 		return result || defaultPath
 	}
 
-	// Get current path data (will be re-evaluated when needed)
-	const getCurrentTopPath = () =>
-		getCurrentPathData(options?.top, defaultTopPath)
-	const getCurrentBottomPath = () =>
-		getCurrentPathData(options?.bottom, defaultBottomPath)
+	// Cache path data to avoid recalculation on every frame
+	const cachedTopPath = useRef<string | null>(null)
+	const cachedBottomPath = useRef<string | null>(null)
+	const lastPathUpdateTime = useRef<number>(0)
+	const PATH_CACHE_DURATION = 100 // Cache path data for 100ms
+
+	// Get current path data (will be re-evaluated when needed, with caching)
+	const getCurrentTopPath = () => {
+		const now = performance.now()
+		if (
+			cachedTopPath.current &&
+			now - lastPathUpdateTime.current < PATH_CACHE_DURATION
+		) {
+			return cachedTopPath.current
+		}
+		const path = getCurrentPathData(options?.top, defaultTopPath)
+		cachedTopPath.current = path
+		lastPathUpdateTime.current = now
+		return path
+	}
+
+	const getCurrentBottomPath = () => {
+		const now = performance.now()
+		if (
+			cachedBottomPath.current &&
+			now - lastPathUpdateTime.current < PATH_CACHE_DURATION
+		) {
+			return cachedBottomPath.current
+		}
+		const path = getCurrentPathData(options?.bottom, defaultBottomPath)
+		cachedBottomPath.current = path
+		lastPathUpdateTime.current = now
+		return path
+	}
 
 	/**
 	 * Updates the trail with new points, maintaining the maximum length constraint
+	 * Optimized for better CPU performance with reduced array operations
 	 */
 	const updateTrail = () => {
 		frameRef.current = null
@@ -121,35 +166,53 @@ export const useMouseTrail = (options?: {
 
 		const [x, y] = newPoint
 
-		// Skip if movement is too small
+		// Skip if movement is too small (using squared distance for performance)
 		if (lastPos.current) {
 			const [lx, ly] = lastPos.current
 			const dx = x - lx
 			const dy = y - ly
-			const dist = Math.sqrt(dx * dx + dy * dy)
-			if (dist < POINT_INTERVAL) return
+			const distSquared = dx * dx + dy * dy
+			// Compare squared distance to avoid sqrt calculation
+			if (distSquared < POINT_INTERVAL * POINT_INTERVAL) return
 		}
 
 		lastPos.current = newPoint
 
 		setPoints(prev => {
+			// Optimize: start with new point and work backwards
 			const newPoints = [...prev, newPoint]
+			const newPointsLength = newPoints.length
+
+			// Early return if we don't have enough points to trim
+			if (newPointsLength <= 2) return newPoints
+
 			let total = 0
-			let trimmed = [...newPoints]
+			let trimIndex = newPointsLength - 1
 
 			// Trim points to maintain total length ≤ MAX_LENGTH
-			for (let i = trimmed.length - 1; i > 0; i--) {
-				const [x1, y1] = trimmed[i]
-				const [x2, y2] = trimmed[i - 1]
-				const segLength = Math.hypot(x1 - x2, y1 - y2)
-				total += segLength
-				if (total > MAX_LENGTH) {
-					trimmed = trimmed.slice(i)
-					break
+			// Optimize: only calculate if we have many points
+			if (newPointsLength > 10) {
+				for (let i = newPointsLength - 1; i > 0; i--) {
+					const [x1, y1] = newPoints[i]
+					const [x2, y2] = newPoints[i - 1]
+					const dx = x1 - x2
+					const dy = y1 - y2
+					// Use squared distance first, only sqrt if needed
+					const segLengthSquared = dx * dx + dy * dy
+					const segLength = Math.sqrt(segLengthSquared)
+					total += segLength
+					if (total > MAX_LENGTH) {
+						trimIndex = i
+						break
+					}
+				}
+
+				if (trimIndex < newPointsLength - 1) {
+					return newPoints.slice(trimIndex)
 				}
 			}
 
-			return trimmed
+			return newPoints
 		})
 	}
 
@@ -314,8 +377,22 @@ export const useMouseTrail = (options?: {
 	 * Handles mouse movement within the SVG element
 	 * @param e - Mouse event containing cursor position
 	 */
+	const MOUSE_MOVE_THROTTLE = 32 // ~30fps for mouse updates (double the animation frame)
+
 	const handleMouseMove = (e: MouseEvent) => {
 		if (!isInside.current || !svgRef.current) return
+
+		const now = performance.now()
+		// Throttle mouse move updates
+		if (now - lastMouseMoveTime.current < MOUSE_MOVE_THROTTLE) {
+			// Still update pending point for smoother trail, but don't schedule animation frame
+			const rect = svgRef.current.getBoundingClientRect()
+			const x = e.clientX - rect.left
+			const y = e.clientY - rect.top
+			pendingPoint.current = [x, y]
+			return
+		}
+		lastMouseMoveTime.current = now
 
 		const rect = svgRef.current.getBoundingClientRect()
 		const x = e.clientX - rect.left
@@ -403,9 +480,12 @@ export const useMouseTrail = (options?: {
 		const svg = svgRef.current
 		if (!svg) return
 
-		svg.addEventListener('mousemove', handleMouseMove)
-		svg.addEventListener('mouseenter', handleMouseEnter as EventListener)
-		svg.addEventListener('mouseleave', handleMouseLeave)
+		// Use passive listeners where possible for better performance
+		svg.addEventListener('mousemove', handleMouseMove, { passive: true })
+		svg.addEventListener('mouseenter', handleMouseEnter as EventListener, {
+			passive: true,
+		})
+		svg.addEventListener('mouseleave', handleMouseLeave, { passive: true })
 
 		return () => {
 			svg.removeEventListener('mousemove', handleMouseMove)

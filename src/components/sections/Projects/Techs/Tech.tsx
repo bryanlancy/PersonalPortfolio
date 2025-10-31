@@ -84,7 +84,8 @@ const Tech: FC<TechProps> = ({
 
 	const [mouseState, mouseRef] = useMouse()
 	const [hoverRef, isHovered] = useHover()
-	const throttledCoordState = useThrottle(mouseState, 50)
+	// Increase throttle from 50ms to 100ms for better CPU performance
+	const throttledCoordState = useThrottle(mouseState, 100)
 	const { width } = useWindowSize()
 
 	// Update bounding box on resize
@@ -103,19 +104,23 @@ const Tech: FC<TechProps> = ({
 	}, [throttledCoordState, isHovered])
 
 	useGSAP(() => {
-		if (mousePct) {
+		if (mousePct && techRef.current) {
 			const [x, y] = mousePct
 			// Based on mouse y position in `li`
 			const rotateX = -mapRange(y, [0, 1], [-20, 20])
 			// Based on mouse x position in `li`
 			const rotateY = rotation + mapRange(x, [0, 1], [-20, 20])
 
+			// Use faster ease and force GPU acceleration
 			gsap.to(techRef.current, {
 				rotateX,
 				rotateY,
+				duration: 0.3, // Faster animation reduces CPU load
+				ease: 'power1.out',
+				force3D: true, // Force GPU acceleration
 			})
 		}
-	}, [mousePct])
+	}, [mousePct, rotation])
 
 	useGSAP(() => {
 		if (name.includes('/')) {

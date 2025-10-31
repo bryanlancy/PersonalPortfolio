@@ -1,6 +1,7 @@
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useRef } from 'react'
 
 import styles from './Graphs.module.scss'
 import { cn } from '@/utils/react'
@@ -8,10 +9,14 @@ import Bar from './Bar'
 import Pie from './Pie'
 import Scatter from './Scatter'
 import { NoSsr } from '@/utils/next'
+import { useScrollTriggerPause } from '@/hooks'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const Graphs = () => {
+	const graphsRef = useRef<HTMLDivElement>(null)
+	const { registerTimeline } = useScrollTriggerPause(graphsRef, '100vh')
+
 	useGSAP(() => {
 		// Timeline for Intro
 		const graphTl = gsap.timeline({
@@ -23,6 +28,7 @@ const Graphs = () => {
 				fastScrollEnd: true,
 			},
 		})
+		registerTimeline(graphTl)
 
 		graphTl.to(`.${styles.graphs}`, {
 			duration: 0.1,
@@ -39,6 +45,7 @@ const Graphs = () => {
 				fastScrollEnd: true,
 			},
 		})
+		registerTimeline(graphTransitionTl)
 		graphTransitionTl.to(`.${styles.graphs}`, {
 			y: -400,
 		})
@@ -52,6 +59,7 @@ const Graphs = () => {
 				toggleActions: 'play complete none reverse',
 			},
 		})
+		registerTimeline(graphExitTl)
 		graphExitTl.to(`.graphs`, {
 			duration: 0.5,
 			autoAlpha: 0,
@@ -59,7 +67,7 @@ const Graphs = () => {
 	}, [])
 
 	return (
-		<div className={cn('graphs', styles.graphs)}>
+		<div ref={graphsRef} className={cn('graphs', styles.graphs)}>
 			<Bar />
 			<Pie />
 			<NoSsr>

@@ -9,9 +9,11 @@ import { faComment } from '@awesome.me/kit-ddd907bdb7/icons/sharp/thin'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useRef } from 'react'
 import Background from './Background'
 
 import { cn } from '@/utils/react'
+import { useScrollTriggerPause } from '@/hooks'
 
 import styles from './Chapter1.module.scss'
 import Container from '@/utils/components/Container'
@@ -27,6 +29,9 @@ const Chapter1 = () => {
 	const line3 =
 		"That question sparked the curiosity that's shaped my career ever since."
 
+	const chapterRef = useRef<HTMLDivElement>(null)
+	const { registerTimeline } = useScrollTriggerPause(chapterRef, '100vh')
+
 	useGSAP(() => {
 		// Container scroll with screen
 		gsap.to('.c1-container', {
@@ -39,6 +44,7 @@ const Chapter1 = () => {
 		})
 
 		const emojiTl = gsap.timeline()
+		registerTimeline(emojiTl)
 		// Emoji animations
 		emojiTl.set('.c1-emoji', {
 			top: '30%',
@@ -51,6 +57,7 @@ const Chapter1 = () => {
 				start: 'bottom top+=300px',
 				end: '+=200',
 				scrub: true,
+				fastScrollEnd: true,
 			},
 		})
 		emojiTl.to(
@@ -61,6 +68,7 @@ const Chapter1 = () => {
 					trigger: '.chapter1',
 					start: 'top top',
 					scrub: true,
+					fastScrollEnd: true,
 				},
 			},
 			'<'
@@ -72,6 +80,7 @@ const Chapter1 = () => {
 				start: 'top top-=600px',
 				end: '+=400px',
 				scrub: true,
+				fastScrollEnd: true,
 			},
 		})
 
@@ -84,6 +93,7 @@ const Chapter1 = () => {
 				toggleActions: 'play none none reverse',
 			},
 		})
+		registerTimeline(titleTl)
 		titleTl.to('.c1-title', {
 			autoAlpha: 1,
 			left: 0,
@@ -108,8 +118,10 @@ const Chapter1 = () => {
 				start: 'top top+=0px',
 				end: '+=1200',
 				scrub: true,
+				fastScrollEnd: true,
 			},
 		})
+		registerTimeline(line1Tl)
 		line1Tl.set('.c1-line1', {
 			y: 100,
 		})
@@ -134,8 +146,10 @@ const Chapter1 = () => {
 				start: 'top top-=600px',
 				end: '+=1600',
 				scrub: true,
+				fastScrollEnd: true,
 			},
 		})
+		registerTimeline(line2Tl)
 		line2Tl.set('.c1-line2', {
 			y: 100,
 		})
@@ -155,8 +169,10 @@ const Chapter1 = () => {
 				start: 'top top-=1800px',
 				end: '+=1200',
 				scrub: true,
+				fastScrollEnd: true,
 			},
 		})
+		registerTimeline(line3Tl)
 		line3Tl.set('.c1-line3', {
 			y: 100,
 		})
@@ -177,8 +193,10 @@ const Chapter1 = () => {
 				start: 'top top-=800px',
 				end: '+=400px',
 				scrub: true,
+				fastScrollEnd: true,
 			},
 		})
+		registerTimeline(gpaTl)
 		gpaTl.to('.c1-gpa', { autoAlpha: 1, duration: 1 })
 
 		// Speech bubble animations
@@ -188,8 +206,10 @@ const Chapter1 = () => {
 				start: 'top top-=1100px',
 				end: '+=200px',
 				scrub: true,
+				fastScrollEnd: true,
 			},
 		})
+		registerTimeline(speechTl)
 		speechTl.to('.c1-bubble', {
 			autoAlpha: 1,
 			duration: 1,
@@ -210,8 +230,10 @@ const Chapter1 = () => {
 				start: 'top top-=600px',
 				end: '+=400px',
 				scrub: true,
+				fastScrollEnd: true,
 			},
 		})
+		registerTimeline(computerTl)
 		computerTl.set('.c1-computer', {
 			autoAlpha: 0,
 			y: '500%',
@@ -228,8 +250,10 @@ const Chapter1 = () => {
 				start: 'bottom bottom+=600px',
 				end: '+=600px',
 				scrub: true,
+				fastScrollEnd: true,
 			},
 		})
+		registerTimeline(transTl)
 
 		transTl.to('.c1-computer', {
 			ease: 'expo.in',
@@ -239,7 +263,10 @@ const Chapter1 = () => {
 	}, [])
 
 	return (
-		<div id='chapter1' className={cn(styles.chapter1, 'chapter1')}>
+		<div
+			id='chapter1'
+			ref={chapterRef}
+			className={cn(styles.chapter1, 'chapter1')}>
 			<Background />
 			<div className={cn('c1-container', styles.container)}>
 				<Container>

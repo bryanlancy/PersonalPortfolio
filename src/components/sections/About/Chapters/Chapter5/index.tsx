@@ -16,6 +16,7 @@ import {
 
 import { arrRotator } from '@/utils/general'
 import { cn } from '@/utils/react'
+import { useScrollTriggerPause } from '@/hooks'
 
 import styles from './Chapter5.module.scss'
 import Network from './Network'
@@ -51,6 +52,9 @@ const Chapter5 = () => {
 
 	const containerRef = useRef<HTMLDivElement>(null)
 
+	const chapterRef = useRef<HTMLDivElement>(null)
+	const { registerTimeline } = useScrollTriggerPause(chapterRef, '100vh')
+
 	const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
 	const colorRotator = arrRotator(colors)
 
@@ -71,8 +75,10 @@ const Chapter5 = () => {
 				start: 'top top',
 				end: '+=750px',
 				scrub: true,
+				fastScrollEnd: true,
 			},
 		})
+		registerTimeline(backgoundTl)
 		backgoundTl.to(['.chapter5'], {
 			backgroundColor: '#32005c',
 		})
@@ -121,8 +127,10 @@ const Chapter5 = () => {
 
 				end: '+=400px',
 				scrub: true,
+				fastScrollEnd: true,
 			},
 		})
+		registerTimeline(line1Tl)
 		line1Tl.to(`.${styles.line1}`, {
 			autoAlpha: 1,
 		})
@@ -137,7 +145,7 @@ const Chapter5 = () => {
 				trigger: '.chapter5',
 				start: 'top top-=2750px',
 				end: '+=200px',
-
+				fastScrollEnd: true,
 				onUpdate: self => {
 					line3Tl
 						.timeScale(self.direction > 0 ? 1 : 5)
@@ -145,6 +153,7 @@ const Chapter5 = () => {
 				},
 			},
 		})
+		registerTimeline(line3Tl)
 		line3Tl.to(`.${styles.line3}`, {
 			autoAlpha: 1,
 		})
@@ -182,7 +191,10 @@ const Chapter5 = () => {
 	}, [])
 
 	return (
-		<div id='chapter5' className={cn('chapter5', styles.chapter5)}>
+		<div
+			id='chapter5'
+			ref={chapterRef}
+			className={cn('chapter5', styles.chapter5)}>
 			<div className={styles.container} ref={containerRef}>
 				<Container>
 					<NoSsr>

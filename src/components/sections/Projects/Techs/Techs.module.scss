@@ -38,6 +38,10 @@
 	overflow: hidden;
 	transform-style: preserve-3d;
 
+	// GPU acceleration for 3D transforms
+	will-change: transform;
+	transform: translateZ(0);
+
 	@include laptop {
 		width: 240px;
 	}
