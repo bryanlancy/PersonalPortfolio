@@ -23,8 +23,8 @@
 	@include laptop {
 		top: 55%;
 		bottom: auto;
-		width: 600px;
-		height: 600px;
+	width: 600px;
+	height: 600px;
 
 		transform: translateY(-50%);
 	}
@@ -44,7 +44,7 @@
 	}
 
 	@include laptop {
-		font-size: 40px;
+	font-size: 40px;
 	}
 }
 .subtext {
@@ -62,9 +62,9 @@
 	}
 
 	@include laptop {
-		height: 75px;
+	height: 75px;
 
-		font-size: 40px;
+	font-size: 40px;
 	}
 }
 

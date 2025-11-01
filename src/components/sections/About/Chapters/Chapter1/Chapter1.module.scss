@@ -16,23 +16,38 @@
 .emoji {
 	position: absolute;
 	top: 50%;
-	left: 50%;
+	left: 0%;
 
 	visibility: hidden;
 	opacity: 0;
 
 	transform: translateY(-100%);
 
+	width: 100%;
+	height: 200px;
+
 	@include autoAlpha;
 }
 .me {
-	position: relative;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	color: rgb(250, 250, 125);
 
 	> * {
 		position: absolute;
 		top: 50%;
 		left: 50%;
+		font-size: 40px;
+
+		@include tablet {
+			font-size: 50px;
+		}
+
+		@include laptop {
+			font-size: 60px;
+		}
 	}
 	.happy {
 		transform: translate(-50%, -50%);
@@ -69,7 +84,19 @@
 		right: 10%;
 	}
 
+	@include mobile {
+		top: 15%;
+
+		&.line3 {
+			left: 10%;
+			top: calc(15% + 104px);
+			text-align: left;
+		}
+	}
+
 	@include tablet {
+		top: 30%;
+
 		&.line1 {
 			right: 15%;
 		}
@@ -78,7 +105,10 @@
 			width: 220px;
 		}
 		&.line3 {
-			right: 15%;
+			left: 15%;
+			top: calc(30% + 104px);
+			text-align: left;
+			max-width: 240px;
 		}
 	}
 
@@ -91,7 +121,9 @@
 			width: 240px;
 		}
 		&.line3 {
-			right: 20%;
+			left: 20%;
+			top: calc(35% + 104px);
+			text-align: left;
 		}
 	}
 }
@@ -101,20 +133,43 @@
 	--fa-secondary-opacity: 1;
 	position: absolute;
 	top: 50%;
-	right: -144px;
+	left: 50%;
 
+	font-size: 60px;
 	transform: translate(-50%, -50%);
 	@include autoAlpha;
+
+	@include tablet {
+		font-size: 70px;
+	}
+
+	@include laptop {
+		font-size: 80px;
+	}
 }
 .gpa {
 	position: absolute;
 	top: 50%;
-	right: -272px;
+	left: calc(50% + 120px);
 
 	transform: translate(-50%, -50%);
 
+	@include mobile {
+		left: 16px;
+		transform: translate(0, -50%);
+	}
+
 	.body {
+		font-size: 80px;
 		@include autoAlpha;
+
+		@include tablet {
+			font-size: 100px;
+		}
+
+		@include laptop {
+			font-size: 120px;
+		}
 	}
 }
 .bubble {
@@ -122,12 +177,36 @@
 	bottom: 70%;
 	left: 90%;
 
+	font-size: 160px;
 	@include autoAlpha;
+
+	@include tablet {
+		font-size: 180px;
+	}
+
+	@include laptop {
+		font-size: 200px;
+	}
 }
 .question {
 	position: absolute;
-	top: 50%;
+	top: 40%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 104px;
+	font-size: 14px;
+	line-height: 1.2;
+	text-align: center;
+
+	@include tablet {
+		top: 42%;
+		width: 120px;
+		font-size: 16px;
+	}
+
+	@include laptop {
+		top: 45%;
+		width: 140px;
+		font-size: 18px;
+	}
 }
