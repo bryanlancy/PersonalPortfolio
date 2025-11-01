@@ -65,14 +65,32 @@ const Chapter1 = () => {
 			},
 			'<'
 		)
-		emojiTl.to('.c1-emoji', {
-			x: -100,
-			scrollTrigger: {
-				trigger: '.chapter1',
-				start: 'top top-=600px',
-				end: '+=400px',
-				scrub: true,
-			},
+
+		// Responsive emoji x positioning using gsap.matchMedia
+		const mm = gsap.matchMedia()
+
+		mm.add('(max-width: 599px)', () => {
+			emojiTl.to(`.${styles.me}`, {
+				x: 100,
+				scrollTrigger: {
+					trigger: '.chapter1',
+					start: 'top top-=600px',
+					end: '+=400px',
+					scrub: true,
+				},
+			})
+		})
+
+		mm.add('(min-width: 600px)', () => {
+			emojiTl.to(`.${styles.me}`, {
+				x: -100,
+				scrollTrigger: {
+					trigger: '.chapter1',
+					start: 'top top-=600px',
+					end: '+=400px',
+					scrub: true,
+				},
+			})
 		})
 
 		// Title animations
@@ -175,33 +193,29 @@ const Chapter1 = () => {
 			scrollTrigger: {
 				trigger: '.chapter1',
 				start: 'top top-=800px',
-				end: '+=400px',
+				end: '+=800px',
 				scrub: true,
 			},
 		})
 		gpaTl.to('.c1-gpa', { autoAlpha: 1, duration: 1 })
-
-		// Speech bubble animations
-		const speechTl = gsap.timeline({
-			scrollTrigger: {
-				trigger: '.chapter1',
-				start: 'top top-=1100px',
-				end: '+=200px',
-				scrub: true,
-			},
-		})
-		speechTl.to('.c1-bubble', {
+		gpaTl.to('.c1-bubble', {
 			autoAlpha: 1,
 			duration: 1,
+			delay: 1,
 		})
-		speechTl.to(`.${styles.happy}`, {
+		gpaTl.to(`.${styles.happy}`, {
 			autoAlpha: 0,
 			duration: 0.25,
+			delay: 1,
 		})
-		speechTl.to(`.${styles.wonder}`, {
-			autoAlpha: 1,
-			duration: 0.25,
-		})
+		gpaTl.to(
+			`.${styles.wonder}`,
+			{
+				autoAlpha: 1,
+				duration: 0.25,
+			},
+			'<'
+		)
 
 		// Computer animations
 		const computerTl = gsap.timeline({
@@ -249,30 +263,23 @@ const Chapter1 = () => {
 							<FontAwesomeIcon
 								icon={faFaceAwesome}
 								className={styles.happy}
-								fontSize={'40px'}
 							/>
 							<FontAwesomeIcon
 								icon={faFaceThinking}
 								className={styles.wonder}
-								fontSize={'40px'}
 							/>
 						</div>
 						<FontAwesomeIcon
 							icon={faDesktop}
 							className={cn(styles.computer, 'c1-computer')}
-							fontSize={'60px'}
 						/>
 						<div className={styles.gpa}>
 							<FontAwesomeIcon
 								icon={faUserTie}
 								className={cn('c1-gpa', styles.body)}
-								fontSize={'80px'}
 							/>
 							<div className={cn('c1-bubble', styles.bubble)}>
-								<FontAwesomeIcon
-									icon={faComment}
-									fontSize={'160px'}
-								/>
+								<FontAwesomeIcon icon={faComment} />
 								<p
 									className={cn(
 										'c1-question',

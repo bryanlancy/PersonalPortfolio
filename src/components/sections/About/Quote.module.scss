@@ -16,8 +16,10 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
+	width: fit-content;
 
 	margin: 8px 0;
+
 	figcaption {
 		margin-top: 4px;
 	}
