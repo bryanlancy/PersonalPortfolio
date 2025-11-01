@@ -20,19 +20,12 @@
 	display: flex;
 	gap: 16px;
 	height: 40px;
-
-	// border: 1px solid red;
 }
 
 .storyControls {
 	display: flex;
 	align-items: center;
 
-	// height: 100%;
-
-	// padding: 0px 12px;
-	// padding-top: 12px;
-	// background-color: rgba(0, 0, 0, 0.8);
 	border-radius: 8px 8px 0 0;
 	backdrop-filter: blur(10px);
 }
@@ -56,6 +49,7 @@
 	font-size: 16px;
 	font-family: var(--font-bebas);
 	text-wrap: nowrap;
+	color: #fff;
 
 	transition: all 0.3s ease;
 
@@ -78,10 +72,6 @@
 		transform: scale(1.05);
 		box-shadow: 0 8px 25px rgba(43, 160, 43, 0.3);
 	}
-
-	span {
-		color: #70e03c;
-	}
 }
 
 .skip {
@@ -92,10 +82,6 @@
 		transform: scale(1.05);
 		box-shadow: 0 8px 25px rgba(255, 0, 0, 0.3);
 	}
-
-	span {
-		color: #ff8e8e;
-	}
 }
 
 .top {
@@ -105,9 +91,5 @@
 		background-color: #a6dcff;
 		transform: scale(1.05);
 		box-shadow: 0 8px 25px rgba(126, 203, 255, 0.4);
-	}
-
-	span {
-		color: #006bb3;
 	}
 }
