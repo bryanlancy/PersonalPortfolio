@@ -99,7 +99,7 @@ const Chapter1 = () => {
 				trigger: '.chapter1',
 				start: 'top top',
 				end: '+=900',
-				toggleActions: 'play none none reverse',
+				toggleActions: 'play none none reset',
 			},
 		})
 		titleTl.to('.c1-title', {
