@@ -76,7 +76,7 @@ const TypeText: FC<TypeTextProps> = ({
 
 		// Split text into lines and characters
 		const splitText = SplitText.create(textRef.current, {
-			type: ['lines', 'chars'],
+			type: 'lines, chars',
 			deepSlice: true,
 			autoSplit: true,
 		})
@@ -125,9 +125,12 @@ const TypeText: FC<TypeTextProps> = ({
 				})
 
 				if (firstLineChars.length > 0) {
-					const firstCharRect = firstLineChars[0].getBoundingClientRect()
-					const initialX = firstCharRect.left - (containerRect?.left || 0)
-					const initialY = firstCharRect.top - (containerRect?.top || 0)
+					const firstCharRect =
+						firstLineChars[0].getBoundingClientRect()
+					const initialX =
+						firstCharRect.left - (containerRect?.left || 0)
+					const initialY =
+						firstCharRect.top - (containerRect?.top || 0)
 
 					gsap.set(cursorRef.current, {
 						x: initialX,
@@ -189,7 +192,8 @@ const TypeText: FC<TypeTextProps> = ({
 
 				// Animate characters appearing for this line
 				lineChars.forEach((char, charOffset) => {
-					const charStartTime = totalDuration + charOffset * typeSpeed * 1.3
+					const charStartTime =
+						totalDuration + charOffset * typeSpeed * 1.3
 
 					textTl.current.to(
 						char,
