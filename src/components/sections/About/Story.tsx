@@ -25,10 +25,10 @@ const Story: FC<StoryProps> = ({}) => {
 			<SpreadsheetContextProvider>
 				<Chapter2 />
 				<Spreadsheet />
+				<Bar />
+				<Pie />
 				<NoSsr>
-					<Pie />
 					<Scatter />
-					<Bar />
 				</NoSsr>
 				<Chapter3 />
 				<BarSwipe />
