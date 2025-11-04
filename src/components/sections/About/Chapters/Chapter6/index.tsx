@@ -1,31 +1,19 @@
-import { useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import { cn } from '@/utils/react'
 import Calendar from './Calendar'
-import Projects from './Projects'
 
 import styles from './Chapter6.module.scss'
 import Container from '@/utils/components/Container'
+import ChapterScrollContainer from '@/components/ChapterScrollContainer'
+import Desk from './Desk'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const Chapter6 = () => {
-	const containerRef = useRef<HTMLDivElement>(null)
-
 	useGSAP(() => {
-		// Container scroll with screen
-		gsap.to(containerRef.current, {
-			scrollTrigger: {
-				trigger: containerRef.current,
-				start: 'top top',
-				end: '+=3000',
-				pin: true,
-			},
-		})
-
 		// Fade out light from previous animations
 		const lightExit = gsap.timeline({
 			scrollTrigger: {
@@ -101,7 +89,10 @@ const Chapter6 = () => {
 	const line4 = ` while continuing to work on passion projects at home.`
 	return (
 		<div id='chapter6' className={cn('chapter6', styles.chapter6)}>
-			<div ref={containerRef} className={styles.container}>
+			<ChapterScrollContainer
+				triggerClassName='c6-container'
+				scrollDistance={3000}
+				className={styles.container}>
 				<Container>
 					<h1 className={cn('c6-title', styles.title)}>{title}</h1>
 					<Calendar />
@@ -111,9 +102,9 @@ const Chapter6 = () => {
 					<p className={cn(styles.line, styles.line3)}>{line3}</p>
 					<p className={cn(styles.line, styles.line4)}>{line4}</p>
 
-					<Projects />
+					<Desk />
 				</Container>
-			</div>
+			</ChapterScrollContainer>
 		</div>
 	)
 }

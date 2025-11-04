@@ -21,6 +21,7 @@ import styles from './Chapter5.module.scss'
 import Network from './Network'
 import { NoSsr } from '@/utils/next'
 import Container from '@/utils/components/Container'
+import ChapterScrollContainer from '@/components/ChapterScrollContainer'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText)
 
@@ -49,22 +50,10 @@ const Chapter5 = () => {
 	const lineComputer = 'just a computer'
 	const lineInternet = 'and an internet connection.'
 
-	const containerRef = useRef<HTMLDivElement>(null)
-
 	const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
 	const colorRotator = arrRotator(colors)
 
 	useGSAP(() => {
-		// Container scroll with screen
-		gsap.to(containerRef.current, {
-			scrollTrigger: {
-				trigger: containerRef.current,
-				start: 'top top',
-				end: '+=4000',
-				pin: true,
-			},
-		})
-
 		const backgoundTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter5',
@@ -183,7 +172,10 @@ const Chapter5 = () => {
 
 	return (
 		<div id='chapter5' className={cn('chapter5', styles.chapter5)}>
-			<div className={styles.container} ref={containerRef}>
+			<ChapterScrollContainer
+				triggerClassName='c5-container'
+				scrollDistance={4000}
+				className={styles.container}>
 				<Container>
 					<NoSsr>
 						<Network />
@@ -271,7 +263,7 @@ const Chapter5 = () => {
 						</div>
 					</div>
 				</Container>
-			</div>
+			</ChapterScrollContainer>
 		</div>
 	)
 }

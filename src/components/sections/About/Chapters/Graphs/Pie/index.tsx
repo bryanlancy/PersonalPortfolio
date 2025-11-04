@@ -3,9 +3,11 @@ import { useGSAP } from '@gsap/react'
 import DrawSVGPlugin from 'gsap/DrawSVGPlugin'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-import styles from './Graphs.module.scss'
+import styles from './Pie.module.scss'
 
 gsap.registerPlugin(useGSAP, DrawSVGPlugin, ScrollTrigger)
+
+export { styles as pieStyles }
 
 const Pie = () => {
 	useGSAP(() => {
@@ -42,27 +44,71 @@ const Pie = () => {
 				'<'
 			)
 
-		const pieTransitionTl = gsap.timeline({
-			scrollTrigger: {
-				trigger: '.chapter3',
-				start: 'top center',
-				end: '+=600px',
-				toggleActions: 'play complete none reverse',
-			},
-		})
-		pieTransitionTl
-			.to(`.${styles.circle1}`, {
-				delay: 0.5,
-				x: 0,
-				y: 0,
-			})
-			.to(
-				`.${styles.pie}`,
-				{
-					rotate: 120,
+		const mm = gsap.matchMedia()
+
+		// Desktop and larger: use -50vh
+		mm.add('(min-width: 1240px)', () => {
+			const pieTransitionTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.chapter3',
+					start: 'top center',
+					end: '+=1000px',
+					toggleActions: 'play complete none reverse',
 				},
-				'<'
-			)
+			})
+			pieTransitionTl
+				.to(`.${styles.circle1}`, {
+					delay: 0.5,
+					x: 0,
+					y: 0,
+				})
+				.to(
+					`.${styles.pie}`,
+					{
+						rotate: 120,
+					},
+					'<'
+				)
+				.to(
+					`.${styles.pie}`,
+					{
+						y: '-45vh',
+					},
+					'<'
+				)
+		})
+
+		// Below desktop: use -30vh
+		mm.add('(max-width: 1239px)', () => {
+			const pieTransitionTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.chapter3',
+					start: 'top center',
+					end: '+=1000px',
+					toggleActions: 'play complete none reverse',
+				},
+			})
+			pieTransitionTl
+				.to(`.${styles.circle1}`, {
+					delay: 0.5,
+					x: 0,
+					y: 0,
+				})
+				.to(
+					`.${styles.pie}`,
+					{
+						rotate: 120,
+					},
+					'<'
+				)
+				.to(
+					`.${styles.pie}`,
+					{
+						y: '-30vh',
+					},
+					'<'
+				)
+		})
 	}, [])
 
 	return (

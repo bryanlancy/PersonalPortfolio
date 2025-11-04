@@ -25,6 +25,7 @@ import { cn } from '@/utils/react'
 import styles from './Chapter4.module.scss'
 import DayNight from './DayNight'
 import Container from '@/utils/components/Container'
+import ChapterScrollContainer from '@/components/ChapterScrollContainer'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText)
 
@@ -37,19 +38,7 @@ const Chapter4 = () => {
 	const line5 = 'The first time I saw an LED respond to my code'
 	const line6 = 'I was hooked.'
 
-	const containerRef = useRef<HTMLDivElement>(null)
-
 	useGSAP(() => {
-		// Container scroll with screen
-		gsap.to(containerRef.current, {
-			scrollTrigger: {
-				trigger: containerRef.current,
-				start: 'top top',
-				end: '+=4750',
-				pin: true,
-			},
-		})
-
 		// Title Animation
 		const titleTl = gsap.timeline({
 			scrollTrigger: {
@@ -413,7 +402,10 @@ const Chapter4 = () => {
 
 	return (
 		<div id='chapter4' className={cn('chapter4', styles.chapter4)}>
-			<div ref={containerRef} className={styles.container}>
+			<ChapterScrollContainer
+				triggerClassName='c4-container'
+				scrollDistance={4750}
+				className={styles.container}>
 				<Container>
 					<h1 className={styles.title}>{title}</h1>
 
@@ -465,7 +457,7 @@ const Chapter4 = () => {
 						/>
 					</div>
 				</Container>
-			</div>
+			</ChapterScrollContainer>
 			<div className={cn('lightContainer', styles.lightContainer)}>
 				<FontAwesomeIcon
 					icon={faLightbulb}

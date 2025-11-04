@@ -5,13 +5,17 @@
 	top: 0;
 	left: 0;
 
-	width: 520px;
-	height: 480px;
+	width: 100%;
+	aspect-ratio: 520 / 480;
 	perspective: 1000px;
 
 	transform: translateX(-600px);
 	@include autoAlpha;
 	z-index: 1;
+
+	@include laptop {
+		width: 45%;
+	}
 }
 .pageAnim {
 	transform-origin: top left;
