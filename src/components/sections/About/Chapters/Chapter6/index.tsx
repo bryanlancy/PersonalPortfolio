@@ -4,11 +4,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import { cn } from '@/utils/react'
 import Calendar from './Calendar'
-
-import styles from './Chapter6.module.scss'
 import Container from '@/utils/components/Container'
 import ChapterScrollContainer from '@/components/ChapterScrollContainer'
 import Desk from './Desk'
+
+import styles from './Chapter6.module.scss'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
