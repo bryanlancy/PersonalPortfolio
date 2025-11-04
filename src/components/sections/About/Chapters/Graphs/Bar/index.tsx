@@ -5,7 +5,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import styles from './Bar.module.scss'
 import { interpolateColors } from '@/utils/styles'
 import { cn } from '@/utils/react'
-import { pieStyles } from '../Pie'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -93,7 +92,11 @@ const Bar = () => {
 			duration: 0.1,
 			autoAlpha: 0,
 		})
-		overflowTl.to(`.${pieStyles.pie}`, {
+		overflowTl.to(`.pie-chart`, {
+			duration: 0.1,
+			autoAlpha: 0,
+		})
+		overflowTl.to(`.scatter-chart`, {
 			duration: 0.1,
 			autoAlpha: 0,
 		})

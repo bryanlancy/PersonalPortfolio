@@ -4,10 +4,9 @@ import DrawSVGPlugin from 'gsap/DrawSVGPlugin'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import styles from './Pie.module.scss'
+import { cn } from '@/utils/react'
 
 gsap.registerPlugin(useGSAP, DrawSVGPlugin, ScrollTrigger)
-
-export { styles as pieStyles }
 
 const Pie = () => {
 	useGSAP(() => {
@@ -23,12 +22,13 @@ const Pie = () => {
 				trigger: '.chapter2',
 				start: 'top top-=2200px',
 				end: '+=600px',
-				toggleActions: 'play complete none reverse',
+				toggleActions: 'play none none reverse',
+				fastScrollEnd: true,
 			},
 		})
 		pieTl
 			.to(`.${styles.pie}`, {
-				duration: 0.1,
+				duration: 0.3,
 				autoAlpha: 1,
 			})
 			.to(`.${styles.circle1}`, { drawSVG: '0% 37%' })
@@ -52,8 +52,9 @@ const Pie = () => {
 				scrollTrigger: {
 					trigger: '.chapter3',
 					start: 'top center',
-					end: '+=1000px',
+					end: '+=700px',
 					toggleActions: 'play complete none reverse',
+					fastScrollEnd: true,
 				},
 			})
 			pieTransitionTl
@@ -72,7 +73,7 @@ const Pie = () => {
 				.to(
 					`.${styles.pie}`,
 					{
-						y: '-45vh',
+						y: '-50vh',
 					},
 					'<'
 				)
@@ -84,7 +85,7 @@ const Pie = () => {
 				scrollTrigger: {
 					trigger: '.chapter3',
 					start: 'top center',
-					end: '+=1000px',
+					end: '+=700px',
 					toggleActions: 'play complete none reverse',
 				},
 			})
@@ -112,7 +113,7 @@ const Pie = () => {
 	}, [])
 
 	return (
-		<div className={styles.pie}>
+		<div className={cn(styles.pie, 'pie-chart')}>
 			<svg
 				id='demo'
 				xmlns='http://www.w3.org/2000/svg'

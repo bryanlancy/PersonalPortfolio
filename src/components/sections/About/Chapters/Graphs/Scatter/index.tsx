@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Coord } from '@/utils/general'
 import { generatePoints, lineOfBestFit, printPoint } from '@/utils/svg'
 import styles from './Scatter.module.scss'
+import { cn } from '@/utils/react'
 
 gsap.registerPlugin(useGSAP, DrawSVGPlugin, ScrollTrigger)
 
@@ -55,7 +56,7 @@ const Scatter = () => {
 					start: 'top top-=2200px',
 					end: '+=100px',
 					fastScrollEnd: true,
-					toggleActions: 'play complete none reverse',
+					toggleActions: 'play none none reverse',
 				},
 			})
 			showScatterTl.to(`.${styles.scatter}`, {
@@ -184,7 +185,7 @@ const Scatter = () => {
 	}, [points])
 
 	return (
-		<div className={styles.scatter}>
+		<div className={cn(styles.scatter, 'scatter-chart')}>
 			<svg viewBox={`0 0 ${svgWidth} ${svgHeight}`}>
 				<path
 					ref={xLineRef}
