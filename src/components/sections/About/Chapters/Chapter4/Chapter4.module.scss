@@ -22,18 +22,19 @@
 	word-wrap: normal;
 
 	text-align: left;
-	width: 90px;
+	width: 110px;
+
+	border: 1px solid red;
 
 	@include tablet {
 		top: 18px;
 		left: 18px;
-		width: 110px;
 	}
 
 	@include laptop {
 		top: 24px;
 		left: 24px;
-	width: 120px;
+		width: 120px;
 	}
 }
 
