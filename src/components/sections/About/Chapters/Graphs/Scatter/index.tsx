@@ -51,16 +51,17 @@ const Scatter = () => {
 		// Only show scatter chart on desktop and larger screens
 		mm.add('(min-width: 1240px)', () => {
 			const showScatterTl = gsap.timeline({
+				defaults: { duration: 1, ease: 'sine.inOut' },
 				scrollTrigger: {
 					trigger: '.chapter2',
 					start: 'top top-=2200px',
-					end: '+=100px',
+					end: '+=600px',
 					fastScrollEnd: true,
 					toggleActions: 'play none none reverse',
 				},
 			})
 			showScatterTl.to(`.${styles.scatter}`, {
-				duration: 0.1,
+				duration: 0.3,
 				autoAlpha: 1,
 			})
 		})
@@ -180,6 +181,21 @@ const Scatter = () => {
 			scatterTransitionTl.to(`.${styles.scatter}`, {
 				ease: 'power1',
 				y: '-20vh',
+			})
+
+			// Hide scatter chart when chapter4 overflow animation starts
+			const scatterHideTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.chapter4',
+					start: 'top bottom+=1000px',
+					end: '+=1300px',
+					toggleActions: 'play complete none reverse',
+					fastScrollEnd: true,
+				},
+			})
+			scatterHideTl.to(`.${styles.scatter}`, {
+				duration: 0.1,
+				autoAlpha: 0,
 			})
 		})
 	}, [points])

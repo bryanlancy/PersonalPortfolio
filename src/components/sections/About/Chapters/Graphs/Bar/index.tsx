@@ -92,14 +92,14 @@ const Bar = () => {
 			duration: 0.1,
 			autoAlpha: 0,
 		})
-		overflowTl.to(`.pie-chart`, {
-			duration: 0.1,
-			autoAlpha: 0,
-		})
-		overflowTl.to(`.scatter-chart`, {
-			duration: 0.1,
-			autoAlpha: 0,
-		})
+		overflowTl.to(
+			`.pie-chart`,
+			{
+				duration: 0.1,
+				autoAlpha: 0,
+			},
+			'<'
+		)
 		overflowTl.to(
 			'.chapter3 > div',
 			{
