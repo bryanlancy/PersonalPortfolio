@@ -3,10 +3,17 @@
 .container {
 	position: absolute;
 	bottom: 24px;
-	right: 24px;
+	left: 0;
+	right: 0;
 
-	width: 800px;
-	height: 600px;
+	aspect-ratio: 800 / 600;
+
+	@include laptop {
+		left: auto;
+		width: 800px;
+		aspect-ratio: auto;
+		height: 600px;
+	}
 }
 
 .boxes {
@@ -22,7 +29,8 @@
 .box {
 	position: absolute;
 	bottom: 224px;
-	--boxSize: 120px;
+	/* 120px / 800px = 15% */
+	--boxSize: 15%;
 
 	width: var(--boxSize);
 	height: var(--boxSize);
@@ -36,14 +44,27 @@
 	filter: drop-shadow(0px 4px 8px #0008);
 
 	&.pro {
-		left: 80px;
+		/* 80px / 800px = 10% */
+		left: 10%;
 
 		color: rgb(127, 167, 137);
 	}
 	&.hobby {
-		right: 80px;
+		/* 80px / 800px = 10% */
+		right: 10%;
 
 		color: rgb(167, 127, 146);
+	}
+
+	@include laptop {
+		--boxSize: 120px;
+
+		&.pro {
+			left: 80px;
+		}
+		&.hobby {
+			right: 80px;
+		}
 	}
 	.icon {
 		width: 100%;

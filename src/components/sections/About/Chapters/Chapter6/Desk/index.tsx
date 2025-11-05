@@ -8,9 +8,50 @@ import {
 	faFaceRelieved,
 } from '@awesome.me/kit-ddd907bdb7/icons/duotone/regular'
 
+import Box from './Box'
+
 import styles from './Desk.module.scss'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
+
+interface BoxesProps {
+	hobby: number
+	pro: number
+}
+function Boxes({ hobby, pro }: BoxesProps) {
+	const hobbyBoxes = []
+	const proBoxes = []
+	const boxOffset = 80
+	for (let i = 0; i < hobby; i++) {
+		hobbyBoxes.push(
+			<Box
+				key={`hob-box-${Math.random().toFixed(4)}`}
+				start={200 + i * 400}
+				type='hobby'
+				endY={-i * boxOffset}
+				size={120}
+			/>
+		)
+	}
+	for (let i = 0; i < pro; i++) {
+		proBoxes.push(
+			<Box
+				key={`pro-box-${Math.random().toFixed(4)}`}
+				start={2000 + i * 350}
+				type='pro'
+				endY={-i * boxOffset}
+				size={120}
+			/>
+		)
+	}
+
+	return (
+		<div className={styles.boxes}>
+			{hobbyBoxes}
+			{proBoxes}
+		</div>
+	)
+}
 
 const Desk = () => {
 	useGSAP(() => {
@@ -47,7 +88,7 @@ const Desk = () => {
 			<FontAwesomeIcon icon={faChairOffice} className={styles.chair} />
 			<FontAwesomeIcon icon={faFaceRelieved} className={styles.face} />
 			<FontAwesomeIcon icon={faFaceParty} className={styles.faceParty} />
-
+			<Boxes hobby={6} pro={4} />
 			<div className={styles.desk}>
 				<div className={styles.top}>
 					<div className={styles.drawerLeft}>

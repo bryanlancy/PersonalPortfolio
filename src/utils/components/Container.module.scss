@@ -2,5 +2,52 @@
 
 .content {
 	@include container;
-	// border: 1px solid red;
+	// border: 1px solid red !important;
+}
+
+.debug {
+	border: 1px solid red !important;
+}
+.debugIndicator {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 9999;
+
+	margin: 0;
+	padding: 4px 8px;
+
+	font-size: 12px;
+	background-color: rgba(255, 0, 0, 0.8);
+	color: #fff;
+	pointer-events: none;
+
+	// Default content for mobile (max-width: 599px)
+	&::after {
+		content: 'mobile';
+	}
+
+	@include tablet {
+		&::after {
+			content: 'tablet';
+		}
+	}
+
+	@include laptop {
+		&::after {
+			content: 'laptop';
+		}
+	}
+
+	@include desktop {
+		&::after {
+			content: 'desktop';
+		}
+	}
+
+	@include hd {
+		&::after {
+			content: 'hd';
+		}
+	}
 }

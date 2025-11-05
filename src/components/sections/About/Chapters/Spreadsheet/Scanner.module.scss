@@ -11,6 +11,14 @@
 		height: 200px;
 
 		@include autoAlpha;
+
+		@include mobile {
+			left: -120px;
+		}
+
+		@include tablet {
+			left: -140px;
+		}
 	}
 	&Gun {
 		position: absolute;

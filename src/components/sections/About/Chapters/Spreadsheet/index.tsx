@@ -88,9 +88,9 @@ const Spreadsheet: FC<SpreadsheetProps> = ({}) => {
 		spreadsheetTl1.to(`.${styles.spreadsheet}`, {
 			autoAlpha: 0,
 		})
-		spreadsheetTl1.set('.spreadsheet', {
-			x: -120,
-		})
+		// spreadsheetTl1.set('.spreadsheet', {
+		// 	x: -120,
+		// })
 		spreadsheetTl1.to('.spreadsheet', {
 			autoAlpha: 1,
 		})
@@ -146,7 +146,7 @@ const Spreadsheet: FC<SpreadsheetProps> = ({}) => {
 					<tr>
 						<th>Part Name</th>
 						<th>Part Id</th>
-						<th>Unit Price ($)</th>
+						<th>Unit ($)</th>
 						<th>Qty</th>
 						<th>Total Cost</th>
 					</tr>

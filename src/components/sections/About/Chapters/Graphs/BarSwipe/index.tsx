@@ -13,11 +13,15 @@ const BarSwipe = () => {
 				trigger: '.chapter4',
 				start: 'top center+=400px',
 				end: '+=1000px',
+				toggleActions: 'play none none reverse',
 				scrub: true,
 				fastScrollEnd: true,
 			},
 		})
-
+		exitTransitionTl.set(`.${styles.swipe}`, {
+			autoAlpha: 1,
+			duration: 0.1,
+		})
 		exitTransitionTl.to(`.${styles.swipe}`, {
 			yPercent: -100,
 			duration: 2.5,

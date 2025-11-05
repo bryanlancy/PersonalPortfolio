@@ -13,13 +13,34 @@
 	border-radius: var(--spreadsheet-radius);
 	box-shadow: -4px 4px 12px 0px #0008;
 
+	transform: translateX(-120px);
+
 	@include autoAlpha;
 
+	@include mobile {
+		top: 224px;
+		right: 8px;
+		width: 280px;
+		height: 350px;
+		transform: scale(0.7);
+		transform-origin: top right;
+
+		table {
+			font-size: 12px;
+		}
+	}
+
 	@include tablet {
-		top: 200px;
-		right: 6px;
-		width: 75%;
-		height: 65vh;
+		top: 300px;
+		right: 12px;
+		width: 400px;
+		height: 500px;
+		transform: scale(0.85);
+		transform-origin: top right;
+
+		table {
+			font-size: 14px;
+		}
 	}
 
 	@include laptop {
@@ -27,6 +48,11 @@
 		right: 8px;
 		width: 544px;
 		height: 70vh;
+		transform: none;
+
+		table {
+			font-size: 14px;
+		}
 	}
 
 	table {
@@ -65,7 +91,7 @@
 			width: 200px;
 		}
 		&:nth-child(2) {
-			width: 100px;
+			width: 120px;
 		}
 		&:nth-child(3) {
 			width: 100px;

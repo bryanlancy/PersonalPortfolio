@@ -8,6 +8,8 @@ type MotionWithChildren = PropsWithChildren<ContainerProps>
 interface ContainerProps {
 	/** The Container Component comes wih default styling. Use this prop to override or add additional styling. */
 	className?: string
+	/** When true, displays a debug indicator in the top right corner showing the current breakpoint. */
+	debug?: boolean
 }
 
 /**
@@ -22,11 +24,14 @@ interface ContainerProps {
  * </Conainer>
  */
 const Container: FC<MotionWithChildren> = props => {
-	const { children, className, ...rest } = props
+	const { children, className, debug = false, ...rest } = props
 
 	return (
-		<div className={cn(styles.content, className)} {...rest}>
+		<div
+			className={cn(styles.content, className, [debug, styles.debug])}
+			{...rest}>
 			{children}
+			{debug && <p className={styles.debugIndicator} />}
 		</div>
 	)
 }

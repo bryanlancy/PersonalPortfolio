@@ -10,6 +10,7 @@ import TypeText from '@/utils/components/TypeText'
 import useStateRef from 'react-usestateref'
 import Conveyor from './Conveyor'
 import Container from '@/utils/components/Container'
+import ChapterScrollContainer from '@/components/ChapterScrollContainer'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -26,19 +27,8 @@ const Chapter3 = () => {
 	const showLine3State = useStateRef<boolean>(false)
 
 	const titleRef = useRef<HTMLHeadingElement>(null)
-	const containerRef = useRef<HTMLDivElement>(null)
 
 	useGSAP(() => {
-		// Container scroll with screen
-		gsap.to(containerRef.current, {
-			scrollTrigger: {
-				trigger: containerRef.current,
-				start: 'top top',
-				end: '+=2800',
-				pin: true,
-			},
-		})
-
 		// Title Animation
 		const titleInTl = gsap.timeline({
 			scrollTrigger: {
@@ -144,7 +134,10 @@ const Chapter3 = () => {
 
 	return (
 		<div id='chapter3' className={cn('chapter3', styles.chapter3)}>
-			<div ref={containerRef} className={styles.container}>
+			<ChapterScrollContainer
+				triggerClassName='c3-container'
+				scrollDistance={2800}
+				className={styles.container}>
 				<Container>
 					<h1 ref={titleRef} className={styles.title}>
 						{title}
@@ -181,7 +174,7 @@ const Chapter3 = () => {
 					</TypeText>
 				</Container>
 				<Conveyor />
-			</div>
+			</ChapterScrollContainer>
 		</div>
 	)
 }

@@ -2,7 +2,7 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-import styles from './Graphs.module.scss'
+import styles from './Bar.module.scss'
 import { interpolateColors } from '@/utils/styles'
 import { cn } from '@/utils/react'
 
@@ -62,7 +62,6 @@ const Bar = () => {
 				end: '+=1300px',
 				toggleActions: 'play complete none reverse',
 				fastScrollEnd: true,
-				// preventOverlaps: true,
 			},
 		})
 		overflowTl.to(`.${styles.barLast}`, {
@@ -89,22 +88,18 @@ const Bar = () => {
 			scale: 1,
 			stagger: 0.1,
 		})
-		// overflowTl.to('.graphs', {
-		// 	duration: 0.3,
-		// 	autoAlpha: 0,
-		// })
-		// overflowTl.to(
-		// 	'.spreadsheet',
-		// 	{
-		// 		duration: 0.1,
-		// 		autoAlpha: 0,
-		// 	},
-		// 	'<'
-		// )
 		overflowTl.to(`.${styles.barContainer}`, {
 			duration: 0.1,
 			autoAlpha: 0,
 		})
+		overflowTl.to(
+			`.pie-chart`,
+			{
+				duration: 0.1,
+				autoAlpha: 0,
+			},
+			'<'
+		)
 		overflowTl.to(
 			'.chapter3 > div',
 			{

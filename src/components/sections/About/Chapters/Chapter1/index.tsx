@@ -9,12 +9,13 @@ import { faComment } from '@awesome.me/kit-ddd907bdb7/icons/sharp/thin'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Background from './Background'
 
+import Background from './Background'
 import { cn } from '@/utils/react'
+import Container from '@/utils/components/Container'
+import ChapterScrollContainer from '@/components/ChapterScrollContainer'
 
 import styles from './Chapter1.module.scss'
-import Container from '@/utils/components/Container'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -27,19 +28,12 @@ const Chapter1 = () => {
 	const line3 =
 		"That question sparked the curiosity that's shaped my career ever since."
 
+	const line1Offset = 600
+	const line2Offset = line1Offset + 400
+	const line3Offset = line2Offset + 600
 	useGSAP(() => {
-		// Container scroll with screen
-		gsap.to('.c1-container', {
-			scrollTrigger: {
-				trigger: '.c1-container',
-				start: 'top top',
-				end: '+=3000',
-				pin: true,
-			},
-		})
-
-		const emojiTl = gsap.timeline()
 		// Emoji animations
+		const emojiTl = gsap.timeline()
 		emojiTl.set('.c1-emoji', {
 			top: '30%',
 		})
@@ -123,7 +117,7 @@ const Chapter1 = () => {
 		const line1Tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter1',
-				start: 'top top+=0px',
+				start: `top top-=${line1Offset}px`,
 				end: '+=1200',
 				scrub: true,
 			},
@@ -149,7 +143,7 @@ const Chapter1 = () => {
 		const line2Tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter1',
-				start: 'top top-=600px',
+				start: `top top-=${line2Offset}px`,
 				end: '+=1600',
 				scrub: true,
 			},
@@ -170,7 +164,7 @@ const Chapter1 = () => {
 		const line3Tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter1',
-				start: 'top top-=1800px',
+				start: `top top-=${line3Offset}px`,
 				end: '+=1200',
 				scrub: true,
 			},
@@ -255,7 +249,10 @@ const Chapter1 = () => {
 	return (
 		<div id='chapter1' className={cn(styles.chapter1, 'chapter1')}>
 			<Background />
-			<div className={cn('c1-container', styles.container)}>
+
+			<ChapterScrollContainer
+				triggerClassName='c1-container'
+				scrollDistance={3000}>
 				<Container>
 					<h1 className={cn('c1-title', styles.title)}>{title}</h1>
 					<div className={cn(styles.emoji, 'c1-emoji')}>
@@ -300,7 +297,7 @@ const Chapter1 = () => {
 						{line3}
 					</p>
 				</Container>
-			</div>
+			</ChapterScrollContainer>
 		</div>
 	)
 }

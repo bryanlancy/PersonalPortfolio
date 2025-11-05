@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@awesome.me/kit-ddd907bdb7/icons/classic/regular'
-import { faClipboard } from '@awesome.me/kit-ddd907bdb7/icons/sharp-duotone/solid'
 
 import { Contact } from '../../../app/data/contact-list'
+import CopyButton from './CopyButton'
 
 import styles from './ContactCard.module.scss'
 
@@ -34,25 +34,12 @@ export const createBackground: (color: Contact['color']) => string = color => {
 	return background
 }
 
-const copyLink: (
-	e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-	text: string
-) => void = (e, text) => {
-	e.preventDefault()
-	// TODO Add animation for successful/failed copy
-	if (location.protocol !== 'https:') {
-		console.error('Cannot copy to clipboard over insecure connection!')
-		return
-	}
-	// Copy the text inside the text field
-	navigator.clipboard.writeText(text)
-}
-
 type ContactCardProps = {
 	contactMethod: Contact
 	copy?: boolean
 	className?: string
 }
+
 export default function ContactCard({
 	contactMethod,
 	className,
@@ -74,14 +61,7 @@ export default function ContactCard({
 						<FontAwesomeIcon icon={faArrowRight} />
 					</div>
 
-					{copy && (
-						<div
-							className={styles.copy}
-							onClick={e => copyLink(e, link)}>
-							<p>Copy address to clipboard</p>
-							<FontAwesomeIcon icon={faClipboard} />
-						</div>
-					)}
+					{copy && <CopyButton textToCopy={link} />}
 				</div>
 			</div>
 

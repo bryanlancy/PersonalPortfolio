@@ -9,6 +9,7 @@ import { VT323 } from 'next/font/google'
 import Container from '@/utils/components/Container'
 import { cn } from '@/utils/react'
 import TypeText from '@/utils/components/TypeText'
+import ChapterScrollContainer from '@/components/ChapterScrollContainer'
 
 import styles from './Chapter2.module.scss'
 
@@ -23,6 +24,7 @@ const Chapter2 = () => {
 	const line1 = 'I began with building PCs and doing basic repairs.'
 	const line2a = 'In 2011, I started using spreadsheets at my first job and'
 	const line2b = 'was fascinated by how much you could do with just formulas.'
+	const line2 = line2a + line2b
 	const line3 = 'I automated nightly math tasks'
 	const line4 = 'learned some basics of data visualization'
 	const line5 = 'and later'
@@ -33,7 +35,6 @@ const Chapter2 = () => {
 	const line4Offset = 2200
 	const line5Offset = 2400
 	const titleRef = useRef<HTMLHeadingElement>(null)
-	const containerRef = useRef<HTMLDivElement>(null)
 	const showTitleState = useState<boolean>(false)
 	const showLine1State = useState<boolean>(false)
 	const showLine2State = useState<boolean>(false)
@@ -42,16 +43,6 @@ const Chapter2 = () => {
 	const showLine5State = useState<boolean>(false)
 
 	useGSAP(() => {
-		// Container scroll with screen
-		gsap.to('.c2-container', {
-			scrollTrigger: {
-				trigger: '.c2-container',
-				start: 'top top',
-				end: `+=${containerScrollLength}px`,
-				pin: true,
-			},
-		})
-
 		// Title Animation
 		ScrollTrigger.create({
 			trigger: '.chapter2',
@@ -98,7 +89,7 @@ const Chapter2 = () => {
 				},
 			},
 		})
-		line2Tl.to([`.${styles.line2a}`, `.${styles.line2b}`], {
+		line2Tl.to(`.${styles.line2}`, {
 			autoAlpha: 1,
 			duration: 0.5,
 		})
@@ -125,7 +116,7 @@ const Chapter2 = () => {
 			autoAlpha: 1,
 			duration: 0.5,
 		})
-		line3Tl.to([`.${styles.line2a}`, `.${styles.line2b}`], {
+		line3Tl.to(`.${styles.line2}`, {
 			autoAlpha: 0.5,
 		})
 
@@ -192,9 +183,10 @@ const Chapter2 = () => {
 		<div
 			id='chapter2'
 			className={cn('chapter2', styles.chapter2, vt323.className)}>
-			<div
-				ref={containerRef}
-				className={cn('c2-container', styles.container)}>
+			<ChapterScrollContainer
+				triggerClassName='c2-container'
+				scrollDistance={containerScrollLength}
+				className={styles.container}>
 				<Container>
 					<TypeText
 						shouldAnimate={showTitleState[0]}
@@ -213,21 +205,13 @@ const Chapter2 = () => {
 
 					<TypeText
 						shouldAnimate={showLine2State[0]}
-						text={line2a}
+						text={line2}
 						typeSpeed={0.015}
 						cursorLengthAdjust={4}
-						className={cn(styles.line, styles.line2a)}>
-						<p>{line2a}</p>
+						className={cn(styles.line, styles.line2)}>
+						<p>{line2}</p>
 					</TypeText>
-					<TypeText
-						shouldAnimate={showLine2State[0]}
-						text={line2b}
-						typeSpeed={0.015}
-						cursorLengthAdjust={4}
-						delay={1.5}
-						className={cn(styles.line, styles.line2b)}>
-						<p>{line2b}</p>
-					</TypeText>
+
 					<TypeText
 						shouldAnimate={showLine3State[0]}
 						text={line3}
@@ -250,7 +234,7 @@ const Chapter2 = () => {
 						<p>{line5}</p>
 					</TypeText>
 				</Container>
-			</div>
+			</ChapterScrollContainer>
 		</div>
 	)
 }
