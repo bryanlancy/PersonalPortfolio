@@ -146,8 +146,62 @@ const Box: FC<BoxProps> = ({ part, index }) => {
 			)
 		})
 
-		// Tablet and larger: use 200 increment
-		mm.add('(min-width: 600px)', () => {
+		// Tablet: use 200 increment
+		mm.add('(min-width: 600px) and (max-width: 949px)', () => {
+			const conveyorTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: `.${styles.conveyor}`,
+					start: `bottom bottom-=${index * 200 - 1000}`,
+					end: `+=${window.innerWidth / 1.01}px`,
+					scrub: true,
+					onUpdate: () => {
+						const rect = boxRef.current?.getBoundingClientRect()
+						if (!rect || !scannerXState[2].current) return
+						const midPoint = (rect.left + rect.right) * 0.48
+
+						if (!scanned.current) {
+							// Check for scan
+							if (midPoint < scannerXState[2].current) {
+								scan()
+								addOne()
+								scanned.current = true
+							}
+						} else {
+							// Check for unscan
+							if (midPoint > scannerXState[2].current) {
+								subOne()
+								scanned.current = false
+							}
+						}
+					},
+				},
+			})
+			conveyorTl.to(`#${boxId}`, {
+				autoAlpha: 1,
+				duration: 0.5,
+			})
+			conveyorTl.to(
+				`#${boxId}`,
+				{
+					ease: 'none',
+					duration: 5,
+					x: () => {
+						return -window.innerWidth - 100
+					},
+				},
+				'<'
+			)
+			conveyorTl.to(
+				`#${boxId}`,
+				{
+					autoAlpha: 0,
+				},
+				'>-.5'
+			)
+		})
+
+		// Laptop: use 200 increment
+		mm.add('(min-width: 950px)', () => {
 			const conveyorTl = gsap.timeline({
 				scrollTrigger: {
 					trigger: `.${styles.conveyor}`,

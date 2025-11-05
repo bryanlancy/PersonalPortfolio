@@ -90,6 +90,7 @@ const Bar = () => {
 				},
 			})
 			mainBarTransitionTl.to(`.${styles.barContainer}`, {
+				delay: 0.5,
 				y: -64, // 72 - 120 = -48 (moves up 120px from laptop's y: 72)
 				x: -32,
 			})

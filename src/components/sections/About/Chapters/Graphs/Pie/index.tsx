@@ -59,7 +59,6 @@ const Pie = () => {
 			})
 			pieTransitionTl
 				.to(`.${styles.circle1}`, {
-					delay: 0.5,
 					x: 0,
 					y: 0,
 				})
@@ -91,7 +90,6 @@ const Pie = () => {
 			})
 			pieTransitionTl
 				.to(`.${styles.circle1}`, {
-					delay: 0.5,
 					x: 0,
 					y: 0,
 				})
