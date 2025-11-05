@@ -82,14 +82,39 @@
 	@include autoAlpha;
 
 	> .bar {
-		background-color: red;
-
 		@for $i from 1 through 5 {
 			&:nth-child(#{$i}) {
 				width: 200px + (40px * $i * $i/3);
 				height: 180px + (140px * $i * $i/2);
 				z-index: $i * 1;
 				box-shadow: -4px 0px 2px 0px #000800 inset;
+			}
+		}
+	}
+
+	@include mobile {
+		width: 80vw;
+		> .bar {
+			@for $i from 1 through 5 {
+				&:nth-child(#{$i}) {
+					width: 300px + (40px * $i * $i/3);
+					height: 200px + (60px * $i * $i/2);
+					z-index: $i * 1;
+					box-shadow: -4px 0px 2px 0px #000800 inset;
+				}
+			}
+		}
+	}
+	@include tablet {
+		width: 80vw;
+		> .bar {
+			@for $i from 1 through 5 {
+				&:nth-child(#{$i}) {
+					width: 300px + (40px * $i * $i/3);
+					height: 200px + (60px * $i * $i/2);
+					z-index: $i * 1;
+					box-shadow: -4px 0px 2px 0px #000800 inset;
+				}
 			}
 		}
 	}
