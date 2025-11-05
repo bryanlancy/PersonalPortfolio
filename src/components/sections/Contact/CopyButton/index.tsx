@@ -72,6 +72,7 @@ export default function CopyButton({ textToCopy }: CopyButtonProps) {
 			const isDev = process.env.NODE_ENV === 'development'
 
 			// In dev environment, alternate between success and failure for testing
+			// Will not run try/catch block in dev environment as this will always fail because of the insecure connection
 			if (isDev) {
 				if (devSuccessToggle) {
 					devSuccessToggle = false
@@ -85,9 +86,7 @@ export default function CopyButton({ textToCopy }: CopyButtonProps) {
 					setPopups(prev => [...prev, newPopup])
 				} else {
 					devSuccessToggle = true
-					console.log(
-						'Copy failed: Simulated failure for testing (dev environment)'
-					)
+
 					// Failure
 					const newPopup: PopupState = {
 						id: `popup-${Date.now()}-${Math.random()}`,
@@ -97,21 +96,6 @@ export default function CopyButton({ textToCopy }: CopyButtonProps) {
 					}
 					setPopups(prev => [...prev, newPopup])
 				}
-				return
-			}
-
-			// Production: check for secure connection
-			if (location.protocol !== 'https:') {
-				console.log(
-					`Copy failed: Insecure connection (${location.protocol}). Clipboard API requires HTTPS.`
-				)
-				const newPopup: PopupState = {
-					id: `popup-${Date.now()}-${Math.random()}`,
-					type: 'error',
-					x: adjustedX,
-					y: clickY,
-				}
-				setPopups(prev => [...prev, newPopup])
 				return
 			}
 
@@ -126,7 +110,6 @@ export default function CopyButton({ textToCopy }: CopyButtonProps) {
 				}
 				setPopups(prev => [...prev, newPopup])
 			} catch (error) {
-				console.log('Copy failed: Clipboard API error:', error)
 				console.error('Failed to copy text to clipboard:', error)
 				// Failure
 				const newPopup: PopupState = {
