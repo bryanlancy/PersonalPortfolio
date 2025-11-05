@@ -50,7 +50,7 @@ const Bar = () => {
 				scrollTrigger: {
 					trigger: '.chapter3',
 					start: 'top center',
-					end: '+=600px',
+					end: '+=1000px',
 					toggleActions: 'play complete none reverse',
 					fastScrollEnd: true,
 				},
@@ -68,7 +68,7 @@ const Bar = () => {
 				scrollTrigger: {
 					trigger: '.chapter3',
 					start: 'top center',
-					end: '+=600px',
+					end: '+=1000px',
 					toggleActions: 'play complete none reverse',
 					fastScrollEnd: true,
 				},
@@ -78,8 +78,8 @@ const Bar = () => {
 			})
 		})
 
-		// Desktop and larger: move up by 120px (from laptop position)
-		mm.add('(min-width: 1240px)', () => {
+		// Desktop: move up by 120px (from laptop position)
+		mm.add('(min-width: 1240px) and (max-width: 1727px)', () => {
 			const mainBarTransitionTl = gsap.timeline({
 				scrollTrigger: {
 					trigger: '.chapter3',
@@ -90,8 +90,24 @@ const Bar = () => {
 				},
 			})
 			mainBarTransitionTl.to(`.${styles.barContainer}`, {
-				delay: 0.5,
-				y: -64, // 72 - 120 = -48 (moves up 120px from laptop's y: 72)
+				y: -96, // 72 - 120 = -48 (moves up 120px from laptop's y: 72)
+				x: -32,
+			})
+		})
+
+		// HD
+		mm.add('(min-width: 1728px)', () => {
+			const mainBarTransitionTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.chapter3',
+					start: 'top center',
+					end: '+=1000px',
+					toggleActions: 'play complete none reverse',
+					fastScrollEnd: true,
+				},
+			})
+			mainBarTransitionTl.to(`.${styles.barContainer}`, {
+				bottom: '50%',
 				x: -32,
 			})
 		})
