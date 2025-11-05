@@ -282,6 +282,9 @@
 		left: 0;
 		top: 45vh;
 	}
+	@include desktop {
+		top: calc(20vh + 160px);
+	}
 }
 .line6 {
 	top: 59%;
@@ -290,5 +293,8 @@
 	@include mobile {
 		left: 0;
 		top: calc(45vh + 48px);
+	}
+	@include desktop {
+		top: calc(20vh + 196px);
 	}
 }
