@@ -27,10 +27,8 @@ const Story: FC<StoryProps> = ({}) => {
 				<Spreadsheet />
 				<NoSsr>
 					<Pie />
-					{/* // Needs to be in NoSsr to avoid gsap errors withscatter class name */}
-					<Bar />
-					{/* // Needs to be in NoSsr to avoid hydration errors */}
 					<Scatter />
+					<Bar />
 				</NoSsr>
 				<Chapter3 />
 				<BarSwipe />

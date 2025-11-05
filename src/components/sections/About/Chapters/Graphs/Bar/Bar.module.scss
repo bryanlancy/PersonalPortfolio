@@ -2,11 +2,12 @@
 
 .barContainer {
 	position: fixed;
-	top: 300px;
+	// top: 300px;
 	left: 8px;
 	bottom: 0;
 	right: -20px;
 	z-index: 101; // Needs to be on top of spreadsheet for animation
+	height: 300px;
 	width: 200px;
 
 	@include autoAlpha;
@@ -15,25 +16,30 @@
 		bottom: 16px;
 		left: 128px;
 		right: auto;
-		top: auto;
-		width: 200px;
+		// top: auto;
+		width: 160px;
+		height: 240px;
 	}
 
 	@include tablet {
 		bottom: 16px;
 		left: 172px;
 		right: auto;
-		top: auto;
+		// top: auto;
 		width: 300px;
 	}
 
 	@include laptop {
-		top: calc(50vh + 200px);
-		left: calc(50vw - 400px);
+		bottom: 5vh;
+		left: calc(50vw - 424px);
 		right: auto;
-		bottom: auto;
 		width: 400px;
 		transform: none;
+	}
+
+	@include desktop {
+		bottom: 5vh;
+		left: calc(50vw - 376px);
 	}
 }
 
@@ -81,14 +87,39 @@
 	@include autoAlpha;
 
 	> .bar {
-		background-color: red;
-
 		@for $i from 1 through 5 {
 			&:nth-child(#{$i}) {
 				width: 200px + (40px * $i * $i/3);
 				height: 180px + (140px * $i * $i/2);
 				z-index: $i * 1;
 				box-shadow: -4px 0px 2px 0px #000800 inset;
+			}
+		}
+	}
+
+	@include mobile {
+		width: 80vw;
+		> .bar {
+			@for $i from 1 through 5 {
+				&:nth-child(#{$i}) {
+					width: 300px + (40px * $i * $i/3);
+					height: 200px + (60px * $i * $i/2);
+					z-index: $i * 1;
+					box-shadow: -4px 0px 2px 0px #000800 inset;
+				}
+			}
+		}
+	}
+	@include tablet {
+		width: 80vw;
+		> .bar {
+			@for $i from 1 through 5 {
+				&:nth-child(#{$i}) {
+					width: 300px + (40px * $i * $i/3);
+					height: 200px + (60px * $i * $i/2);
+					z-index: $i * 1;
+					box-shadow: -4px 0px 2px 0px #000800 inset;
+				}
 			}
 		}
 	}

@@ -46,8 +46,8 @@ const Pie = () => {
 
 		const mm = gsap.matchMedia()
 
-		// Desktop and larger: use -50vh
-		mm.add('(min-width: 1240px)', () => {
+		// Laptop and larger: use top: 120px
+		mm.add('(min-width: 950px)', () => {
 			const pieTransitionTl = gsap.timeline({
 				scrollTrigger: {
 					trigger: '.chapter3',
@@ -59,7 +59,6 @@ const Pie = () => {
 			})
 			pieTransitionTl
 				.to(`.${styles.circle1}`, {
-					delay: 0.5,
 					x: 0,
 					y: 0,
 				})
@@ -73,14 +72,14 @@ const Pie = () => {
 				.to(
 					`.${styles.pie}`,
 					{
-						y: '-50vh',
+						top: '40px',
 					},
 					'<'
 				)
 		})
 
-		// Below desktop: use -30vh
-		mm.add('(max-width: 1239px)', () => {
+		// Below laptop: use x and top transforms
+		mm.add('(max-width: 949px)', () => {
 			const pieTransitionTl = gsap.timeline({
 				scrollTrigger: {
 					trigger: '.chapter3',
@@ -91,7 +90,6 @@ const Pie = () => {
 			})
 			pieTransitionTl
 				.to(`.${styles.circle1}`, {
-					delay: 0.5,
 					x: 0,
 					y: 0,
 				})
@@ -105,7 +103,8 @@ const Pie = () => {
 				.to(
 					`.${styles.pie}`,
 					{
-						y: '-30vh',
+						top: '24px',
+						x: -40,
 					},
 					'<'
 				)

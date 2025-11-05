@@ -90,41 +90,168 @@ const Box: FC<BoxProps> = ({ part, index }) => {
 	})
 
 	useGSAP(() => {
-		const conveyorTl = gsap.timeline({
-			scrollTrigger: {
-				trigger: `.${styles.conveyor}`,
-				start: `bottom bottom-=${index * 200 - 600}`,
-				// start: 'bottom bottom',
-				end: `+=${window.innerWidth / 1.01}px`,
-				scrub: true,
-				onUpdate: () => {
-					const rect = boxRef.current?.getBoundingClientRect()
-					if (!rect || !scannerXState[2].current) return
-					const midPoint = (rect.left + rect.right) * 0.48
+		const mm = gsap.matchMedia()
 
-					if (!scanned.current) {
-						// Check for scan
-						if (midPoint < scannerXState[2].current) {
-							scan()
-							addOne()
-							scanned.current = true
+		// Mobile: use longer end to decrease spacing increment
+		mm.add('(max-width: 599px)', () => {
+			const conveyorTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: `.${styles.conveyor}`,
+					start: `bottom bottom-=${index * 200}`,
+					end: `+=${window.innerWidth / 0.5}px`,
+					scrub: true,
+					onUpdate: () => {
+						const rect = boxRef.current?.getBoundingClientRect()
+						if (!rect || !scannerXState[2].current) return
+						const midPoint = (rect.left + rect.right) * 0.48
+
+						if (!scanned.current) {
+							// Check for scan
+							if (midPoint < scannerXState[2].current) {
+								scan()
+								addOne()
+								scanned.current = true
+							}
+						} else {
+							// Check for unscan
+							if (midPoint > scannerXState[2].current) {
+								subOne()
+								scanned.current = false
+							}
 						}
-					} else {
-						// Check for unscan
-						if (midPoint > scannerXState[2].current) {
-							subOne()
-							scanned.current = false
-						}
-					}
+					},
 				},
-			},
+			})
+			conveyorTl.to(`#${boxId}`, {
+				autoAlpha: 1,
+				duration: 0.5,
+			})
+			conveyorTl.to(
+				`#${boxId}`,
+				{
+					ease: 'none',
+					duration: 5,
+					x: () => {
+						return -window.innerWidth - 100
+					},
+				},
+				'<'
+			)
+			conveyorTl.to(
+				`#${boxId}`,
+				{
+					autoAlpha: 0,
+				},
+				'>-.5'
+			)
 		})
 
-		conveyorTl.to(`#${boxId}`, {
-			ease: 'none',
-			x: () => {
-				return -window.innerWidth - 100
-			},
+		// Tablet: use 200 increment
+		mm.add('(min-width: 600px) and (max-width: 949px)', () => {
+			const conveyorTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: `.${styles.conveyor}`,
+					start: `bottom bottom-=${index * 200}`,
+					end: `+=${window.innerWidth / 1.01}px`,
+					scrub: true,
+					onUpdate: () => {
+						const rect = boxRef.current?.getBoundingClientRect()
+						if (!rect || !scannerXState[2].current) return
+						const midPoint = (rect.left + rect.right) * 0.48
+
+						if (!scanned.current) {
+							// Check for scan
+							if (midPoint < scannerXState[2].current) {
+								scan()
+								addOne()
+								scanned.current = true
+							}
+						} else {
+							// Check for unscan
+							if (midPoint > scannerXState[2].current) {
+								subOne()
+								scanned.current = false
+							}
+						}
+					},
+				},
+			})
+			conveyorTl.to(`#${boxId}`, {
+				autoAlpha: 1,
+				duration: 0.5,
+			})
+			conveyorTl.to(
+				`#${boxId}`,
+				{
+					ease: 'none',
+					duration: 5,
+					x: () => {
+						return -window.innerWidth - 100
+					},
+				},
+				'<'
+			)
+			conveyorTl.to(
+				`#${boxId}`,
+				{
+					autoAlpha: 0,
+				},
+				'>-.5'
+			)
+		})
+
+		// Laptop: use 200 increment
+		mm.add('(min-width: 950px)', () => {
+			const conveyorTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: `.${styles.conveyor}`,
+					start: `bottom bottom-=${index * 200 - 1000}`,
+					end: `+=${window.innerWidth / 1.01}px`,
+					scrub: true,
+					onUpdate: () => {
+						const rect = boxRef.current?.getBoundingClientRect()
+						if (!rect || !scannerXState[2].current) return
+						const midPoint = (rect.left + rect.right) * 0.48
+
+						if (!scanned.current) {
+							// Check for scan
+							if (midPoint < scannerXState[2].current) {
+								scan()
+								addOne()
+								scanned.current = true
+							}
+						} else {
+							// Check for unscan
+							if (midPoint > scannerXState[2].current) {
+								subOne()
+								scanned.current = false
+							}
+						}
+					},
+				},
+			})
+			conveyorTl.to(`#${boxId}`, {
+				autoAlpha: 1,
+				duration: 0.5,
+			})
+			conveyorTl.to(
+				`#${boxId}`,
+				{
+					ease: 'none',
+					duration: 5,
+					x: () => {
+						return -window.innerWidth - 100
+					},
+				},
+				'<'
+			)
+			conveyorTl.to(
+				`#${boxId}`,
+				{
+					autoAlpha: 0,
+				},
+				'>-.5'
+			)
 		})
 	}, [])
 
@@ -150,12 +277,80 @@ const Box: FC<BoxProps> = ({ part, index }) => {
 
 const Conveyor = () => {
 	const { partsArr } = useSpreadsheetContext()
+	const conveyorRef = useRef<HTMLDivElement>(null)
 
 	const partIds = [0, 8, 3, 5, 1, 10, 6, 4, 2, 7, 8, 2, 6, 3, 5, 0]
 
+	useGSAP(() => {
+		const updateConveyorPosition = () => {
+			// Find scanner by looking within the spreadsheet element
+			const spreadsheetElement = document.querySelector('.spreadsheet')
+			const conveyorElement = conveyorRef.current
+			if (!spreadsheetElement || !conveyorElement) return
+
+			// Find the scanner beam element (where boxes should overlap)
+			const scannerBeamElement = document.getElementById('scannerBeam')
+			if (!scannerBeamElement) return
+
+			// Find a box to get its height
+			const firstBox = conveyorElement.querySelector(
+				`.${styles.boxContainer}`
+			)
+			if (!firstBox) return
+
+			const conveyorContainerRect =
+				conveyorElement.parentElement?.getBoundingClientRect()
+			if (!conveyorContainerRect) return
+
+			// Get positions relative to viewport
+			const beamRect = scannerBeamElement.getBoundingClientRect()
+			const boxRect = firstBox.getBoundingClientRect()
+
+			// Calculate box height
+			const boxHeight = boxRect.height
+
+			// Calculate position relative to the conveyor's container
+			// Position conveyor so its bottom aligns with the bottom of the scanner beam
+			const beamBottom = beamRect.bottom
+			const containerTop = conveyorContainerRect.top
+			const topPosition = beamBottom - containerTop - boxHeight
+
+			// Position conveyor and set its height to match the boxes
+			gsap.set(conveyorElement, {
+				top: topPosition,
+				bottom: 'auto',
+				height: boxHeight,
+			})
+		}
+
+		// Update position on scroll
+		gsap.timeline({
+			scrollTrigger: {
+				trigger: '.chapter3',
+				start: 'top bottom',
+				end: 'bottom top',
+				onUpdate: updateConveyorPosition,
+				onEnter: updateConveyorPosition,
+				onEnterBack: updateConveyorPosition,
+				onLeave: updateConveyorPosition,
+				onLeaveBack: updateConveyorPosition,
+			},
+		})
+
+		// Also update on resize
+		window.addEventListener('resize', updateConveyorPosition)
+
+		// Initial update with a small delay to ensure elements are rendered
+		setTimeout(updateConveyorPosition, 100)
+
+		return () => {
+			window.removeEventListener('resize', updateConveyorPosition)
+		}
+	}, [])
+
 	if (!partsArr) return null
 	return (
-		<div className={styles.conveyor}>
+		<div ref={conveyorRef} className={styles.conveyor}>
 			{partIds.map((id, i) => {
 				const [num, name, cost] = partsArr[id]
 				return (

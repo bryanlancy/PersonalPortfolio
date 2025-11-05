@@ -18,18 +18,28 @@
 .title {
 	position: absolute;
 	bottom: 200px;
-	right: 40px;
+	z-index: 100000000000000;
 
 	@include autoAlpha;
 
+	@include mobile {
+		font-size: 32px;
+		top: 8px;
+		right: 8px;
+		bottom: auto;
+		text-align: right;
+	}
+
 	@include tablet {
-		bottom: 260px;
+		top: calc(300px + 500px + 64px);
 		right: 60px;
+		bottom: auto;
 	}
 
 	@include laptop {
-		bottom: 304px;
+		top: calc(240px + 70vh + 64px);
 		right: 80px;
+		bottom: auto;
 	}
 }
 
@@ -49,50 +59,61 @@
 
 	@include autoAlpha;
 
+	@include mobile {
+		top: 104px;
+		right: 8px;
+		left: auto;
+		bottom: auto;
+		max-width: 168px;
+		text-align: right;
+	}
+
 	@include tablet {
-		bottom: 320px;
-		left: 12px;
+		top: 200px;
+		right: 0;
+		left: auto;
+		bottom: auto;
+		max-width: 360px;
+		text-align: right;
 	}
 
 	@include laptop {
 		bottom: 360px;
 		left: 16px;
+		top: auto;
+		right: auto;
+		max-width: none;
+		text-align: left;
+	}
+	.moolah {
+		color: #009700;
 	}
 }
 .line2 {
-	position: absolute;
-	bottom: 236px;
+	bottom: 180px;
 	left: 8px;
+	text-align: left;
 
 	@include autoAlpha;
+
+	@include mobile {
+		left: 24px;
+		right: auto;
+		top: auto;
+		bottom: 25%;
+		max-width: 136px;
+		text-align: left;
+	}
 
 	@include tablet {
 		bottom: 296px;
 		left: 12px;
+		text-align: left;
 	}
 
 	@include laptop {
 		bottom: 336px;
 		left: 16px;
-	}
-
-	.moolah {
-		color: #fff;
-	}
-}
-.line3 {
-	bottom: 180px;
-	left: 8px;
-
-	@include autoAlpha;
-
-	@include tablet {
-		bottom: 240px;
-		left: 12px;
-	}
-
-	@include laptop {
-		bottom: 280px;
-		left: 16px;
+		text-align: left;
 	}
 }
