@@ -92,7 +92,7 @@ const Box: FC<BoxProps> = ({ part, index }) => {
 	useGSAP(() => {
 		const mm = gsap.matchMedia()
 
-		// Mobile: use 100 increment
+		// Mobile: use longer end to decrease spacing increment
 		mm.add('(max-width: 599px)', () => {
 			const conveyorTl = gsap.timeline({
 				scrollTrigger: {
