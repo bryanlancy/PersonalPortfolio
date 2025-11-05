@@ -24,8 +24,6 @@
 	text-align: left;
 	width: 110px;
 
-	border: 1px solid red;
-
 	@include tablet {
 		top: 18px;
 		left: 18px;
@@ -40,22 +38,29 @@
 
 .house {
 	position: absolute;
-	top: 65%;
+	top: 50vh;
 	left: 50%;
 
-	height: 300px;
-	width: 300px;
+	height: 40vh;
+	width: 40vh;
 
-	transform: translate(-50%, -50%);
+	transform: translateX(-50%);
 
+	@include mobile {
+		top: 50vh;
+		height: 300px;
+		width: 300px;
+	}
 	@include tablet {
-		height: 450px;
-		width: 450px;
+		top: calc(50vh - 120px);
+		height: 600px;
+		width: 600px;
 	}
 
 	@include laptop {
-		height: 600px;
-		width: 600px;
+		top: 20vh;
+		height: 70vh;
+		width: 70vh;
 	}
 }
 
@@ -86,6 +91,11 @@
 	height: 64px;
 
 	transform: translateX(-1000px);
+
+	@include mobile {
+		height: 40px;
+	}
+
 	> * {
 		position: absolute;
 		top: 50%;
@@ -148,11 +158,11 @@
 
 .lightContainer {
 	position: fixed;
-	top: 50%;
+	top: calc(50vh + 24px);
 	left: 50%;
 	z-index: 1;
 
-	transform: translate(-50%, -50%);
+	transform: translateX(-50%);
 
 	border-radius: 16px;
 	border-radius: 50%;
@@ -162,6 +172,14 @@
 	padding: 40px;
 
 	@include autoAlpha;
+
+	@include tablet {
+		top: calc(50vh - 80px);
+	}
+
+	@include laptop {
+		top: calc(20vh + 80px);
+	}
 
 	> * {
 		top: 50%;
@@ -194,14 +212,47 @@
 .line1 {
 	top: 60%;
 	left: 50%;
+
+	@include mobile {
+		top: 160px;
+		right: 8px;
+		left: auto;
+		text-align: right;
+	}
+
+	@include desktop {
+		top: calc(60% - 40px);
+	}
 }
 .line2 {
 	top: 62%;
 	left: 50%;
+
+	@include mobile {
+		top: 188px;
+		right: 8px;
+		left: auto;
+		text-align: right;
+	}
+
+	@include desktop {
+		top: calc(62% - 40px);
+	}
 }
 .line3 {
 	top: 64%;
 	left: 53%;
+
+	@include mobile {
+		top: 216px;
+		right: 8px;
+		left: auto;
+		text-align: right;
+	}
+
+	@include desktop {
+		top: calc(64% - 40px);
+	}
 }
 .line4 {
 	bottom: 25%;
@@ -209,6 +260,16 @@
 
 	width: 200px;
 	text-align: left;
+
+	@include mobile {
+		left: 0;
+		top: 35vh;
+		bottom: auto;
+	}
+
+	@include desktop {
+		bottom: calc(25% + 32px);
+	}
 }
 .line5 {
 	top: 53%;
@@ -216,8 +277,18 @@
 
 	width: 144px;
 	text-align: left;
+
+	@include mobile {
+		left: 0;
+		top: 45vh;
+	}
 }
 .line6 {
 	top: 59%;
 	left: 45%;
+
+	@include mobile {
+		left: 0;
+		top: calc(45vh + 48px);
+	}
 }
