@@ -151,7 +151,7 @@ const Box: FC<BoxProps> = ({ part, index }) => {
 			const conveyorTl = gsap.timeline({
 				scrollTrigger: {
 					trigger: `.${styles.conveyor}`,
-					start: `bottom bottom-=${index * 200 - 1000}`,
+					start: `bottom bottom-=${index * 200}`,
 					end: `+=${window.innerWidth / 1.01}px`,
 					scrub: true,
 					onUpdate: () => {
@@ -205,7 +205,7 @@ const Box: FC<BoxProps> = ({ part, index }) => {
 			const conveyorTl = gsap.timeline({
 				scrollTrigger: {
 					trigger: `.${styles.conveyor}`,
-					start: `bottom bottom-=${index * 200}`,
+					start: `bottom bottom-=${index * 200 - 1000}`,
 					end: `+=${window.innerWidth / 1.01}px`,
 					scrub: true,
 					onUpdate: () => {
