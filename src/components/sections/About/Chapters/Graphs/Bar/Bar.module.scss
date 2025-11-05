@@ -16,25 +16,30 @@
 		bottom: 16px;
 		left: 128px;
 		right: auto;
-		top: auto;
+		// top: auto;
 		width: 160px;
+		height: 240px;
 	}
 
 	@include tablet {
 		bottom: 16px;
 		left: 172px;
 		right: auto;
-		top: auto;
+		// top: auto;
 		width: 300px;
 	}
 
 	@include laptop {
-		top: calc(50vh + 200px);
-		left: calc(50vw - 400px);
+		bottom: 5vh;
+		left: calc(50vw - 424px);
 		right: auto;
-		bottom: auto;
 		width: 400px;
 		transform: none;
+	}
+
+	@include desktop {
+		bottom: 5vh;
+		left: calc(50vw - 376px);
 	}
 }
 

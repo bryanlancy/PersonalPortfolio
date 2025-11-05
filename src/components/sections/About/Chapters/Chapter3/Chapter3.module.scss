@@ -60,7 +60,7 @@
 	@include autoAlpha;
 
 	@include mobile {
-		top: 120px;
+		top: 104px;
 		right: 8px;
 		left: auto;
 		bottom: auto;
@@ -69,7 +69,7 @@
 	}
 
 	@include tablet {
-		top: 240px;
+		top: 200px;
 		right: 0;
 		left: auto;
 		bottom: auto;

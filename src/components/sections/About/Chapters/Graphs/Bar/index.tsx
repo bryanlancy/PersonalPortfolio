@@ -62,8 +62,8 @@ const Bar = () => {
 			})
 		})
 
-		// Laptop and larger: use y positioning
-		mm.add('(min-width: 950px)', () => {
+		// Laptop: use y positioning (no additional adjustment needed as SCSS handles it)
+		mm.add('(min-width: 950px) and (max-width: 1239px)', () => {
 			const mainBarTransitionTl = gsap.timeline({
 				scrollTrigger: {
 					trigger: '.chapter3',
@@ -74,7 +74,24 @@ const Bar = () => {
 				},
 			})
 			mainBarTransitionTl.to(`.${styles.barContainer}`, {
-				y: 72,
+				bottom: '45%',
+			})
+		})
+
+		// Desktop and larger: move up by 120px (from laptop position)
+		mm.add('(min-width: 1240px)', () => {
+			const mainBarTransitionTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.chapter3',
+					start: 'top center',
+					end: '+=600px',
+					toggleActions: 'play complete none reverse',
+					fastScrollEnd: true,
+				},
+			})
+			mainBarTransitionTl.to(`.${styles.barContainer}`, {
+				y: -64, // 72 - 120 = -48 (moves up 120px from laptop's y: 72)
+				x: -32,
 			})
 		})
 
