@@ -270,7 +270,7 @@ const Conveyor = () => {
 		}
 
 		// Update position on scroll
-		const updateTl = gsap.timeline({
+		gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter3',
 				start: 'top bottom',
