@@ -31,8 +31,24 @@ const StoryControls = ({ className }: StoryControlsProps) => {
 	const { contextSafe } = useGSAP({ scope: controlsRef })
 
 	const handleAuto = contextSafe(() => {
+		// Calculate remaining scroll distance to projects section
+		const projectsElement = document.getElementById('projects')
+		if (!projectsElement) return
+
+		const currentScrollY = window.scrollY || window.pageYOffset
+		const projectsTop = projectsElement.getBoundingClientRect().top + currentScrollY
+		const remainingDistance = Math.abs(projectsTop - currentScrollY)
+
+		// Calculate duration based on steady scroll speed (pixels per second)
+		// Using 400 pixels per second for a smooth, steady scroll
+		const scrollSpeed = 400 // pixels per second
+		const calculatedDuration = remainingDistance / scrollSpeed
+
+		// Ensure minimum duration to avoid too-fast scrolling
+		const duration = Math.max(calculatedDuration, 0.5)
+
 		gsap.to(window, {
-			duration: 90,
+			duration,
 			ease: 'none',
 			scrollTo: { y: '#projects', autoKill: true },
 		})
