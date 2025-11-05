@@ -130,8 +130,9 @@ function CircularImage(
 		<g className={className}>
 			<defs>
 				<clipPath
-					id={`imageClip-${imageUrl.replace(/[^a-zA-Z0-9]/g, '')}`}>
-					<circle cx={x} cy={y} r={radius} />
+					id={`imageClip-${imageUrl.replace(/[^a-zA-Z0-9]/g, '')}`}
+					clipPathUnits="objectBoundingBox">
+					<circle cx="0.5" cy="0.5" r="0.5" />
 				</clipPath>
 			</defs>
 
