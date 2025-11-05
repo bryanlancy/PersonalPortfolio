@@ -13,7 +13,8 @@
 		@include autoAlpha;
 
 		@include mobile {
-			left: -120px;
+			left: -32px;
+			top: calc(100% - 32px);
 		}
 
 		@include tablet {

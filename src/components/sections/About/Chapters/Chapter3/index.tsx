@@ -1,30 +1,29 @@
+import { useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import useStateRef from 'react-usestateref'
 
 import { cn } from '@/utils/react'
-
-import styles from './Chapter3.module.scss'
-import { useRef } from 'react'
 import TypeText from '@/utils/components/TypeText'
-import useStateRef from 'react-usestateref'
 import Conveyor from './Conveyor'
 import Container from '@/utils/components/Container'
 import ChapterScrollContainer from '@/components/ChapterScrollContainer'
+
+import styles from './Chapter3.module.scss'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const Chapter3 = () => {
 	const title = 'Finding the Limits'
-	const line1 = 'added barcode-scanning functionality to a spreadsheet'
-	const line2a = 'used to manage million'
-	const line2b = ' in inventory.'
-	const line3 =
+	const line1a =
+		'added barcode-scanning functionality to a spreadsheet used to manage million'
+	const line1b = ' in inventory.'
+	const line2 =
 		'Eventually, I hit the limits of what basic spreadsheets could do.'
 
 	const showLine1State = useStateRef<boolean>(false)
 	const showLine2State = useStateRef<boolean>(false)
-	const showLine3State = useStateRef<boolean>(false)
 
 	const titleRef = useRef<HTMLHeadingElement>(null)
 
@@ -109,27 +108,6 @@ const Chapter3 = () => {
 			},
 			'<'
 		)
-		// Line 3 Animation
-		const line3Tl = gsap.timeline({
-			scrollTrigger: {
-				trigger: '.chapter3',
-				start: `top top-=600px`,
-				end: '+=1000px',
-				toggleActions: 'play none resume reverse',
-				onToggle: self => {
-					if (self.isActive !== showLine3State[2].current) {
-						showLine3State[1](self.isActive)
-					}
-				},
-			},
-		})
-		line3Tl.to([`.${styles.line1}`, `.${styles.line2}`], {
-			duration: 0.75,
-			autoAlpha: 0.5,
-		})
-		line3Tl.to(`.${styles.line3}`, {
-			autoAlpha: 1,
-		})
 	}, [])
 
 	return (
@@ -144,33 +122,24 @@ const Chapter3 = () => {
 					</h1>
 
 					<TypeText
-						shouldAnimate={showLine3State[0]}
-						text={line3}
-						shouldBlink={true}
-						className={cn(styles.line, styles.line3)}
-						cursorClassName={styles.cursor}>
-						<p>{line3}</p>
-					</TypeText>
-
-					<TypeText
 						shouldAnimate={showLine1State[0]}
-						text={line1}
-						typeSpeed={0.02}
+						text={line1a + line1b + 1}
+						delay={1.1}
 						className={cn(styles.line, styles.line1)}
 						cursorClassName={styles.cursor}>
-						<p>{line1}</p>
+						<p>
+							{line1a}
+							<span className={styles.moolah}>$</span>
+							{line1b}
+						</p>
 					</TypeText>
 					<TypeText
 						shouldAnimate={showLine2State[0]}
-						text={line2a + line2b + 1}
-						delay={1.1}
+						text={line2}
+						shouldBlink={true}
 						className={cn(styles.line, styles.line2)}
 						cursorClassName={styles.cursor}>
-						<p>
-							{line2a}
-							<span className={styles.moolah}>$</span>
-							{line2b}
-						</p>
+						<p>{line2}</p>
 					</TypeText>
 				</Container>
 				<Conveyor />

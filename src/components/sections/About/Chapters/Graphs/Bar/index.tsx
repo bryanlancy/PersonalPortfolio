@@ -42,17 +42,40 @@ const Bar = () => {
 			delay: 1,
 			stagger: 0.2,
 		})
-		const mainBarTransitionTl = gsap.timeline({
-			scrollTrigger: {
-				trigger: '.chapter3',
-				start: 'top center',
-				end: '+=300px',
-				toggleActions: 'play complete none reverse',
-				fastScrollEnd: true,
-			},
+		const mm = gsap.matchMedia()
+
+		// Tablet and mobile: use top and left positioning
+		mm.add('(max-width: 949px)', () => {
+			const mainBarTransitionTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.chapter3',
+					start: 'top center',
+					end: '+=600px',
+					toggleActions: 'play complete none reverse',
+					fastScrollEnd: true,
+				},
+			})
+			mainBarTransitionTl.to(`.${styles.barContainer}`, {
+				delay: 0.5,
+				bottom: '50vh',
+				left: 24,
+			})
 		})
-		mainBarTransitionTl.to(`.${styles.barContainer}`, {
-			y: 72,
+
+		// Laptop and larger: use y positioning
+		mm.add('(min-width: 950px)', () => {
+			const mainBarTransitionTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.chapter3',
+					start: 'top center',
+					end: '+=600px',
+					toggleActions: 'play complete none reverse',
+					fastScrollEnd: true,
+				},
+			})
+			mainBarTransitionTl.to(`.${styles.barContainer}`, {
+				y: 72,
+			})
 		})
 
 		const overflowTl = gsap.timeline({
@@ -92,14 +115,14 @@ const Bar = () => {
 			duration: 0.1,
 			autoAlpha: 0,
 		})
-		overflowTl.to(
-			`.pie-chart`,
-			{
-				duration: 0.1,
-				autoAlpha: 0,
-			},
-			'<'
-		)
+		overflowTl.to(`.pie-chart`, {
+			duration: 0.1,
+			autoAlpha: 0,
+		})
+		overflowTl.to(`.scatter-chart`, {
+			duration: 0.1,
+			autoAlpha: 0,
+		})
 		overflowTl.to(
 			'.chapter3 > div',
 			{

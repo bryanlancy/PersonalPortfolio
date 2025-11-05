@@ -2,11 +2,12 @@
 
 .barContainer {
 	position: fixed;
-	top: 300px;
+	// top: 300px;
 	left: 8px;
 	bottom: 0;
 	right: -20px;
 	z-index: 101; // Needs to be on top of spreadsheet for animation
+	height: 300px;
 	width: 200px;
 
 	@include autoAlpha;
@@ -16,7 +17,7 @@
 		left: 128px;
 		right: auto;
 		top: auto;
-		width: 200px;
+		width: 160px;
 	}
 
 	@include tablet {

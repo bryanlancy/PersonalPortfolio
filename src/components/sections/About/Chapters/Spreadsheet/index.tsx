@@ -88,9 +88,7 @@ const Spreadsheet: FC<SpreadsheetProps> = ({}) => {
 		spreadsheetTl1.to(`.${styles.spreadsheet}`, {
 			autoAlpha: 0,
 		})
-		// spreadsheetTl1.set('.spreadsheet', {
-		// 	x: -120,
-		// })
+
 		spreadsheetTl1.to('.spreadsheet', {
 			autoAlpha: 1,
 		})
@@ -109,17 +107,38 @@ const Spreadsheet: FC<SpreadsheetProps> = ({}) => {
 		})
 
 		// Timeline for transition between Chapter 2 and Chapter 3
-		const spreadsheetTransitionTl = gsap.timeline({
-			scrollTrigger: {
-				trigger: '.chapter3',
-				start: `top center`,
-				end: '+=1000px',
-				toggleActions: 'play complete none reverse',
-				fastScrollEnd: true,
-			},
+		const mm = gsap.matchMedia()
+
+		// Laptop and larger: use -60
+		mm.add('(min-width: 950px)', () => {
+			const spreadsheetTransitionTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.chapter3',
+					start: `top center`,
+					end: '+=1000px',
+					toggleActions: 'play complete none reverse',
+					fastScrollEnd: true,
+				},
+			})
+			spreadsheetTransitionTl.to('.spreadsheet', {
+				yPercent: -60,
+			})
 		})
-		spreadsheetTransitionTl.to('.spreadsheet', {
-			yPercent: -60,
+
+		// Below laptop: no yPercent animation (or use 0)
+		mm.add('(max-width: 949px)', () => {
+			const spreadsheetTransitionTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.chapter3',
+					start: `top center`,
+					end: '+=1000px',
+					toggleActions: 'play complete none reverse',
+					fastScrollEnd: true,
+				},
+			})
+			spreadsheetTransitionTl.to('.spreadsheet', {
+				x: 24,
+			})
 		})
 		// Timeline for exit transition
 		const spreadsheetExitTl = gsap.timeline({
