@@ -137,6 +137,8 @@ $border-radius: 8px;
 	}
 }
 .line {
+	position: relative;
+	z-index: 1;
 	@include autoAlpha;
 }
 .bucket0 {

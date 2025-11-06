@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -34,7 +34,8 @@ export default function Bucket({
 
 	const fillRef = useRef<HTMLDivElement>(null)
 	const nibRef = useRef<HTMLDivElement>(null)
-	const lineRef = useRef<HTMLParagraphElement>(null)
+	const bucketRef = useRef<HTMLDivElement>(null)
+	const [wavePaused, setWavePaused] = useState(true)
 
 	useGSAP(() => {
 		const backgroundTl = gsap.timeline({
@@ -46,6 +47,7 @@ export default function Bucket({
 
 				onEnter: () => {
 					backgroundTl.timeScale(1).reversed(false)
+					setWavePaused(false) // Unpause wave when timeline starts
 				},
 				onLeaveBack: () => {
 					backgroundTl.timeScale(10).reversed(true)
@@ -54,12 +56,27 @@ export default function Bucket({
 					backgroundTl.timeScale(5).reversed(false)
 				},
 			},
+			onStart: () => {
+				setWavePaused(false) // Unpause wave when timeline starts playing
+			},
+			onComplete: () => {
+				setWavePaused(true) // Pause wave when timeline completes
+			},
+			onReverseComplete: () => {
+				setWavePaused(true) // Pause wave when timeline reverses completely
+			},
 		})
-		backgroundTl.to(lineRef.current, {
-			y: 0,
-			delay,
-			autoAlpha: 1,
-		})
+		// Animate all line elements, not just one
+		if (bucketRef.current) {
+			const lineElements = bucketRef.current.querySelectorAll(
+				`.${styles.line}`
+			)
+			backgroundTl.to(lineElements, {
+				y: 0,
+				delay,
+				autoAlpha: 1,
+			})
+		}
 		backgroundTl.to(
 			fillRef.current,
 			{
@@ -84,12 +101,13 @@ export default function Bucket({
 	})
 	return (
 		<div
+			ref={bucketRef}
 			className={cn(
 				styles.bucket,
 				className !== undefined ? styles[className] : undefined
 			)}>
-			{content.map(line => (
-				<p key={Math.random()} className={styles.line} ref={lineRef}>
+			{content.map((line, index) => (
+				<p key={`line-${index}`} className={styles.line}>
 					{line}
 				</p>
 			))}
@@ -97,7 +115,7 @@ export default function Bucket({
 				<div className={styles.fill} ref={fillRef}>
 					<Wave
 						className={styles.top}
-						paused={false}
+						paused={wavePaused}
 						options={{
 							height: 10,
 							amplitude: 10,

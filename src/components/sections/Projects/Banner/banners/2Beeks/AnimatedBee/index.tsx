@@ -36,6 +36,7 @@ const AnimatedBee: FC<AnimatedBeeProps> = ({ width, height, index }) => {
 				xPercent: -50,
 				yPercent: -50,
 				transformOrigin: '50% 50%',
+				force3D: true, // Force GPU acceleration
 			})
 
 			const beeTimeline = gsap.timeline({
@@ -44,14 +45,14 @@ const AnimatedBee: FC<AnimatedBeeProps> = ({ width, height, index }) => {
 					trigger: '.TwoBeeksContainer',
 					start: `top center+=${randomInteger(0, 300)}px`,
 					end: `bottom center-=${randomInteger(450, 750)}px`,
-					scrub: 1,
+					scrub: true, // Use GSAP's optimized scrub instead of scrub: 1
 				},
 			})
 
 			beeTimeline.fromTo(
 				pathMaskRef.current,
 				{ drawSVG: '0% 0%' },
-				{ drawSVG: '95% 100%' }
+				{ drawSVG: '95% 100%', force3D: true }
 			)
 			beeTimeline.to(
 				beeRef.current,
@@ -62,6 +63,7 @@ const AnimatedBee: FC<AnimatedBeeProps> = ({ width, height, index }) => {
 						alignOrigin: [0.5, 0.5],
 						autoRotate: 90,
 					},
+					force3D: true, // Force GPU acceleration
 				},
 				'<'
 			)

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -17,6 +18,7 @@ const Background = () => {
 	const { mercury: data } = projectList
 
 	const numDrops = 3
+	const [wavesPaused, setWavesPaused] = useState(true)
 
 	useGSAP(() => {
 		const backgroundTl = gsap.timeline({
@@ -44,6 +46,17 @@ const Background = () => {
 			y: 0,
 			autoAlpha: 1,
 		})
+
+		// Pause/unpause waves based on visibility
+		ScrollTrigger.create({
+			trigger: `.mercury`,
+			start: 'top bottom',
+			end: 'bottom top',
+			onEnter: () => setWavesPaused(false),
+			onLeave: () => setWavesPaused(true),
+			onEnterBack: () => setWavesPaused(false),
+			onLeaveBack: () => setWavesPaused(true),
+		})
 	})
 
 	return (
@@ -51,7 +64,7 @@ const Background = () => {
 			<div className={styles.background}>
 				<Wave
 					className={cn(styles.wave, styles.top)}
-					paused={false}
+					paused={wavesPaused}
 					options={{
 						height: 10,
 						amplitude: 15,
@@ -62,7 +75,7 @@ const Background = () => {
 				<Drops drops={numDrops} />
 				<Wave
 					className={cn(styles.wave, styles.bottom)}
-					paused={false}
+					paused={wavesPaused}
 					options={{
 						height: 10,
 						amplitude: 25,
@@ -74,10 +87,9 @@ const Background = () => {
 					<h1 className={styles.title}>{data.name}</h1>
 				</Container>
 
-				{/* TODO Hide or fade bottom wave when  scrolled out of view*/}
 				<Wave
 					className={cn(styles.wave, styles.bottombottom)}
-					paused={false}
+					paused={wavesPaused}
 					options={{
 						height: 8,
 						amplitude: 15,
