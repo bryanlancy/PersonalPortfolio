@@ -346,8 +346,8 @@ $accent-color-3: #ffb800;
 
 		@include tablet {
 			$height: 98px;
-			top: 56px;
-			right: 24px;
+			top: 40px;
+			right: 0px;
 			width: calc($height * 1.33) !important;
 			height: $height !important;
 		}

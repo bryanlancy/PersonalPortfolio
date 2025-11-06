@@ -103,8 +103,8 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 		const picTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.TwoBeeksContainer',
-				start: 'top center-=50px',
-				end: '+=100px',
+				start: 'top center+=50px',
+				end: '+=200px',
 				fastScrollEnd: true,
 				toggleActions: 'play none none reverse',
 				onEnter: () => {
@@ -139,8 +139,8 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 		const textTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.TwoBeeksContainer',
-				start: 'top center+=100px',
-				end: '+=400px',
+				start: 'top center+=150px',
+				end: '+=300px',
 				fastScrollEnd: true,
 				toggleActions: 'play none none reverse',
 				onEnter: () => {
