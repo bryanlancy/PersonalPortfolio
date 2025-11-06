@@ -226,22 +226,6 @@ const Network = () => {
 			return `.${node.className}`
 		})
 
-		// Set auto alpha of nodes when out of section
-		const nodeAlphaTl = gsap.timeline({
-			scrollTrigger: {
-				trigger: '.chapter5',
-				start: 'top top-=999px',
-				end: '+=200px',
-				fastScrollEnd: true,
-				toggleActions: 'play complete none reverse',
-			},
-		})
-		nodeAlphaTl.to(`.${styles.node}`, {
-			autoAlpha: 1,
-			duration: 0.2,
-			stagger: 0,
-		})
-
 		// Add background behind lightbulb
 		const lightNodeTl = gsap.timeline({
 			scrollTrigger: {
@@ -274,6 +258,8 @@ const Network = () => {
 		// 	)
 		// }
 
+		const nodeDuration = 600
+
 		// Light to computer
 		const path1 = makeBinaryPath(lightPathRef, `.${styles.lightBinary}`)
 		if (path1) binary1Tl.current = path1
@@ -281,10 +267,11 @@ const Network = () => {
 			scrollTrigger: {
 				trigger: '.chapter5',
 				start: `top top-=${750}`,
-				end: `+=${400}px`,
+				end: `+=${nodeDuration}px`,
 				scrub: true,
-				toggleActions: 'play complete none reverse',
-				fastScrollEnd: true,
+				toggleActions: 'play none none revert',
+				preventOverlaps: 'nodes',
+				// fastScrollEnd: true,
 				onUpdate: self => {
 					if (binary1Tl.current) {
 						if (self.direction > 0 && self.progress >= 0.95) {
@@ -326,10 +313,11 @@ const Network = () => {
 			scrollTrigger: {
 				trigger: '.chapter5',
 				start: `top top-=${1150}`,
-				end: `+=${400}px`,
+				end: `+=${nodeDuration}px`,
 				scrub: true,
-				toggleActions: 'play complete none reverse',
-				fastScrollEnd: true,
+				toggleActions: 'play none none revert',
+				preventOverlaps: 'nodes',
+				// fastScrollEnd: true,
 				onUpdate: self => {
 					if (binary2Tl.current) {
 						if (self.direction > 0 && self.progress >= 0.95) {
@@ -367,10 +355,11 @@ const Network = () => {
 			scrollTrigger: {
 				trigger: '.chapter5',
 				start: `top top-=${1550}`,
-				end: `+=${400}px`,
+				end: `+=${nodeDuration}px`,
 				scrub: true,
-				toggleActions: 'play complete nonw reverse',
-				fastScrollEnd: true,
+				toggleActions: 'play none none revert',
+				preventOverlaps: 'nodes',
+				// fastScrollEnd: true,
 				onUpdate: self => {
 					if (binary3Tl.current) {
 						if (self.direction > 0 && self.progress >= 0.95) {
@@ -406,10 +395,11 @@ const Network = () => {
 			scrollTrigger: {
 				trigger: '.chapter5',
 				start: `top top-=${1950}`,
-				end: `+=${400}px`,
+				end: `+=${nodeDuration}px`,
 				scrub: true,
-				toggleActions: 'play complete none reverse',
-				fastScrollEnd: true,
+				toggleActions: 'play none none revert',
+				preventOverlaps: 'nodes',
+				// fastScrollEnd: true,
 			},
 		})
 		node4Tl.to(nodeClasses[3], {
@@ -446,10 +436,11 @@ const Network = () => {
 			scrollTrigger: {
 				trigger: '.chapter5',
 				start: `top top-=${2150}`,
-				end: `+=${400}px`,
+				end: `+=${nodeDuration}px`,
 				scrub: true,
-				toggleActions: 'play complete none reverse',
-				fastScrollEnd: true,
+				toggleActions: 'play none none revert',
+				preventOverlaps: 'nodes',
+				// fastScrollEnd: true,
 			},
 		})
 		node5Tl.to(nodeClasses[4], {
@@ -476,10 +467,11 @@ const Network = () => {
 			scrollTrigger: {
 				trigger: '.chapter5',
 				start: `top top-=${2350}`,
-				end: `+=${400}px`,
+				end: `+=${nodeDuration}px`,
 				scrub: true,
-				toggleActions: 'play complete none reverse',
-				fastScrollEnd: true,
+				toggleActions: 'play none none revert',
+				preventOverlaps: 'nodes',
+				// fastScrollEnd: true,
 				onUpdate: self => {
 					if (binary4Tl.current) {
 						if (self.direction > 0 && self.progress >= 0.95) {

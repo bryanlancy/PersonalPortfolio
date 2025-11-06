@@ -44,8 +44,8 @@ const Bar = () => {
 		})
 		const mm = gsap.matchMedia()
 
-		// Tablet and mobile: use top and left positioning
-		mm.add('(max-width: 949px)', () => {
+		// Mobile: use top and left positioning
+		mm.add('(max-width: 599px)', () => {
 			const mainBarTransitionTl = gsap.timeline({
 				scrollTrigger: {
 					trigger: '.chapter3',
@@ -59,6 +59,24 @@ const Bar = () => {
 				delay: 0.5,
 				bottom: '50vh',
 				left: 24,
+			})
+		})
+
+		// Tablet: use top and left positioning
+		mm.add('(min-width: 600px) and (max-width: 949px)', () => {
+			const mainBarTransitionTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.chapter3',
+					start: 'top center',
+					end: '+=1000px',
+					toggleActions: 'play complete none reverse',
+					fastScrollEnd: true,
+				},
+			})
+			mainBarTransitionTl.to(`.${styles.barContainer}`, {
+				delay: 0.5,
+				bottom: '50vh',
+				left: 60,
 			})
 		})
 
@@ -78,8 +96,25 @@ const Bar = () => {
 			})
 		})
 
-		// Desktop and above
-		mm.add('(min-width: 1240px)', () => {
+		// Desktop
+		mm.add('(min-width: 1240px) and (max-width: 1727px)', () => {
+			const mainBarTransitionTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.chapter3',
+					start: 'top center',
+					end: '+=600px',
+					toggleActions: 'play complete none reverse',
+					fastScrollEnd: true,
+				},
+			})
+			mainBarTransitionTl.to(`.${styles.barContainer}`, {
+				bottom: '296px',
+				x: -32,
+			})
+		})
+
+		// HD
+		mm.add('(min-width: 1728px)', () => {
 			const mainBarTransitionTl = gsap.timeline({
 				scrollTrigger: {
 					trigger: '.chapter3',
