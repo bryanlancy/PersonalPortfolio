@@ -51,6 +51,9 @@ const Chapter6 = () => {
 				toggleActions: 'play none resume reverse',
 			},
 		})
+		line2Tl.to(`.${styles.line1}`, {
+			autoAlpha: 0.3,
+		})
 		line2Tl.to(`.${styles.line2}`, {
 			autoAlpha: 1,
 		})
@@ -62,6 +65,9 @@ const Chapter6 = () => {
 				end: '+=200px',
 				toggleActions: 'play none resume reverse',
 			},
+		})
+		line3Tl.to(`.${styles.line2}`, {
+			autoAlpha: 0.3,
 		})
 		line3Tl.to(`.${styles.line3}`, {
 			autoAlpha: 1,
@@ -75,6 +81,9 @@ const Chapter6 = () => {
 				toggleActions: 'play none resume reverse',
 			},
 		})
+		line4Tl.to(`.${styles.line3}`, {
+			autoAlpha: 0.3,
+		})
 		line4Tl.to(`.${styles.line4}`, {
 			autoAlpha: 1,
 		})
@@ -86,7 +95,7 @@ const Chapter6 = () => {
 		'After a couple of years of learning and building personal projects...'
 	const line2 = 'I landed my first full-time dev job in 2021.'
 	const line3 = "I've been building software professionally ever since,"
-	const line4 = ` while continuing to work on passion projects at home.`
+	const line4 = `while continuing to work on passion projects at home.`
 	return (
 		<div id='chapter6' className={cn('chapter6', styles.chapter6)}>
 			<ChapterScrollContainer
