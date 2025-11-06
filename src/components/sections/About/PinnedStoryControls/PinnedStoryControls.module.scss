@@ -2,7 +2,7 @@
 
 .storyControlsContainer {
 	position: absolute;
-	left: 20px;
+	left: 16px;
 	top: 400px;
 	z-index: 1000;
 
@@ -14,6 +14,10 @@
 	gap: 12px;
 
 	@include autoAlpha;
+
+	@include mobile {
+		left: 12px;
+	}
 }
 
 .storyControlsWrapper {

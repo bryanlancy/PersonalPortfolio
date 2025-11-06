@@ -22,10 +22,10 @@ gsap.registerPlugin(useGSAP, ScrollTrigger)
 export default function Tiles() {
 	useGSAP(() => {
 		const step1 = 50
-		const step2 = 45
+		const step2 = 10
 		const duration1 = 0.5
 		const duration2 = 5
-		const length = 1200
+		const length = 400
 
 		// Start at y:100%, jump to on screen, continue to scroll to y:-100%
 		const oddTl = gsap.timeline({

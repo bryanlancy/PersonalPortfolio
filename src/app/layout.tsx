@@ -6,7 +6,7 @@ import './globals.scss'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import { LoadingProvider } from '@/context/loadingContext'
-import SiteNotice from '@/components/SiteNotice'
+
 config.autoAddCss = false
 
 // Display/title fonts
@@ -29,10 +29,7 @@ export default function RootLayout({
 	return (
 		<html lang='en' className={bebasNeue.className}>
 			<body>
-				<LoadingProvider>
-					<SiteNotice />
-					{children}
-				</LoadingProvider>
+				<LoadingProvider>{children}</LoadingProvider>
 			</body>
 		</html>
 	)

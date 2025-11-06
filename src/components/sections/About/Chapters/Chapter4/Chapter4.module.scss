@@ -262,7 +262,7 @@
 	text-align: left;
 
 	@include mobile {
-		left: 0;
+		left: 16px;
 		top: 35vh;
 		bottom: auto;
 	}
@@ -279,7 +279,7 @@
 	text-align: left;
 
 	@include mobile {
-		left: 0;
+		left: 16px;
 		top: 45vh;
 	}
 	@include desktop {
@@ -291,7 +291,7 @@
 	left: 45%;
 
 	@include mobile {
-		left: 0;
+		left: 16px;
 		top: calc(45vh + 48px);
 	}
 	@include desktop {
