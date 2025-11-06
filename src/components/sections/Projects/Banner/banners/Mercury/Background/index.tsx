@@ -90,7 +90,7 @@ const Background = () => {
 					points={1}
 				/>
 			</div>
-			<svg>
+			{/* <svg>
 				<defs>
 					<filter id='smoosh'>
 						<feGaussianBlur in='SourceGraphic' stdDeviation={10} />
@@ -105,7 +105,7 @@ const Background = () => {
 						<feBlend in='SourceGraphic' />
 					</filter>
 				</defs>
-			</svg>
+			</svg> */}
 		</>
 	)
 }
