@@ -21,6 +21,21 @@ $accent-color-3: #ffb800;
 	clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
 
 	@include autoAlpha;
+
+	@include mobile {
+		width: 240px;
+		height: 180px;
+		top: 100px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	@include tablet {
+		width: 280px;
+		height: 210px;
+		top: 110px;
+		left: 200px;
+	}
 }
 
 .word {
@@ -28,6 +43,18 @@ $accent-color-3: #ffb800;
 	top: 16px;
 	right: 48px;
 	transform: translateX(-50%);
+
+	@include mobile {
+		top: 12px;
+		right: 36px;
+		font-size: 14px;
+	}
+
+	@include tablet {
+		top: 14px;
+		right: 42px;
+		font-size: 15px;
+	}
 }
 .definition {
 	position: absolute;
@@ -46,6 +73,26 @@ $accent-color-3: #ffb800;
 	b {
 		width: 192px;
 		color: #000;
+
+		@include mobile {
+			width: 140px;
+			font-size: 12px;
+		}
+
+		@include tablet {
+			width: 160px;
+			font-size: 13px;
+		}
+	}
+
+	@include mobile {
+		height: 48px;
+		bottom: 8px;
+	}
+
+	@include tablet {
+		height: 56px;
+		bottom: 10px;
 	}
 }
 

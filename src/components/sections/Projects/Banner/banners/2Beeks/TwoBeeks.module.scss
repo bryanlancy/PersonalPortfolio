@@ -9,6 +9,10 @@ $accent-color-3: #ffb800;
 .background {
 	position: relative;
 	background-color: #fff;
+
+	@include mobile {
+		height: 600px;
+	}
 }
 .logo {
 	position: absolute;
@@ -20,6 +24,16 @@ $accent-color-3: #ffb800;
 
 	@include autoAlpha;
 	transform: translateY(40px);
+
+	@include mobile {
+		width: 120px;
+		bottom: 12px;
+		left: 12px;
+	}
+
+	@include tablet {
+		width: 160px;
+	}
 }
 .swarm {
 	position: absolute;
@@ -49,34 +63,106 @@ $accent-color-3: #ffb800;
 		gap: 4px;
 
 		top: 80px;
-		left: 24px;
 
 		transform: scaleX(0);
 		transform-origin: left center;
+
+		@include mobile {
+			top: 60px;
+
+			font-size: 14px;
+			flex-wrap: wrap;
+		}
+
+		@include tablet {
+			top: 70px;
+
+			font-size: 15px;
+		}
 	}
 	&.line2 {
 		top: 136px;
-		left: 24px;
+
 		width: 240px;
 
 		transform: scaleY(0);
 		transform-origin: top center;
+
+		@include mobile {
+			top: 136px;
+
+			width: calc(100% - 24px);
+			max-width: 160px;
+			font-size: 14px;
+		}
+
+		@include tablet {
+			top: 130px;
+
+			width: 280px;
+			font-size: 15px;
+		}
 	}
 	&.line3 {
 		top: 264px;
-		left: 24px;
+
 		width: 240px;
 
 		transform: scaleY(0);
 		transform-origin: top center;
+
+		@include mobile {
+			top: auto;
+			bottom: 30vh;
+
+			width: calc(100% - 24px);
+			max-width: 200px;
+			font-size: 14px;
+		}
+
+		@include tablet {
+			top: 240px;
+
+			width: 280px;
+			font-size: 15px;
+		}
+		@include laptop {
+			top: 224px;
+		}
+		@include desktop {
+			top: 264px;
+		}
 	}
 	&.line4 {
-		position: relative;
+		position: absolute;
+		bottom: 40px;
+		left: 360px;
 
 		width: 280px;
 
 		transform: scaleY(0);
 		transform-origin: top center;
+
+		@include mobile {
+			width: calc(100% - 24px);
+			max-width: 280px;
+			font-size: 14px;
+		}
+
+		@include tablet {
+			width: 300px;
+			font-size: 15px;
+			left: 24px;
+			bottom: 12vh;
+		}
+		@include laptop {
+			left: 80px;
+			bottom: 80px;
+		}
+		@include desktop {
+			left: 360px;
+			bottom: 40px;
+		}
 	}
 	&.line5 {
 		position: relative;
@@ -86,6 +172,16 @@ $accent-color-3: #ffb800;
 
 		transform: scaleX(0);
 		transform-origin: right center;
+
+		@include mobile {
+			text-align: left;
+			transform-origin: left center;
+			font-size: 14px;
+		}
+
+		@include tablet {
+			font-size: 15px;
+		}
 	}
 	&.line6 {
 		position: relative;
@@ -98,30 +194,34 @@ $accent-color-3: #ffb800;
 		> div {
 			transform: translateY(-100%);
 		}
+
+		@include mobile {
+			font-size: 14px;
+			// top: auto;
+			// bottom: 10vh;
+		}
+
+		@include tablet {
+			font-size: 15px;
+		}
 	}
 }
-.group4 {
+
+.group5 {
 	position: absolute;
-	bottom: 40px;
-	left: 360px;
+	bottom: 5vh;
+	right: 0;
 
 	display: flex;
-	gap: 16px;
-
+	flex-direction: column;
 	align-items: flex-end;
 
-	.rightCol {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 16px;
-	}
-	.group5 {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
+	@include mobile {
+		bottom: 10vh;
+		width: 100%;
 	}
 }
+
 .buttons {
 	position: absolute;
 	bottom: 144px;
@@ -131,6 +231,16 @@ $accent-color-3: #ffb800;
 	display: flex;
 	gap: 36px;
 
+	@include mobile {
+		bottom: 22vh;
+	}
+
+	@include tablet {
+		bottom: 120px;
+		right: 16px;
+		gap: 24px;
+	}
+
 	.button {
 		font-family: inherit;
 		font-weight: 700;
@@ -138,6 +248,14 @@ $accent-color-3: #ffb800;
 		font-size: 16px;
 
 		@include autoAlpha;
+
+		@include mobile {
+			font-size: 14px;
+		}
+
+		@include tablet {
+			font-size: 15px;
+		}
 	}
 }
 .apiaryText {
@@ -151,6 +269,14 @@ $accent-color-3: #ffb800;
 	.magnifier {
 		margin-bottom: 2px;
 		font-size: 12px;
+
+		@include mobile {
+			font-size: 10px;
+		}
+	}
+
+	@include mobile {
+		gap: 1px;
 	}
 }
 
@@ -165,13 +291,65 @@ $accent-color-3: #ffb800;
 		right: 200px;
 		width: calc($height * 1.33) !important;
 		height: $height !important;
+
+		@include mobile {
+			$height: 120px;
+			top: 144px;
+			right: 0;
+			width: calc($height * 1.33) !important;
+			height: $height !important;
+		}
+
+		@include tablet {
+			$height: 160px;
+			top: 70px;
+			right: 120px;
+			width: calc($height * 1.33) !important;
+			height: $height !important;
+		}
+		@include laptop {
+			top: 104px;
+			right: 136px;
+		}
 	}
 	&Small1 {
 		top: 40px;
 		right: 480px;
+
+		@include mobile {
+			display: none;
+		}
+
+		@include tablet {
+			$height: 98px;
+			top: 176px;
+			right: 320px;
+			width: calc($height * 1.33) !important;
+			height: $height !important;
+		}
+		@include laptop {
+			top: 40px;
+		}
 	}
 	&Small2 {
 		top: 64px;
 		right: 32px;
+
+		@include mobile {
+			$height: 75px;
+			top: unset;
+			bottom: 30vh;
+			right: 12px;
+			width: calc($height * 1.33) !important;
+			height: $height !important;
+		}
+
+		@include tablet {
+			$height: 98px;
+			top: 56px;
+			right: 24px;
+			width: calc($height * 1.33) !important;
+			height: $height !important;
+		}
 	}
 }

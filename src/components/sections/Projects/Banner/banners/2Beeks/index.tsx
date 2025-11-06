@@ -282,18 +282,12 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 				</p>
 				<p className={cn(styles.line, styles.line2)}>{line2}</p>
 				<p className={cn(styles.line, styles.line3)}>{line3}</p>
-				<div className={styles.group4}>
-					<p className={cn(styles.line, styles.line4)}>{line4}</p>
-					<div className={styles.rightCol}>
-						<div className={styles.group5}>
-							<p className={cn(styles.line, styles.line5)}>
-								{line5}
-							</p>
-							<p className={cn(styles.line, styles.line6)}>
-								{line6}
-							</p>
-						</div>
-					</div>
+
+				<p className={cn(styles.line, styles.line4)}>{line4}</p>
+
+				<div className={styles.group5}>
+					<p className={cn(styles.line, styles.line5)}>{line5}</p>
+					<p className={cn(styles.line, styles.line6)}>{line6}</p>
 				</div>
 				<div className={styles.buttons}>
 					{/* <HexButton

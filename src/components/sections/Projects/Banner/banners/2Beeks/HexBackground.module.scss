@@ -33,6 +33,9 @@ $under: $top + ($rowD * 3);
 	@include desktop {
 		--start: 0px;
 	}
+	@include tablet {
+		--start: -40px;
+	}
 	@include mobile {
 		--start: -76px;
 	}
