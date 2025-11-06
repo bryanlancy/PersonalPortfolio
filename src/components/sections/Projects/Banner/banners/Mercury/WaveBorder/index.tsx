@@ -143,10 +143,10 @@ const WaveBorder = ({
 		// Initial path
 		updatePath()
 
-		// Create animation timeline
+		// Create animation timeline - always start paused, we'll control it via useEffect
 		const timeline = gsap.timeline({
 			repeat: -1,
-			paused,
+			paused: true, // Always start paused, let useEffect control it
 		})
 
 		// Animate the offset to create wave motion
@@ -176,14 +176,11 @@ const WaveBorder = ({
 		}
 	}, [height, amplitude, speed, points])
 
-	// Handle pause/resume separately to avoid recreating animation
+	// Handle pause/resume - both initial state and when prop changes
 	useEffect(() => {
 		if (timelineRef.current) {
-			if (paused) {
-				timelineRef.current.pause()
-			} else {
-				timelineRef.current.resume()
-			}
+			// Use paused() setter for more reliable control
+			timelineRef.current.paused(paused)
 		}
 	}, [paused])
 

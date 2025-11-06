@@ -65,9 +65,9 @@ const Background = () => {
 				<WaveBorder
 					className={cn(styles.wave, styles.top)}
 					paused={wavesPaused}
-					amplitude={15}
-					speed={0.15}
-					points={3}
+					amplitude={10}
+					speed={0.1}
+					points={2}
 				/>
 				<Drops drops={numDrops} />
 				<WaveBorder
