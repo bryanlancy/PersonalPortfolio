@@ -9,6 +9,7 @@ import AnimatedElement from './AnimatedElement'
 import { cn } from '@/utils/react'
 
 import styles from './DiscouragingElements.module.scss'
+import { useEffect, useRef } from 'react'
 
 gsap.registerPlugin(useGSAP, SplitText)
 
@@ -21,6 +22,9 @@ const DiscouragingElements = ({
 	isVisible,
 	duration = 0.6,
 }: DiscouragingElementsProps) => {
+	const patrickStewartRef = useRef<HTMLVideoElement>(null)
+	const patrickRef = useRef<HTMLVideoElement>(null)
+
 	useGSAP(() => {
 		const booTl = gsap.timeline()
 		SplitText.create('.booText', {
@@ -43,6 +47,16 @@ const DiscouragingElements = ({
 			},
 		})
 	}, [])
+
+	useEffect(() => {
+		if (isVisible) {
+			patrickStewartRef.current?.play()
+			patrickRef.current?.play()
+		} else {
+			patrickStewartRef.current?.pause()
+			patrickRef.current?.pause()
+		}
+	}, [isVisible])
 
 	const xFactor = 1.5
 	const yFactor = 1.2
@@ -131,11 +145,13 @@ const DiscouragingElements = ({
 				isVisible={isVisible}
 				duration={duration}
 				continuousAnimation='shake'>
-				<Image
-					src='https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTZka2NyNmNyM3h6c21wc3Z0c3VrNTVsc21neXRkMHByeTEyb2dvcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1PIGU0cftC2pG/giphy.gif'
-					alt='face-palm'
+				<video
+					ref={patrickStewartRef}
+					src='/assets/patrick-stewart.webm'
 					width={80}
 					height={80}
+					loop
+					muted
 				/>
 			</AnimatedElement>
 
@@ -163,11 +179,13 @@ const DiscouragingElements = ({
 				isVisible={isVisible}
 				duration={duration}
 				continuousAnimation='shake'>
-				<img
-					src='/assets/patrick.gif'
-					alt='Booo'
+				<video
+					ref={patrickRef}
+					src='/assets/patrick.webm'
 					width={120}
 					height={120}
+					loop
+					muted
 				/>
 			</AnimatedElement>
 
