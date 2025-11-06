@@ -16,10 +16,6 @@
 	z-index: 3;
 	left: 0;
 
-	path {
-		fill: var(--green);
-	}
-
 	&.top {
 		top: 0;
 		height: 40px;
@@ -66,7 +62,7 @@
 
 		@include tablet {
 			height: 18px;
-			bottom: -18px;
+			bottom: -40px;
 		}
 	}
 }

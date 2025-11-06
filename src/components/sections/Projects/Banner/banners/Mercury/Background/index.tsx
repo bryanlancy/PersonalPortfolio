@@ -1,11 +1,12 @@
+import { useState } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Wave from 'react-wavify'
 
 import { cn } from '@/utils/react'
 import Drops from './Drops'
 import Container from '@/utils/components/Container'
+import WaveBorder from '../WaveBorder'
 
 import { projectList } from '@/app/data'
 
@@ -17,6 +18,7 @@ const Background = () => {
 	const { mercury: data } = projectList
 
 	const numDrops = 3
+	const [wavesPaused, setWavesPaused] = useState(true)
 
 	useGSAP(() => {
 		const backgroundTl = gsap.timeline({
@@ -44,46 +46,48 @@ const Background = () => {
 			y: 0,
 			autoAlpha: 1,
 		})
+
+		// Pause/unpause waves based on visibility
+		ScrollTrigger.create({
+			trigger: `.mercury`,
+			start: 'top bottom',
+			end: 'bottom top',
+			onEnter: () => setWavesPaused(false),
+			onLeave: () => setWavesPaused(true),
+			onEnterBack: () => setWavesPaused(false),
+			onLeaveBack: () => setWavesPaused(true),
+		})
 	})
 
 	return (
 		<>
 			<div className={styles.background}>
-				<Wave
+				<WaveBorder
 					className={cn(styles.wave, styles.top)}
-					paused={false}
-					options={{
-						height: 10,
-						amplitude: 15,
-						speed: 0.15,
-						points: 3,
-					}}
+					paused={wavesPaused}
+					amplitude={10}
+					speed={0.1}
+					points={2}
 				/>
 				<Drops drops={numDrops} />
-				<Wave
+				<WaveBorder
 					className={cn(styles.wave, styles.bottom)}
-					paused={false}
-					options={{
-						height: 10,
-						amplitude: 25,
-						speed: 0.18,
-						points: 4,
-					}}
+					paused={wavesPaused}
+					height={200}
+					amplitude={10}
+					speed={0.18}
+					points={2}
 				/>
 				<Container>
 					<h1 className={styles.title}>{data.name}</h1>
 				</Container>
 
-				{/* TODO Hide or fade bottom wave when  scrolled out of view*/}
-				<Wave
+				<WaveBorder
 					className={cn(styles.wave, styles.bottombottom)}
-					paused={false}
-					options={{
-						height: 8,
-						amplitude: 15,
-						speed: 0.18,
-						points: 4,
-					}}
+					paused={wavesPaused}
+					amplitude={5}
+					speed={0.18}
+					points={1}
 				/>
 			</div>
 			<svg>
