@@ -19,7 +19,11 @@
 .storyControlsWrapper {
 	display: flex;
 	gap: 16px;
-	height: 40px;
+	height: 32px;
+
+	@include mobile {
+		height: 28px;
+	}
 }
 
 .storyControls {
@@ -61,6 +65,16 @@
 		font-size: 12px;
 		font-weight: 400;
 		letter-spacing: 0.5px;
+	}
+
+	@include mobile {
+		padding: 8px 10px;
+		font-size: 14px;
+		gap: 6px;
+
+		span {
+			font-size: 10px;
+		}
 	}
 }
 
