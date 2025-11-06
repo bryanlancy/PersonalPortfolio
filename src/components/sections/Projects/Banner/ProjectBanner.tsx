@@ -17,7 +17,6 @@ interface ProjectTechs {
 	devops: string[]
 }
 
-// TODO larger height of mercury banner messes with overlay fade?
 // TODO Add techs used component
 
 interface ProjectBannerProps extends PropsWithChildren {
@@ -54,9 +53,6 @@ const ProjectBanner: FC<ProjectBannerProps> = ({
 }) => {
 	const overlayRef = useRef(null)
 	const sectionRef = useRef(null)
-
-	// TODO Use framer useTransform instead of mapRange
-	// TODO Add project spec section - techs, company link,
 
 	useGSAP(() => {
 		if (sectionRef.current) {
