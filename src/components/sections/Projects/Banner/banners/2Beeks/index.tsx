@@ -64,20 +64,20 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 		ref: MutableRefObject<HTMLDivElement | null>
 	}[] = [
 		{
-			url: 'https://upload.wikimedia.org/wikipedia/commons/8/84/Apiary_in_Bashkortostan%2C_Russia.jpg',
+			url: '/assets/2beeks/apiary.jpg',
 			alt: 'apiary',
 			className: styles.picLarge,
 			ref: picLargeRef,
 		},
 		{
-			url: 'https://upload.wikimedia.org/wikipedia/commons/1/11/The_Lone_Pollinator.jpg',
-			alt: 'bee',
+			url: '/assets/2beeks/bees.jpg',
+			alt: 'bees',
 			className: styles.picSmall1,
 			ref: picSmall1Ref,
 		},
 		{
-			url: 'https://upload.wikimedia.org/wikipedia/commons/8/81/Bee_Collecting_Pollen_2004-08-14.jpg',
-			alt: 'bee pollen',
+			url: '/assets/2beeks/hive.jpg',
+			alt: 'hive',
 			className: styles.picSmall2,
 			ref: picSmall2Ref,
 		},
