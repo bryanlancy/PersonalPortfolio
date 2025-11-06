@@ -2,11 +2,11 @@ import { useState } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Wave from 'react-wavify'
 
 import { cn } from '@/utils/react'
 import Drops from './Drops'
 import Container from '@/utils/components/Container'
+import WaveBorder from '../WaveBorder'
 
 import { projectList } from '@/app/data'
 
@@ -62,40 +62,32 @@ const Background = () => {
 	return (
 		<>
 			<div className={styles.background}>
-				<Wave
+				<WaveBorder
 					className={cn(styles.wave, styles.top)}
 					paused={wavesPaused}
-					options={{
-						height: 10,
-						amplitude: 15,
-						speed: 0.15,
-						points: 3,
-					}}
+					amplitude={15}
+					speed={0.15}
+					points={3}
 				/>
 				<Drops drops={numDrops} />
-				<Wave
+				<WaveBorder
 					className={cn(styles.wave, styles.bottom)}
 					paused={wavesPaused}
-					options={{
-						height: 10,
-						amplitude: 25,
-						speed: 0.18,
-						points: 4,
-					}}
+					height={200}
+					amplitude={10}
+					speed={0.18}
+					points={2}
 				/>
 				<Container>
 					<h1 className={styles.title}>{data.name}</h1>
 				</Container>
 
-				<Wave
+				<WaveBorder
 					className={cn(styles.wave, styles.bottombottom)}
 					paused={wavesPaused}
-					options={{
-						height: 8,
-						amplitude: 15,
-						speed: 0.18,
-						points: 4,
-					}}
+					amplitude={5}
+					speed={0.18}
+					points={1}
 				/>
 			</div>
 			<svg>

@@ -2,10 +2,10 @@ import { useRef, useState } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Wave from 'react-wavify'
 
 import { Project } from '@/app/data/project-list'
 import { cn } from '@/utils/react'
+import WaveBorder from './WaveBorder'
 
 import styles from './Bucket.module.scss'
 
@@ -113,15 +113,13 @@ export default function Bucket({
 			))}
 			<div className={styles.background}>
 				<div className={styles.fill} ref={fillRef}>
-					<Wave
+					<WaveBorder
 						className={styles.top}
 						paused={wavePaused}
-						options={{
-							height: 10,
-							amplitude: 10,
-							speed: 0.18,
-							points: 4,
-						}}
+						height={10}
+						amplitude={10}
+						speed={0.18}
+						points={4}
 					/>
 				</div>
 			</div>
