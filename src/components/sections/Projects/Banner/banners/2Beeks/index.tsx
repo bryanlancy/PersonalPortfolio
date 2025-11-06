@@ -14,9 +14,9 @@ import ToolTip from './ToolTip'
 import PictureFrame from './PictureFrame'
 import Container from '@/utils/components/Container'
 import { cn } from '@/utils/react'
+import { NoSsr } from '@/utils/next'
 
 import styles from './TwoBeeks.module.scss'
-import { NoSsr } from '@/utils/next'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText)
 
