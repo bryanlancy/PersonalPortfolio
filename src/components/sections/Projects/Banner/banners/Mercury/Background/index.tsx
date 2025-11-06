@@ -4,7 +4,7 @@ import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import { cn } from '@/utils/react'
-import Drops from './Drops'
+// import Drops from './Drops'
 import Container from '@/utils/components/Container'
 import WaveBorder from '../WaveBorder'
 
@@ -17,7 +17,7 @@ gsap.registerPlugin(useGSAP, ScrollTrigger)
 const Background = () => {
 	const { mercury: data } = projectList
 
-	const numDrops = 3
+	// const numDrops = 3
 	const [wavesPaused, setWavesPaused] = useState(true)
 
 	useGSAP(() => {
@@ -69,7 +69,7 @@ const Background = () => {
 					speed={0.1}
 					points={2}
 				/>
-				<Drops drops={numDrops} />
+				{/* <Drops drops={numDrops} /> */}
 				<WaveBorder
 					className={cn(styles.wave, styles.bottom)}
 					paused={wavesPaused}
