@@ -111,7 +111,7 @@ const Projects: FC<ProjectsProps> = () => {
 				<ul>
 					<SideBanner name='proProjects'>Projects</SideBanner>
 					<WalkOnsBanner />
-					<MercuryBanner />
+					{/* <MercuryBanner /> */}
 					{/* <OttoBanner /> */}
 					<TwoBeeksBanner />
 				</ul>
