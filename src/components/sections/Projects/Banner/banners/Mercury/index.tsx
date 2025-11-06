@@ -28,15 +28,17 @@ const MercuryCard = () => {
 			projectName='Mercury'>
 			<Background />
 			<Container>
-				{data.description.map((text, i) => (
-					<Bucket
-						key={i}
-						className={`bucket${i}`}
-						text={text}
-						delay={timings[i] && timings[i].delay}
-						duration={timings[i] && timings[i].duration}
-					/>
-				))}
+				<div className={styles.container}>
+					{data.description.map((text, i) => (
+						<Bucket
+							key={i}
+							className={`bucket${i}`}
+							text={text}
+							delay={timings[i] && timings[i].delay}
+							duration={timings[i] && timings[i].duration}
+						/>
+					))}
+				</div>
 			</Container>
 		</ProjectCard>
 	)

@@ -9,9 +9,9 @@
 	overflow: visible !important;
 	z-index: 99;
 
-	height: 720px;
+	height: 800px;
 	@include tablet {
-		height: 640px;
+		height: 680px;
 	}
 	@include laptop {
 		height: 560px;
@@ -30,12 +30,32 @@
 	align-items: flex-end;
 	padding-top: 40px;
 
+	height: fit-content;
+	width: 100%;
+
+	@include mobile {
+		margin-top: 24px;
+		padding-top: 24px;
+		gap: 24px;
+	}
+
+	@include tablet {
+		margin-top: 24px;
+		padding-top: 32px;
+		gap: 10px;
+	}
+
+	// Odd buckets (1st, 3rd, 5th) align left
 	> :nth-child(odd) {
 		align-self: flex-start;
 	}
 
+	// Even buckets (2nd, 4th, 6th) align right (default align-items: flex-end)
+
 	@include laptop {
 		display: unset;
 		flex-direction: unset;
+		padding-top: 40px;
+		align-items: unset;
 	}
 }
