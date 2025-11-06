@@ -111,7 +111,10 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 					picTl.timeScale(1).reversed(false)
 				},
 				onLeaveBack: () => {
-					picTl.timeScale(5).reversed(true)
+					picTl.timeScale(10).reversed(true)
+				},
+				onLeave: () => {
+					picTl.timeScale(5).reversed(false)
 				},
 			},
 		})
@@ -144,7 +147,10 @@ const TwoBeeksBanner: FC<TwoBeeksBannerProps> = ({}) => {
 					textTl.timeScale(1).reversed(false)
 				},
 				onLeaveBack: () => {
-					textTl.timeScale(7).reversed(true)
+					textTl.timeScale(10).reversed(true)
+				},
+				onLeave: () => {
+					textTl.timeScale(5).reversed(false)
 				},
 			},
 		})

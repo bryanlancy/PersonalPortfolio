@@ -50,6 +50,9 @@ export default function Bucket({
 				onLeaveBack: () => {
 					backgroundTl.timeScale(10).reversed(true)
 				},
+				onLeave: () => {
+					backgroundTl.timeScale(5).reversed(false)
+				},
 			},
 		})
 		backgroundTl.to(lineRef.current, {
