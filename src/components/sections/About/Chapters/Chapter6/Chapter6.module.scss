@@ -11,6 +11,12 @@
 	width: 100%;
 }
 
+.title {
+	position: absolute;
+	top: 16px;
+	right: 0px;
+}
+
 .line {
 	position: absolute;
 }
@@ -21,14 +27,27 @@
 
 	@include autoAlpha;
 
+	@include mobile {
+		top: 30vh;
+		right: 0;
+		left: auto;
+		text-align: right;
+		max-width: 176px;
+	}
+
 	@include tablet {
 		top: 100px;
-		left: 40%;
+		left: unset;
+		right: 0;
+		text-align: right;
+		max-width: 200px;
 	}
 
 	@include laptop {
 		top: 120px;
 		left: 520px;
+		right: auto;
+		text-align: left;
 	}
 }
 .line2 {
@@ -37,14 +56,26 @@
 
 	@include autoAlpha;
 
+	@include mobile {
+		top: 41vh;
+		right: 0;
+		left: auto;
+		text-align: right;
+		max-width: 160px;
+	}
+
 	@include tablet {
-		top: 124px;
-		left: 40%;
+		top: 160px;
+		left: unset;
+		right: 0;
+		text-align: right;
 	}
 
 	@include laptop {
-		top: 144px;
+		top: 176px;
 		left: 520px;
+		right: auto;
+		text-align: left;
 	}
 }
 .line3 {
@@ -53,14 +84,36 @@
 
 	@include autoAlpha;
 
+	@include mobile {
+		top: 45vh;
+		left: 16px;
+		bottom: auto;
+		right: auto;
+		max-width: 176px;
+		text-align: left;
+	}
+
 	@include tablet {
-		bottom: 360px;
-		right: 20%;
+		bottom: 440px;
+		left: calc(100% - 360px);
+		right: auto;
+		top: auto;
+		transform: translateX(-50%);
 	}
 
 	@include laptop {
 		bottom: 424px;
-		right: 264px;
+		left: calc(100% - 400px);
+		right: auto;
+		top: auto;
+		transform: translateX(-50%);
+	}
+	@include desktop {
+		bottom: 424px;
+		left: calc(100% - 360px);
+		right: auto;
+		top: auto;
+		transform: translateX(-50%);
 	}
 }
 .line4 {
@@ -69,13 +122,35 @@
 
 	@include autoAlpha;
 
+	@include mobile {
+		top: 52vh;
+		left: 16px;
+		bottom: auto;
+		right: auto;
+		max-width: 176px;
+		text-align: left;
+	}
+
 	@include tablet {
-		bottom: 340px;
-		right: 20%;
+		bottom: 412px;
+		left: calc(100% - 360px);
+		right: auto;
+		top: auto;
+		transform: translateX(-50%);
 	}
 
 	@include laptop {
 		bottom: 400px;
-		right: 264px;
+		left: calc(100% - 400px);
+		right: auto;
+		top: auto;
+		transform: translateX(-50%);
+	}
+	@include desktop {
+		bottom: 400px;
+		left: calc(100% - 360px);
+		right: auto;
+		top: auto;
+		transform: translateX(-50%);
 	}
 }
