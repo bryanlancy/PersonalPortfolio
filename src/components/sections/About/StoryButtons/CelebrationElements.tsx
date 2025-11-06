@@ -164,7 +164,7 @@ const CelebrationElements = ({
 					width={152}
 					height={120}
 					playsInline
-					webkit-playsinline
+					webkit-playsinline='true'
 					loop
 					muted
 				/>
@@ -184,7 +184,7 @@ const CelebrationElements = ({
 					width={120}
 					height={120}
 					playsInline
-					webkit-playsinline
+					webkit-playsinline='true'
 					loop
 					muted
 				/>
