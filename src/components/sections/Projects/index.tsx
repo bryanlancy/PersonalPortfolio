@@ -12,7 +12,7 @@ import {
 	// CarputerBanner,
 	// HomeNetworkBanner,
 	// OttoBanner,
-	MercuryBanner,
+	// MercuryBanner,
 	TwoBeeksBanner,
 	WalkOnsBanner,
 } from './Banner'
