@@ -4,6 +4,7 @@ import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import { cn } from '@/utils/react'
+import { usePerformanceMode } from '@/hooks/usePerformanceMode'
 import Drops from './Drops'
 import Container from '@/utils/components/Container'
 import WaveBorder from '../WaveBorder'
@@ -16,9 +17,14 @@ gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const Background = () => {
 	const { mercury: data } = projectList
+	const { mode: performanceMode } = usePerformanceMode()
 
 	const numDrops = 3
 	const [wavesPaused, setWavesPaused] = useState(true)
+
+	// Only enable blur effect on high and medium performance devices
+	const enableBlur =
+		performanceMode === 'high' || performanceMode === 'medium'
 
 	useGSAP(() => {
 		const backgroundTl = gsap.timeline({
@@ -61,7 +67,11 @@ const Background = () => {
 
 	return (
 		<>
-			<div className={styles.background}>
+			<div
+				className={cn(
+					styles.background,
+					!enableBlur ? styles.noBlur : undefined
+				)}>
 				<WaveBorder
 					className={cn(styles.wave, styles.top)}
 					paused={wavesPaused}
@@ -90,22 +100,28 @@ const Background = () => {
 					points={1}
 				/>
 			</div>
-			<svg>
-				<defs>
-					<filter id='smoosh'>
-						<feGaussianBlur in='SourceGraphic' stdDeviation={10} />
-						<feColorMatrix
-							in='name'
-							mode='matrix'
-							values='1 0 0 0 0
-									0 1 0 0 0
-									0 0 1 0 0
-									0 0 0 30 -15'
-						/>
-						<feBlend in='SourceGraphic' />
-					</filter>
-				</defs>
-			</svg>
+			{/* Only render expensive SVG blur filter on capable devices */}
+			{enableBlur && (
+				<svg style={{ position: 'absolute', width: 0, height: 0 }}>
+					<defs>
+						<filter id='smoosh'>
+							<feGaussianBlur
+								in='SourceGraphic'
+								stdDeviation={10}
+							/>
+							<feColorMatrix
+								in='name'
+								mode='matrix'
+								values='1 0 0 0 0
+										0 1 0 0 0
+										0 0 1 0 0
+										0 0 0 30 -15'
+							/>
+							<feBlend in='SourceGraphic' />
+						</filter>
+					</defs>
+				</svg>
+			)}
 		</>
 	)
 }
