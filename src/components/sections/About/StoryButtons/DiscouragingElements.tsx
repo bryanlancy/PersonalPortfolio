@@ -151,7 +151,7 @@ const DiscouragingElements = ({
 					width={80}
 					height={80}
 					playsInline
-					webkit-playsinline
+					webkit-playsinline='true'
 					loop
 					muted
 				/>
@@ -187,7 +187,7 @@ const DiscouragingElements = ({
 					width={120}
 					height={120}
 					playsInline
-					webkit-playsinline
+					webkit-playsinline='true'
 					loop
 					muted
 				/>
