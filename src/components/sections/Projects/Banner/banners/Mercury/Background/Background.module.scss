@@ -7,8 +7,17 @@
 	width: 100%;
 	height: 100%;
 
+	// Apply blur filter only on capable devices (controlled via JS)
 	filter: url(#smoosh);
 	-webkit-filter: url(#smoosh);
+
+	// Fallback for low-performance devices: subtle opacity/glow effect
+	&.noBlur {
+		filter: none;
+		-webkit-filter: none;
+		// Optional: subtle box-shadow for depth without blur cost
+		// box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
+	}
 }
 
 .wave {
