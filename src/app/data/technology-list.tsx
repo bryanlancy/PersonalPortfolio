@@ -153,7 +153,7 @@ const technologyList: { [technologyName: string]: Technology } = {
 	sass: {
 		title: 'SCSS',
 		name: 'sass',
-		color: ['#c904c0'],
+		color: '#c904c0',
 		icon: <FontAwesomeIcon icon={faSass} />,
 		category: 'styles',
 		description: [''],

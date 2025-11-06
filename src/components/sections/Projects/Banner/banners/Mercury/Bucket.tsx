@@ -48,7 +48,10 @@ export default function Bucket({
 					backgroundTl.timeScale(1).reversed(false)
 				},
 				onLeaveBack: () => {
-					backgroundTl.timeScale(5).reversed(true)
+					backgroundTl.timeScale(10).reversed(true)
+				},
+				onLeave: () => {
+					backgroundTl.timeScale(5).reversed(false)
 				},
 			},
 		})

@@ -15,6 +15,14 @@ $border-radius: 8px;
 
 	overflow: hidden;
 	filter: drop-shadow(8px 8px 4px #0003);
+
+	@include mobile {
+		filter: drop-shadow(4px 4px 2px #0003);
+	}
+
+	@include tablet {
+		filter: drop-shadow(6px 6px 3px #0003);
+	}
 }
 .fill {
 	position: absolute;
@@ -57,6 +65,16 @@ $border-radius: 8px;
 	filter: brightness(1.2);
 
 	@include autoAlpha;
+
+	@include mobile {
+		width: 6px;
+		height: 6px;
+	}
+
+	@include tablet {
+		width: 7px;
+		height: 7px;
+	}
 }
 .bucket {
 	position: relative;
@@ -70,19 +88,43 @@ $border-radius: 8px;
 	padding: 8px;
 	border-radius: $border-radius;
 
+	@include mobile {
+		padding: 6px;
+		gap: 6px;
+		max-width: calc(100% - 32px);
+	}
+
+	@include tablet {
+		padding: 7px;
+		gap: 7px;
+		max-width: calc(100% - 48px);
+	}
+
 	@include laptop {
 		position: absolute;
 		max-width: 49%;
+		padding: 8px;
+		gap: 8px;
 	}
+
+	// Even buckets (0-indexed: 1, 3, 5) align right
 	&:nth-child(even) {
-		right: 0;
+		@include laptop {
+			right: 0;
+			left: auto;
+		}
 		border-bottom-right-radius: 0 !important;
 		.background {
 			border-bottom-right-radius: 0 !important;
 		}
 	}
+
+	// Odd buckets (0-indexed: 0, 2, 4) align left
 	&:nth-child(odd) {
-		left: 0;
+		@include laptop {
+			left: 0;
+			right: auto;
+		}
 		border-bottom-left-radius: 0 !important;
 		.background {
 			border-bottom-left-radius: 0 !important;
@@ -105,6 +147,14 @@ $border-radius: 8px;
 	.line {
 		&:nth-child(1) {
 			max-width: 540px;
+
+			@include mobile {
+				max-width: 300px;
+			}
+
+			@include tablet {
+				max-width: 420px;
+			}
 		}
 	}
 }
@@ -160,4 +210,19 @@ $border-radius: 8px;
 	}
 
 	color: var(--lightgreen);
+
+	@include mobile {
+		max-width: 280px;
+		font-size: 14px;
+	}
+
+	@include tablet {
+		max-width: 380px;
+		font-size: 16px;
+	}
+
+	@include laptop {
+		max-width: 480px;
+		font-size: inherit;
+	}
 }

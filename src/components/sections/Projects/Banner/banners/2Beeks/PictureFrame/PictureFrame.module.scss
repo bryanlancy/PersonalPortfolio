@@ -1,3 +1,5 @@
+@import '@/styles/mixins.scss';
+
 $accent-color-2: #f7e653;
 $accent-color-3: #ffb800;
 
@@ -9,6 +11,16 @@ $accent-color-3: #ffb800;
 	height: 120px;
 	aspect-ratio: 1 / cos(30deg);
 	clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
+
+	@include mobile {
+		width: 100px;
+		height: 75px;
+	}
+
+	@include tablet {
+		width: 130px;
+		height: 98px;
+	}
 }
 
 .frame {

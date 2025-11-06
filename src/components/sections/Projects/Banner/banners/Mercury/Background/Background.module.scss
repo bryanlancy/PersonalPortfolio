@@ -26,6 +26,16 @@
 
 		transform: translateY(-50px) rotate(180deg);
 		@include autoAlpha;
+
+		@include mobile {
+			height: 30px;
+			transform: translateY(-40px) rotate(180deg);
+		}
+
+		@include tablet {
+			height: 35px;
+			transform: translateY(-45px) rotate(180deg);
+		}
 	}
 	&.bottom {
 		bottom: 0px;
@@ -34,13 +44,30 @@
 		transform: translateY(50px);
 		@include autoAlpha;
 
+		@include mobile {
+			height: 120px;
+			transform: translateY(40px);
+		}
+
 		@include tablet {
+			height: 140px;
+			transform: translateY(45px);
 		}
 	}
 	&.bottombottom {
 		height: 20px;
 		transform: rotate(180deg);
 		bottom: -20px;
+
+		@include mobile {
+			height: 15px;
+			bottom: -15px;
+		}
+
+		@include tablet {
+			height: 18px;
+			bottom: -18px;
+		}
 	}
 }
 
@@ -51,11 +78,23 @@
 
 	right: 0px;
 
-	bottom: 120px;
-	@include tablet {
-		bottom: 112px;
+	bottom: 112px;
+
+	@include mobile {
+		bottom: 88px;
+		right: 8px;
+		font-size: 32px;
 	}
+
+	@include tablet {
+		bottom: 96px;
+		right: 16px;
+		font-size: 36px;
+	}
+
 	@include laptop {
-		bottom: 104px;
+		bottom: 88px;
+		right: 0px;
+		font-size: inherit;
 	}
 }
