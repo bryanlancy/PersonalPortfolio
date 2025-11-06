@@ -68,8 +68,8 @@ const Chapter3 = () => {
 		const line1Tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter3',
-				start: `top top`,
-				end: '+=1800px',
+				start: `top top+=500px`,
+				end: '+=2100px',
 				toggleActions: 'play none resume reverse',
 				onToggle: self => {
 					if (self.isActive !== showLine1State[2].current) {
@@ -81,13 +81,14 @@ const Chapter3 = () => {
 
 		line1Tl.to(`.${styles.line1}`, {
 			autoAlpha: 1,
+			duration: 0.1,
 		})
 		// Line 2 Animation
 		const line2Tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter3',
-				start: `top top+=200px`,
-				end: '+=1800px',
+				start: `top top-=800px`,
+				end: '+=1600px',
 				toggleActions: 'play none resume reverse',
 				onToggle: self => {
 					if (self.isActive !== showLine2State[2].current) {
@@ -96,10 +97,19 @@ const Chapter3 = () => {
 				},
 			},
 		})
-
-		line2Tl.to(`.${styles.line2}`, {
-			autoAlpha: 1,
+		line2Tl.to(`.${styles.line1}`, {
+			autoAlpha: 0.3,
+			duration: 0.25,
 		})
+		line2Tl.to(
+			`.${styles.line2}`,
+			{
+				autoAlpha: 1,
+				duration: 0.1,
+			},
+			'<'
+		)
+
 		line2Tl.to(
 			`.${styles.moolah}`,
 			{

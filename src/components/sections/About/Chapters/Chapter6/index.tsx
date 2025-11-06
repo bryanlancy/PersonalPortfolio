@@ -35,8 +35,10 @@ const Chapter6 = () => {
 			scrollTrigger: {
 				trigger: '.chapter6',
 				start: 'top top-=240px',
-				end: '+=200px',
-				toggleActions: 'play none resume reverse',
+				end: '+=600px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
+				preventOverlaps: 'text',
 			},
 		})
 		line1Tl.to(`.${styles.line1}`, {
@@ -47,8 +49,10 @@ const Chapter6 = () => {
 			scrollTrigger: {
 				trigger: '.chapter6',
 				start: 'top top-=1800px',
-				end: '+=200px',
-				toggleActions: 'play none resume reverse',
+				end: '+=600px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
+				preventOverlaps: 'text',
 			},
 		})
 		line2Tl.to(`.${styles.line1}`, {
@@ -62,8 +66,10 @@ const Chapter6 = () => {
 			scrollTrigger: {
 				trigger: '.chapter6',
 				start: 'top top-=2200px',
-				end: '+=200px',
-				toggleActions: 'play none resume reverse',
+				end: '+=600px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
+				preventOverlaps: 'text',
 			},
 		})
 		line3Tl.to(`.${styles.line2}`, {
@@ -77,8 +83,10 @@ const Chapter6 = () => {
 			scrollTrigger: {
 				trigger: '.chapter6',
 				start: 'top top-=2600px',
-				end: '+=200px',
-				toggleActions: 'play none resume reverse',
+				end: '+=600px',
+				toggleActions: 'play complete none reverse',
+				fastScrollEnd: true,
+				preventOverlaps: 'text',
 			},
 		})
 		line4Tl.to(`.${styles.line3}`, {

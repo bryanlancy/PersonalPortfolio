@@ -78,30 +78,13 @@ const Bar = () => {
 			})
 		})
 
-		// Desktop: move up by 120px (from laptop position)
-		mm.add('(min-width: 1240px) and (max-width: 1727px)', () => {
+		// Desktop and above
+		mm.add('(min-width: 1240px)', () => {
 			const mainBarTransitionTl = gsap.timeline({
 				scrollTrigger: {
 					trigger: '.chapter3',
 					start: 'top center',
 					end: '+=600px',
-					toggleActions: 'play complete none reverse',
-					fastScrollEnd: true,
-				},
-			})
-			mainBarTransitionTl.to(`.${styles.barContainer}`, {
-				y: -96, // 72 - 120 = -48 (moves up 120px from laptop's y: 72)
-				x: -32,
-			})
-		})
-
-		// HD
-		mm.add('(min-width: 1728px)', () => {
-			const mainBarTransitionTl = gsap.timeline({
-				scrollTrigger: {
-					trigger: '.chapter3',
-					start: 'top center',
-					end: '+=1000px',
 					toggleActions: 'play complete none reverse',
 					fastScrollEnd: true,
 				},
