@@ -1,10 +1,9 @@
 'use client'
 
-import Image from 'next/image'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { SplitText } from 'gsap/SplitText'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 import AnimatedElement from './AnimatedElement'
 import { cn } from '@/utils/react'
@@ -38,6 +37,8 @@ const CelebrationElements = ({
 		'#ff6348', // Coral
 		'#2ed573', // Lime Green
 	])
+	const veryCoolRef = useRef<HTMLVideoElement>(null)
+	const doItRef = useRef<HTMLVideoElement>(null)
 
 	useGSAP(() => {
 		const yesSplitTl = gsap.timeline({})
@@ -68,6 +69,16 @@ const CelebrationElements = ({
 
 	const xFactor = 1.5
 	const yFactor = 1.2
+
+	useEffect(() => {
+		if (isVisible) {
+			veryCoolRef.current?.play()
+			doItRef.current?.play()
+		} else {
+			veryCoolRef.current?.pause()
+			doItRef.current?.pause()
+		}
+	}, [isVisible])
 
 	return (
 		<div className={styles.celebrationContainer}>
@@ -147,12 +158,13 @@ const CelebrationElements = ({
 				isVisible={isVisible}
 				duration={duration}
 				continuousAnimation='float'>
-				<Image
-					src='https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3o4a3Jtc24xdjkxbnAzMzJ1YndzMTF3ZTJqN2ViYWh0dGM2MndhbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SVH9y2LQUVVCRcqD7o/giphy.gif'
-					alt='Very Cool'
-					width={120}
+				<video
+					ref={veryCoolRef}
+					src='/assets/very-cool.webm'
+					width={152}
 					height={120}
-					unoptimized
+					loop
+					muted
 				/>
 			</AnimatedElement>
 
@@ -164,12 +176,13 @@ const CelebrationElements = ({
 				isVisible={isVisible}
 				duration={duration}
 				continuousAnimation='float'>
-				<Image
-					src='https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzZmMnVvdjRkam40bWVobGNzdmNsdGVteW9xajNiMXJ0b2N4cnF5NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CpgNjk2E54p7W/giphy.gif'
-					alt='Video'
+				<video
+					ref={doItRef}
+					src='/assets/do-it.webm'
 					width={120}
 					height={120}
-					unoptimized
+					loop
+					muted
 				/>
 			</AnimatedElement>
 
@@ -223,6 +236,7 @@ const CelebrationElements = ({
 				isVisible={isVisible}
 				duration={duration}
 				continuousAnimation='float'>
+				{/* Leave empty, the shape is generated in the CSS */}
 				<div></div>
 			</AnimatedElement>
 
@@ -238,6 +252,7 @@ const CelebrationElements = ({
 				isVisible={isVisible}
 				duration={duration}
 				continuousAnimation='float'>
+				{/* Leave empty, the shape is generated in the CSS */}
 				<div></div>
 			</AnimatedElement>
 
@@ -253,6 +268,7 @@ const CelebrationElements = ({
 				isVisible={isVisible}
 				duration={duration}
 				continuousAnimation='float'>
+				{/* Leave empty, the shape is generated in the CSS */}
 				<div></div>
 			</AnimatedElement>
 
@@ -268,6 +284,7 @@ const CelebrationElements = ({
 				isVisible={isVisible}
 				duration={duration}
 				continuousAnimation='float'>
+				{/* Leave empty, the shape is generated in the CSS */}
 				<div></div>
 			</AnimatedElement>
 		</div>

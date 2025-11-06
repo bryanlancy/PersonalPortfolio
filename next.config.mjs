@@ -8,16 +8,6 @@ const nextConfig = {
 				hostname: 'upload.wikimedia.org',
 				pathname: '/**',
 			},
-			{
-				protocol: 'https',
-				hostname: 'tenor.com',
-				pathname: '/**',
-			},
-			{
-				protocol: 'https',
-				hostname: '*.giphy.com',
-				pathname: '/**',
-			},
 		],
 	},
 }
