@@ -56,7 +56,7 @@ export default function Drop({ id, droptions, deleteDrop }: DropProps) {
 			},
 		})
 		dropTl.to(dropRef.current, {
-			bottom: '0%',
+			bottom: '-40px',
 			duration: dropDuration,
 			delay: dropDelay,
 		})
