@@ -163,6 +163,8 @@ const CelebrationElements = ({
 					src='/assets/very-cool.webm'
 					width={152}
 					height={120}
+					playsInline
+					webkit-playsinline
 					loop
 					muted
 				/>
@@ -181,6 +183,8 @@ const CelebrationElements = ({
 					src='/assets/do-it.webm'
 					width={120}
 					height={120}
+					playsInline
+					webkit-playsinline
 					loop
 					muted
 				/>

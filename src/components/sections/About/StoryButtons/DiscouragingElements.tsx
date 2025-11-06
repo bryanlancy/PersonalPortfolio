@@ -150,6 +150,8 @@ const DiscouragingElements = ({
 					src='/assets/patrick-stewart.webm'
 					width={80}
 					height={80}
+					playsInline
+					webkit-playsinline
 					loop
 					muted
 				/>
@@ -184,6 +186,8 @@ const DiscouragingElements = ({
 					src='/assets/patrick.webm'
 					width={120}
 					height={120}
+					playsInline
+					webkit-playsinline
 					loop
 					muted
 				/>
