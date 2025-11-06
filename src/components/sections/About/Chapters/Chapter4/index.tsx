@@ -770,66 +770,195 @@ const Chapter4 = () => {
 			'<'
 		)
 
-		// House Exit Animation
-		const houseExitTl = gsap.timeline({
-			scrollTrigger: {
-				trigger: '.chapter5',
-				start: 'top bottom',
-				end: '+=600px',
-				fastScrollEnd: true,
-				toggleActions: 'play complete none reverse',
-			},
+		// House Exit Animation - Mobile
+		mm.add('(max-width: 599px)', () => {
+			const houseExitTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.chapter5',
+					start: 'top bottom',
+					end: '+=600px',
+					fastScrollEnd: true,
+					toggleActions: 'play complete none reverse',
+				},
+			})
+
+			houseExitTl.to(
+				`.${styles.houseIn}`,
+				{
+					autoAlpha: 0,
+				},
+				'<'
+			)
+			houseExitTl.to(
+				`.${styles.bed}`,
+				{
+					autoAlpha: 0,
+				},
+				'<'
+			)
+			houseExitTl.to(
+				`.${styles.computer}`,
+				{
+					autoAlpha: 0,
+				},
+				'<'
+			)
+			houseExitTl.to(
+				`.${styles.me}`,
+				{
+					autoAlpha: 0,
+				},
+				'<'
+			)
+			houseExitTl.to(
+				`.${styles.computer}`,
+				{
+					autoAlpha: 0,
+				},
+				'<'
+			)
+
+			houseExitTl.to(
+				`.${styles.line5}`,
+				{ autoAlpha: 0, duration: 0.25 },
+				'<'
+			)
+			houseExitTl.to(
+				`.${styles.line6}`,
+				{ autoAlpha: 0, duration: 0.25 },
+				'<'
+			)
+			houseExitTl.to(`.${styles.lightContainer}`, {
+				top: '40vh',
+			})
 		})
 
-		houseExitTl.to(
-			`.${styles.houseIn}`,
-			{
-				autoAlpha: 0,
-			},
-			'<'
-		)
-		houseExitTl.to(
-			`.${styles.bed}`,
-			{
-				autoAlpha: 0,
-			},
-			'<'
-		)
-		houseExitTl.to(
-			`.${styles.computer}`,
-			{
-				autoAlpha: 0,
-			},
-			'<'
-		)
-		houseExitTl.to(
-			`.${styles.me}`,
-			{
-				autoAlpha: 0,
-			},
-			'<'
-		)
-		houseExitTl.to(
-			`.${styles.computer}`,
-			{
-				autoAlpha: 0,
-			},
-			'<'
-		)
+		// House Exit Animation - Tablet
+		mm.add('(min-width: 600px) and (max-width: 949px)', () => {
+			const houseExitTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.chapter5',
+					start: 'top bottom',
+					end: '+=600px',
+					fastScrollEnd: true,
+					toggleActions: 'play complete none reverse',
+				},
+			})
 
-		houseExitTl.to(
-			`.${styles.line5}`,
-			{ autoAlpha: 0, duration: 0.25 },
-			'<'
-		)
-		houseExitTl.to(
-			`.${styles.line6}`,
-			{ autoAlpha: 0, duration: 0.25 },
-			'<'
-		)
-		houseExitTl.to(`.${styles.lightContainer}`, {
-			y: 80,
-			scale: 1.3,
+			houseExitTl.to(
+				`.${styles.houseIn}`,
+				{
+					autoAlpha: 0,
+				},
+				'<'
+			)
+			houseExitTl.to(
+				`.${styles.bed}`,
+				{
+					autoAlpha: 0,
+				},
+				'<'
+			)
+			houseExitTl.to(
+				`.${styles.computer}`,
+				{
+					autoAlpha: 0,
+				},
+				'<'
+			)
+			houseExitTl.to(
+				`.${styles.me}`,
+				{
+					autoAlpha: 0,
+				},
+				'<'
+			)
+			houseExitTl.to(
+				`.${styles.computer}`,
+				{
+					autoAlpha: 0,
+				},
+				'<'
+			)
+
+			houseExitTl.to(
+				`.${styles.line5}`,
+				{ autoAlpha: 0, duration: 0.25 },
+				'<'
+			)
+			houseExitTl.to(
+				`.${styles.line6}`,
+				{ autoAlpha: 0, duration: 0.25 },
+				'<'
+			)
+			houseExitTl.to(`.${styles.lightContainer}`, {
+				top: '45vh',
+				scale: 1.3,
+			})
+		})
+
+		// House Exit Animation - Laptop and larger
+		mm.add('(min-width: 950px)', () => {
+			const houseExitTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.chapter5',
+					start: 'top bottom',
+					end: '+=600px',
+					fastScrollEnd: true,
+					toggleActions: 'play complete none reverse',
+				},
+			})
+
+			houseExitTl.to(
+				`.${styles.houseIn}`,
+				{
+					autoAlpha: 0,
+				},
+				'<'
+			)
+			houseExitTl.to(
+				`.${styles.bed}`,
+				{
+					autoAlpha: 0,
+				},
+				'<'
+			)
+			houseExitTl.to(
+				`.${styles.computer}`,
+				{
+					autoAlpha: 0,
+				},
+				'<'
+			)
+			houseExitTl.to(
+				`.${styles.me}`,
+				{
+					autoAlpha: 0,
+				},
+				'<'
+			)
+			houseExitTl.to(
+				`.${styles.computer}`,
+				{
+					autoAlpha: 0,
+				},
+				'<'
+			)
+
+			houseExitTl.to(
+				`.${styles.line5}`,
+				{ autoAlpha: 0, duration: 0.25 },
+				'<'
+			)
+			houseExitTl.to(
+				`.${styles.line6}`,
+				{ autoAlpha: 0, duration: 0.25 },
+				'<'
+			)
+			houseExitTl.to(`.${styles.lightContainer}`, {
+				top: '50vh',
+				scale: 1.3,
+			})
 		})
 	}, [])
 

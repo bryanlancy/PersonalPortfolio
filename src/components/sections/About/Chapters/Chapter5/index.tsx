@@ -2,22 +2,19 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
 	faLaptop,
 	faScrewdriverWrench,
 	faWifiFair,
 } from '@awesome.me/kit-ddd907bdb7/icons/sharp-duotone/solid'
-import {
-	faBan,
-	faCheck,
-} from '@awesome.me/kit-ddd907bdb7/icons/classic/regular'
+import { faBan } from '@awesome.me/kit-ddd907bdb7/icons/classic/regular'
 
 import { arrRotator } from '@/utils/general'
 import { cn } from '@/utils/react'
 
 import styles from './Chapter5.module.scss'
 import Network from './Network'
+import ProContainer from './ProContainer'
 import { NoSsr } from '@/utils/next'
 import Container from '@/utils/components/Container'
 import ChapterScrollContainer from '@/components/ChapterScrollContainer'
@@ -119,6 +116,21 @@ const Chapter5 = () => {
 			delay: 1,
 		})
 
+		const line2Tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.chapter5',
+				start: 'top top-=1600px',
+				end: '+=200px',
+				scrub: true,
+			},
+		})
+		line2Tl.to(`.${styles.line1}`, {
+			autoAlpha: 0.3,
+		})
+		line2Tl.to(`.${styles.line2}`, {
+			autoAlpha: 1,
+		})
+
 		// Line 3,Tools,Computer,Internet Animation
 		const line3Tl = gsap.timeline({
 			scrollTrigger: {
@@ -132,6 +144,9 @@ const Chapter5 = () => {
 						.reversed(self.direction > 0 ? false : true)
 				},
 			},
+		})
+		line3Tl.to(`.${styles.line2}`, {
+			autoAlpha: 0.3,
 		})
 		line3Tl.to(`.${styles.line3}`, {
 			autoAlpha: 1,
@@ -194,72 +209,26 @@ const Chapter5 = () => {
 					<p className={cn(styles.line, styles.line1)}>{line1}</p>
 					<p className={cn(styles.line, styles.line2)}>{line2}</p>
 					<p className={cn(styles.line, styles.line3)}>{line3}</p>
-
-					<div
-						className={cn(
-							styles.proContainer,
-							styles.toolsContainer
-						)}>
-						<div className={styles.iconContainer}>
-							<FontAwesomeIcon
-								icon={faBan}
-								className={styles.ban}
-							/>
-							<FontAwesomeIcon
-								icon={faScrewdriverWrench}
-								className={styles.icon}
-							/>
-						</div>
-						<div className={styles.text}>
-							<FontAwesomeIcon
-								icon={faCheck}
-								className={styles.check}
-							/>
-							<p className={styles.lineTools}>{lineTools}</p>
-						</div>
-					</div>
-					<div
-						className={cn(
-							styles.proContainer,
-							styles.computerContainer
-						)}>
-						<div className={styles.iconContainer}>
-							<FontAwesomeIcon
-								icon={faLaptop}
-								className={styles.icon}
-							/>
-						</div>
-						<div className={styles.text}>
-							<FontAwesomeIcon
-								icon={faCheck}
-								className={styles.check}
-							/>
-							<p className={styles.lineComputer}>
-								{lineComputer}
-							</p>
-						</div>
-					</div>
-
-					<div
-						className={cn(
-							styles.proContainer,
-							styles.internetContainer
-						)}>
-						<div className={styles.iconContainer}>
-							<FontAwesomeIcon
-								icon={faWifiFair}
-								className={styles.icon}
-							/>
-						</div>
-						<div className={styles.text}>
-							<FontAwesomeIcon
-								icon={faCheck}
-								className={styles.check}
-							/>
-							<p className={styles.lineInternet}>
-								{lineInternet}
-							</p>
-						</div>
+					<div className={styles.prosContainer}>
+						<ProContainer
+							containerClassName={styles.toolsContainer}
+							icon={faScrewdriverWrench}
+							banIcon={faBan}
+							text={lineTools}
+							textClassName={styles.lineTools}
+						/>
+						<ProContainer
+							containerClassName={styles.computerContainer}
+							icon={faLaptop}
+							text={lineComputer}
+							textClassName={styles.lineComputer}
+						/>
+						<ProContainer
+							containerClassName={styles.internetContainer}
+							icon={faWifiFair}
+							text={lineInternet}
+							textClassName={styles.lineInternet}
+						/>
 					</div>
 				</Container>
 			</ChapterScrollContainer>
