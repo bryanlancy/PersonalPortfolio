@@ -58,7 +58,7 @@
 	left: 50%;
 
 	@include mobile {
-		top: 40vh;
+		top: 38vh;
 		left: 16px;
 		transform: none;
 		text-align: left;
@@ -106,6 +106,12 @@
 		transform: none;
 		text-align: left;
 	}
+	@include desktop {
+		top: 58vh;
+	}
+	@include hd {
+		top: 56vh;
+	}
 }
 .line3 {
 	top: 60%;
@@ -128,6 +134,9 @@
 
 	@include laptop {
 		left: 20%;
+	}
+	@include desktop {
+		top: 65vh;
 	}
 }
 
