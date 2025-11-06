@@ -107,6 +107,12 @@ const Chapter4 = () => {
 		faceTl.to(`.${styles.me}`, {
 			x: 0,
 		})
+
+		// Store final position of .me after faceOnBedTl for reuse in faceToComputerTl
+		let meFinalX = 0
+		let meFinalY = 0
+
+		// faceOnBedTl - Works for all screen sizes with dynamic positioning
 		const faceOnBedTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: '.chapter4',
@@ -118,8 +124,51 @@ const Chapter4 = () => {
 		})
 
 		faceOnBedTl.to(`.${styles.me}`, {
-			x: 136,
-			y: -45,
+			x: function () {
+				const bedElement = document.querySelector(`.${styles.bed}`)
+				const meElement = document.querySelector(`.${styles.me}`)
+				const houseElement = document.querySelector(`.${styles.house}`)
+
+				if (!bedElement || !meElement || !houseElement) return 136
+
+				const bedRect = bedElement.getBoundingClientRect()
+				const houseRect = houseElement.getBoundingClientRect()
+				const meRect = meElement.getBoundingClientRect()
+
+				const bedCenterX =
+					bedRect.left - houseRect.left + bedRect.width / 2
+				const meCenterX =
+					meRect.left - houseRect.left + meRect.width / 2
+				const offsetX = bedCenterX - meCenterX
+
+				// Get current transform value and add offset
+				const currentX =
+					(gsap.getProperty(meElement, 'x') as number) || 0
+				meFinalX = currentX + offsetX
+				return meFinalX
+			},
+			y: function () {
+				const bedElement = document.querySelector(`.${styles.bed}`)
+				const meElement = document.querySelector(`.${styles.me}`)
+				const houseElement = document.querySelector(`.${styles.house}`)
+
+				if (!bedElement || !meElement || !houseElement) return -45
+
+				const bedRect = bedElement.getBoundingClientRect()
+				const houseRect = houseElement.getBoundingClientRect()
+				const meRect = meElement.getBoundingClientRect()
+
+				const bedTop = bedRect.top - houseRect.top
+				const meBottom = meRect.bottom - houseRect.top
+				const spacing = -20
+				const offsetY = bedTop - meBottom - spacing
+
+				// Get current transform value and add offset
+				const currentY =
+					(gsap.getProperty(meElement, 'y') as number) || 0
+				meFinalY = currentY + offsetY
+				return meFinalY
+			},
 			ease: 'elastic',
 		})
 		faceOnBedTl.to(
@@ -194,49 +243,434 @@ const Chapter4 = () => {
 			'<'
 		)
 
-		// Face to Computer Animation
-		const faceToComputerTl = gsap.timeline({
-			scrollTrigger: {
-				trigger: '.chapter4',
-				start: 'top top-=2500px',
-				end: '+=600px',
-				toggleActions: 'play complete none reverse',
-				fastScrollEnd: true,
-			},
-		})
-		faceToComputerTl.set(`.${styles.line4}`, { autoAlpha: 0 })
-		faceToComputerTl.to(`.${styles.me}`, {
-			rotateY: '+=180deg',
-			x: -104,
-			y: 0,
-		})
-		faceToComputerTl.to(`.${styles.line4}`, {
-			autoAlpha: 1,
-		})
-		faceToComputerTl.to(
-			[`.${styles.line1}`, `.${styles.line2}`, `.${styles.line3}`],
-			{
-				autoAlpha: 0.5,
-				stagger: 0.25,
-			},
-			'<'
-		)
-		faceToComputerTl.to(
-			`.${styles.smart}`,
-			{
-				duration: 0.1,
+		// Face to Computer Animation - Mobile
+		const mm = gsap.matchMedia()
+		mm.add('(max-width: 599px)', () => {
+			const faceToComputerTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.chapter4',
+					start: 'top top-=2500px',
+					end: '+=600px',
+					toggleActions: 'play complete none reverse',
+					fastScrollEnd: true,
+				},
+			})
+			faceToComputerTl.set(`.${styles.line4}`, { autoAlpha: 0 })
+			faceToComputerTl.to(`.${styles.me}`, {
+				rotateY: '+=180deg',
+				x: function () {
+					const computerElement = document.querySelector(
+						`.${styles.computer}`
+					)
+					const meElement = document.querySelector(`.${styles.me}`)
+					const houseElement = document.querySelector(
+						`.${styles.house}`
+					)
+
+					if (!computerElement || !meElement || !houseElement) {
+						// Fallback: use stored final position
+						return meFinalX - 104
+					}
+
+					const computerRect = computerElement.getBoundingClientRect()
+					const houseRect = houseElement.getBoundingClientRect()
+					const meRect = meElement.getBoundingClientRect()
+
+					// Get computer's right edge position relative to house
+					const computerRightX = computerRect.right - houseRect.left
+					// Get me's current left edge position (includes transform from faceOnBedTl)
+					const meLeftX = meRect.left - houseRect.left
+					// Calculate offset needed to position me to the right of computer
+					const spacing = 32 // spacing between computer and me
+					const offsetX = computerRightX - meLeftX + spacing
+
+					// Get current transform value (includes faceOnBedTl transform) and add offset
+					const currentX =
+						(gsap.getProperty(meElement, 'x') as number) || 0
+					return currentX + offsetX
+				},
+				y: function () {
+					const computerElement = document.querySelector(
+						`.${styles.computer}`
+					)
+					const meElement = document.querySelector(`.${styles.me}`)
+					const houseElement = document.querySelector(
+						`.${styles.house}`
+					)
+
+					if (!computerElement || !meElement || !houseElement) {
+						// Fallback: use stored final position
+						return meFinalY
+					}
+
+					const computerRect = computerElement.getBoundingClientRect()
+					const houseRect = houseElement.getBoundingClientRect()
+					const meRect = meElement.getBoundingClientRect()
+
+					// Align vertically with computer's center
+					const computerCenterY =
+						computerRect.top -
+						houseRect.top +
+						computerRect.height / 2
+					const meCenterY =
+						meRect.top - houseRect.top + meRect.height / 2
+					const offsetY = computerCenterY - meCenterY
+
+					// Get current transform value (includes faceOnBedTl transform) and add offset
+					const currentY =
+						(gsap.getProperty(meElement, 'y') as number) || 0
+					return currentY + offsetY
+				},
+			})
+			faceToComputerTl.to(`.${styles.line4}`, {
 				autoAlpha: 1,
-			},
-			'<'
-		)
-		faceToComputerTl.to(
-			`.${styles.sleeping}`,
-			{
-				duration: 0.1,
-				autoAlpha: 0,
-			},
-			'<'
-		)
+			})
+			faceToComputerTl.to(
+				[`.${styles.line1}`, `.${styles.line2}`, `.${styles.line3}`],
+				{
+					autoAlpha: 0.5,
+					stagger: 0.25,
+				},
+				'<'
+			)
+			faceToComputerTl.to(
+				`.${styles.smart}`,
+				{
+					duration: 0.1,
+					autoAlpha: 1,
+				},
+				'<'
+			)
+			faceToComputerTl.to(
+				`.${styles.sleeping}`,
+				{
+					duration: 0.1,
+					autoAlpha: 0,
+				},
+				'<'
+			)
+		})
+
+		// Face to Computer Animation - Tablet
+		mm.add('(min-width: 600px) and (max-width: 949px)', () => {
+			const faceToComputerTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.chapter4',
+					start: 'top top-=2500px',
+					end: '+=600px',
+					toggleActions: 'play complete none reverse',
+					fastScrollEnd: true,
+				},
+			})
+			faceToComputerTl.set(`.${styles.line4}`, { autoAlpha: 0 })
+			faceToComputerTl.to(`.${styles.me}`, {
+				rotateY: '+=180deg',
+				x: function () {
+					const computerElement = document.querySelector(
+						`.${styles.computer}`
+					)
+					const meElement = document.querySelector(`.${styles.me}`)
+					const houseElement = document.querySelector(
+						`.${styles.house}`
+					)
+
+					if (!computerElement || !meElement || !houseElement) {
+						// Fallback: use stored final position
+						return meFinalX - 104
+					}
+
+					const computerRect = computerElement.getBoundingClientRect()
+					const houseRect = houseElement.getBoundingClientRect()
+					const meRect = meElement.getBoundingClientRect()
+
+					// Get computer's right edge position relative to house
+					const computerRightX = computerRect.right - houseRect.left
+					// Get me's current left edge position (includes transform from faceOnBedTl)
+					const meLeftX = meRect.left - houseRect.left
+					// Calculate offset needed to position me to the right of computer
+					const spacing = 48 // spacing between computer and me - adjust for tablet
+					const offsetX = computerRightX - meLeftX + spacing
+
+					// Get current transform value (includes faceOnBedTl transform) and add offset
+					const currentX =
+						(gsap.getProperty(meElement, 'x') as number) || 0
+					return currentX + offsetX
+				},
+				y: function () {
+					const computerElement = document.querySelector(
+						`.${styles.computer}`
+					)
+					const meElement = document.querySelector(`.${styles.me}`)
+					const houseElement = document.querySelector(
+						`.${styles.house}`
+					)
+
+					if (!computerElement || !meElement || !houseElement) {
+						// Fallback: use stored final position
+						return meFinalY
+					}
+
+					const computerRect = computerElement.getBoundingClientRect()
+					const houseRect = houseElement.getBoundingClientRect()
+					const meRect = meElement.getBoundingClientRect()
+
+					// Align vertically with computer's center
+					const computerCenterY =
+						computerRect.top -
+						houseRect.top +
+						computerRect.height / 2
+					const meCenterY =
+						meRect.top - houseRect.top + meRect.height / 2
+					const offsetY = computerCenterY - meCenterY
+
+					// Get current transform value (includes faceOnBedTl transform) and add offset
+					const currentY =
+						(gsap.getProperty(meElement, 'y') as number) || 0
+					return currentY + offsetY
+				},
+			})
+			faceToComputerTl.to(`.${styles.line4}`, {
+				autoAlpha: 1,
+			})
+			faceToComputerTl.to(
+				[`.${styles.line1}`, `.${styles.line2}`, `.${styles.line3}`],
+				{
+					autoAlpha: 0.5,
+					stagger: 0.25,
+				},
+				'<'
+			)
+			faceToComputerTl.to(
+				`.${styles.smart}`,
+				{
+					duration: 0.1,
+					autoAlpha: 1,
+				},
+				'<'
+			)
+			faceToComputerTl.to(
+				`.${styles.sleeping}`,
+				{
+					duration: 0.1,
+					autoAlpha: 0,
+				},
+				'<'
+			)
+		})
+
+		// Face to Computer Animation - Laptop
+		mm.add('(min-width: 950px) and (max-width: 1239px)', () => {
+			const faceToComputerTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.chapter4',
+					start: 'top top-=2500px',
+					end: '+=600px',
+					toggleActions: 'play complete none reverse',
+					fastScrollEnd: true,
+				},
+			})
+			faceToComputerTl.set(`.${styles.line4}`, { autoAlpha: 0 })
+			faceToComputerTl.to(`.${styles.me}`, {
+				rotateY: '+=180deg',
+				x: function () {
+					const computerElement = document.querySelector(
+						`.${styles.computer}`
+					)
+					const meElement = document.querySelector(`.${styles.me}`)
+					const houseElement = document.querySelector(
+						`.${styles.house}`
+					)
+
+					if (!computerElement || !meElement || !houseElement) {
+						// Fallback: use stored final position
+						return meFinalX - 104
+					}
+
+					const computerRect = computerElement.getBoundingClientRect()
+					const houseRect = houseElement.getBoundingClientRect()
+					const meRect = meElement.getBoundingClientRect()
+
+					// Get computer's right edge position relative to house
+					const computerRightX = computerRect.right - houseRect.left
+					// Get me's current left edge position (includes transform from faceOnBedTl)
+					const meLeftX = meRect.left - houseRect.left
+					// Calculate offset needed to position me to the right of computer
+					const spacing = 32 // spacing between computer and me - adjust for laptop
+					const offsetX = computerRightX - meLeftX + spacing
+
+					// Get current transform value (includes faceOnBedTl transform) and add offset
+					const currentX =
+						(gsap.getProperty(meElement, 'x') as number) || 0
+					return currentX + offsetX
+				},
+				y: function () {
+					const computerElement = document.querySelector(
+						`.${styles.computer}`
+					)
+					const meElement = document.querySelector(`.${styles.me}`)
+					const houseElement = document.querySelector(
+						`.${styles.house}`
+					)
+
+					if (!computerElement || !meElement || !houseElement) {
+						// Fallback: use stored final position
+						return meFinalY
+					}
+
+					const computerRect = computerElement.getBoundingClientRect()
+					const houseRect = houseElement.getBoundingClientRect()
+					const meRect = meElement.getBoundingClientRect()
+
+					// Align vertically with computer's center
+					const computerCenterY =
+						computerRect.top -
+						houseRect.top +
+						computerRect.height / 2
+					const meCenterY =
+						meRect.top - houseRect.top + meRect.height / 2
+					const offsetY = computerCenterY - meCenterY
+
+					// Get current transform value (includes faceOnBedTl transform) and add offset
+					const currentY =
+						(gsap.getProperty(meElement, 'y') as number) || 0
+					return currentY + offsetY
+				},
+			})
+			faceToComputerTl.to(`.${styles.line4}`, {
+				autoAlpha: 1,
+			})
+			faceToComputerTl.to(
+				[`.${styles.line1}`, `.${styles.line2}`, `.${styles.line3}`],
+				{
+					autoAlpha: 0.5,
+					stagger: 0.25,
+				},
+				'<'
+			)
+			faceToComputerTl.to(
+				`.${styles.smart}`,
+				{
+					duration: 0.1,
+					autoAlpha: 1,
+				},
+				'<'
+			)
+			faceToComputerTl.to(
+				`.${styles.sleeping}`,
+				{
+					duration: 0.1,
+					autoAlpha: 0,
+				},
+				'<'
+			)
+		})
+
+		// Face to Computer Animation - Desktop and larger
+		mm.add('(min-width: 1240px)', () => {
+			const faceToComputerTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.chapter4',
+					start: 'top top-=2500px',
+					end: '+=600px',
+					toggleActions: 'play complete none reverse',
+					fastScrollEnd: true,
+				},
+			})
+			faceToComputerTl.set(`.${styles.line4}`, { autoAlpha: 0 })
+			faceToComputerTl.to(`.${styles.me}`, {
+				rotateY: '+=180deg',
+				x: function () {
+					const computerElement = document.querySelector(
+						`.${styles.computer}`
+					)
+					const meElement = document.querySelector(`.${styles.me}`)
+					const houseElement = document.querySelector(
+						`.${styles.house}`
+					)
+
+					if (!computerElement || !meElement || !houseElement) {
+						// Fallback: use stored final position
+						return meFinalX - 104
+					}
+
+					const computerRect = computerElement.getBoundingClientRect()
+					const houseRect = houseElement.getBoundingClientRect()
+					const meRect = meElement.getBoundingClientRect()
+
+					// Get computer's right edge position relative to house
+					const computerRightX = computerRect.right - houseRect.left
+					// Get me's current left edge position (includes transform from faceOnBedTl)
+					const meLeftX = meRect.left - houseRect.left
+					// Calculate offset needed to position me to the right of computer
+					const spacing = 60 // spacing between computer and me - adjust for desktop
+					const offsetX = computerRightX - meLeftX + spacing
+
+					// Get current transform value (includes faceOnBedTl transform) and add offset
+					const currentX =
+						(gsap.getProperty(meElement, 'x') as number) || 0
+					return currentX + offsetX
+				},
+				y: function () {
+					const computerElement = document.querySelector(
+						`.${styles.computer}`
+					)
+					const meElement = document.querySelector(`.${styles.me}`)
+					const houseElement = document.querySelector(
+						`.${styles.house}`
+					)
+
+					if (!computerElement || !meElement || !houseElement) {
+						// Fallback: use stored final position
+						return meFinalY
+					}
+
+					const computerRect = computerElement.getBoundingClientRect()
+					const houseRect = houseElement.getBoundingClientRect()
+					const meRect = meElement.getBoundingClientRect()
+
+					// Align vertically with computer's center
+					const computerCenterY =
+						computerRect.top -
+						houseRect.top +
+						computerRect.height / 2
+					const meCenterY =
+						meRect.top - houseRect.top + meRect.height / 2
+					const offsetY = computerCenterY - meCenterY
+
+					// Get current transform value (includes faceOnBedTl transform) and add offset
+					const currentY =
+						(gsap.getProperty(meElement, 'y') as number) || 0
+					return currentY + offsetY
+				},
+			})
+			faceToComputerTl.to(`.${styles.line4}`, {
+				autoAlpha: 1,
+			})
+			faceToComputerTl.to(
+				[`.${styles.line1}`, `.${styles.line2}`, `.${styles.line3}`],
+				{
+					autoAlpha: 0.5,
+					stagger: 0.25,
+				},
+				'<'
+			)
+			faceToComputerTl.to(
+				`.${styles.smart}`,
+				{
+					duration: 0.1,
+					autoAlpha: 1,
+				},
+				'<'
+			)
+			faceToComputerTl.to(
+				`.${styles.sleeping}`,
+				{
+					duration: 0.1,
+					autoAlpha: 0,
+				},
+				'<'
+			)
+		})
 
 		// Line 4,5 Animation
 		const line4Tl = gsap.timeline({
