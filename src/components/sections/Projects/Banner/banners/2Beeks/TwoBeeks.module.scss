@@ -113,7 +113,7 @@ $accent-color-3: #ffb800;
 
 		@include mobile {
 			top: auto;
-			bottom: 30vh;
+			bottom: 40vh;
 
 			width: calc(100% - 24px);
 			max-width: 200px;
@@ -144,8 +144,10 @@ $accent-color-3: #ffb800;
 		transform-origin: top center;
 
 		@include mobile {
+			bottom: 25vh;
+			left: 0;
 			width: calc(100% - 24px);
-			max-width: 280px;
+			max-width: 240px;
 			font-size: 14px;
 		}
 
@@ -315,6 +317,7 @@ $accent-color-3: #ffb800;
 	&Small1 {
 		top: 40px;
 		right: 480px;
+		z-index: 10;
 
 		@include mobile {
 			display: none;
@@ -334,11 +337,12 @@ $accent-color-3: #ffb800;
 	&Small2 {
 		top: 64px;
 		right: 32px;
+		z-index: 10;
 
 		@include mobile {
 			$height: 75px;
 			top: unset;
-			bottom: 30vh;
+			bottom: 31vh;
 			right: 12px;
 			width: calc($height * 1.33) !important;
 			height: $height !important;
