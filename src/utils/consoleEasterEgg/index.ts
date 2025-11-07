@@ -47,8 +47,7 @@ export default function consoleEasterEgg(
 			title: 'Framework & Language',
 			items: [
 				'Next.js + TypeScript',
-				'SCSS for styling + GSAP for animations.',
-				'  GSAP plugins used:',
+				'SCSS for styling + GSAP for animations. Plugins used:',
 				'  - useGSAP',
 				'  - ScrollTrigger',
 				'  - SplitText',
