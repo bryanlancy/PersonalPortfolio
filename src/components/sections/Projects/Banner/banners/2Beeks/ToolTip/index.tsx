@@ -19,8 +19,7 @@ interface ToolTipsProps {
 const ToolTip: FC<ToolTipsProps> = ({ show }) => {
 	const tl = useRef(gsap.timeline({ reversed: true }))
 
-	const apiaryImageUrl =
-		'https://upload.wikimedia.org/wikipedia/commons/8/84/Apiary_in_Bashkortostan%2C_Russia.jpg'
+	const apiaryImageUrl = '/assets/2beeks/apiary.jpg'
 
 	const definition = 'a place where bees are kept; a collection of beehives.'
 	// const origin = [

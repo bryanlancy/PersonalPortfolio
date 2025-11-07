@@ -5,11 +5,11 @@ import styles from './Carousel.module.scss'
 const Carousel = () => {
 	const images: { url: string; alt: string }[] = [
 		{
-			url: 'https://upload.wikimedia.org/wikipedia/commons/8/84/Apiary_in_Bashkortostan%2C_Russia.jpg',
+			url: '/assets/2beeks/apiary.jpg',
 			alt: 'apiary',
 		},
 		{
-			url: 'https://upload.wikimedia.org/wikipedia/commons/1/11/The_Lone_Pollinator.jpg',
+			url: '/assets/2beeks/bees.jpg',
 			alt: 'bee',
 		},
 	]
