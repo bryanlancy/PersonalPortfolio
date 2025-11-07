@@ -6,6 +6,7 @@ import './globals.scss'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import { LoadingProvider } from '@/context/loadingContext'
+import { PostHogProvider } from './providers'
 
 config.autoAddCss = false
 
@@ -29,7 +30,9 @@ export default function RootLayout({
 	return (
 		<html lang='en' className={bebasNeue.className}>
 			<body>
-				<LoadingProvider>{children}</LoadingProvider>
+				<PostHogProvider>
+					<LoadingProvider>{children}</LoadingProvider>
+				</PostHogProvider>
 			</body>
 		</html>
 	)
